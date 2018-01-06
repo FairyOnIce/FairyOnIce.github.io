@@ -6485,9 +6485,9 @@ oDcrOwAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Data-augmentation">Data augmentation<a class="anchor-link" href="#Data-augmentation">¶</a></h2><h3 id="flipping-pictures">flipping pictures<a class="anchor-link" href="#flipping-pictures">¶</a></h3><p>FlippedImageDataGenerator is written by <a href="https://elix-tech.github.io/ja/2016/06/02/kaggle-facial-keypoints-ja.html">Shinya</a>. This class extends the keras.preprocessing.image.mageDataGenerator and overwrites "next" method.
-When I try using this class, it was not correctly generating flipped pictures. *This could be because of the different version of the keras? It seems ImageDataGenerator.flow() is not internally calling next() method). So I take more manual approach and explicitly write codes to modify each batch within each iteration/epoch (just as in <a href="https://keras.io/preprocessing/image/">the first example of keras documentation</a>).</p>
-<h3 id="Why-not-just-using-ImageDataGenerator?">Why not just using ImageDataGenerator?<a class="anchor-link" href="#Why-not-just-using-ImageDataGenerator?">¶</a></h3><p>Keras has exisiting <a href="https://keras.io/preprocessing/image/">ImageDataGenerator</a> but this only flip the data and not the land marks. I guess ImageDataGenerator can be used for image classification purpose where the classification labels do not need to be flipped. (e.g., Dog picture is a dog picture even if the picutre is flipped.)</p>
+<h2 id="Data-augmentation">Data augmentation<a class="anchor-link" href="#Data-augmentation">¶</a></h2><h3 id="flipping-pictures">flipping pictures<a class="anchor-link" href="#flipping-pictures">¶</a></h3><p>FlippedImageDataGenerator class was written by <a href="https://elix-tech.github.io/ja/2016/06/02/kaggle-facial-keypoints-ja.html">Shinya</a>. This class extends the keras.preprocessing.image.mageDataGenerator and overwrites "next" method.</p>
+<p>When I try using this class, it was not correctly generating flipped pictures. *This could be because of the different version of the keras? It seems ImageDataGenerator.flow() is not internally calling next() method). So I take rather manual approach and explicitly write codes to modify each batch within each iteration/epoch (just as in <a href="https://keras.io/preprocessing/image/">the first example of keras documentation</a>).</p>
+<h3 id="Why-not-just-using-ImageDataGenerator?">Why not just using ImageDataGenerator?<a class="anchor-link" href="#Why-not-just-using-ImageDataGenerator?">¶</a></h3><p>Keras has exisiting <a href="https://keras.io/preprocessing/image/">ImageDataGenerator</a>. This is pretty handy function and I had a <a href="https://fairyonice.github.io/practice-with-keraspreprocessingimageimagedatagenerator.html">post</a> to experient its useage. But the problem of this function is that is only flips the data and not the land marks. I guess ImageDataGenerator can be used for image classification purpose where the classification labels do not need to be flipped. (e.g., Dog picture is a dog picture even if the picutre is flipped.)</p>
 </div>
 </div>
 </div>
@@ -36846,10 +36846,10 @@ AAAAAElFTkSuQmCC
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="./practice-with-keraspreprocessingimageimagedatagenerator.html">Practice with keras.preprocessing.image.ImageDataGenerator</a>
+          <a href="./The first post!.html">Achieving Top 23% in Kaggle's Facial Keypoints Detection with Keras + Tensorflow</a>
       </li>
       <li class="post">
-          <a href="./The first post!.html">Achieving Top 23% in Kaggle's Facial Keypoints Detection with Keras + Tensorflow</a>
+          <a href="./learn-about-with-imagedatagenerator.html">Learn about with ImageDataGenerator</a>
       </li>
     </ul>
   </section>
