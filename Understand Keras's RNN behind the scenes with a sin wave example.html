@@ -1624,7 +1624,7 @@ RNN with a single hidden unit followed by fully connected layer with a single un
 <p>Let $x_t$ be the sin wave at time point $t$, then
 Formally, This simple model can be formulated in two lines as:</p>
 <p>$$
-h_t = \textrm{tanh}(x_t^T w_1 + b_1)\\
+h_t = \textrm{tanh}(x_t^T w_1 + h_{t-1}^T w_2 + b_1)\\
 x_{t+1} = h_t  w_2 + b_2  \\
 $$
 Conventionally $h_0=0$. 
@@ -1717,7 +1717,7 @@ The script was run without GPU.</p>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">hist</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> 
-                 <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">validation_split</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span> 
+                 <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">validation_split</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -3396,7 +3396,7 @@ The model weights can be readiliy obtained from the model.layers.</p>
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">ws</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">layer</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">layers</span><span class="p">:</span>
     <span class="n">ws</span><span class="p">[</span><span class="n">layer</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()</span>
-<span class="n">ws</span>    
+<span class="n">ws</span>
 </pre></div>
 </div>
 </div>
