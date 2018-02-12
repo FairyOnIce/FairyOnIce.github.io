@@ -1069,8 +1069,23 @@ I originally thought that creating game needs a "serious" computer science degre
 <h2 id="Game-features">Game features<a class="anchor-link" href="#Game-features">¶</a></h2><p>If you are interested in learning pygame from scratch, you should go to <a href="https://www.youtube.com/watch?v=K5F-aGDIYaM">thenewboston</a>.
 Here, I will show some features of my game, and how I did them.</p>
 <h3 id="The-game-is-400-x-400-pixcels">The game is 400 x 400 pixcels<a class="anchor-link" href="#The-game-is-400-x-400-pixcels">¶</a></h3><p>You can specify the number of pixcels by specifying npix_x and npix_y inputs of the SavePrince object. But the game display is really defined in the line:</p>
-<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L386">pixcel defined</a></p>
-<h3 id="The-snake-monster-hunts-you-down.">The snake monster hunts you down.<a class="anchor-link" href="#The-snake-monster-hunts-you-down.">¶</a></h3><p>I added this functionality to make</p>
+<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L386">Defined here</a></p>
+<h3 id="The-snake-monster-hunts-you-down.">The snake monster hunts you down.<a class="anchor-link" href="#The-snake-monster-hunts-you-down.">¶</a></h3><p>I added this functionality to make the game more challenging. 
+It will always move toward you. For example, if you are on the right of the snake monster and above it, then the snake monster will go up or right. The decision of going up or going right is based on randomness.</p>
+<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L112-L124">Defined here</a></p>
+<h3 id="The-snake-monster-appears-around-prince.">The snake monster appears around prince.<a class="anchor-link" href="#The-snake-monster-appears-around-prince.">¶</a></h3><p>This is another fuctionality to make the game more challenging. While you want to go closer to prince, you need to avoid the snake that is around the prince.</p>
+<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L63-L64">Defined ere</a></p>
+<h2 id="The-speed-of-the-snake-monster-increases-when-it-moves-toward-the-same-direction-consequtively.">The speed of the snake monster increases when it moves toward the same direction consequtively.<a class="anchor-link" href="#The-speed-of-the-snake-monster-increases-when-it-moves-toward-the-same-direction-consequtively.">¶</a></h2><p>Even if the snake seems to be far away from you, it will get you really quick if the snake is on the same row or on the same column.</p>
+<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L135-L149">Defined here for princess</a></p>
+<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L205-L216">Defined here for the snake monster</a></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>@octocat :+1: This PR looks great - it's ready to merge! :shipit:</p>
 </div>
 </div>
 </div>
