@@ -18,7 +18,7 @@
  
 
   <meta charset="utf-8">
-  <title>Create a simple game using pygame.ipynb</title>
+  <title>Create a simple game using pygame</title>
   <meta name="author" content="Yumi">
 
 
@@ -66,7 +66,7 @@
 <div>
   <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">Create a simple game using pygame.ipynb</h1>
+      <h1 class="entry-title">Create a simple game using pygame</h1>
       <p class="meta"><time datetime="2018-02-10T20:00:00-08:00" pubdate>Sat 10 February 2018</time></p>
 </header>
 
@@ -1042,14 +1042,11 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [9]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-</pre></div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="Example Gif" src="https://media.giphy.com/media/xThtaajEQpcpsghazC/giphy.gif" /></p>
 </div>
 </div>
 </div>
@@ -1057,7 +1054,21 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="Example Gif" src="https://media.giphy.com/media/xThtaajEQpcpsghazC/giphy.gif" /></p>
+<p>The above gif is my very first game. In this blog post, I will introduce a very simple game created using pygame.</p>
+<h2 id="What-is-this-game-about?">What is this game about?<a class="anchor-link" href="#What-is-this-game-about?">¶</a></h2><p>In this game, you are a "princess" and the goal is to rescue "price". But be careful, there is a snake monster that could hit you!</p>
+<h2 id="I-used-pygame.">I used pygame.<a class="anchor-link" href="#I-used-pygame.">¶</a></h2><p>This pygame library is really REALLY amazing for creating a game. 
+I originally thought that creating game needs a "serious" computer science degree, and it is out of my reach. Creating graphical user interface seemed very complicated! How can my script accepts keyboard input, do calculation and then update the game screen accodingly? No worry, pygame will take care of such things, so you can focus on creating game logics (e.g., how to score points, what decides "game over"). <a href="https://github.com/FairyOnIce/SavePrinceGame/blob/master/SavePrince.py">In fact the game above requires only about 400 lines.</a></p>
+<h2 id="Where-did-I-start?">Where did I start?<a class="anchor-link" href="#Where-did-I-start?">¶</a></h2><p>Did I take any online courses? Well, yes and no. All I did was follow <a href="https://www.youtube.com/watch?v=K5F-aGDIYaM">this great youtube series from thenewboston</a>. This series has many tutorial videos. I watched the first 40 (40!). Each tutorial is nicely modularized and takes only about 5 - 10 minutes. I would love to watch the rest later in my life!</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you are interested in learning pygame from scratch, you should go to <a href="https://www.youtube.com/watch?v=K5F-aGDIYaM">thenewboston</a>.
+I will show some features of my game, and how I did them.</p>
+<h2 id="Game-features">Game features<a class="anchor-link" href="#Game-features">¶</a></h2><h3 id="The-game-is-400-x-400-pixcels">The game is 400 x 400 pixcels<a class="anchor-link" href="#The-game-is-400-x-400-pixcels">¶</a></h3><h3 id="The-snake-monster-hunts-you-down.">The snake monster hunts you down.<a class="anchor-link" href="#The-snake-monster-hunts-you-down.">¶</a></h3><p>I added this functionality to make</p>
 </div>
 </div>
 </div>
@@ -1107,11 +1118,11 @@ h6:hover .anchor-link {
     <section>
     <p id="post-share-links">
         Share on:
-        <a href="https://twitter.com/intent/tweet?text=Create%20a%20simple%20game%20using%20pygame.ipynb&url=https%3A//FairyOnIce.github.io/create-a-simple-game-using-pygame.html" target="_blank" title="Share on Twitter">Twitter</a>
+        <a href="https://twitter.com/intent/tweet?text=Create%20a%20simple%20game%20using%20pygame&url=https%3A//FairyOnIce.github.io/create-a-simple-game-using-pygame.html" target="_blank" title="Share on Twitter">Twitter</a>
         ❄
         <a href="http://www.facebook.com/sharer/sharer.php?u=https%3A//FairyOnIce.github.io/create-a-simple-game-using-pygame.html" target="_blank" title="Share on Facebook">Facebook</a>
         ❄
-        <a href="mailto:?subject=Create%20a%20simple%20game%20using%20pygame.ipynb&amp;body=https%3A//FairyOnIce.github.io/create-a-simple-game-using-pygame.html" target="_blank" title="Share via Email">Email</a>
+        <a href="mailto:?subject=Create%20a%20simple%20game%20using%20pygame&amp;body=https%3A//FairyOnIce.github.io/create-a-simple-game-using-pygame.html" target="_blank" title="Share via Email">Email</a>
     </p>
     </section>
 
@@ -1144,19 +1155,19 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="https://FairyOnIce.github.io/create-a-simple-game-using-pygame.html">Create a simple game using pygame.ipynb</a>
+          <a href="https://FairyOnIce.github.io/create-a-simple-game-using-pygame.html">Create a simple game using pygame</a>
       </li>
       <li class="post">
-          <a href="https://FairyOnIce.github.io/Create deep learning calculators based on Encoder-Decoder RNN using Keras.html">Create deep learning calculators based on Encoder-Decoder RNN using Keras</a>
+          <a href="https://FairyOnIce.github.io/Create-deep-learning-calculators-based-on-Encoder-Decoder-RNN-using-Keras.html">Create deep learning calculators based on Encoder-Decoder RNN using Keras</a>
       </li>
       <li class="post">
-          <a href="https://FairyOnIce.github.io/Assess the robustness of CapsNet.html">Assess the robustness of CapsNet</a>
+          <a href="https://FairyOnIce.github.io/Assess-the-robustness-of-CapsNet.html">Assess the robustness of CapsNet</a>
       </li>
       <li class="post">
-          <a href="https://FairyOnIce.github.io/Understanding and Experimenting Capsule Networks.html">Understanding and Experimenting Capsule Networks</a>
+          <a href="https://FairyOnIce.github.io/Understanding-and-Experimenting-Capsule-Networks.html">Understanding and Experimenting Capsule Networks</a>
       </li>
       <li class="post">
-          <a href="https://FairyOnIce.github.io/CNN modeling with image translations using MNIST data.html">CNN modeling with image translations using MNIST data</a>
+          <a href="https://FairyOnIce.github.io/CNN-modeling-with-image-translations-using-MNIST-data.html">CNN modeling with image translations using MNIST data</a>
       </li>
     </ul>
   </section>
@@ -1218,7 +1229,7 @@ s.setAttribute('data-timestamp', +new Date());
 	  var disqus_shortname = 'yumis-blog';
           var disqus_identifier = '/create-a-simple-game-using-pygame.html';
           var disqus_url = 'https://FairyOnIce.github.io/create-a-simple-game-using-pygame.html';
-          var disqus_title = 'Create a simple game using pygame.ipynb';
+          var disqus_title = 'Create a simple game using pygame';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
