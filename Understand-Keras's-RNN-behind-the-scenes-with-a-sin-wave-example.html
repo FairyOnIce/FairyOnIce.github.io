@@ -1046,15 +1046,15 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Recurent Neural Network (RNN) has been successful in modeling time series data.</p>
+<p>Recurrent Neural Network (RNN) has been successful in modeling time series data.</p>
 <p>People say that RNN is great for modeling sequential data because it is designed to potentially remember the entire history of the time series to predict values. "In theory" this may be true.</p>
-<p>But when it comes to implementation of the RNN model in Keras, practitioners encounter to specify a "length of time series" in batch_shape:</p>
+<p>But when it comes to implementation of the RNN model in Keras, practitioners need to specify a "length of time series" in batch_shape:</p>
 <ul>
 <li><strong>batch_shape = (N of time series in a batch, the length of time series, N of features)</strong></li>
 </ul>
-<p>Well, I was very confused with this parameter at first. Why do I need to specify the length of time series when the model is meant to handle a sequence of potentially infenite length?? Where does this parameter come into play in the defenition of the RNN model?</p>
-<p>Hindsight, these questions show my lack of understanding in back propagation throught time (BPTT) algorithms.
-Nevertheless, there are not many good, conclete and simple explanations about the role of this parameter.</p>
+<p>Well, I was very confused with this parameter at first. Why do I need to specify the length of time series when the model is meant to handle a sequence of potentially infinite length?? Where does this parameter come into play in the definition of the RNN model?</p>
+<p>Hindsight, these questions show my lack of understanding in back propagation through time (BPTT) algorithms.
+Nevertheless, there are not many good, concrete and simple explanations about the role of this parameter.</p>
 <p>The goal of this blog post is to help my-past-self and someone who is stack at the similar problems in understanding Keras's RNN model. I believe that the best way to understand models is to reproduce the model script by hands. Therefore, I will use a simple example (sin wave time series) to train a simple RNN (only 5 weights!!!!) and predict the sin wave values by hands. Here I will touch the concept of "stateful" and "stateless" prediction. I hope that this blog helps you understood the Keras's sequential model better.</p>
 <h2 id="Reference">Reference<a class="anchor-link" href="#Reference">¶</a></h2><p><a href="https://machinelearningmastery.com/time-series-prediction-lstm-recurrent-neural-networks-python-keras/">Time Series Prediction with LSTM Recurrent Neural Networks in Python with Keras</a></p>
 <p><a href="http://philipperemy.github.io/keras-stateful-lstm/">Stateful LSTM in Keras</a></p>
@@ -1113,7 +1113,7 @@ Nevertheless, there are not many good, conclete and simple explanations about th
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Generate-a-sin-wave-with-no-noise">Generate a sin wave with no noise<a class="anchor-link" href="#Generate-a-sin-wave-with-no-noise">¶</a></h1><p>First, I create a function that generates sin wave with/without noise.
 Using this function, I will generate a sin wave with no noise. 
-As this sin wave is completely deterministic, I should be able to create a model that can prefectly predict the next value of sin wave given the previous values of sin waves!</p>
+As this sin wave is completely deterministic, I should be able to create a model that can do prefect prediction the next value of sin wave given the previous values of sin waves!</p>
 <p>Here I generate period-10 sin wave, repeating itself 500 times, and plot the first few cycles.</p>
 </div>
 </div>
@@ -1672,7 +1672,7 @@ n7LdCgAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Create a training and testing data.
-Here, the controvertial "length of time series" parameter comes into play.
+Here, the controversial "length of time series" parameter comes into play.
 For now, we set this parameter to 2.</p>
 </div>
 </div>
@@ -1746,7 +1746,7 @@ h_t = \textrm{tanh}(x_t^T w_{1x} + h_{t-1}^T w_{1h}+ b_1)\\
 x_{t+1} = h_t^T  w_2 + b_2  \\
 $$
 Conventionally $h_0=0$. 
-Notice that the length of timeseires is not involved in the defenition of the RNN. The model should be able to "remember" the past history of $x_t$ through te hidden unit $h_t$.</p>
+Notice that the length of time series is not involved in the definition of the RNN. The model should be able to "remember" the past history of $x_t$ through the hidden unit $h_t$.</p>
 <h4 id="batch_shape-needs-for-BPTT.">batch_shape needs for BPTT.<a class="anchor-link" href="#batch_shape-needs-for-BPTT.">¶</a></h4><ul>
 <li>Every time when the model weights are updated, the BPTT uses only the randomly selected subset of the data.</li>
 <li>This means that the each batch is treated as independent. </li>
@@ -1760,7 +1760,7 @@ Notice that the length of timeseires is not involved in the defenition of the RN
 <li>It contains the stateful flag, and its default value is set to False, because this is the default setting in SimpleRNN method. We will set this flag to True and do the prediction later. </li>
 <li>It contains batch_size flag, and its default value is set to None, meaning that the batch_size can be decided during the training. None is the default for the Input layer when stateful = False. However, this value needs to be pre-specified when stateful = True. The details are discussed later.</li>
 </ul>
-<p>For the model definition, I use functional API, despite that you can readily define this model using Sequantial API. The reason becomes clear later.</p>
+<p>For the model definition, I use functional API, despite that you can readily define this model using Sequential API. The reason becomes clear later.</p>
 </div>
 </div>
 </div>
@@ -3863,7 +3863,7 @@ QmCC
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="What-are-the-model-weights?">What are the model weights?<a class="anchor-link" href="#What-are-the-model-weights?">¶</a></h2><p>The best way to understand the RNN model is to create a model from scratch.
 Let's extract the weights and try to reproduce the predicted values from the model by hands.
-The model weights can be readiliy obtained from the model.layers.</p>
+The model weights can be readily obtained from the model.layers.</p>
 </div>
 </div>
 </div>
@@ -3901,7 +3901,7 @@ The model weights can be readiliy obtained from the model.layers.</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="What-are-the-predicted-values-of-hidden-units?">What are the predicted values of hidden units?<a class="anchor-link" href="#What-are-the-predicted-values-of-hidden-units?">¶</a></h2><p>Since we used Keras's functional API to develop a model, we can easily see the output of each layer by compiling another model with outputs specified to be the layer of interest.</p>
-<p>In order to use the .predict() function, we need to compile the model, which requires specifing loss and optimizer.
+<p>In order to use the .predict() function, we need to compile the model, which requires specifying loss and optimizer.
 You can choose any values of loss and optimizer here, as we do not actually optimize this loss function.
 The newly created model "rnn_model" shares the weights obtained by the previous model's optimization. 
 Therefore for the purpose of visualizing the hidden unit values with the current model result, we do not need to do additional optimizations.</p>
@@ -4782,10 +4782,10 @@ jDwrAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Obtain-predicted-sin-wave-at-the-next-time-point-given-the-current-sin-wave-by-hand">Obtain predicted sin wave at the next time point given the current sin wave by hand<a class="anchor-link" href="#Obtain-predicted-sin-wave-at-the-next-time-point-given-the-current-sin-wave-by-hand">¶</a></h2><p>We understand that how the predicted sin wave values can be obtained using the predicted hidden states from KEras.
+<h2 id="Obtain-predicted-sin-wave-at-the-next-time-point-given-the-current-sin-wave-by-hand">Obtain predicted sin wave at the next time point given the current sin wave by hand<a class="anchor-link" href="#Obtain-predicted-sin-wave-at-the-next-time-point-given-the-current-sin-wave-by-hand">¶</a></h2><p>We understand that how the predicted sin wave values can be obtained using the predicted hidden states from Keras.
 But how does the predicted hidden states generated from the original inputs i.e. the current sin wave?
 Here, stateful and stateless prediction comes into very important role.
-Following the defenition of the RNN, we can write a script for RNNmodel as:</p>
+Following the definition of the RNN, we can write a script for RNNmodel as:</p>
 </div>
 </div>
 </div>
@@ -5879,7 +5879,7 @@ $</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Notice that this predicted values are exactly the same as the ones calcualted before.</p>
+<p>Notice that this predicted values are exactly the same as the ones calculated before.</p>
 </div>
 </div>
 </div>
@@ -7293,7 +7293,7 @@ AABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here, the techinical details of the BPTT algorithm comes in, and the time series length parameter (i.e., batch_size[1]) takes very important role.</p>
+<p>Here, the technical details of the BPTT algorithm comes in, and the time series length parameter (i.e., batch_size[1]) takes very important role.</p>
 <p>As the BPTT algorithm only passed back 2 steps, the model assumes that:</p>
 <ul>
 <li>the hidden units are initialized to zero every 2 steps. </li>
@@ -7483,9 +7483,9 @@ Here it is very important to reset_state() before the prediction so that $h_0 = 
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we understand that xstars is the prediction result when stateful = True. We also understand that the prediction results are way better when stateful = False at least for this sin wave example.</p>
-<p>However, the prediction with stateful = False brings to some awkwardness: what if our batch have a very long time series of length, say $K$? Do we always have to go back all the $K$ time steps, set $h_{t-K}=0$ and then feed foward $K$ steps in order to predict at the time point $t$? This may be computationally intense.</p>
+<p>However, the prediction with stateful = False brings to some awkwardness: what if our batch have a very long time series of length, say $K$? Do we always have to go back all the $K$ time steps, set $h_{t-K}=0$ and then feed forward $K$ steps in order to predict at the time point $t$? This may be computationally intense.</p>
 <h2 id="Next-step">Next step<a class="anchor-link" href="#Next-step">¶</a></h2><ul>
-<li>Assess stateful VS stateless prediction with more examples and confirm whether the stateful prediciton is ALWAYS worse.</li>
+<li>Assess stateful VS stateless prediction with more examples and confirm whether the stateful prediction is ALWAYS worse.</li>
 </ul>
 </div>
 </div>
@@ -7573,6 +7573,9 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/Extract-weights-from-Keras's-LSTM-and-calcualte-hidden-and-cell-states.html">Extract weights from Keras's LSTM and calcualte hidden and cell states</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Understand-Keras's-RNN-behind-the-scenes-with-a-sin-wave-example.html">Understand Keras's RNN behind the scenes with a sin wave example - Stateful and Stateless prediction -</a>
       </li>
       <li class="post">
@@ -7583,9 +7586,6 @@ s.setAttribute('data-timestamp', +new Date());
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Assess-the-robustness-of-CapsNet.html">Assess the robustness of CapsNet</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Understanding-and-Experimenting-Capsule-Networks.html">Understanding and Experimenting Capsule Networks</a>
       </li>
     </ul>
   </section>
