@@ -2614,7 +2614,7 @@ s.setAttribute('data-timestamp', +new Date());
 <aside class="sidebar">
 <section>
 
-    <h1><a href="https://FairyOnIce.github.io/archives"></a></h1>
+    <h1><a href="https://FairyOnIce.github.io/archives">Archives</a></h1>
 
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
@@ -2648,33 +2648,6 @@ s.setAttribute('data-timestamp', +new Date());
   <h1>Tags</h1>
     <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>  </section>
 
-
-
-  <section>
-    <h1>GitHub Repos</h1>
-    <ul id="gh_repos">
-      <li class="loading">Status updating...</li>
-    </ul>
-    <script type="text/javascript">
-      $.domReady(function(){
-          if (!window.jXHR){
-              var jxhr = document.createElement('script');
-              jxhr.type = 'text/javascript';
-              jxhr.src = 'https://FairyOnIce.github.io/theme/js/jXHR.js';
-              var s = document.getElementsByTagName('script')[0];
-              s.parentNode.insertBefore(jxhr, s);
-          }
-
-          github.showRepos({
-              user: 'THIS!',
-              count: 5,
-              skip_forks: false,
-              target: '#gh_repos'
-          });
-      });
-    </script>
-    <script src="https://FairyOnIce.github.io/theme/js/github.js" type="text/javascript"> </script>
-  </section>
 
     <section>
         <h1>Social</h1>
