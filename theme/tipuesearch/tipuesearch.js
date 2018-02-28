@@ -30,7 +30,7 @@ http://www.tipue.com/search
           'showRelated'            : true,
           'showTime'               : true,
           'showTitleCount'         : true,
-          'showURL'                : true,
+          'showURL'                : false,
           'wholeWords'             : true
           
           }, options);
