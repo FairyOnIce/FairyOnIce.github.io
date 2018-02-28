@@ -30,7 +30,8 @@
 
   <link href="https://FairyOnIce.github.io/favicon.png" rel="icon">
   <link href="https://FairyOnIce.github.io/theme/css/main.css" media="screen, projection"
-        rel="stylesheet" type="text/css">
+rel="stylesheet" type="text/css">
+ <link rel="stylesheet" href="https://FairyOnIce.github.io/theme/tipuesearch.css">
   <script src="https://FairyOnIce.github.io/theme/js/modernizr-2.0.js"></script>
   <script src="https://FairyOnIce.github.io/theme/js/ender.js"></script>
   <script src="https://FairyOnIce.github.io/theme/js/octopress.js" type="text/javascript"></script>
@@ -57,6 +58,9 @@
 </form>
 
 <ul class="main-navigation">
+    <li><a href="/">Home</a></li>
+    <li><a href="/archives.html">Archives</a></li>
+    <li><a href="/search.html">Search</a></li>
     <li class="active">
     <a href="https://FairyOnIce.github.io/category/blog.html">Blog</a>
     </li>
@@ -8535,6 +8539,12 @@ s.setAttribute('data-timestamp', +new Date());
     </section>
 </div>
 <aside class="sidebar">
+<section>
+    <h1>Search</h1></hr>
+    <form class="navbar-search" action="https://FairyOnIce.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="" name="q" id="tipue_search_input"><input type="submit" value="Go!"></form></li>
+    </section>
+    
+
 <section>
     <h1><a href="https://FairyOnIce.github.io/archives">Archives</a></h1>
 </section>
