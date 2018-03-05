@@ -18,7 +18,7 @@
  
 
   <meta charset="utf-8">
-  <title>Create a simple game using pygame</title>
+  <title>Semantic model built with tensorflow deployed with Flask and Heroku Part 2</title>
   <meta name="author" content="Yumi">
 
 
@@ -69,8 +69,8 @@ placeholder="Google Search"/>
 <div>
   <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">Create a simple game using pygame</h1>
-      <p class="meta"><time datetime="2018-02-10T20:00:00-08:00" pubdate>Sat 10 February 2018</time></p>
+      <h1 class="entry-title">Semantic model built with tensorflow deployed with Flask and Heroku Part 2</h1>
+      <p class="meta"><time datetime="2018-03-29T20:00:00-07:00" pubdate>Thu 29 March 2018</time></p>
 </header>
 
   <div class="entry-content"><style type="text/css">/*!
@@ -1049,7 +1049,16 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="Example Gif" src="https://media.giphy.com/media/xThtaajEQpcpsghazC/giphy.gif" /></p>
+<p>In the <a href="https://fairyonice.github.io/Semantic-model-built-with-tensorflow-deployed-with-Flask-and-Heroku-Part-2.html">previous blog</a> I created a small semantic classification model that can be developed in Heroku.
+I will discuss how I deployed this model.</p>
+<p>Despite that there are many public clouds that offers GPU instances, such as <a href="https://aws.amazon.com/blogs/machine-learning/how-to-deploy-deep-learning-models-with-aws-lambda-and-tensorflow/">Amazon Web Service</a>, <a href="https://cloud.google.com/ml-engine/docs/deploying-models">Google Cloud</a>, I will use <a href="https://www.heroku.com/">Heroku</a>, which does not offer GPU instances. This is because Heroku is VERY easy to set up and it allows to host at most 5 applications FOR FREE.</p>
+<p>In the first blog post, I created a simple deep learning model for sentiment analysis using tensor-flow. The model takes tweet or short text as a sentence and return the likelihood of happiness. 
+My focus in thie post was to simplify the model so that every calculation can be done within 30 secounds and the memory stays within 500MB.</p>
+<p><a href="https://fairyonice.github.io/Semantic-model-built-with-tensorflow-deployed-with-Flask-and-Heroku-Part-2.html">In this blog</a>, I will discuss how to deploy this model in Heroku. If you are not interested in the model development, I recommend you to jump to the second phase.</p>
+<h2 id="To-motivate-the-readers,-click-here-to-see-my-deployed-web-app">To motivate the readers, <a href="http://simple-text-prediction.herokuapp.com/">click here to see my deployed web app</a><a class="anchor-link" href="#To-motivate-the-readers,-click-here-to-see-my-deployed-web-app">¶</a></h2><h3 id="Reference:">Reference:<a class="anchor-link" href="#Reference:">¶</a></h3><ul>
+<li><a href="https://fairyonice.github.io/Semantic-model-built-with-tensorflow-deployed-with-Flask-and-Heroku-Part-1.html">Deep learning semantic model built with tensorflow deployed using Flask and Heroku Part 1 (Model Development)</a></li>
+<li><a href="https://fairyonice.github.io/Semantic-model-built-with-tensorflow-deployed-with-Flask-and-Heroku-Part-2.html">Deep learning semantic model built with tensorflow deployed using Flask and Heroku Part 2 (Deployment)</a></li>
+</ul>
 </div>
 </div>
 </div>
@@ -1057,41 +1066,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The above gif is my very first game. In this blog post, I will introduce a very simple game created using pygame.</p>
-<h2 id="What-is-this-game-about?">What is this game about?<a class="anchor-link" href="#What-is-this-game-about?">¶</a></h2><p>In this game, you are a "princess" and the goal is to rescue "price". But be careful, there is a snake monster that could hit you!</p>
-<h2 id="I-used-pygame.">I used pygame.<a class="anchor-link" href="#I-used-pygame.">¶</a></h2><p>This pygame library is really REALLY amazing for creating a game. 
-I originally thought that creating game needs a "serious" computer science degree, and it is out of my reach. Creating graphical user interface seemed very complicated! How can my script accepts keyboard input, do calculation and then update the game screen accodingly? No worry, pygame will take care of such things, so you can focus on creating game logics (e.g., how to score points, what decides "game over"). <a href="https://github.com/FairyOnIce/SavePrinceGame/blob/master/SavePrince.py">In fact the game above requires only about 400 lines.</a></p>
-<h2 id="Where-did-I-start?">Where did I start?<a class="anchor-link" href="#Where-did-I-start?">¶</a></h2><p>Did I take any online courses? Well, yes and no. All I did was follow <a href="https://www.youtube.com/watch?v=K5F-aGDIYaM">this great youtube series from thenewboston</a>. This series has many tutorial videos. I watched the first 40 (40!). Each tutorial is nicely modularized and takes only about 5 - 10 minutes. I would love to watch the rest later in my life!</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Game-features">Game features<a class="anchor-link" href="#Game-features">¶</a></h2><p>If you are interested in learning pygame from scratch, you should go to <a href="https://www.youtube.com/watch?v=K5F-aGDIYaM">thenewboston</a>.
-Here, I will show some features of my game, and how I did them.</p>
-<h3 id="The-keyboad-input-are-extracted-in-less-than-20-lines.">The keyboad input are extracted in less than 20 lines.<a class="anchor-link" href="#The-keyboad-input-are-extracted-in-less-than-20-lines.">¶</a></h3><p>This is not really features of my game but I want to say where this is defined. Its defined</p>
-<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L285-L302">Here</a></p>
-<h3 id="The-game-is-400-x-400-pixcels">The game is 400 x 400 pixcels<a class="anchor-link" href="#The-game-is-400-x-400-pixcels">¶</a></h3><p>You can specify the number of pixcels by specifying npix_x and npix_y inputs of the SavePrince object. But the game display is really defined in the line:</p>
-<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L386">Here</a></p>
-<h3 id="The-snake-monster-hunts-you-down.">The snake monster hunts you down.<a class="anchor-link" href="#The-snake-monster-hunts-you-down.">¶</a></h3><p>I added this functionality to make the game more challenging. 
-It will always move toward you. For example, if you are on the right of the snake monster and above it, then the snake monster will go up or right. The decision of going up or going right is based on randomness.</p>
-<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L112-L124">Defined here</a></p>
-<h3 id="The-snake-monster-appears-around-prince.">The snake monster appears around prince.<a class="anchor-link" href="#The-snake-monster-appears-around-prince.">¶</a></h3><p>This is another fuctionality to make the game more challenging. While you want to go closer to prince, you need to avoid the snake that is around the prince.</p>
-<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L63-L64">Defined ere</a></p>
-<h3 id="The-speed-of-the-snake-monster-increases-when-it-moves-toward-the-same-direction-consequtively.">The speed of the snake monster increases when it moves toward the same direction consequtively.<a class="anchor-link" href="#The-speed-of-the-snake-monster-increases-when-it-moves-toward-the-same-direction-consequtively.">¶</a></h3><p>Even if the snake seems to be far away from you, it will get you really quick if the snake is on the same row or on the same column.</p>
-<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L135-L149">Defined here for princess</a></p>
-<p><a href="https://github.com/FairyOnIce/SavePrinceGame/blob/756d3996bb832f2676ac1d46f33780d8e1c7eb85/SavePrince.py#L205-L216">Defined here for the snake monster</a></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-play-the-game?">How to play the game?<a class="anchor-link" href="#How-to-play-the-game?">¶</a></h2><p>To run the game, download the whole SavePrinceGame repository, pip install pygame, and then within the SavePrinceGame repository and on your terminal, type:</p>
-<pre><code>python2 SavePrince.py</code></pre>
+<h1 id="Reference:">Reference:<a class="anchor-link" href="#Reference:">¶</a></h1><h1 id="https://pythonspot.com/flask-web-app-with-python/"><a href="https://pythonspot.com/flask-web-app-with-python/">https://pythonspot.com/flask-web-app-with-python/</a><a class="anchor-link" href="#https://pythonspot.com/flask-web-app-with-python/">¶</a></h1><h1 id="https://www.tutorialspoint.com/index.html"><a href="https://www.tutorialspoint.com/index.html">https://www.tutorialspoint.com/index.html</a><a class="anchor-link" href="#https://www.tutorialspoint.com/index.html">¶</a></h1><h2 id="Heroku-reference">Heroku reference<a class="anchor-link" href="#Heroku-reference">¶</a></h2><h1 id="https://github.com/datademofun/heroku-basic-flask"><a href="https://github.com/datademofun/heroku-basic-flask">https://github.com/datademofun/heroku-basic-flask</a><a class="anchor-link" href="#https://github.com/datademofun/heroku-basic-flask">¶</a></h1><h1 id="https://simple-text-prediction.herokuapp.com/"><a href="https://simple-text-prediction.herokuapp.com/">https://simple-text-prediction.herokuapp.com/</a><a class="anchor-link" href="#https://simple-text-prediction.herokuapp.com/">¶</a></h1>
 </div>
 </div>
 </div>
@@ -1130,11 +1105,12 @@ It will always move toward you. For example, if you are on the right of the snak
   <span class="byline author vcard">
     Posted by <span class="fn">Yumi</span>
   </span>
-<time datetime="2018-02-10T20:00:00-08:00" pubdate>Sat 10 February 2018</time>  <span class="categories">
-    <a class="category" href="https://FairyOnIce.github.io/tag/game.html">Game</a>
+<time datetime="2018-03-29T20:00:00-07:00" pubdate>Thu 29 March 2018</time>  <span class="categories">
+    <a class="category" href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>
+    <a class="category" href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>
   </span>
 </p><div class="sharing">
-  <a href="http://twitter.com/share" class="twitter-share-button" data-url="https://FairyOnIce.github.io/create-a-simple-game-using-pygame.html" data-via="" data-counturl="https://FairyOnIce.github.io/create-a-simple-game-using-pygame.html" >Tweet</a>
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="https://FairyOnIce.github.io/Semantic-model-built-with-tensorflow-deployed-with-Flask-and-Heroku-Part-2.html" data-via="" data-counturl="https://FairyOnIce.github.io/Semantic-model-built-with-tensorflow-deployed-with-Flask-and-Heroku-Part-2.html" >Tweet</a>
     <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
 </div>    </footer>
   </article>
@@ -1247,9 +1223,9 @@ s.setAttribute('data-timestamp', +new Date());
 </script>
 	<script type="text/javascript">
 	  var disqus_shortname = 'yumis-blog';
-          var disqus_identifier = '/create-a-simple-game-using-pygame.html';
-          var disqus_url = 'https://FairyOnIce.github.io/create-a-simple-game-using-pygame.html';
-          var disqus_title = 'Create a simple game using pygame';
+          var disqus_identifier = '/Semantic-model-built-with-tensorflow-deployed-with-Flask-and-Heroku-Part-2.html';
+          var disqus_url = 'https://FairyOnIce.github.io/Semantic-model-built-with-tensorflow-deployed-with-Flask-and-Heroku-Part-2.html';
+          var disqus_title = 'Semantic model built with tensorflow deployed with Flask and Heroku Part 2';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
