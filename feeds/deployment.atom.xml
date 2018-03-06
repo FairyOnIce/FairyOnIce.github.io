@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Yumi's Blog</title><link href="https://FairyOnIce.github.io/" rel="alternate"></link><link href="https://FairyOnIce.github.io/feeds/deployment.atom.xml" rel="self"></link><id>https://FairyOnIce.github.io/</id><updated>2018-03-03T22:00:00-08:00</updated><entry><title>Deployment</title><link href="https://FairyOnIce.github.io/deployment.html" rel="alternate"></link><published>2018-03-03T22:00:00-08:00</published><updated>2018-03-03T22:00:00-08:00</updated><author><name>Yumi Kondo</name></author><id>tag:FairyOnIce.github.io,2018-03-03:deployment.html</id><summary type="html">
-&lt;h1&gt;&lt;a href="http://simple-text-prediction.herokuapp.com/"&gt;Simple Semantic Analysis ~ how happy are you? ~&lt;/a&gt;&lt;/h1&gt;
-</summary></entry></feed>
