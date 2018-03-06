@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Yumi's Blog</title><link href="https://FairyOnIce.github.io/" rel="alternate"></link><link href="https://FairyOnIce.github.io/feeds/yeah.atom.xml" rel="self"></link><id>https://FairyOnIce.github.io/</id><updated>2012-07-10T20:14:00-07:00</updated><entry><title>My super title</title><link href="https://FairyOnIce.github.io/my-super-title.html" rel="alternate"></link><published>2012-07-10T20:14:00-07:00</published><updated>2012-07-10T20:14:00-07:00</updated><author><name>Alexis Métaireau</name></author><id>tag:FairyOnIce.github.io,2012-07-09:my-super-title.html</id><summary type="html">
+        This is the content of my super blog post.
+    </summary><category term="thats"></category><category term="awesome"></category></entry></feed>
