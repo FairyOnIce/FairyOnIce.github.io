@@ -18,7 +18,7 @@
  
 
   <meta charset="utf-8">
-  <title>Yumi's Blog</title>
+  <title>Deep learning semantic model deplyoyment using Flask and Heroku</title>
   <meta name="author" content="Yumi">
 
 
@@ -61,15 +61,177 @@ placeholder="Google Search"/>
 <ul class="main-navigation">
     <li><a href="/archives.html">Archives</a></li>
       <li><a href="https://FairyOnIce.github.io/pages/deployment.html">Deployment</a></li>
-    <li >
+    <li class="active">
     <a href="https://FairyOnIce.github.io/category/blog.html">Blog</a>
     </li>
 </ul></nav>
   <div id="main">
     <div id="content">
-<ul>
-    <li><a href="https://FairyOnIce.github.io/category/blog.html">Blog</a></li>
-</ul>
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Deep learning semantic model deplyoyment using Flask and Heroku</h1>
+      <p class="meta"><time datetime="2018-03-10T22:28:00-08:00" pubdate>Sat 10 March 2018</time></p>
+</header>
+
+  <div class="entry-content">Deep learning semantic model deplyoyment using Flask and Heroku
+    
+    
+    
+    
+
+
+
+
+
+In the previous blog
+I created a small semantic classification model that can be developed in Heroku.
+The web application is hosted here in Heroku.
+In this short blog, I will briefly discuss my deployment process.
+
+
+
+
+
+
+Despite that there are many public clouds that offers GPU instances,
+such as
+Amazon Web Service,
+Google Cloud,
+I decided to go with Heroku, which does not offer GPU instances.
+This is because Heroku is VERY easy to set up and it allows to host at most 5 applications FOR FREE.
+
+
+
+
+
+In the previous blog,
+I created a simple deep learning model for sentiment analysis using tensor-flow.
+The model takes a tweet or short text as a sentence and return the likelihood of happiness.
+My focus in the post was to simplify the model so that every calculation can be done within 30 seconds and the memory stays within 500MB.
+
+
+
+
+
+Reference
+    Deep learning semantic model built with tensorflow deployed using Flask and Heroku Part 1 (Model Development)
+    Deep learning semantic model built with tensorflow deployed using Flask and Heroku Part 2 (Deployment)
+    My Github repo containing Flask app
+
+
+Deployment
+As my daily job focuses on model development, I do not have as much experience in deployment (and that is the reason why I am spending weekend to write this blog).
+For someone like me, the learning curve may be too sharp if tring to learn everything at once. But if you take steps, every step is really easy.
+Here are the steps I followed to deploy deep learning model in Heroku.
+
+Step 0: Learn HTML
+HTML stands for HyperText Markup Language.
+Every webpage you look at is written in a language called HTML. You can think of HTML as the skeleton that gives every webpage structure.
+If you do not know about HTML, take a codeacademy's course about HTML & CSS (Free) and try your best to go as far as possible
+(until you get bored).
+
+
+Step 1: Learn Flask
+Flask is a micro web framework written in Python.
+For a quick start, follow this tutorial,
+it will let you create your first Flask web application and run it locally on your own computer in 10 minutes.
+
+
+Step 2: Learn Jinja2
+jinja2 is a popular templating engine for Python.
+A web templating system combines a template with a certain data source to render dynamic web pages.
+With jinja2, you can pass variable between your python script and html.
+
+I recommend you to read Template Designer Documentation.
+If you are too lazy to read it, here is the quick cheat sheet for its syntax:
+
+    {% ... %} for Statements
+    {{ ... }} for Expressions to print to the template output
+    {# ... #} for Comments not included in the template output
+    #  ... ## for Line Statements
+
+
+
+Step 3: Learn Heroku
+In Step 1, you already run the web application locally on your computer.
+With a cloud service like Heroku, you are able to put your websites onto the public World Wide Web, with a publicly accessible URL.
+This datademofun's github repo
+seems the simplest walkthrough on how to get set up with Heroku, its toolkit and then how to deploy a simple web application (for free) on the Heroku Cloud.
+
+Step 4: Learn Heroku + deep learning
+    My Flask app related codes are created by modifying datademofun's github repo.
+    While datademofun's Flask app only requires Flask and gunicorn, I need some additional python modules for pre processing data and to use deep learning functions.
+    My requirements.txt contains:
+    
+
+    You see that I have tensorflow as one of the requirements.txt but not Keras, my favorite deep learning framework.
+    This is because I could not import Keras:
+
+
+    As the Flask application with Keras worked locally in my computer but failed in Heroku,
+    I believe that this was Hiroku related problem.
+    More specifically, using Heroku, I could add it as one of the requirements.txt but when I add a line "import keras" in backend.py,
+    the application failed with H13 error. What is the H13 error?
+
+Here is a quote from H13 - Connection closed without response.
+
+    This error is thrown when a process in your web dyno accepts a connection, but then closes the socket without writing anything to it....
+    One example where this might happen is when a Unicorn web server is configured with a timeout shorter than 30s
+    and a request has not been processed by a worker before the timeout happens.
+    In this case, Unicorn closes the connection before any data is written, resulting in an H13.
+
+
+    I solved this problem in very hacky way: I imported Keras through tensorflow. You can see this in my backend.py:
+    
+
+    I agree this is not a very good solution but it was a quick go around!
+
+
+
+
+
+
+
+</div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Yumi Kondo</span>
+  </span>
+<time datetime="2018-03-10T22:28:00-08:00" pubdate>Sat 10 March 2018</time>  <span class="categories">
+    <a class="category" href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>
+  </span>
+</p><div class="sharing">
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="https://FairyOnIce.github.io/deep-learning-semantic-model-deplyoyment-using-flask-and-heroku.html" data-via="" data-counturl="https://FairyOnIce.github.io/deep-learning-semantic-model-deplyoyment-using-flask-and-heroku.html" >Tweet</a>
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+</div>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://yumis-blog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+     
+    </section>
+</div>
 <aside class="sidebar">
 
 <section>
@@ -153,6 +315,9 @@ placeholder="Google Search"/>
 </script>
 	<script type="text/javascript">
 	  var disqus_shortname = 'yumis-blog';
+          var disqus_identifier = '/deep-learning-semantic-model-deplyoyment-using-flask-and-heroku.html';
+          var disqus_url = 'https://FairyOnIce.github.io/deep-learning-semantic-model-deplyoyment-using-flask-and-heroku.html';
+          var disqus_title = 'Deep learning semantic model deplyoyment using Flask and Heroku';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
