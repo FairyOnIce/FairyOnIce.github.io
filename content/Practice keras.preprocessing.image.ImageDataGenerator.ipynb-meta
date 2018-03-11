@@ -1,8 +1,0 @@
-Title: Learn about ImageDataGenerator
-Slug: Learn-about-ImageDataGenerator
-Date: 2018-01-03 20:00
-Category: Blog
-Tags: Computer Vision
-author: Yumi
-Summary: ImageDataGenerator is a very handy method to generate augmented image data during the training.
-This post learns about input parameters of this method.
