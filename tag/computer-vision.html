@@ -72,6 +72,33 @@ placeholder="Google Search"/>
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="https://FairyOnIce.github.io/Driver-facial-keypoint-detection-with-data-augmentation.html">Driver's facial keypoint detection with data augmentation</a>
+      </h1>
+      <p class="meta"><time datetime="2018-04-20T23:00:00-07:00" pubdate>Fri 20 April 2018</time></p>
+</header>
+
+  <div class="entry-content">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="data augmentation" src="https://media.giphy.com/media/9G34rqiFhnRhih5RBj/giphy.gif" />
+I will revisit 
+<a href="https://fairyonice.github.io/Driver-facial-keypoint-detection.html">Driver's facial keypoint detection</a>.
+In this blog, I will improve the landmark detection model performance with <a href="https://fairyonice.github.io/Data-augmentation-for-facial-keypoint-detection.html">data augmentation</a>.
+ImageDataGenerator for the purpose of landmark detection is implemented at <a href="https://github.com/FairyOnIce/landmark_detection/blob/master/data_augmentation/ImageDataGenerator_landmarks.py">my github account</a> and discussed in <a href="https://fairyonice.github.io/Data-augmentation-for-facial-keypoint-detection.html">my previous blog - Data augmentation for facial keypoint detection-</a>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="https://FairyOnIce.github.io/Driver-facial-keypoint-detection-with-data-augmentation.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="https://FairyOnIce.github.io/Data-augmentation-for-facial-keypoint-detection.html">Data augmentation for facial keypoint detection</a>
       </h1>
       <p class="meta"><time datetime="2018-04-20T20:00:00-07:00" pubdate>Fri 20 April 2018</time></p>
@@ -83,6 +110,8 @@ placeholder="Google Search"/>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><img alt="gif" src="https://media.giphy.com/media/2vpEdUnChWDNbLpVbt/giphy.gif" /></p>
+<p>The python class ImageDataGenerator_landmarks is available at <a href="https://github.com/FairyOnIce/landmark_detection/blob/master/data_augmentation/ImageDataGenerator_landmarks.py">my github account</a>. 
+This blog explains about his class.</p>
 <h3 id="Why-data-augmentation?">Why data augmentation?<a class="anchor-link" href="#Why-data-augmentation?">¶</a></h3><p>Deep learning model is data greedy and the performance of the model may be surprisingly bad when testing images vary from training images a lot. 
 Data augmentation is an essential technique to utilize limited amount of training images.
 In my previous blog post, I have seen poor performance of a deep learning model when testing images contain the translation of the training images. However, the model performance improves when training data also contains translated images. See <a href="https://fairyonice.github.io/Assess-the-robustness-of-CapsNet.html">Assess the robustness of CapsNet</a></div>
@@ -284,25 +313,6 @@ I experimented <a href="https://arxiv.org/abs/1710.09829">Hinton's Capsule Netwo
     <a rel="full-article" href="https://FairyOnIce.github.io/Assess-the-robustness-of-CapsNet.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Understanding-and-Experimenting-Capsule-Networks.html">Understanding and Experimenting Capsule Networks</a>
-      </h1>
-      <p class="meta"><time datetime="2018-01-29T20:00:00-08:00" pubdate>Mon 29 January 2018</time></p>
-</header>
-
-  <div class="entry-content">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This blog is inspired by <a href="https://arxiv.org/abs/1710.09829">Dynamic Routing Between Capsules</a> and aims to understand Capsule Networks with hands-on coding.</p>
-<p>I use Keras with tensorflow backend. The codes here are created by modifing <a href="https://www.kaggle.com/kmader/capsulenet-on-mnist">Kevin Mader's ipython notebook script in Kaggle competition</a>, which, in turn are written by adapting <a href="https://github.com/XifengGuo/CapsNet-Keras/blob/master/capsulenet.py">Xifeng Guo's script in Github</a></div>
-  <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Understanding-and-Experimenting-Capsule-Networks.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="https://FairyOnIce.github.io/tag/computer-vision2.html">&larr; Older</a>
 
@@ -320,6 +330,9 @@ I experimented <a href="https://arxiv.org/abs/1710.09829">Hinton's Capsule Netwo
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/Driver-facial-keypoint-detection-with-data-augmentation.html">Driver's facial keypoint detection with data augmentation</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Data-augmentation-for-facial-keypoint-detection.html">Data augmentation for facial keypoint detection</a>
       </li>
       <li class="post">
@@ -330,9 +343,6 @@ I experimented <a href="https://arxiv.org/abs/1710.09829">Hinton's Capsule Netwo
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/create-jpgs-from-iphone-video.html">Extract series of JPEG files from iPhone 6S video</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Color-gray-scale-images-and-manga-using-deep-learning.html">Color gray scale images and manga using deep learning</a>
       </li>
     </ul>
   </section>
