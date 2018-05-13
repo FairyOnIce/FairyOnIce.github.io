@@ -1076,7 +1076,7 @@ When there is no signal, the recording performances of iphone's MovesCount app, 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [1]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>
@@ -1088,7 +1088,7 @@ When there is no signal, the recording performances of iphone's MovesCount app, 
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[1]:</div>
+<div class="prompt output_prompt">Out[2]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img height="100" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAACDgAAAUuCAYAAACV8hR6AAAMFmlDQ1BJQ0MgUHJvZmlsZQAASImV
 VwdYU8kWnltSCEkogQhICb0J0qv0LghIBxshCRBKDIGgYkcWFVwLKhYUFV0RUXEtgCwqIooFEez9
@@ -14111,6 +14111,7 @@ Object does not have a geometry
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">gmplot</span> <span class="k">import</span> <span class="n">gmplot</span>
 
+<span class="n">filenm</span> <span class="o">=</span> <span class="s2">"my_map.html"</span>
 <span class="c1"># Place map</span>
 <span class="n">gmap</span> <span class="o">=</span> <span class="n">gmplot</span><span class="o">.</span><span class="n">GoogleMapPlotter</span><span class="p">(</span><span class="mf">27.971815</span><span class="p">,</span> <span class="mf">86.828963</span><span class="p">,</span> <span class="mi">14</span><span class="p">)</span>
 
@@ -14120,7 +14121,7 @@ Object does not have a geometry
 <span class="c1">#gmap.scatter(df_phone["lat"], df_phone["lon"], '#3B0B39', size=10, marker=True)</span>
 
 <span class="c1"># Draw</span>
-<span class="n">gmap</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="s2">"my_map.html"</span><span class="p">)</span>
+<span class="n">gmap</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">filenm</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -14128,17 +14129,19 @@ Object does not have a geometry
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [6]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">IFrame</span>
 <span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"../trip/"</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"../../trip/"</span><span class="p">)</span>
+<span class="c1">## my google api key</span>
 <span class="kn">from</span> <span class="nn">personal</span> <span class="k">import</span> <span class="n">MY_API_KEY</span> 
 
 <span class="k">def</span> <span class="nf">jupyter_display</span><span class="p">(</span><span class="n">gmplot_filename</span><span class="p">,</span> <span class="n">google_api_key</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    Hack to display a gmplot map in Jupyter</span>
+<span class="sd">    reference</span>
 <span class="sd">    https://github.com/vgm64/gmplot/issues/16</span>
 <span class="sd">    """</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">gmplot_filename</span><span class="p">,</span> <span class="s2">"r+"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
@@ -14148,7 +14151,8 @@ Object does not have a geometry
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f_string</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">IFrame</span><span class="p">(</span><span class="n">gmplot_filename</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">990</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
 
-<span class="n">jupyter_display</span><span class="p">(</span><span class="s2">"my_map.html"</span><span class="p">,</span> <span class="n">MY_API_KEY</span><span class="p">)</span>
+<span class="n">jupyter_display</span><span class="p">(</span><span class="n">filenm</span><span class="p">,</span> <span class="n">MY_API_KEY</span><span class="p">)</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="n">filenm</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">990</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -14156,7 +14160,7 @@ Object does not have a geometry
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[6]:</div>
+<div class="prompt output_prompt">Out[5]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <iframe allowfullscreen="" frameborder="0" height="800" src="my_map.html" width="990"></iframe>
 </div>
@@ -14169,13 +14173,13 @@ Object does not have a geometry
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We see that the elevation gain and loss infomation are substantially different!
-I know that the elvation gain of this trail is never 1535m, and the recording from the watch seems more right!</p>
+I know that the elvation gain of this trail around 5200m elevation was never 1535m (I know I cannot finish the trail otherwise!), and the recording from the watch seems more right!</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">atan2</span><span class="p">,</span> <span class="n">radians</span>
@@ -14233,25 +14237,6 @@ I know that the elvation gain of this trail is never 1535m, and the recording fr
 </div>
 </div>
 </div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>watch
-  distance = 7.6km
-  Elevation gain 471m, Elevation loss -162m
-  N samples = 229
-phone
-  distance = 8.7km
-  Elevation gain 1535m, Elevation loss -1197m
-  N samples = 14500
----
-</pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -14301,7 +14286,7 @@ This suggests that we can take the rolling average of every 10 samples to clean 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [8]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_rolling_average</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
@@ -14325,25 +14310,6 @@ This suggests that we can take the rolling average of every 10 samples to clean 
 <span class="n">get_alt_change</span><span class="p">(</span><span class="n">df_phone</span><span class="p">[</span><span class="s2">"altitude"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"-------------"</span><span class="p">)</span>
 </pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>watch
-  distance = 7.6km
-  Elevation gain 471m, Elevation loss -162m
-  N samples = 229
-phone
-  distance = 8.0km
-  Elevation gain 643m, Elevation loss -308m
-  N samples = 14500
----
-</pre>
-</div>
 </div>
 </div>
 </div>
@@ -14383,10 +14349,7 @@ phone
   <span class="byline author vcard">
     Posted by <span class="fn">Yumi</span>
   </span>
-<time datetime="2018-05-13T21:00:00-07:00" pubdate>Sun 13 May 2018</time>  <span class="categories">
-    <a class="category" href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>
-  </span>
-</p><div class="sharing">
+<time datetime="2018-05-13T21:00:00-07:00" pubdate>Sun 13 May 2018</time></p><div class="sharing">
   <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://FairyOnIce.github.io/Extract-GPS-data-from-Suuntos-MovesCount.html" data-via="" data-counturl="https://FairyOnIce.github.io/Extract-GPS-data-from-Suuntos-MovesCount.html" >Tweet</a>
     <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
 </div>    </footer>
