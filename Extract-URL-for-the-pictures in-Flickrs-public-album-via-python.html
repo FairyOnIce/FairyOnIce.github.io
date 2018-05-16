@@ -1089,7 +1089,7 @@ This is an identifier for the album.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [14]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
@@ -1140,7 +1140,7 @@ This is an identifier for the album.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [15]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">photosetids</span><span class="p">,</span> <span class="n">titles</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
@@ -1209,7 +1209,7 @@ album title=4/24/2018 Day1 photoset_id=72157668988636988
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [16]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_photo_url</span><span class="p">(</span><span class="n">farmId</span><span class="p">,</span><span class="n">serverId</span><span class="p">,</span><span class="n">Id</span><span class="p">,</span><span class="n">secret</span><span class="p">):</span>
@@ -1237,21 +1237,25 @@ album title=4/24/2018 Day1 photoset_id=72157668988636988
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Finally-let's-plot-the-extracted-photos">Finally let's plot the extracted photos<a class="anchor-link" href="#Finally-let's-plot-the-extracted-photos">¶</a></h2>
+<h2 id="Finally-let's-plot-the-extracted-photos-from-the-first-4-albums">Finally let's plot the extracted photos from the first 4 albums<a class="anchor-link" href="#Finally-let's-plot-the-extracted-photos-from-the-first-4-albums">¶</a></h2><p>The codes seem to be working!</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [17]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span><span class="p">,</span> <span class="n">display</span>
 
+<span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">photoset_id</span><span class="p">,</span> <span class="n">urls</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">URLs</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2">, photoset_id=</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">photoset_id</span><span class="p">))</span>
     <span class="k">for</span> <span class="n">url</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
         <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">url</span><span class="o">=</span> <span class="n">url</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">200</span><span class="p">))</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">></span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">break</span>
 </pre></div>
 </div>
 </div>
@@ -1368,502 +1372,6 @@ album title=4/24/2018 Day1 photoset_id=72157668988636988
 <div class="prompt"></div>
 <div class="output_html rendered_html output_subarea ">
 <img height="200" src="https://farm1.staticflickr.com/909/41219255495_7606541450.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>5/2/2018 Day9, photoset_id=72157696204993104
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/825/42120266411_897d5e9386.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/978/27249708007_48c65ca2f5.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/947/28247609418_10cf78d413.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/903/41219136905_fcf5931ae8.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/825/41219138225_6a36d8f098.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/909/40313361160_348b396756.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/944/40313371050_557339f5e8.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/968/27249724947_fc355594e1.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/904/27249730187_14c2c1f9d8.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/978/42074161442_f6fb312f3c.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/909/41219174925_66135aeb01.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>5/3/2018 Day10, photoset_id=72157696204977184
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/906/42074164682_e84dbe4e55.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/958/27249747367_4f5d5f4016.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/960/40313402450_a4448fecdd.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/903/27249751417_09a9675110.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/959/40313405400_b463edbaa6.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/947/27249754497_bb02d4554f.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/944/40313408860_08a29505be.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/967/40313410390_10fbb75003.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/971/41400104894_d2619d08d0.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/974/41400106834_aa20ebdfc3.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/945/41400111164_40e2651cd0.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/981/27249770077_0e9ce44e0a.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>4/28/2018 Day5, photoset_id=72157693696318772
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/943/27249576897_822c1cd388.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/825/42120170521_6b51d01070.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/960/42074004512_e68e3ef267.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/953/41399980074_b39f047e97.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/906/42120205261_f69960c233.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/950/42120207241_6f427303dc.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>4/29/2018 Day6, photoset_id=72157695104025101
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/982/42120210531_14ca99b828.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/982/42120215591_9eedaf051d.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/978/42120218001_ddc8bc4302.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/828/27249634227_233ea5a4e0.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>4/30/2018 Day7, photoset_id=72157666947100257
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/960/42120229701_525fa104b7.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/960/28247542578_41bc1c430c.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/829/27249647247_d3c4898f96.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/950/27249649117_42a5e1e8b0.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/830/28247548138_5dc7f045ba.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>5/1/2018 Day8, photoset_id=72157695104003731
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/967/42120257261_eb3278f7d1.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/965/42074099532_d1d9a27097.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/955/42120259621_70baf4cbfa.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/907/27249692587_cc3c9eda8a.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/907/27249693557_347d2446af.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/977/42120261801_0f3b377274.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/958/27249698287_d3d889553f.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/971/42120264141_6c1977cfd7.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/976/27249703387_c209c6b694.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>4/27/2018 Day4, photoset_id=72157693696247802
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/912/42120159321_0164437fb1.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/908/42120161721_31dd9498af.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/943/42120164491_43b535e696.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/972/27249570837_cee31f200e.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>4/26/2018 Day3, photoset_id=72157695103914511
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/823/40313229320_b3a5d92b1c.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/830/40313230700_a90cdc1214.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/967/40313552950_13f7eb053a.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/908/41218435525_382b510265.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/911/41218438585_f2cc209ce3.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/965/42073428832_62923b850a.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/972/40313233710_78334b3ec9.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/823/42120148191_0ccd7245d3.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/906/42120150731_d1308b2406.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/971/28247469218_fe0b767125.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/954/42120154361_2f2d9239d5.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/943/42120151861_405a549d73.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>4/25/2018 Day2, photoset_id=72157666947001577
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/957/40313543200_8bcd1da3c4.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/907/40313535750_5d91c97245.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/910/27249524307_712ab3f1ef.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/955/40313540160_cae0c0e402.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>4/24/2018 Day1, photoset_id=72157668988636988
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/909/41218996005_af667648be.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/961/41218999635_3e934d1bb5.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/824/42120115871_e0063d8083.jpg" width="200" />
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_html rendered_html output_subarea ">
-<img height="200" src="https://farm1.staticflickr.com/827/42120118931_43f22cd6ae.jpg" width="200" />
 </div>
 </div>
 </div>
