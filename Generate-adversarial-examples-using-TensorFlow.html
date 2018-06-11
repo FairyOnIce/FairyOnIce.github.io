@@ -1056,8 +1056,7 @@ h6:hover .anchor-link {
 <h2 id="What-is-adversarial-images?">What is adversarial images?<a class="anchor-link" href="#What-is-adversarial-images?">¶</a></h2><p>According to <a href="https://blog.openai.com/adversarial-example-research/">OpenAI</a>, 
 adversarial examples are:</p>
 <blockquote>
-inputs to machine learning models that an attacker has intentionally designed to cause the model to make a mistake; they’re like optical illusions for machines.
-<i>[OpenAI](https://blog.openai.com/adversarial-example-research/)</i>
+inputs to machine learning models that an attacker has intentionally designed to cause the model to make a mistake; they’re like optical illusions for machines. <i><a href="https://blog.openai.com/adversarial-example-research/">OpenAI</a></i>
 </blockquote><p><a href="https://blog.openai.com/adversarial-example-research/">Explaining and Harnessing Adversarial Examples</a> proposed the fast gradient sign method that generates an adversarial example as:</p>
 <p>$$
 X' = X + \epsilon sign \left(\frac{d \textrm{loss}(X)}{dX} \right)
@@ -1066,10 +1065,11 @@ where $\epsilon$ is a small value such that the max-norm of the perturbation is 
 <p>This means that the adversarial perturbation creates a new training example by adding a perturbation along a direction which the network is likely to increase the loss. 
 <a href="https://blog.openai.com/adversarial-example-research/">Explaining and Harnessing Adversarial Examples</a> mentioned that by including the adversarial examples in the training data, the classifier becomes more robust. This is adversarial training.</p>
 <h3 id="Adversarial-examples-using-TensorFlow">Adversarial examples using TensorFlow<a class="anchor-link" href="#Adversarial-examples-using-TensorFlow">¶</a></h3><p>The goal of this blog is to understand and create adversarial examples using TensorFlow.
-I will use TensorFlow rather than Keras as writing it with Keras requires Keras's backend functions which requires using both Keras and Tensorflow functions. Rather than mixing up the two, I will use Keras
-I will use <a href="https://fairyonice.github.io/achieving-top-23-in-kaggles-facial-keypoints-detection-with-keras-tensorflow.html">my facial keypoint detection model</a> developed using Kaggle's facial keypoint detection data. 
+I will use TensorFlow rather than Keras as writing it in Keras requires Keras's backend functions which essentially requires using Tensorflow backend functions. Rather than mixing up the two frameworks, I will stick to TensorFlow.</p>
+<p>I will use <a href="https://fairyonice.github.io/achieving-top-23-in-kaggles-facial-keypoints-detection-with-keras-tensorflow.html">my facial keypoint detection model</a> developed using Kaggle's facial keypoint detection data as a base model for which I will create adversarial examples. 
 See <a href="https://fairyonice.github.io/achieving-top-23-in-kaggles-facial-keypoints-detection-with-keras-tensorflow.html">Achieving Top 23% in Kaggle's Facial Keypoints Detection with Keras + Tensorflow</a> to learn how I developed this model.</p>
-<p>As this model is developed in Keras, the first half of the blog discusses how to read in the Keras's model with weights, and load TensorFlow's model. If you already have a TensorFlow model in hand, I recommend you to start reading from the section "Create a class for adversarial examples with TensorFlow deep learning model".</p>
+<p>As this model is developed in Keras, the first half of the blog discusses how to read in the Keras's pre-trained model, and load TensorFlow's model. 
+If you already have a TensorFlow model in hand, I recommend you to start reading it from the section "Create a class for adversarial examples with TensorFlow deep learning model".</p>
 <h3 id="Reference">Reference<a class="anchor-link" href="#Reference">¶</a></h3><ul>
 <li><a href="https://blog.openai.com/adversarial-example-research/">Explaining and Harnessing Adversarial Examples</a></li>
 </ul>
@@ -8077,6 +8077,9 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/Evaluate-uncertainty-using-ensemble-of-deep-learning-models-with-negative-log-likelihood-loss.html">Evaluate uncertainty using ensemble of deep learning models with negative log likelihood loss</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Generate-adversarial-examples-using-TensorFlow.html">Generate adversarial examples using TensorFlow</a>
       </li>
       <li class="post">
@@ -8087,9 +8090,6 @@ s.setAttribute('data-timestamp', +new Date());
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Learn-about-Fully-Convolutional-Networks-for-semantic-segmentation.html">Learn about Fully Convolutional Networks for semantic segmentation</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Extract-URL-for-the-pictures in-Flickrs-public-album-via-python.html">Extract URL for the pictures in Flickr's public album via python</a>
       </li>
     </ul>
   </section>
@@ -8104,7 +8104,7 @@ s.setAttribute('data-timestamp', +new Date());
 
   <section>
   <h1>Tags</h1>
-    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>  </section>
+    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>  </section>
 
 
     <section>

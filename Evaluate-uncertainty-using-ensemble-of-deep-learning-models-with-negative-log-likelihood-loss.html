@@ -1,0 +1,1928 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+
+
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-112020731-1"></script>
+   <script>
+   window.dataLayer = window.dataLayer || [];
+   function gtag(){dataLayer.push(arguments);}
+   gtag('js', new Date());
+
+   gtag('config', 'UA-112020731-1');
+   </script>
+
+ 
+
+  <meta charset="utf-8">
+  <title>Evaluate uncertainty using ensemble of deep learning models with negative log likelihood loss</title>
+  <meta name="author" content="Yumi">
+
+
+
+  <!-- https://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://FairyOnIce.github.io/favicon.png" rel="icon">
+  <link href="https://FairyOnIce.github.io/theme/css/main.css" media="screen, projection"
+rel="stylesheet" type="text/css">
+ <link rel="stylesheet" href="https://FairyOnIce.github.io/theme/tipuesearch.css">
+  <script src="https://FairyOnIce.github.io/theme/js/modernizr-2.0.js"></script>
+  <script src="https://FairyOnIce.github.io/theme/js/ender.js"></script>
+  <script src="https://FairyOnIce.github.io/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="https://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://FairyOnIce.github.io/">Yumi's Blog</a></h1>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+</ul>
+
+
+<form action="https://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:FairyOnIce.github.io" />
+    <input class="search" type="text" name="q" results="0"
+placeholder="Google Search"/>
+  </fieldset>
+</form>
+
+<ul class="main-navigation">
+    <li><a href="/archives.html">Archives</a></li>
+      <li><a href="https://FairyOnIce.github.io/pages/deployment.html">Deployment</a></li>
+      <li><a href="https://FairyOnIce.github.io/pages/quest.html">Quest</a></li>
+    <li class="active">
+    <a href="https://FairyOnIce.github.io/category/blog.html">Blog</a>
+    </li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Evaluate uncertainty using ensemble of deep learning models with negative log likelihood loss</h1>
+      <p class="meta"><time datetime="2018-06-10T20:00:00-07:00" pubdate>Sun 10 June 2018</time></p>
+</header>
+
+  <div class="entry-content"><style type="text/css">/*!
+*
+* IPython notebook
+*
+*/
+/* CSS font colors for translated ANSI colors. */
+.ansibold {
+  font-weight: bold;
+}
+/* use dark versions for foreground, to improve visibility */
+.ansiblack {
+  color: black;
+}
+.ansired {
+  color: darkred;
+}
+.ansigreen {
+  color: darkgreen;
+}
+.ansiyellow {
+  color: #c4a000;
+}
+.ansiblue {
+  color: darkblue;
+}
+.ansipurple {
+  color: darkviolet;
+}
+.ansicyan {
+  color: steelblue;
+}
+.ansigray {
+  color: gray;
+}
+/* and light for background, for the same reason */
+.ansibgblack {
+  background-color: black;
+}
+.ansibgred {
+  background-color: red;
+}
+.ansibggreen {
+  background-color: green;
+}
+.ansibgyellow {
+  background-color: yellow;
+}
+.ansibgblue {
+  background-color: blue;
+}
+.ansibgpurple {
+  background-color: magenta;
+}
+.ansibgcyan {
+  background-color: cyan;
+}
+.ansibggray {
+  background-color: gray;
+}
+div.cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-radius: 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: transparent;
+  width: 100%;
+  padding: 5px;
+  /* This acts as a spacer between cells, that is outside the border */
+  margin: 0px;
+  outline: none;
+  border-left-width: 1px;
+  padding-left: 5px;
+  background: linear-gradient(to right, transparent -40px, transparent 1px, transparent 1px, transparent 100%);
+}
+div.cell.jupyter-soft-selected {
+  border-left-color: #90CAF9;
+  border-left-color: #E3F2FD;
+  border-left-width: 1px;
+  padding-left: 5px;
+  border-right-color: #E3F2FD;
+  border-right-width: 1px;
+  background: #E3F2FD;
+}
+@media print {
+  div.cell.jupyter-soft-selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected {
+  border-color: #ababab;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  div.cell.selected {
+    border-color: transparent;
+  }
+}
+div.cell.selected.jupyter-soft-selected {
+  border-left-width: 0;
+  padding-left: 6px;
+  background: linear-gradient(to right, #42A5F5 -40px, #42A5F5 7px, #E3F2FD 7px, #E3F2FD 100%);
+}
+.edit_mode div.cell.selected {
+  border-color: #66BB6A;
+  border-left-width: 0px;
+  padding-left: 6px;
+  background: linear-gradient(to right, #66BB6A -40px, #66BB6A 5px, transparent 5px, transparent 100%);
+}
+@media print {
+  .edit_mode div.cell.selected {
+    border-color: transparent;
+  }
+}
+.prompt {
+  /* This needs to be wide enough for 3 digit prompt numbers: In[100]: */
+  min-width: 14ex;
+  /* This padding is tuned to match the padding on the CodeMirror editor. */
+  padding: 0.4em;
+  margin: 0px;
+  font-family: monospace;
+  text-align: right;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+  /* Don't highlight prompt number selection */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  /* Use default cursor */
+  cursor: default;
+}
+@media (max-width: 540px) {
+  .prompt {
+    text-align: left;
+  }
+}
+div.inner_cell {
+  min-width: 0;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_area {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+/* This is needed so that empty prompt areas can collapse to zero height when there
+   is no content in the output_subarea and the prompt. The main purpose of this is
+   to make sure that empty JavaScript output_subareas have no height. */
+div.prompt:empty {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+div.unrecognized_cell {
+  padding: 5px 5px 5px 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.unrecognized_cell .inner_cell {
+  border-radius: 2px;
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+  border: 1px solid #cfcfcf;
+  background: #eaeaea;
+}
+div.unrecognized_cell .inner_cell a {
+  color: inherit;
+  text-decoration: none;
+}
+div.unrecognized_cell .inner_cell a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+@media (max-width: 540px) {
+  div.unrecognized_cell > div.prompt {
+    display: none;
+  }
+}
+div.code_cell {
+  /* avoid page breaking on code cells when printing */
+}
+@media print {
+  div.code_cell {
+    page-break-inside: avoid;
+  }
+}
+/* any special styling for code cells that are currently running goes here */
+div.input {
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.input {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/* input_area and input_prompt must match in top border and margin for alignment */
+div.input_prompt {
+  color: #303F9F;
+  border-top: 1px solid transparent;
+}
+div.input_area > div.highlight {
+  margin: 0.4em;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+div.input_area > div.highlight > pre {
+  margin: 0px;
+  border: none;
+  padding: 0px;
+  background-color: transparent;
+}
+/* The following gets added to the <head> if it is detected that the user has a
+ * monospace font with inconsistent normal/bold/italic height.  See
+ * notebookmain.js.  Such fonts will have keywords vertically offset with
+ * respect to the rest of the text.  The user should select a better font.
+ * See: https://github.com/ipython/ipython/issues/1503
+ *
+ * .CodeMirror span {
+ *      vertical-align: bottom;
+ * }
+ */
+.CodeMirror {
+  line-height: 1.21429em;
+  /* Changed from 1em to our global default */
+  font-size: 14px;
+  height: auto;
+  /* Changed to auto to autogrow */
+  background: none;
+  /* Changed from white to allow our bg to show through */
+}
+.CodeMirror-scroll {
+  /*  The CodeMirror docs are a bit fuzzy on if overflow-y should be hidden or visible.*/
+  /*  We have found that if it is visible, vertical scrollbars appear with font size changes.*/
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+.CodeMirror-lines {
+  /* In CM2, this used to be 0.4em, but in CM3 it went to 4px. We need the em value because */
+  /* we have set a different line-height and want this to scale with that. */
+  padding: 0.4em;
+}
+.CodeMirror-linenumber {
+  padding: 0 8px 0 4px;
+}
+.CodeMirror-gutters {
+  border-bottom-left-radius: 2px;
+  border-top-left-radius: 2px;
+}
+.CodeMirror pre {
+  /* In CM3 this went to 4px from 0 in CM2. We need the 0 value because of how we size */
+  /* .CodeMirror-lines */
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+/*
+
+Original style from softwaremaniacs.org (c) Ivan Sagalaev <Maniac@SoftwareManiacs.Org>
+Adapted from GitHub theme
+
+*/
+.highlight-base {
+  color: #000;
+}
+.highlight-variable {
+  color: #000;
+}
+.highlight-variable-2 {
+  color: #1a1a1a;
+}
+.highlight-variable-3 {
+  color: #333333;
+}
+.highlight-string {
+  color: #BA2121;
+}
+.highlight-comment {
+  color: #408080;
+  font-style: italic;
+}
+.highlight-number {
+  color: #080;
+}
+.highlight-atom {
+  color: #88F;
+}
+.highlight-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.highlight-builtin {
+  color: #008000;
+}
+.highlight-error {
+  color: #f00;
+}
+.highlight-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.highlight-meta {
+  color: #AA22FF;
+}
+/* previously not defined, copying from default codemirror */
+.highlight-def {
+  color: #00f;
+}
+.highlight-string-2 {
+  color: #f50;
+}
+.highlight-qualifier {
+  color: #555;
+}
+.highlight-bracket {
+  color: #997;
+}
+.highlight-tag {
+  color: #170;
+}
+.highlight-attribute {
+  color: #00c;
+}
+.highlight-header {
+  color: blue;
+}
+.highlight-quote {
+  color: #090;
+}
+.highlight-link {
+  color: #00c;
+}
+/* apply the same style to codemirror */
+.cm-s-ipython span.cm-keyword {
+  color: #008000;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-atom {
+  color: #88F;
+}
+.cm-s-ipython span.cm-number {
+  color: #080;
+}
+.cm-s-ipython span.cm-def {
+  color: #00f;
+}
+.cm-s-ipython span.cm-variable {
+  color: #000;
+}
+.cm-s-ipython span.cm-operator {
+  color: #AA22FF;
+  font-weight: bold;
+}
+.cm-s-ipython span.cm-variable-2 {
+  color: #1a1a1a;
+}
+.cm-s-ipython span.cm-variable-3 {
+  color: #333333;
+}
+.cm-s-ipython span.cm-comment {
+  color: #408080;
+  font-style: italic;
+}
+.cm-s-ipython span.cm-string {
+  color: #BA2121;
+}
+.cm-s-ipython span.cm-string-2 {
+  color: #f50;
+}
+.cm-s-ipython span.cm-meta {
+  color: #AA22FF;
+}
+.cm-s-ipython span.cm-qualifier {
+  color: #555;
+}
+.cm-s-ipython span.cm-builtin {
+  color: #008000;
+}
+.cm-s-ipython span.cm-bracket {
+  color: #997;
+}
+.cm-s-ipython span.cm-tag {
+  color: #170;
+}
+.cm-s-ipython span.cm-attribute {
+  color: #00c;
+}
+.cm-s-ipython span.cm-header {
+  color: blue;
+}
+.cm-s-ipython span.cm-quote {
+  color: #090;
+}
+.cm-s-ipython span.cm-link {
+  color: #00c;
+}
+.cm-s-ipython span.cm-error {
+  color: #f00;
+}
+.cm-s-ipython span.cm-tab {
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAMCAYAAAAkuj5RAAAAAXNSR0IArs4c6QAAAGFJREFUSMft1LsRQFAQheHPowAKoACx3IgEKtaEHujDjORSgWTH/ZOdnZOcM/sgk/kFFWY0qV8foQwS4MKBCS3qR6ixBJvElOobYAtivseIE120FaowJPN75GMu8j/LfMwNjh4HUpwg4LUAAAAASUVORK5CYII=);
+  background-position: right;
+  background-repeat: no-repeat;
+}
+div.output_wrapper {
+  /* this position must be relative to enable descendents to be absolute within it */
+  position: relative;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  z-index: 1;
+}
+/* class for the output area when it should be height-limited */
+div.output_scroll {
+  /* ideally, this would be max-height, but FF barfs all over that */
+  height: 24em;
+  /* FF needs this *and the wrapper* to specify full width, or it will shrinkwrap */
+  width: 100%;
+  overflow: auto;
+  border-radius: 2px;
+  -webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
+  display: block;
+}
+/* output div while it is collapsed */
+div.output_collapsed {
+  margin: 0px;
+  padding: 0px;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+div.out_prompt_overlay {
+  height: 100%;
+  padding: 0px 0.4em;
+  position: absolute;
+  border-radius: 2px;
+}
+div.out_prompt_overlay:hover {
+  /* use inner shadow to get border that is computed the same on WebKit/FF */
+  -webkit-box-shadow: inset 0 0 1px #000;
+  box-shadow: inset 0 0 1px #000;
+  background: rgba(240, 240, 240, 0.5);
+}
+div.output_prompt {
+  color: #D84315;
+}
+/* This class is the outer container of all output sections. */
+div.output_area {
+  padding: 0px;
+  page-break-inside: avoid;
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+div.output_area .MathJax_Display {
+  text-align: left !important;
+}
+div.output_area 
+div.output_area 
+div.output_area img,
+div.output_area svg {
+  max-width: 100%;
+  height: auto;
+}
+div.output_area img.unconfined,
+div.output_area svg.unconfined {
+  max-width: none;
+}
+/* This is needed to protect the pre formating from global settings such
+   as that of bootstrap */
+.output {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: vertical;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: vertical;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.output_area {
+    /* Old browsers */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-align: stretch;
+    display: -moz-box;
+    -moz-box-orient: vertical;
+    -moz-box-align: stretch;
+    display: box;
+    box-orient: vertical;
+    box-align: stretch;
+    /* Modern browsers */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+div.output_area pre {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  color: black;
+  background-color: transparent;
+  border-radius: 0;
+}
+/* This class is for the output subarea inside the output_area and after
+   the prompt div. */
+div.output_subarea {
+  overflow-x: auto;
+  padding: 0.4em;
+  /* Old browsers */
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+  box-flex: 1;
+  /* Modern browsers */
+  flex: 1;
+  max-width: calc(100% - 14ex);
+}
+div.output_scroll div.output_subarea {
+  overflow-x: visible;
+}
+/* The rest of the output_* classes are for special styling of the different
+   output types */
+/* all text output has this class: */
+div.output_text {
+  text-align: left;
+  color: #000;
+  /* This has to match that of the the CodeMirror class line-height below */
+  line-height: 1.21429em;
+}
+/* stdout/stderr are 'text' as well as 'stream', but execute_result/error are *not* streams */
+div.output_stderr {
+  background: #fdd;
+  /* very light red background for stderr */
+}
+div.output_latex {
+  text-align: left;
+}
+/* Empty output_javascript divs should have no height */
+div.output_javascript:empty {
+  padding: 0;
+}
+.js-error {
+  color: darkred;
+}
+/* raw_input styles */
+div.raw_input_container {
+  line-height: 1.21429em;
+  padding-top: 5px;
+}
+pre.raw_input_prompt {
+  /* nothing needed here. */
+}
+input.raw_input {
+  font-family: monospace;
+  font-size: inherit;
+  color: inherit;
+  width: auto;
+  /* make sure input baseline aligns with prompt */
+  vertical-align: baseline;
+  /* padding + margin = 0.5em between prompt and cursor */
+  padding: 0em 0.25em;
+  margin: 0em 0.25em;
+}
+input.raw_input:focus {
+  box-shadow: none;
+}
+p.p-space {
+  margin-bottom: 10px;
+}
+div.output_unrecognized {
+  padding: 5px;
+  font-weight: bold;
+  color: red;
+}
+div.output_unrecognized a {
+  color: inherit;
+  text-decoration: none;
+}
+div.output_unrecognized a:hover {
+  color: inherit;
+  text-decoration: none;
+}
+.rendered_html {
+  color: #000;
+  /* any extras will just be numbers: */
+}
+
+
+
+.rendered_html :link {
+  text-decoration: underline;
+}
+.rendered_html :visited {
+  text-decoration: underline;
+}
+
+
+
+
+
+
+.rendered_html h1:first-child {
+  margin-top: 0.538em;
+}
+.rendered_html h2:first-child {
+  margin-top: 0.636em;
+}
+.rendered_html h3:first-child {
+  margin-top: 0.777em;
+}
+.rendered_html h4:first-child {
+  margin-top: 1em;
+}
+.rendered_html h5:first-child {
+  margin-top: 1em;
+}
+.rendered_html h6:first-child {
+  margin-top: 1em;
+}
+
+
+
+
+
+
+
+
+.rendered_html * + ul {
+  margin-top: 1em;
+}
+.rendered_html * + ol {
+  margin-top: 1em;
+}
+
+
+.rendered_html pre,
+
+
+
+.rendered_html tr,
+.rendered_html th,
+
+.rendered_html td,
+
+
+.rendered_html * + table {
+  margin-top: 1em;
+}
+
+.rendered_html * + p {
+  margin-top: 1em;
+}
+
+.rendered_html * + img {
+  margin-top: 1em;
+}
+.rendered_html img,
+
+.rendered_html img.unconfined,
+
+div.text_cell {
+  /* Old browsers */
+  display: -webkit-box;
+  -webkit-box-orient: horizontal;
+  -webkit-box-align: stretch;
+  display: -moz-box;
+  -moz-box-orient: horizontal;
+  -moz-box-align: stretch;
+  display: box;
+  box-orient: horizontal;
+  box-align: stretch;
+  /* Modern browsers */
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+@media (max-width: 540px) {
+  div.text_cell > div.prompt {
+    display: none;
+  }
+}
+div.text_cell_render {
+  /*font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;*/
+  outline: none;
+  resize: none;
+  width: inherit;
+  border-style: none;
+  padding: 0.5em 0.5em 0.5em 0.4em;
+  color: #000;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+a.anchor-link:link {
+  text-decoration: none;
+  padding: 0px 20px;
+  visibility: hidden;
+}
+h1:hover .anchor-link,
+h2:hover .anchor-link,
+h3:hover .anchor-link,
+h4:hover .anchor-link,
+h5:hover .anchor-link,
+h6:hover .anchor-link {
+  visibility: visible;
+}
+.text_cell.rendered .input_area {
+  display: none;
+}
+.text_cell.rendered 
+.text_cell.unrendered .text_cell_render {
+  display: none;
+}
+.cm-header-1,
+.cm-header-2,
+.cm-header-3,
+.cm-header-4,
+.cm-header-5,
+.cm-header-6 {
+  font-weight: bold;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.cm-header-1 {
+  font-size: 185.7%;
+}
+.cm-header-2 {
+  font-size: 157.1%;
+}
+.cm-header-3 {
+  font-size: 128.6%;
+}
+.cm-header-4 {
+  font-size: 110%;
+}
+.cm-header-5 {
+  font-size: 100%;
+  font-style: italic;
+}
+.cm-header-6 {
+  font-size: 100%;
+  font-style: italic;
+}
+</style>
+<style type="text/css">.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #666666 } /* Literal.Number.Bin */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
+<style type="text/css">
+/* Temporary definitions which will become obsolete with Notebook release 5.0 */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Evaluating the quality of predictive uncertainties is challenging as "ground truth" uncertainty is usually not available. 
+Yet, model's confidence about its estimation is often of interest for researchers.
+If the model can tell "what it knows" or what is "out of distribution", such infomation gives insights about when the researchers should take the point estimates as their face values.</p>
+<p><a href="https://arxiv.org/abs/1506.02142?context=cs">Dropout as a Bayesian Approximation: Representing Model Uncertainty in Deep Learning</a> recently proposed using Monte Carlo dropout to estimate predictive uncertainty by using Dropout at test time. 
+Most of the recent work on uncertainty in deep learning is in this line. 
+I study MC dropout method for evaluating model's confidence in <a href="https://fairyonice.github.io/Measure-the-uncertainty-in-deep-learning-models-using-dropout.html">Measure the uncertainty in deep learning models using dropout</a>.
+I found that this MC dropout method requires the model to restrict the choice of network structures even for modeling simple data; activation functions seem to have to be relu and we seem to need to have quite a few dropout layers.</p>
+<p>I recently found a new paper <a href="https://papers.nips.cc/paper/7219-simple-and-scalable-predictive-uncertainty-estimation-using-deep-ensembles.pdf">Simple and Scalable Predictive Uncertainty
+Estimation using Deep Ensembles</a> in this line of uncertainty research.
+Their methods do not take Bayesian approaches and it has a lot of similarity with the maximum likelihood approach.</p>
+<p>In this blog post, I will review this new method.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><head></p>
+<p><script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script></p>
+<p><script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript">
+</script>
+</p>
+<body>
+<h2>Model</h2>
+The approach assumes that given available input $X$, 
+the target has a normal distribution with mean and variance dependent on the values of $X$: 
+$$
+Y | X \overset{i.i.d.}{\sim} N \left(\mu_m (X) , \sigma_m^2(X) \right)
+$$
+Here, $\mu_m (X)$ and $\sigma_m^2(X)$ are modelled non-linearly using neural network.
+Then the maximum likelihood methods are used to estimate unknown parameters $\mu_m (X)$, $\sigma_m^2(X)$.
+
+In practice, estimates become more accurate if $M$ models are ensembled together. 
+Therefore, [Simple and Scalable Predictive Uncertainty
+Estimation using Deep Ensembles](https://papers.nips.cc/paper/7219-simple-and-scalable-predictive-uncertainty-estimation-using-deep-ensembles.pdf) also proposed to use the ensemble model for prediction. 
+This essentially means that you are assuming that conditional distribution of $Y$ to be from the mixture: 
+$$
+Y \left| X \right. \sim \frac{1}{M}\sum_{m=1}^M 
+N \left(\mu_m (X) , \sigma_m^2(X) \right)
+$$
+
+Under this ensemble model structure, mean $\mu_{*} (X)$ and variance $\sigma_{*}^2(X)$ of the marginal distribution can be calcualted as: 
+
+\begin{array}{rcll}
+\mu_{*} (X) 
+&=& \frac{1}{M}\sum_{m=1}^M \mu_m (X)\\
+\sigma_{*}^2 (X)
+&=& \frac{1}{M} \sum_{m=1}^M \left( \sigma_m^2(X) + \mu_m (X)^2 \right) -  \mu_{*} (X)^2\\
+\end{array}
+
+These are because: 
+\begin{array}{rcll}
+\mu_{*} (X) & := & E(Y)\\
+&=& \sum_{m=1}^M  E(Y|m) \\
+&=& \frac{1}{M}\sum_{m=1}^M \mu_m (X)\\
+\sigma_{*}^2 (X) 
+&:=& Var(Y) \\
+&=& E_m(Var(Y|m)) + Var_m(E(Y|m)) \\
+&=& \frac{1}{M}\sum_{m=1}^M \sigma_m^2(X) + Var_m \left( \mu_m (X) \right)\\
+\textrm{ where  } Var_m \left( \mu_m (X) \right) 
+&=&  E_m \left( \mu_m (X)^2 \right) - E_m  \left( \mu_m (X) \right)^2\\
+&=&  \frac{1}{M} \sum_{m=1}^M \mu_m (X)^2  -  \left( \frac{1}{M}\sum_{m=1}^M \mu_m (X) \right)^2\\
+&=& \frac{1}{M} \sum_{m=1}^M \mu_m (X)^2  -  \mu_{*} (X)^2
+\end{array}
+See [Wikipedia](https://en.wikipedia.org/wiki/Conditional_variance) if you get lost deviding variance into its component.
+
+
+
+
+
+
+
+
+Finally, the authors propose to use adversarial training to improve the estimation of the likelihood:
+
+Adverasarial training can be interpreted as a computationally efficient solution to smooth the predictive distributions by increasing the likelihood of the target around an $\epsilon$ neighboorhood. 
+
+I previously study about adversarial examples. So I will not discuss its details here. See Generate adversarial examples using TensorFlow.
+In this blog, I would like to know how easy it is to implement this procedure and whether adversarial training is really necessary.
+
+
+
+
+
+In [1]:
+
+
+import matplotlib.pyplot as plt
+import pandas as pd 
+import numpy as np 
+import tensorflow as tf
+import os, sys 
+
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID" 
+config = tf.ConfigProto()
+config.gpu_options.per_process_gpu_memory_fraction = 0.95
+config.gpu_options.visible_device_list = "1" 
+tf.Session(config=config)
+
+print("python {}".format(sys.version))
+print("tensorflow version {}".format(tf.__version__))
+
+
+
+
+
+
+
+
+
+python 2.7.13 |Anaconda 4.3.1 (64-bit)| (default, Dec 20 2016, 23:09:15) 
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)]
+tensorflow version 1.2.0
+
+
+
+
+
+
+
+
+
+
+Generate synthetic data¶I will use the same simulated as the previous blog: TensorFlow newbie creates a neural net with a negative log likelihood as a loss.
+
+
+
+
+
+In [2]:
+
+
+## Define x
+inc = 0.001
+x_train =np.concatenate([np.arange(-2,-1.5,inc),
+                         np.arange(-1,2,inc)])
+x_train = x_train.reshape(len(x_train),1)
+
+## Define y 
+steps_per_cycle = 1
+def sinfun(xs,noise=0.001):
+    import random, math
+    xs = xs.flatten()
+    def randomNoise(x):
+        ax = 2 - np.abs(x)
+        wnoise = random.uniform(-noise*ax, 
+                                 noise*ax)
+        return(math.sin(x * (2 * math.pi / steps_per_cycle) ) + wnoise)
+    vec = [randomNoise(x) - x  for x in xs]
+    return(np.array(vec).flatten())
+
+y_train0 =  sinfun(x_train,noise=0.5) 
+y_train = y_train0.reshape(len(y_train0),1)
+
+
+
+print(" x_train.shape={}".format(x_train.shape))
+print(" y_train.shape={}".format(y_train.shape))
+
+
+## Visualize the generated data (X,y)
+plt.figure(figsize=(10,3))
+plt.scatter(x_train,y_train,s=0.5)
+plt.xlabel("x_train")
+plt.ylabel("y_train")
+plt.title("The x values of the synthetic data ranges between {:4.3f} and {:4.3f}".format(
+    np.min(x_train),np.max(x_train)))
+plt.show()
+
+
+
+
+
+
+
+
+
+ x_train.shape=(3500, 1)
+ y_train.shape=(3500, 1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Define model¶I will consider 3-hidden layer NN for modeling this synthetic data.
+I will consider negative log-likelihood as a loss function. 
+This model was also used in the blog post: 
+TensorFlow newbie creates a neural net with a negative log likelihood as a loss.
+Notice that all functions are the same as ones in the previous blog, except "define_model" function.
+The "define_model" function now has tensors to calcualte the adversarial examples.
+The codes for calculating adversarial examples are mostly borrowed from the previous blog  Generate adversarial examples using TensorFlow.
+
+
+
+
+
+In [3]:
+
+
+def weight_variable(shape):
+    ## weight variable, initialized with truncated normal distribution
+    initial = tf.truncated_normal(shape, stddev=0.01, dtype="float32")
+    return tf.Variable(initial)
+
+def bias_variable(shape):
+    initial = tf.constant(0.001, shape=shape, dtype="float32")
+    return tf.Variable(initial)
+
+def fully_connected_layer(h0,n_h0,n_h1,verbose=True):
+    '''
+    h0   :  tensor of shape (n_h0, n_h1)
+    n_h0 :  scalar 
+    n_h1 :  scalar
+    '''
+    W1 = weight_variable([n_h0, n_h1])
+    b1 =  bias_variable([n_h1])
+    
+    if verbose:
+        print("    h0.shape={}".format(h0.get_shape()))
+        print("    W1.shape={}".format(W1.get_shape()))
+        print("    b1.shape={}".format(b1.get_shape()))
+    
+    h1 = tf.matmul(h0, W1) + b1
+    return(h1, (W1,b1))
+def nll_gaussian(y_pred_mean,y_pred_sd,y_test):
+
+    ## element wise square
+    square = tf.square(y_pred_mean - y_test)## preserve the same shape as y_pred.shape
+    ms = tf.add(tf.divide(square,y_pred_sd), tf.log(y_pred_sd))
+    ## axis = -1 means that we take mean across the last dimension 
+    ## the output keeps all but the last dimension
+    ## ms = tf.reduce_mean(ms,axis=-1)
+    ## return scalar
+    ms = tf.reduce_mean(ms)
+    return(ms)
+def mse(y_pred,y_test, verbose=True):
+    '''
+    y_pred : tensor 
+    y_test : tensor having the same shape as y_pred
+    '''
+    ## element wise square
+    square = tf.square(y_pred - y_test)## preserve the same shape as y_pred.shape
+    ## mean across the final dimensions
+    ms = tf.reduce_mean(square)
+    return(ms)
+
+def define_model(n_feature,n_hs,n_output,eps=0.1,verbose=True,NLL=True):
+
+    x_input_shape = [None, n_feature]
+    x_input = tf.placeholder(tf.float32, x_input_shape)
+    y_input = tf.placeholder(tf.float32, [None, 1])
+    
+    h_previous = x_input
+    n_h_previous = n_feature
+    paras = []
+    for ilayer,n_h in enumerate(n_hs,1):
+        if verbose:
+            print("  layer:{}".format(ilayer))
+        h, p = fully_connected_layer(h_previous,n_h_previous,n_h,verbose)
+        h_previous = tf.nn.relu(h) 
+        n_h_previous = n_h
+        paras.append(p)
+    if verbose:
+        print("  output layer for y_mean")        
+    y_mean,p = fully_connected_layer(h_previous,n_h_previous,n_output,verbose)
+    paras.append(p)
+    
+    if NLL:
+        if verbose:
+            print("  output layer for y_sigma")  
+        y_sigma, p = fully_connected_layer(h_previous,n_h_previous,n_output,verbose)
+        ## for numerical stability this enforce the variance to be more than 1E-4
+        y_sigma = tf.clip_by_value(t=tf.exp(y_sigma),
+                                   clip_value_min=tf.constant(1E-2),
+                                   clip_value_max=tf.constant(1E+100))
+
+        paras.append(p)   
+        loss = nll_gaussian(y_mean, y_sigma,y_input)
+        y = [y_mean, y_sigma]
+    else:
+        loss = mse(y_mean, y_input)
+        y = [y_mean]
+    
+    ## tensor to calculate the adversarial image 
+    eps_tf = tf.constant(float(eps),name="epsilon")
+    grad_tf = tf.gradients(loss,[x_input])
+    grad_sign_tf     = tf.sign(grad_tf)
+    grad_sign_eps_tf = tf.scalar_mul(eps_tf,
+                                     grad_sign_tf)
+    aimage = tf.add(grad_sign_eps_tf,x_input)
+    aimage = tf.reshape(aimage,[-1,n_feature])
+    x_input_a = tf.concat([aimage,
+                          x_input],axis=0)          
+    
+    
+    train_step = tf.train.GradientDescentOptimizer(0.01).minimize(loss)
+    
+    inputs = (x_input,y_input, x_input_a)
+    tensors = (inputs, loss, train_step, y, paras) 
+    return(tensors)
+
+
+
+
+
+
+
+
+
+Functions to train the model¶Notice that every batch is augmented by adversarial examples.
+
+
+
+
+
+In [4]:
+
+
+def train(x_train,y_train,
+          tensors,
+          n_batch  = 500,
+          n_epochs = 5000,
+          adversarialTF = True):
+    from sklearn.utils import shuffle
+    import time 
+    inputs, loss, train_step, _ , _ = tensors
+    x_input,y_input, x_input_a  = inputs
+    
+    
+    sess = tf.InteractiveSession()
+    tf.global_variables_initializer().run()
+    
+    lvalues = []
+    start = time.time()
+    for i_epoch in range(n_epochs):
+
+        x_shuffle, y_shuffle = shuffle(x_train,y_train)
+        for i in range(0,x_train.shape[0],n_batch):
+            batch_xs = x_shuffle[i:i+n_batch]
+            batch_ys = y_shuffle[i:i+n_batch]
+            ## obtain adversarial samples
+            if adversarialTF:
+                batch_xs = sess.run(x_input_a,
+                              feed_dict={x_input: batch_xs, 
+                                         y_input: batch_ys})
+                batch_ys = np.concatenate([batch_ys,
+                                               batch_ys],axis=0)  
+            sess.run(train_step, 
+                           feed_dict={x_input: batch_xs, 
+                                      y_input: batch_ys})
+        lv = sess.run(loss,
+                          feed_dict={x_input: x_train, 
+                                     y_input: y_train})
+        lvalues.append(lv)
+        if (i_epoch % 1000) - 1 == 0:
+            print("     epoch {: 5.0f} loss {: 5.4f}  {:3.0f}sec".format(
+                i_epoch,lv,time.time() - start))
+            start = time.time()
+    return(sess,lvalues)
+
+
+
+
+
+
+
+
+
+Training multiple models¶Here, I consider two training setting:
+
+training with adversarial examples
+training without adversarial examples
+
+
+
+
+
+
+In [5]:
+
+
+result_NLL, result_NLL_adv = [], []
+n_hs = [500,300,100]
+eps = 0.05
+Nensemble = 5
+n_epochs = 5000
+for iens in range(Nensemble):
+    print("Adversarial training: {}th ensemble".format(iens))
+    tensors = define_model(n_feature=1,
+                           n_hs=n_hs,
+                           n_output = 1, 
+                           eps=eps,
+                           verbose=False)
+
+    sess, lvalues = train(x_train,
+                          y_train,
+                          tensors,
+                          n_epochs = n_epochs,
+                          adversarialTF = True)
+    
+    result_NLL_adv.append((sess, lvalues, tensors))
+    
+    print("Regular training: {}th ensemble".format(iens))
+    tensors = define_model(n_feature=1,
+                           n_hs=n_hs,
+                           n_output = 1,
+                           eps=eps,
+                           verbose=False)
+
+    sess, lvalues = train(x_train,
+                          y_train,
+                          tensors, 
+                          n_epochs = n_epochs,
+                          adversarialTF = False)
+    
+    result_NLL.append((sess, lvalues, tensors))    
+
+
+
+
+
+
+
+
+
+Adversarial training: 0th ensemble
+     epoch     1 loss  2.2830    0sec
+     epoch  1001 loss  0.1340   33sec
+     epoch  2001 loss -0.5011   33sec
+     epoch  3001 loss -0.9914   33sec
+     epoch  4001 loss -1.2278   33sec
+Regular training: 0th ensemble
+     epoch     1 loss  2.2829    0sec
+     epoch  1001 loss  0.1037   18sec
+     epoch  2001 loss -0.5578   18sec
+     epoch  3001 loss -1.2393   18sec
+     epoch  4001 loss -1.5269   18sec
+Adversarial training: 1th ensemble
+     epoch     1 loss  2.2830    0sec
+     epoch  1001 loss  0.1456   32sec
+     epoch  2001 loss -0.6371   32sec
+     epoch  3001 loss -1.1708   33sec
+     epoch  4001 loss -1.2811   33sec
+Regular training: 1th ensemble
+     epoch     1 loss  2.2831    0sec
+     epoch  1001 loss  0.0706   18sec
+     epoch  2001 loss -0.3488   18sec
+     epoch  3001 loss -1.0665   18sec
+     epoch  4001 loss -0.9838   18sec
+Adversarial training: 2th ensemble
+     epoch     1 loss  2.2830    0sec
+     epoch  1001 loss  0.2119   33sec
+     epoch  2001 loss -0.5239   33sec
+     epoch  3001 loss -0.9884   33sec
+     epoch  4001 loss -1.1563   32sec
+Regular training: 2th ensemble
+     epoch     1 loss  2.2829    0sec
+     epoch  1001 loss  0.1197   18sec
+     epoch  2001 loss -0.4125   18sec
+     epoch  3001 loss -1.0461   18sec
+     epoch  4001 loss -1.5884   18sec
+Adversarial training: 3th ensemble
+     epoch     1 loss  2.2827    0sec
+     epoch  1001 loss  0.1163   33sec
+     epoch  2001 loss -0.3257   33sec
+     epoch  3001 loss -0.9475   33sec
+     epoch  4001 loss -1.2829   33sec
+Regular training: 3th ensemble
+     epoch     1 loss  2.2828    0sec
+     epoch  1001 loss  0.0866   18sec
+     epoch  2001 loss  0.7224   18sec
+     epoch  3001 loss -1.2874   18sec
+     epoch  4001 loss -1.3211   18sec
+Adversarial training: 4th ensemble
+     epoch     1 loss  2.2829    0sec
+     epoch  1001 loss  0.1987   33sec
+     epoch  2001 loss -0.3377   33sec
+     epoch  3001 loss -1.0210   33sec
+     epoch  4001 loss -1.2595   33sec
+Regular training: 4th ensemble
+     epoch     1 loss  2.2829    0sec
+     epoch  1001 loss  0.0829   18sec
+     epoch  2001 loss -0.8458   18sec
+     epoch  3001 loss -1.2287   18sec
+     epoch  4001 loss -1.3127   18sec
+
+
+
+
+
+
+
+
+
+
+Prediction on testing data¶Here I estimate the mean $\mu_m (X)$ and variance $\sigma_m^2(X)$ of each model.
+
+
+
+
+
+In [6]:
+
+
+x_test = np.arange(-2.5,2.5,inc).reshape(-1,1)
+y_test = sinfun(x_test,noise=0)
+
+
+def get_predicted_values(x_test,result_NLL_adv):
+    y_mean_pred, y_sigma_pred = [], []
+    for iens,mod in enumerate(result_NLL_adv):
+        (sess, lvalues, tensors) = mod
+
+        (inputs, _ , _ , y, _) = tensors 
+        (x_input, _ , _ ) = inputs 
+        (y_mean, y_sigma) = y  
+
+        y_mean_pred.append(sess.run(y_mean,feed_dict={x_input: x_test}))
+        y_sigma_pred.append(sess.run(y_sigma,feed_dict={x_input: x_test}))
+    y_mean_pred = np.array(y_mean_pred).squeeze()
+    y_sigma_pred = np.array(y_sigma_pred).squeeze()        
+    return(y_mean_pred,y_sigma_pred)
+
+prediction_adv = get_predicted_values(x_test,result_NLL_adv)
+prediction_     = get_predicted_values(x_test,result_NLL)
+
+
+
+
+
+
+
+
+
+From mean $\mu_m (X)$ and variance $\sigma_m^2(X)$, I will estimate the aggregate estimates:
+\begin{array}{rcll}
+\mu_{*} (X) 
+&=& \frac{1}{M}\sum_{m=1}^M \mu_m (X)\\
+\sigma_{*}^2 (X)
+&=& \frac{1}{M} \sum_{m=1}^M \left( \sigma_m^2(X) + \mu_m (X)^2 \right) -  \mu_{*} (X)^2\\
+\end{array}
+
+
+
+
+
+In [7]:
+
+
+def get_marginal_var(y_mean,y_sigma):
+    '''
+    y_mean  : M by N
+    y_sigma : M by N 
+    '''
+
+    y_mean_mar = np.mean(y_mean,axis=0) ## N by 1
+    y_sigma_mar = np.mean(y_mean**2 + y_sigma,axis=0) - y_mean_mar**2
+    return(y_mean_mar,y_sigma_mar)
+
+
+y_mean_adv, y_sigma_adv = get_marginal_var(*prediction_adv)
+y_mean_   , y_sigma_    = get_marginal_var(*prediction_)
+
+
+
+
+
+
+
+
+
+Vidualize the model performance¶Results¶
+Ensemble is neccesary to have a sensible error bound. With only single model, the variance seems too small.
+Adversarial samples seem not to affect the error bound and estiamtes much for this simple data analysis.
+
+
+
+
+
+
+In [8]:
+
+
+def plot(x_train,y_train,prediction_adv,iensemble=3):
+    '''
+    y_mean_mar, y_sigma_mar = prediction_adv
+    '''
+    def plotdata(axs):
+        axs.scatter(x_train,y_train,s=0.5, alpha=0.5)
+    def ploterrorbar(x_test,y_test,y_sigma):
+        axs.plot(x_test,y_test)
+        axs.errorbar(x_test, y_test, 
+                     yerr=1.96*np.sqrt(y_sigma), 
+                     capsize=0,alpha=0.1,
+                     label="estimated_y +- 1.96*sigma")
+    
+    fig = plt.figure(figsize=(15,15))
+    
+    ## Plot training data with estimated y from each model
+    axs = fig.add_subplot(4,1,1)
+    plotdata(axs)
+    for i, y_pre in enumerate(prediction_adv[0]):
+        axs.plot(x_test,y_pre,label=" Ensemble {:}".format(i))
+    axs.set_title("Estimated y from each ensemble model")
+    axs.legend()
+    
+    ## Plot estimated sigma
+    axs = fig.add_subplot(4,1,2)
+    for i, y_sig in enumerate(prediction_adv[1]):
+        axs.plot(x_test,y_sig,label=" Ensemble {:}".format(i))
+    axs.set_title("Estimated sigma from each ensemble model")
+    
+    ## Plot a single estimated y with error bar
+    axs = fig.add_subplot(4,1,3)
+    plotdata(axs)
+    ploterrorbar(x_test,
+                 prediction_adv[0][iensemble],
+                 prediction_adv[1][iensemble])
+    axs.set_title("Estimated y with estimated sigma from one of the ensemble models")
+
+    ## Plot 
+    axs = fig.add_subplot(4,1,4)
+    axs.plot(x_test,y_mean_adv,label=" Marginal Mean {:}".format(i))
+    plotdata(axs)
+    ploterrorbar(x_test,
+                 y_mean_adv,
+                 y_sigma_adv)
+    axs.set_title("Aggregate Prediction")
+
+
+    plt.legend()
+    plt.show()
+const = 80    
+iensemble = 1
+print("~"*const)    
+print("Visualization of results with adversarial training")    
+print("~"*const)
+plot(x_train,y_train,prediction_adv,iensemble=iensemble)
+print("~"*const)
+print("Vidualization of results without adversarial training")
+print("~"*const)
+plot(x_train,y_train,prediction_   ,iensemble=iensemble)
+
+
+
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Visualization of results with adversarial training
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Vidualization of results without adversarial training
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = '//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: 'center'," +
+        "    displayIndent: '0em'," +
+        "    showMathMenu: true," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['$','$'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        " linebreaks: { automatic: true, width: '95% container' }, " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'black ! important'} }" +
+        "    } " +
+        "}); ";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+</div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Yumi</span>
+  </span>
+<time datetime="2018-06-10T20:00:00-07:00" pubdate>Sun 10 June 2018</time>  <span class="categories">
+    <a class="category" href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>
+    <a class="category" href="https://FairyOnIce.github.io/tag/model.html">Model</a>
+  </span>
+</p><div class="sharing">
+  <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://FairyOnIce.github.io/Evaluate-uncertainty-using-ensemble-of-deep-learning-models-with-negative-log-likelihood-loss.html" data-via="" data-counturl="https://FairyOnIce.github.io/Evaluate-uncertainty-using-ensemble-of-deep-learning-models-with-negative-log-likelihood-loss.html" >Tweet</a>
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+</div>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://yumis-blog.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+     
+    </section>
+</div>
+<aside class="sidebar">
+
+<section>
+    <h1>Local Search</h1></hr>
+    <form class="navbar-search" action="https://FairyOnIce.github.io/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="" name="q" id="tipue_search_input"><input type="submit" value="Go!"></form></li>
+</section>
+    
+<section>
+
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://FairyOnIce.github.io/Evaluate-uncertainty-using-ensemble-of-deep-learning-models-with-negative-log-likelihood-loss.html">Evaluate uncertainty using ensemble of deep learning models with negative log likelihood loss</a>
+      </li>
+      <li class="post">
+          <a href="https://FairyOnIce.github.io/Generate-adversarial-examples-using-TensorFlow.html">Generate adversarial examples using TensorFlow</a>
+      </li>
+      <li class="post">
+          <a href="https://FairyOnIce.github.io/Create-a-neural-net-with-a-negative-log-likelihood-as-a-loss.html">TensorFlow newbie creates a neural net with a negative log likelihood as a loss</a>
+      </li>
+      <li class="post">
+          <a href="https://FairyOnIce.github.io/Achieving-top-5-in-Kaggles-facial-keypoints-detection-using-FCN.html">Achieving top 5 in Kaggle's facial keypoints detection using FCN</a>
+      </li>
+      <li class="post">
+          <a href="https://FairyOnIce.github.io/Learn-about-Fully-Convolutional-Networks-for-semantic-segmentation.html">Learn about Fully Convolutional Networks for semantic segmentation</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://FairyOnIce.github.io/category/blog.html">Blog</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>  </section>
+
+
+    <section>
+        <h1>Social</h1>
+        <ul>
+            <li><a href="https://www.linkedin.com/notifications/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://github.com/FairyOnIce" target="_blank">Github</a></li>
+        </ul>
+    </section>
+    <section>
+        <h1>Blogroll</h1>
+        <ul>
+            <li><a href="https://getpelican.com/" target="_blank">Pelican</a></li>
+            <li><a href="https://python.org/" target="_blank">Python.org</a></li>
+        </ul>
+    </section>
+
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Yumi -
+  <span class="credit">Powered by <a href="https://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-112020731-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-112020731-1');
+    ga('send', 'pageview');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'yumis-blog';
+          var disqus_identifier = '/Evaluate-uncertainty-using-ensemble-of-deep-learning-models-with-negative-log-likelihood-loss.html';
+          var disqus_url = 'https://FairyOnIce.github.io/Evaluate-uncertainty-using-ensemble-of-deep-learning-models-with-negative-log-likelihood-loss.html';
+          var disqus_title = 'Evaluate uncertainty using ensemble of deep learning models with negative log likelihood loss';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'https://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</body>
+</html>
