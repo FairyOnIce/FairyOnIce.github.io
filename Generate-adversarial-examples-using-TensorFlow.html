@@ -1056,7 +1056,7 @@ h6:hover .anchor-link {
 <h2 id="What-is-adversarial-images?">What is adversarial images?<a class="anchor-link" href="#What-is-adversarial-images?">¶</a></h2><p>According to <a href="https://blog.openai.com/adversarial-example-research/">OpenAI</a>, 
 adversarial examples are:</p>
 <blockquote>
-inputs to machine learning models that an attacker has intentionally designed to cause the model to make a mistake; they’re like optical illusions for machines. <i><a href="https://blog.openai.com/adversarial-example-research/">OpenAI</a></i>
+inputs to machine learning models that an attacker has intentionally designed to cause the model to make a mistake; they’re like optical illusions for machines. 
 </blockquote><p><a href="https://blog.openai.com/adversarial-example-research/">Explaining and Harnessing Adversarial Examples</a> proposed the fast gradient sign method that generates an adversarial example as:</p>
 <p>$$
 X' = X + \epsilon sign \left(\frac{d \textrm{loss}(X)}{dX} \right)
@@ -1081,10 +1081,10 @@ If you already have a TensorFlow model in hand, I recommend you to start reading
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span> 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span> 
-<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="kn">as</span> <span class="nn">tf</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span> 
 
 
@@ -1095,8 +1095,8 @@ If you already have a TensorFlow model in hand, I recommend you to start reading
 <span class="n">tf</span><span class="o">.</span><span class="n">Session</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
 
 
-<span class="k">print</span><span class="p">(</span><span class="s2">"python {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"tensorflow version {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"python </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"tensorflow version </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
 
 <span class="c1">## change the directory</span>
 <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">"../FacialKeypoint/"</span><span class="p">)</span>
@@ -1132,7 +1132,7 @@ The model was developed at <a href="https://fairyonice.github.io/achieving-top-2
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="kn">import</span> <span class="n">model_from_json</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">model_from_json</span>
 
 <span class="k">def</span> <span class="nf">load_model</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="n">model</span> <span class="o">=</span> <span class="n">model_from_json</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">name</span><span class="o">+</span><span class="s1">'_architecture.json'</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
@@ -1213,7 +1213,7 @@ _________________________________________________________________
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">outdir</span> <span class="o">=</span> <span class="s2">"model4_tf"</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">outdir</span> <span class="o">=</span> <span class="s2">"model4_tf"</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">outdir</span> <span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
@@ -1236,10 +1236,10 @@ _________________________________________________________________
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Write the graph in binary .pb file</span>
-<span class="kn">from</span> <span class="nn">tensorflow.python.framework</span> <span class="kn">import</span> <span class="n">graph_util</span>
-<span class="kn">from</span> <span class="nn">tensorflow.python.framework</span> <span class="kn">import</span> <span class="n">graph_io</span>
-<span class="kn">from</span> <span class="nn">keras</span> <span class="kn">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Write the graph in binary .pb file</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.framework</span> <span class="k">import</span> <span class="n">graph_util</span>
+<span class="kn">from</span> <span class="nn">tensorflow.python.framework</span> <span class="k">import</span> <span class="n">graph_io</span>
+<span class="kn">from</span> <span class="nn">keras</span> <span class="k">import</span> <span class="n">backend</span> <span class="k">as</span> <span class="n">K</span>
 
 <span class="n">prefix</span> <span class="o">=</span> <span class="s2">"simple_cnn"</span> 
 <span class="n">name</span> <span class="o">=</span> <span class="s1">'output_graph.pb'</span>
@@ -1250,7 +1250,7 @@ _________________________________________________________________
         <span class="n">pred_node_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">prefix</span><span class="o">+</span><span class="s1">'_'</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
         <span class="n">pred</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">identity</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> 
                                 <span class="n">name</span><span class="o">=</span><span class="n">pred_node_names</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">'Output nodes names are: '</span><span class="p">,</span> <span class="n">pred_node_names</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Output nodes names are: '</span><span class="p">,</span> <span class="n">pred_node_names</span><span class="p">)</span>
 
 
 <span class="n">sess</span> <span class="o">=</span> <span class="n">K</span><span class="o">.</span><span class="n">get_session</span><span class="p">()</span>
@@ -1263,7 +1263,7 @@ _________________________________________________________________
 <span class="n">constant_graph</span> <span class="o">=</span> <span class="n">graph_util</span><span class="o">.</span><span class="n">convert_variables_to_constants</span><span class="p">(</span><span class="n">sess</span><span class="p">,</span> 
                                                            <span class="n">sess</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">as_graph_def</span><span class="p">(),</span> 
                                                            <span class="n">pred_node_names</span><span class="p">)</span>
-<span class="n">graph_io</span><span class="o">.</span><span class="n">write_graph</span><span class="p">(</span><span class="n">constant_graph</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">as_text</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">graph_io</span><span class="o">.</span><span class="n">write_graph</span><span class="p">(</span><span class="n">constant_graph</span><span class="p">,</span> <span class="n">outdir</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">as_text</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="c1">## Finally delete the Keras's session</span>
 <span class="n">K</span><span class="o">.</span><span class="n">clear_session</span><span class="p">()</span>
 </pre></div>
@@ -1297,7 +1297,7 @@ Converted 12 variables to const ops.
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">outdir</span> <span class="o">=</span> <span class="s2">"../FacialKeypoint/model4_tf"</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">outdir</span> <span class="o">=</span> <span class="s2">"../FacialKeypoint/model4_tf"</span>
 <span class="n">name</span> <span class="o">=</span> <span class="s1">'output_graph.pb'</span>
 
 <span class="c1">## Make sure that there are no defult graph</span>
@@ -1347,8 +1347,8 @@ We can find the tensors that we need:</p>
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">op</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">get_default_graph</span><span class="p">()</span><span class="o">.</span><span class="n">get_operations</span><span class="p">()):</span>
-    <span class="k">print</span> <span class="s2">"{: 3.0f}: {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">op</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">op</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">get_default_graph</span><span class="p">()</span><span class="o">.</span><span class="n">get_operations</span><span class="p">()):</span>
+    <span class="nb">print</span> <span class="s2">"</span><span class="si">{: 3.0f}</span><span class="s2">: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">op</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> 
 </pre></div>
 </div>
 </div>
@@ -1433,7 +1433,7 @@ We can find the tensors that we need:</p>
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">input_op</span> <span class="o">=</span> <span class="n">my_graph</span><span class="o">.</span><span class="n">get_operation_by_name</span><span class="p">(</span><span class="s2">"import/conv2d_22_input"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">input_op</span> <span class="o">=</span> <span class="n">my_graph</span><span class="o">.</span><span class="n">get_operation_by_name</span><span class="p">(</span><span class="s2">"import/conv2d_22_input"</span><span class="p">)</span>
 <span class="n">output_op</span> <span class="o">=</span> <span class="n">my_graph</span><span class="o">.</span><span class="n">get_operation_by_name</span><span class="p">(</span><span class="s2">"import/simple_cnn_0"</span><span class="p">)</span>
 <span class="n">ops</span> <span class="o">=</span> <span class="p">(</span><span class="n">input_op</span><span class="p">,</span><span class="n">output_op</span><span class="p">)</span>
 </pre></div>
@@ -1454,8 +1454,8 @@ We can find the tensors that we need:</p>
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">class</span> <span class="nc">AdversarialImage</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inp</span><span class="p">,</span><span class="n">out</span><span class="p">,</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">AdversarialImage</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inp</span><span class="p">,</span><span class="n">out</span><span class="p">,</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
         <span class="sd">'''</span>
 <span class="sd">        inp : input tensor  (image)</span>
 <span class="sd">        out : output tensor (y_pred)</span>
@@ -1465,7 +1465,7 @@ We can find the tensors that we need:</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">outputs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">define_aimage_tensor</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">eps</span><span class="p">))</span>
         
-    <span class="k">def</span> <span class="nf">mse_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">mse_tf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">'''</span>
 <span class="sd">        y_pred : tensor </span>
 <span class="sd">        y_test : tensor having the same shape as y_pred</span>
@@ -1488,7 +1488,7 @@ We can find the tensors that we need:</p>
 <span class="sd">        y : np.array containing the true landmark coordinates (None, 30)</span>
 <span class="sd">        '''</span>
         <span class="c1">## get list of target</span>
-        <span class="n">yshape</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]]</span>
+        <span class="n">yshape</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="o">.</span><span class="n">get_shape</span><span class="p">()[</span><span class="mi">1</span><span class="p">:]]</span>
         <span class="n">eps_tf</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">eps</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s2">"epsilon"</span><span class="p">)</span>
         
         <span class="n">y_true_tf</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">,</span> <span class="n">yshape</span><span class="p">)</span>
@@ -1515,7 +1515,7 @@ We can find the tensors that we need:</p>
             <span class="n">y_pred</span> <span class="o">=</span> <span class="n">sess</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">,</span>
                               <span class="n">feed_dict</span><span class="o">=</span><span class="p">{</span><span class="bp">self</span><span class="o">.</span><span class="n">inp</span><span class="p">:</span><span class="n">X</span><span class="p">})</span>
         <span class="k">return</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">get_aimage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">added_noise</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_aimage</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">added_noise</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="n">tensor2eval</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">aimage</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">added_noise</span><span class="p">:</span>
             <span class="n">tensor2eval</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">added_noise</span><span class="p">)</span>
@@ -1552,7 +1552,7 @@ The data extraction and transformation process is the same as my previous blogs:
 <div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">plot_sample</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">axs</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_sample</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">axs</span><span class="p">):</span>
     <span class="sd">'''</span>
 <span class="sd">    kaggle picture is 96 by 96</span>
 <span class="sd">    y is rescaled to range between -1 and 1</span>
@@ -1561,7 +1561,7 @@ The data extraction and transformation process is the same as my previous blogs:
     <span class="n">axs</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">96</span><span class="p">,</span><span class="mi">96</span><span class="p">),</span><span class="n">cmap</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">)</span>
     <span class="n">axs</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">48</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span> <span class="mi">48</span><span class="p">,</span><span class="mi">48</span><span class="o">*</span><span class="n">y</span><span class="p">[</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span> <span class="mi">48</span><span class="p">)</span>
     
-<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">test</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">test</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">"""</span>
 <span class="sd">    load test/train data</span>
 <span class="sd">    cols : a list containing landmark label names.</span>
@@ -1577,8 +1577,8 @@ The data extraction and transformation process is the same as my previous blogs:
 <span class="sd">       As x and y coordinates are recorded, u.shape = (Nsample,30)</span>
 <span class="sd">       </span>
 <span class="sd">    """</span>
-    <span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">read_csv</span>
-    <span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">shuffle</span>
+    <span class="kn">from</span> <span class="nn">pandas</span> <span class="k">import</span> <span class="n">read_csv</span>
+    <span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="k">import</span> <span class="n">shuffle</span>
     
     <span class="n">fname</span> <span class="o">=</span> <span class="n">FTEST</span> <span class="k">if</span> <span class="n">test</span> <span class="k">else</span> <span class="n">FTRAIN</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">read_csv</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="n">fname</span><span class="p">))</span> 
@@ -1591,7 +1591,7 @@ The data extraction and transformation process is the same as my previous blogs:
 
     <span class="n">myprint</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
     <span class="n">myprint</span> <span class="o">=</span> <span class="n">myprint</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">myprint</span><span class="p">)</span>  
+    <span class="nb">print</span><span class="p">(</span><span class="n">myprint</span><span class="p">)</span>  
     <span class="c1">## row with at least one NA columns are removed!</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>  
     
@@ -1606,12 +1606,12 @@ The data extraction and transformation process is the same as my previous blogs:
         <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># shuffle data</span>
         <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">y</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="kc">None</span>
     
     
     <span class="k">return</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span>
 
-<span class="k">def</span> <span class="nf">load2d</span><span class="p">(</span><span class="n">test</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">cols</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">load2d</span><span class="p">(</span><span class="n">test</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">cols</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
     <span class="n">re</span> <span class="o">=</span> <span class="n">load</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">cols</span><span class="p">)</span>
     
@@ -1623,7 +1623,7 @@ The data extraction and transformation process is the same as my previous blogs:
 <span class="n">FTRAIN</span> <span class="o">=</span> <span class="s1">'data/training.csv'</span>
 <span class="n">FTEST</span> <span class="o">=</span> <span class="s1">'data/test.csv'</span>
 <span class="n">FIdLookup</span> <span class="o">=</span> <span class="s1">'data/IdLookupTable.csv'</span>
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load2d</span><span class="p">(</span><span class="n">test</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">load2d</span><span class="p">(</span><span class="n">test</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1686,7 +1686,7 @@ By changing the direction of sign to negative I can create "good" or "friendly" 
 <div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AIbad</span>  <span class="o">=</span> <span class="n">AdversarialImage</span><span class="p">(</span><span class="o">*</span><span class="n">ops</span><span class="p">,</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">AIbad</span>  <span class="o">=</span> <span class="n">AdversarialImage</span><span class="p">(</span><span class="o">*</span><span class="n">ops</span><span class="p">,</span><span class="n">eps</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
 <span class="n">AIgood</span> <span class="o">=</span> <span class="n">AdversarialImage</span><span class="p">(</span><span class="o">*</span><span class="n">ops</span><span class="p">,</span><span class="n">eps</span><span class="o">=-</span><span class="mf">0.01</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1706,13 +1706,13 @@ By changing the direction of sign to negative I can create "good" or "friendly" 
 <div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">getrmse</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">getrmse</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="p">):</span>
     <span class="k">return</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">-</span> <span class="n">y_true</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
 <span class="k">def</span> <span class="nf">getRMSE</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="p">):</span>
-    <span class="k">return</span><span class="p">(</span><span class="s2">"RMSE:{:4.3f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">getrmse</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="p">)))</span>
+    <span class="k">return</span><span class="p">(</span><span class="s2">"RMSE:</span><span class="si">{:4.3f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">getrmse</span><span class="p">(</span><span class="n">y_pred</span><span class="p">,</span><span class="n">y_true</span><span class="p">)))</span>
 
 <span class="n">Nplot</span> <span class="o">=</span> <span class="mi">5</span>
-<span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">Nplot</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">inds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">Nplot</span><span class="p">,</span><span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -1723,11 +1723,11 @@ By changing the direction of sign to negative I can create "good" or "friendly" 
     <span class="n">y_predi</span>              <span class="o">=</span> <span class="n">AIgood</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xi</span><span class="p">)</span>  
     
     <span class="c1">## Good image</span>
-    <span class="p">(</span><span class="n">X_good</span><span class="p">,</span> <span class="n">noise_good</span><span class="p">)</span> <span class="o">=</span> <span class="n">AIgood</span><span class="o">.</span><span class="n">get_aimage</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span><span class="n">added_noise</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">X_good</span><span class="p">,</span> <span class="n">noise_good</span><span class="p">)</span> <span class="o">=</span> <span class="n">AIgood</span><span class="o">.</span><span class="n">get_aimage</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span><span class="n">added_noise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">y_predi_good</span>          <span class="o">=</span> <span class="n">AIgood</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_good</span><span class="p">)</span>
     
     <span class="c1">## Adversarial image</span>
-    <span class="p">(</span><span class="n">X_bad</span><span class="p">,</span> <span class="n">noise_bad</span><span class="p">)</span>   <span class="o">=</span> <span class="n">AIbad</span><span class="o">.</span><span class="n">get_aimage</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span><span class="n">added_noise</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">X_bad</span><span class="p">,</span> <span class="n">noise_bad</span><span class="p">)</span>   <span class="o">=</span> <span class="n">AIbad</span><span class="o">.</span><span class="n">get_aimage</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span><span class="n">added_noise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">y_predi_bad</span>          <span class="o">=</span> <span class="n">AIbad</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_bad</span><span class="p">)</span>
     
     <span class="c1">## ======== ##</span>
@@ -7722,7 +7722,7 @@ See histogram below.</p>
 <div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">vecX</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">vecX</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">vecX</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">vecX</span><span class="p">)])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">"X"</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -7876,7 +7876,7 @@ This will be the gif shown at the beggining of the blog.</p>
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">dir_images</span> <span class="o">=</span> <span class="s2">"adversarial_image_gif/"</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dir_images</span> <span class="o">=</span> <span class="s2">"adversarial_image_gif/"</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dir_images</span><span class="p">)</span>
 <span class="k">except</span><span class="p">:</span>
@@ -7891,7 +7891,7 @@ This will be the gif shown at the beggining of the blog.</p>
 <div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">irow</span> <span class="o">=</span> <span class="mi">1072</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">irow</span> <span class="o">=</span> <span class="mi">1072</span>
 <span class="n">Xi</span><span class="p">,</span> <span class="n">yi</span> <span class="o">=</span> <span class="n">X</span><span class="p">[[</span><span class="n">irow</span><span class="p">]],</span> <span class="n">y</span><span class="p">[[</span><span class="n">irow</span><span class="p">]]</span>
 <span class="c1">## original image</span>
 <span class="n">y_predi</span>              <span class="o">=</span> <span class="n">AIbad</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xi</span><span class="p">)</span>  
@@ -7908,7 +7908,7 @@ This will be the gif shown at the beggining of the blog.</p>
     <span class="n">AIbad</span>  <span class="o">=</span> <span class="n">AdversarialImage</span><span class="p">(</span><span class="o">*</span><span class="n">ops</span><span class="p">,</span><span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">)</span>
 
     <span class="c1">## Adversarial image</span>
-    <span class="p">(</span><span class="n">X_bad</span><span class="p">,</span> <span class="n">noise_bad</span><span class="p">)</span>   <span class="o">=</span> <span class="n">AIbad</span><span class="o">.</span><span class="n">get_aimage</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span><span class="n">added_noise</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="p">(</span><span class="n">X_bad</span><span class="p">,</span> <span class="n">noise_bad</span><span class="p">)</span>   <span class="o">=</span> <span class="n">AIbad</span><span class="o">.</span><span class="n">get_aimage</span><span class="p">(</span><span class="n">Xi</span><span class="p">,</span><span class="n">yi</span><span class="p">,</span><span class="n">added_noise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">y_predi_bad</span>          <span class="o">=</span> <span class="n">AIbad</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_bad</span><span class="p">)</span>
     
     <span class="c1">## ======== ##</span>
@@ -7927,7 +7927,7 @@ This will be the gif shown at the beggining of the blog.</p>
                 <span class="mi">48</span><span class="o">*</span><span class="n">y_predi_bad</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span> <span class="mi">48</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">"y_pred"</span><span class="p">)</span>
     <span class="n">axs</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">48</span><span class="o">*</span><span class="n">yi</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span> <span class="mi">48</span><span class="p">,</span>
                 <span class="mi">48</span><span class="o">*</span><span class="n">yi</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">::</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span> <span class="mi">48</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">"true"</span><span class="p">)</span>
-    <span class="n">axs</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Adversarial image: RMSE {:5.4f},  eps: {:5.4f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmses</span><span class="p">[</span><span class="n">ieps</span><span class="p">],</span><span class="n">eps</span><span class="p">))</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Adversarial image: RMSE </span><span class="si">{:5.4f}</span><span class="s2">,  eps: </span><span class="si">{:5.4f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmses</span><span class="p">[</span><span class="n">ieps</span><span class="p">],</span><span class="n">eps</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
     <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
     
@@ -7938,10 +7938,10 @@ This will be the gif shown at the beggining of the blog.</p>
     <span class="n">axs</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">rmse_base</span><span class="p">,</span><span class="n">rmse_base</span><span class="o">*</span><span class="mi">3</span><span class="p">])</span>
     <span class="n">axs</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"RMSEs"</span><span class="p">)</span>
     <span class="n">axs</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"epsilon"</span><span class="p">)</span>
-    <span class="n">axs</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"RMSE without noise = {:5.4f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmses</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">axs</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"RMSE without noise = </span><span class="si">{:5.4f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmses</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
     <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
     
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span> <span class="n">dir_images</span> <span class="o">+</span> <span class="s1">'/{:05.0f}.png'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ieps</span><span class="p">),</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">,</span><span class="n">pad_inches</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span> <span class="n">dir_images</span> <span class="o">+</span> <span class="s1">'/</span><span class="si">{:05.0f}</span><span class="s1">.png'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">ieps</span><span class="p">),</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">,</span><span class="n">pad_inches</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7972,7 +7972,7 @@ This will be the gif shown at the beggining of the blog.</p>
 <div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">makegif</span><span class="p">(</span><span class="n">dir_images</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">makegif</span><span class="p">(</span><span class="n">dir_images</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">imageio</span>
     <span class="n">filenames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dir_images</span><span class="p">))</span>
     <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span> <span class="n">fnm</span> <span class="k">for</span> <span class="n">fnm</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s2">".png"</span> <span class="ow">in</span> <span class="n">fnm</span><span class="p">]</span>
