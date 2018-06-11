@@ -1064,15 +1064,15 @@ Therefore, I am writing this blog to digest his blog post.</p>
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">scipy</span><span class="o">,</span> <span class="nn">os</span>
-<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">norm</span>
 
 <span class="kn">import</span> <span class="nn">warnings</span> 
 <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">)</span>
 
-<span class="k">print</span> <span class="s2">"scipy={}v, numpy={}v, matplotlib={}v"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span><span class="n">plt</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span> <span class="s2">"scipy=</span><span class="si">{}</span><span class="s2">v, numpy=</span><span class="si">{}</span><span class="s2">v, matplotlib=</span><span class="si">{}</span><span class="s2">v"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">,</span><span class="n">plt</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1176,7 +1176,7 @@ I will discuss the maximum likelihood procedure later.</p>
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">nlog_pdf_multivariate_gauss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">cov</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">nlog_pdf_multivariate_gauss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">cov</span><span class="p">):</span>
     <span class="sd">'''</span>
 <span class="sd">    Caculate the multivariate normal density (pdf)</span>
 <span class="sd">    x  : n by 1</span>
@@ -1208,13 +1208,13 @@ I will discuss the maximum likelihood procedure later.</p>
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.2</span><span class="p">]])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cov</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.2</span><span class="p">]])</span>
 <span class="n">x</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">3</span><span class="p">])</span>
 <span class="n">mu</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">nldf</span> <span class="o">=</span> <span class="n">nlog_pdf_multivariate_gauss</span><span class="p">(</span><span class="n">x</span>   <span class="o">=</span> <span class="n">x</span><span class="p">,</span> 
                                  <span class="n">mu</span>  <span class="o">=</span> <span class="n">mu</span><span class="p">,</span>
                                  <span class="n">cov</span> <span class="o">=</span> <span class="n">cov</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">" 1/({sigma2:} * np.sqrt(2 * np.pi * {sigma2:}  )) * np.exp( - ({x:} - {mu:})**2 / (2.0 * ({sigma2:})) ) = {ldens:}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">" 1/(</span><span class="si">{sigma2:}</span><span class="s2"> * np.sqrt(2 * np.pi * </span><span class="si">{sigma2:}</span><span class="s2">  )) * np.exp( - (</span><span class="si">{x:}</span><span class="s2"> - </span><span class="si">{mu:}</span><span class="s2">)**2 / (2.0 * (</span><span class="si">{sigma2:}</span><span class="s2">)) ) = </span><span class="si">{ldens:}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">mu</span> <span class="o">=</span> <span class="n">mu</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">sigma2</span> <span class="o">=</span> <span class="n">cov</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">ldens</span><span class="o">=</span> <span class="n">nldf</span> <span class="p">))</span>
 <span class="k">assert</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">nldf</span> <span class="o">+</span> <span class="n">scipy</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="o">.</span><span class="n">logpdf</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])))</span> <span class="o"><</span> <span class="mf">1E-10</span>
 </pre></div>
@@ -1246,8 +1246,8 @@ I will discuss the maximum likelihood procedure later.</p>
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">pdist</span>
-<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="kn">import</span> <span class="n">squareform</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="k">import</span> <span class="n">pdist</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="k">import</span> <span class="n">squareform</span>
 
 <span class="k">def</span> <span class="nf">exponential_cov</span><span class="p">(</span><span class="n">eucl_dist</span><span class="p">,</span> <span class="n">para</span><span class="p">):</span>
     <span class="sd">'''</span>
@@ -1288,12 +1288,12 @@ I will discuss the maximum likelihood procedure later.</p>
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">para</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">para</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">]</span>
 <span class="n">x1s</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span>
 <span class="n">x2s</span> <span class="o">=</span> <span class="p">[</span><span class="mi">13</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">92</span><span class="p">,</span><span class="mi">45</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">x1</span> <span class="p">,</span> <span class="n">x2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">x1s</span><span class="p">,</span><span class="n">x2s</span><span class="p">):</span>
     <span class="n">ex</span> <span class="o">=</span> <span class="n">exponential_cov_pair</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span><span class="n">para</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span> <span class="s2">" {theta1:}*exp(-0.5*{theta2:}*({x1:}-{x2:})**2)={value:}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">" </span><span class="si">{theta1:}</span><span class="s2">*exp(-0.5*</span><span class="si">{theta2:}</span><span class="s2">*(</span><span class="si">{x1:}</span><span class="s2">-</span><span class="si">{x2:}</span><span class="s2">)**2)=</span><span class="si">{value:}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
         <span class="n">theta1</span><span class="o">=</span><span class="n">para</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">theta2</span><span class="o">=</span><span class="n">para</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
         <span class="n">x1</span><span class="o">=</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="o">=</span><span class="n">x2</span><span class="p">,</span><span class="n">value</span><span class="o">=</span><span class="n">ex</span><span class="p">))</span>
 </pre></div>
@@ -1397,7 +1397,7 @@ Nonzero $\sigma^2$ means that knowledge of $\mu_i$ is not quite enough to know t
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">para_true</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mf">0.01</span><span class="p">,</span><span class="mf">0.25</span><span class="p">]</span> <span class="c1">## theta1, theta2, sigma^2</span>
 
@@ -1433,9 +1433,9 @@ In pratice, we do not need to define Gaussian likelihood by hand to find the MLE
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multivariate_normal</span> <span class="k">as</span> <span class="n">mn</span>
-<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">minimize</span>
-<span class="k">def</span> <span class="nf">nllk_gaussian</span><span class="p">(</span><span class="n">para</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">kernel_mat</span><span class="o">=</span><span class="n">exponential_cov_mat</span><span class="p">,</span> <span class="n">gauss_mean</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="k">import</span> <span class="n">multivariate_normal</span> <span class="k">as</span> <span class="n">mn</span>
+<span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="k">import</span> <span class="n">minimize</span>
+<span class="k">def</span> <span class="nf">nllk_gaussian</span><span class="p">(</span><span class="n">para</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">kernel_mat</span><span class="o">=</span><span class="n">exponential_cov_mat</span><span class="p">,</span> <span class="n">gauss_mean</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">'''</span>
 <span class="sd">    calculate negative log likelihood of Gaussian model</span>
 <span class="sd">    para = [log(theta2),log(sigma^2)]</span>
@@ -1455,7 +1455,7 @@ In pratice, we do not need to define Gaussian likelihood by hand to find the MLE
     <span class="n">nllk</span> <span class="o">=</span> <span class="n">nlog_pdf_multivariate_gauss</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">gauss_mean</span><span class="p">,</span> <span class="n">cov</span><span class="p">)</span>
         
     <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s2">"theta1 = {:5.3f}, theta2 = {:5.3f}, sigma^2={:5.3f} -llk = {:6.5f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">para</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">para</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">para</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">nllk</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"theta1 = </span><span class="si">{:5.3f}</span><span class="s2">, theta2 = </span><span class="si">{:5.3f}</span><span class="s2">, sigma^2=</span><span class="si">{:5.3f}</span><span class="s2"> -llk = </span><span class="si">{:6.5f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">para</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">para</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">para</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">nllk</span><span class="p">))</span>
     <span class="k">if</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">nllk</span><span class="p">):</span>
         <span class="n">nllk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
     <span class="k">return</span><span class="p">(</span><span class="n">nllk</span><span class="p">)</span>
@@ -1464,12 +1464,12 @@ In pratice, we do not need to define Gaussian likelihood by hand to find the MLE
 
 <span class="n">res</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">fun</span> <span class="o">=</span> <span class="n">nllk_gaussian</span><span class="p">,</span> 
                <span class="n">x0</span> <span class="o">=</span> <span class="n">para0</span><span class="p">,</span>
-               <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">observed_y</span><span class="p">,</span> <span class="n">observed_x</span><span class="p">,</span><span class="bp">True</span><span class="p">),</span>
+               <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">observed_y</span><span class="p">,</span> <span class="n">observed_x</span><span class="p">,</span><span class="kc">True</span><span class="p">),</span>
                <span class="c1">#method='BFGS',</span>
-               <span class="n">options</span><span class="o">=</span><span class="p">{</span> <span class="s1">'disp'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="s1">'maxiter'</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>
+               <span class="n">options</span><span class="o">=</span><span class="p">{</span> <span class="s1">'disp'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s1">'maxiter'</span><span class="p">:</span><span class="mi">100</span><span class="p">}</span>
               <span class="p">)</span>
 <span class="n">para</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">res</span><span class="p">[</span><span class="s2">"x"</span><span class="p">]))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">"The maximume likelihood estimates of theta1 = {:5.4f}, theta2 = {:5.3f}, sigma^2 = {:5.3f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"The maximume likelihood estimates of theta1 = </span><span class="si">{:5.4f}</span><span class="s2">, theta2 = </span><span class="si">{:5.3f}</span><span class="s2">, sigma^2 = </span><span class="si">{:5.3f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
     <span class="n">para</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">para</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">para</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
 </pre></div>
 </div>
@@ -1623,7 +1623,7 @@ In theory, the sampling error will average out and when the sample size goes to 
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">nllk_gaussian</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">para_true</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span><span class="n">y</span><span class="o">=</span><span class="n">observed_y</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">observed_x</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">nllk_gaussian</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">para_true</span><span class="p">[</span><span class="mi">1</span><span class="p">:]),</span><span class="n">y</span><span class="o">=</span><span class="n">observed_y</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="n">observed_x</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1659,7 +1659,7 @@ In theory, the sampling error will average out and when the sample size goes to 
 <div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">kernel_pair</span><span class="p">,</span> <span class="n">para</span><span class="p">,</span> <span class="n">observed_sigma</span><span class="p">,</span> <span class="n">observed_data</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">kernel_pair</span><span class="p">,</span> <span class="n">para</span><span class="p">,</span> <span class="n">observed_sigma</span><span class="p">,</span> <span class="n">observed_data</span><span class="p">):</span>
     <span class="sd">'''</span>
 <span class="sd">    calcualte the expected value of y | x, data</span>
 <span class="sd">    m = 1 as this function predict E(y|x,data) for a scalar y </span>
@@ -1715,7 +1715,7 @@ In theory, the sampling error will average out and when the sample size goes to 
 <div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">## create a function for plotting</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## create a function for plotting</span>
 
 <span class="k">def</span> <span class="nf">plotGauss</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">newxs</span><span class="p">,</span> 
               <span class="n">y_preds</span><span class="p">,</span> <span class="n">y_preds_sigma</span><span class="p">,</span>
@@ -1734,7 +1734,7 @@ In theory, the sampling error will average out and when the sample size goes to 
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">" training data size: n={}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ox</span><span class="p">)),</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">title</span> <span class="o">+</span> <span class="s2">" training data size: n=</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ox</span><span class="p">)),</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -1746,8 +1746,8 @@ In theory, the sampling error will average out and when the sample size goes to 
 <div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">dir_image</span> <span class="o">=</span> <span class="s2">"./GP_images/"</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dir_image</span> <span class="o">=</span> <span class="s2">"./GP_images/"</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span>
 
 <span class="n">kernel_pair</span><span class="o">=</span><span class="n">exponential_cov_pair</span>
 
@@ -1779,7 +1779,7 @@ In theory, the sampling error will average out and when the sample size goes to 
               <span class="n">title</span> <span class="o">=</span> <span class="s2">"GP regression without noise (sigma2=0)"</span>
               <span class="p">)</span>
     
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">dir_image</span> <span class="o">+</span> <span class="s2">"/fig{:04.0f}.png"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">dir_image</span> <span class="o">+</span> <span class="s2">"/fig</span><span class="si">{:04.0f}</span><span class="s2">.png"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
                 <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">,</span><span class="n">pad_inches</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1820,7 +1820,7 @@ In theory, the sampling error will average out and when the sample size goes to 
 <div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">create_gif</span><span class="p">(</span><span class="n">gifname</span><span class="p">,</span><span class="n">dir_image</span><span class="p">,</span><span class="n">duration</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">create_gif</span><span class="p">(</span><span class="n">gifname</span><span class="p">,</span><span class="n">dir_image</span><span class="p">,</span><span class="n">duration</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="kn">import</span> <span class="nn">imageio</span>
     <span class="n">filenames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dir_image</span><span class="p">))</span>
     <span class="n">filenames</span> <span class="o">=</span> <span class="p">[</span> <span class="n">fnm</span> <span class="k">for</span> <span class="n">fnm</span> <span class="ow">in</span> <span class="n">filenames</span> <span class="k">if</span> <span class="s2">".png"</span> <span class="ow">in</span> <span class="n">fnm</span><span class="p">]</span>
@@ -1851,7 +1851,7 @@ For python user, scikit learn has nice <a href="http://scikit-learn.org/stable/m
 <div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="kn">import</span> <span class="n">GaussianProcessRegressor</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process</span> <span class="k">import</span> <span class="n">GaussianProcessRegressor</span>
 </pre></div>
 </div>
 </div>
@@ -1903,7 +1903,7 @@ $$</p>
 <div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="kn">import</span> <span class="n">RBF</span><span class="p">,</span>  <span class="n">ConstantKernel</span><span class="p">,</span><span class="n">WhiteKernel</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.gaussian_process.kernels</span> <span class="k">import</span> <span class="n">RBF</span><span class="p">,</span>  <span class="n">ConstantKernel</span><span class="p">,</span><span class="n">WhiteKernel</span>
 </pre></div>
 </div>
 </div>
@@ -1964,7 +1964,7 @@ $$</p>
 <div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">## specify the range of parameters </span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## specify the range of parameters </span>
 <span class="n">kernel_with_noise</span> <span class="o">=</span> <span class="p">(</span> <span class="n">ConstantKernel</span><span class="p">(</span><span class="n">constant_value_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">*</span>
                       <span class="n">RBF</span><span class="p">(</span> <span class="n">length_scale_bounds</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">))</span><span class="o">+</span>
                       <span class="n">WhiteKernel</span><span class="p">(</span><span class="n">noise_level</span><span class="o">=</span><span class="mf">1e-5</span><span class="p">,</span> <span class="n">noise_level_bounds</span><span class="o">=</span><span class="p">(</span><span class="mf">1e-10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span>
@@ -1998,8 +1998,8 @@ $$</p>
 <div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">dir_image</span> <span class="o">=</span> <span class="s2">"./GP_images_scikit/"</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dir_image</span> <span class="o">=</span> <span class="s2">"./GP_images_scikit/"</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">copy</span>
 
 <span class="n">kernel_pair</span><span class="o">=</span><span class="n">exponential_cov_pair</span>
 
@@ -2016,17 +2016,17 @@ $$</p>
         <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">gps</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">count</span><span class="p">)</span>
         <span class="n">gp</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">*</span><span class="n">observed_data</span><span class="p">)</span>
         <span class="n">y_preds</span><span class="p">,</span> <span class="n">y_preds_sigma</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span>
-            <span class="n">newxs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">return_std</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">newxs</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">return_std</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">plotGauss</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">newxs</span><span class="p">,</span> 
                   <span class="n">y_preds</span><span class="p">,</span> <span class="n">y_preds_sigma</span><span class="p">,</span>
                   <span class="n">observed_data</span><span class="p">,</span> 
                   <span class="n">title</span> <span class="o">=</span> <span class="s2">"GP regrssion with GP noise"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">print</span><span class="p">(</span><span class="s2">"----</span><span class="se">\n</span><span class="s2">Estimated parameters of Gaussian model:"</span><span class="p">)</span>
-            <span class="k">print</span><span class="p">(</span><span class="n">gp</span><span class="o">.</span><span class="n">kernel_</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"----</span><span class="se">\n</span><span class="s2">Estimated parameters of Gaussian model:"</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">gp</span><span class="o">.</span><span class="n">kernel_</span><span class="p">)</span>
             
-    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">dir_image</span> <span class="o">+</span> <span class="s2">"/fig{:04.0f}.png"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">dir_image</span> <span class="o">+</span> <span class="s2">"/fig</span><span class="si">{:04.0f}</span><span class="s2">.png"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">),</span>
                 <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">,</span><span class="n">pad_inches</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">5</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -2167,6 +2167,9 @@ s.setAttribute('data-timestamp', +new Date());
           <a href="https://FairyOnIce.github.io/Evaluate-uncertainty-using-ensemble-of-deep-learning-models-with-negative-log-likelihood-loss.html">Evaluate uncertainty using ensemble of deep learning models with negative log likelihood loss</a>
       </li>
       <li class="post">
+          <a href="https://FairyOnIce.github.io/Generate-adversarial-examples-using-TensorFlow.html">Generate adversarial examples using TensorFlow</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Create-a-neural-net-with-a-negative-log-likelihood-as-a-loss.html">TensorFlow newbie creates a neural net with a negative log likelihood as a loss</a>
       </li>
       <li class="post">
@@ -2174,9 +2177,6 @@ s.setAttribute('data-timestamp', +new Date());
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Learn-about-Fully-Convolutional-Networks-for-semantic-segmentation.html">Learn about Fully Convolutional Networks for semantic segmentation</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Extract-URL-for-the-pictures in-Flickrs-public-album-via-python.html">Extract URL for the pictures in Flickr's public album via python</a>
       </li>
     </ul>
   </section>
