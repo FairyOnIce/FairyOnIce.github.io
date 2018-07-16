@@ -1464,20 +1464,18 @@ The estimated mean and variances are calculated similarly as before, now using $
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Calculate-the-Gaussian-parameters-with-normalization-of-heatmap-and-K-NN-mean-estimate.">Calculate the Gaussian parameters with normalization of heatmap and K-NN mean estimate.<a class="anchor-link" href="#Calculate-the-Gaussian-parameters-with-normalization-of-heatmap-and-K-NN-mean-estimate.">¶</a></h2><p>The bias in mean toward the image center exists because the heatmap is clipped and the calculated marginal density is skewed toward the center. 
+<h2 id="Calculate-the-Gaussian-parameters-with-normalization-of-heatmap-and-mean-estimate-using-only-its-neighboor.">Calculate the Gaussian parameters with normalization of heatmap and mean estimate using only its neighboor.<a class="anchor-link" href="#Calculate-the-Gaussian-parameters-with-normalization-of-heatmap-and-mean-estimate-using-only-its-neighboor.">¶</a></h2><p>The bias in mean toward the image center exists because the heatmap is clipped and the calculated marginal density is skewed toward the center. 
 To reduce this bias in mean, we will downsample the heatmap for the calculation of marginal mean: 
 the marginal mean is calculated using the neighboor of the high marginal density region.
-The "neighboor" is calculated in two steps:</p>
+For each coordinate, "neighboor" is calculated in two steps:</p>
 <ul>
-<li>(1) order the intensity of the marginal density 
-<pre><code>             in the decreasing manner, 
-             (2) include the top densities until the corresponding pixel coordinate hits the pixel border.</code></pre>
-</li>
+<li>(1) order the intensity of the marginal density in the decreasing manner, </li>
+<li>(2) include the top densities until the corresponding pixel coordinate hits the pixel border.</li>
 </ul>
 <p>That is,</p>
 <ul>
-<li>$\widehat{E}(X) = \sum_{X\in \{ X: \textrm{Top 5 } I^n(X) \}} X I^n(X)$</li>
-<li>$\widehat{E}(Y) = \sum_{Y\in \{ Y: \textrm{Top 5 } I^n(Y) \}} Y I^n(Y)$</li>
+<li>$\widehat{E}(X) = \sum_{X\in \textrm{Neighboor}_{X}} X I^n(X)$</li>
+<li>$\widehat{E}(Y) = \sum_{Y\in \textrm{Neighboor}_{Y}} Y I^n(Y)$</li>
 </ul>
 <h2 id="Observation">Observation<a class="anchor-link" href="#Observation">¶</a></h2><p>The bias in mean seems to be further reduced. 
 (
@@ -1517,7 +1515,8 @@ For this reason, I will take this simple approach to obtain the variance.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="PCA-on-estimated-covariance-matrix">PCA on estimated covariance matrix<a class="anchor-link" href="#PCA-on-estimated-covariance-matrix">¶</a></h2><p>The following codes perform PCA on the data.</p>
+<h2 id="PCA-on-estimated-covariance-matrix">PCA on estimated covariance matrix<a class="anchor-link" href="#PCA-on-estimated-covariance-matrix">¶</a></h2><p>The following codes perform PCA on the heatmap. 
+The assert statement checks if the calculations are correct.</p>
 </div>
 </div>
 </div>
@@ -1597,7 +1596,7 @@ For this reason, I will take this simple approach to obtain the variance.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Plot-the-first-PC-component">Plot the first PC component<a class="anchor-link" href="#Plot-the-first-PC-component">¶</a></h2>
+<h2 id="Plot-the-first-PC-component">Plot the first PC component<a class="anchor-link" href="#Plot-the-first-PC-component">¶</a></h2><p>Finally, plot the 1st PC</p>
 </div>
 </div>
 </div>
