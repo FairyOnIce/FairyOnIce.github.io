@@ -1062,13 +1062,13 @@ In this blog, I will review this one of the most used applied mathematics teqhin
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Idea">Idea<a class="anchor-link" href="#Idea">¶</a></h3><p>To discuss the PCA, let's introduce some notations to describe sample dataframe:</p>
-<p>$$</p>
-<h1 id="\boldsymbol{X}">\boldsymbol{X}<a class="anchor-link" href="#\boldsymbol{X}">¶</a></h1><p>\left[
-\begin{array}{rlll}
+<p>$$
+\boldsymbol{X}=\left[
+\begin{array}{lll}
 x_{1,1} & \cdots & x_{1,\textrm{Nfeat}}\\
 x_{2,1} & \cdots & x_{2,\textrm{Nfeat}}\\
 \cdots  &        & \cdots\\
-x_{\textrm{Nsample},1} & \cdots & x_{\textrm{Nsample},\textrm{Nfeat}}\\
+x_{\textrm{Nsample},1} & \cdots & x_{\textrm{Nsample},\textrm{Nfeat}}
 \end{array}
 \right]
 \in R^{\textrm{Nsample } x \textrm{ Nfeat}}
@@ -1150,17 +1150,18 @@ $$
 <ul>
 <li><strong>Observation 1</strong>: "$\boldsymbol{a}=P\boldsymbol{b}$" is an orthogonal change of variable, meaning that $\boldsymbol{p}_c^T \boldsymbol{p}_k = 0$ if $k\ne c$. This orthonormal matrix $\boldsymbol{P}$ comes with the nice property that inverse of $P$ is the same as the transpose of it:  $\boldsymbol{P}^{-1} = \boldsymbol{P}^T$. To see this:</li>
 </ul>
-<p>\begin{equation}</p>
-<h1 id="\boldsymbol{P}\boldsymbol{P}^T--">\boldsymbol{P}\boldsymbol{P}^T  <a class="anchor-link" href="#\boldsymbol{P}\boldsymbol{P}^T--">¶</a></h1><p>\left[
-\begin{array}{rlll}
+<p>$$
+\boldsymbol{P}\boldsymbol{P}^T=
+\left[
+\begin{array}{llll}
 p_1^T p_1 & p_1^T p_2 & \cdots & p_1^T p_{\textrm{Nfeat}}\\
 p_2^T p_1 & p_2^T p_2 & \cdots & p_2^T p_{\textrm{Nfeat}}\\
 \vdots    &           &        &\vdots\\
-p_{\textrm{Nfeat}}^T p_1 & p_{\textrm{Nfeat}}^T p_2 & \cdots & p_2^T p_{\textrm{Nfeat}}\\
+p_{\textrm{Nfeat}}^T p_1 & p_{\textrm{Nfeat}}^T p_2 & \cdots & p_2^T p_{\textrm{Nfeat}}
 \end{array}
 \right]
 =\boldsymbol{I}
-\end{equation}</p>
+$$</p>
 <ul>
 <li><strong>Observation 2</strong>: $\boldsymbol{p}_k$ is an eigenvector of $A$ with corresponding eigenvalue $\lambda_k$. This means that: </li>
 </ul>
