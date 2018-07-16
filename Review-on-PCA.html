@@ -72,7 +72,7 @@ placeholder="Google Search"/>
   <article class="hentry" role="article">
 <header>
       <h1 class="entry-title">Review on PCA</h1>
-      <p class="meta"><time datetime="2018-07-14T21:00:00-07:00" pubdate>Sat 14 July 2018</time></p>
+      <p class="meta"><time datetime="2018-07-13T21:00:00-07:00" pubdate>Fri 13 July 2018</time></p>
 </header>
 
   <div class="entry-content"><style type="text/css">/*!
@@ -1062,10 +1062,10 @@ In this blog, I will review this one of the most used applied mathematics teqhin
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Idea">Idea<a class="anchor-link" href="#Idea">¶</a></h3><p>To discuss the PCA, let's introduce some notations to describe sample dataframe:</p>
-<p>$$
+<p>\begin{equation}
 \boldsymbol{X}=
 \left[
-\begin{array}{rlll}
+\begin{array}{r}
 \boldsymbol{x}_{1}^T\\
 \vdots\\ 
 \boldsymbol{x}_{\textrm{Nsample}}^T
@@ -1079,7 +1079,7 @@ x_{\textrm{Nsample},1} & \cdots & x_{\textrm{Nsample},\textrm{Nfeat}}\\
 \end{array}
 \right]
 \in R^{\textrm{Nsample } x \textrm{ Nfeat}}
-$$</p>
+\end{equation}</p>
 <p>where $\boldsymbol{x}_{i}$ is a sample vector of length Nfeat.</p>
 <p>With PCA, we can find the set of weights $\boldsymbol{w}=[w_1,\cdots,w_{Nfeat}]^T \in R^{\textrm{Nfeat}}$ that can create a "good" feature as a linear function of original features:</p>
 <p>$$
@@ -1280,7 +1280,7 @@ $$</p>
   <span class="byline author vcard">
     Posted by <span class="fn">Yumi</span>
   </span>
-<time datetime="2018-07-14T21:00:00-07:00" pubdate>Sat 14 July 2018</time>  <span class="categories">
+<time datetime="2018-07-13T21:00:00-07:00" pubdate>Fri 13 July 2018</time>  <span class="categories">
     <a class="category" href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>
   </span>
 </p><div class="sharing">
@@ -1325,6 +1325,9 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/Performing-PCA-on-heatmap.html">Performing PCA on heatmap</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Review-on-PCA.html">Review on PCA</a>
       </li>
       <li class="post">
@@ -1335,9 +1338,6 @@ s.setAttribute('data-timestamp', +new Date());
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Evaluate-uncertainty-using-ensemble-of-deep-learning-models-with-negative-log-likelihood-loss.html">Evaluate uncertainty using ensemble models with likelihood loss and adverserial training</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Generate-adversarial-examples-using-TensorFlow.html">Generate adversarial examples using TensorFlow</a>
       </li>
     </ul>
   </section>
