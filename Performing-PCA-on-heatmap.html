@@ -1465,7 +1465,15 @@ The estimated mean and variances are calculated similarly as before, now using $
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Calculate-the-Gaussian-parameters-with-normalization-of-heatmap-and-K-NN-mean-estimate.">Calculate the Gaussian parameters with normalization of heatmap and K-NN mean estimate.<a class="anchor-link" href="#Calculate-the-Gaussian-parameters-with-normalization-of-heatmap-and-K-NN-mean-estimate.">¶</a></h2><p>The bias in mean toward the image center exists because the heatmap is clipped and the calculated marginal density is skewed toward the center. 
-To reduce this bias in mean, we will downsample the heatmap and only evaluate the mean using top 5 pixels of the marginal density estimates.</p>
+To reduce this bias in mean, we will downsample the heatmap for the calculation of marginal mean: 
+the marginal mean is calculated using the neighboor of the high marginal density region.
+The "neighboor" is calculated in two steps:</p>
+<ul>
+<li>(1) order the intensity of the marginal density 
+<pre><code>             in the decreasing manner, 
+             (2) include the top densities until the corresponding pixel coordinate hits the pixel border.</code></pre>
+</li>
+</ul>
 <p>That is,</p>
 <ul>
 <li>$\widehat{E}(X) = \sum_{X\in \{ X: \textrm{Top 5 } I^n(X) \}} X I^n(X)$</li>
