@@ -1062,15 +1062,8 @@ In this blog, I will review this one of the most used applied mathematics teqhin
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Idea">Idea<a class="anchor-link" href="#Idea">¶</a></h3><p>To discuss the PCA, let's introduce some notations to describe sample dataframe:</p>
-<p>\begin{equation}
-\boldsymbol{X}=
-\left[
-\begin{array}{r}
-\boldsymbol{x}_{1}^T\\
-\vdots\\ 
-\boldsymbol{x}_{\textrm{Nsample}}^T
-\end{array}</p>
-<h1 id="\right]">\right]<a class="anchor-link" href="#\right]">¶</a></h1><p>\left[
+<p>$$</p>
+<h1 id="\boldsymbol{X}">\boldsymbol{X}<a class="anchor-link" href="#\boldsymbol{X}">¶</a></h1><p>\left[
 \begin{array}{rlll}
 x_{1,1} & \cdots & x_{1,\textrm{Nfeat}}\\
 x_{2,1} & \cdots & x_{2,\textrm{Nfeat}}\\
@@ -1079,8 +1072,8 @@ x_{\textrm{Nsample},1} & \cdots & x_{\textrm{Nsample},\textrm{Nfeat}}\\
 \end{array}
 \right]
 \in R^{\textrm{Nsample } x \textrm{ Nfeat}}
-\end{equation}</p>
-<p>where $\boldsymbol{x}_{i}$ is a sample vector of length Nfeat.</p>
+$$</p>
+<p>Let also $\boldsymbol{x}_{i}$ be a sample vector of length Nfeat for the $i$th sample.</p>
 <p>With PCA, we can find the set of weights $\boldsymbol{w}=[w_1,\cdots,w_{Nfeat}]^T \in R^{\textrm{Nfeat}}$ that can create a "good" feature as a linear function of original features:</p>
 <p>$$
 f_i = \boldsymbol{x}_{i}^T \boldsymbol{w} = \sum_{f=1}^{Nfeat} x_{i,f} w_{f}
@@ -1112,6 +1105,13 @@ $$</p>
 <p>This sample variance is a symetric matrix: transpose of the matrix is identical to the original matrix. 
 This can be easily seen by 
 $(\boldsymbol{X}^T \boldsymbol{X})^T=\boldsymbol{X}^T \boldsymbol{X}.$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="Principal-Axes-Theorem">Principal Axes Theorem<a class="anchor-link" href="#Principal-Axes-Theorem">¶</a></h4><p>In the previous section, we learned that the objective function of the constraint optimization problem is expressed with $ \boldsymbol{X}^T\boldsymbol{X}$.
 To further expand the sample variance $ \boldsymbol{X}^T\boldsymbol{X}$, 
 I give you a Principal Axes Theorem, which takes advantage of the symmetry of the sample variance:</p>
@@ -1150,24 +1150,17 @@ $$
 <ul>
 <li><strong>Observation 1</strong>: "$\boldsymbol{a}=P\boldsymbol{b}$" is an orthogonal change of variable, meaning that $\boldsymbol{p}_c^T \boldsymbol{p}_k = 0$ if $k\ne c$. This orthonormal matrix $\boldsymbol{P}$ comes with the nice property that inverse of $P$ is the same as the transpose of it:  $\boldsymbol{P}^{-1} = \boldsymbol{P}^T$. To see this:</li>
 </ul>
-<p>$$</p>
+<p>\begin{equation}</p>
 <h1 id="\boldsymbol{P}\boldsymbol{P}^T--">\boldsymbol{P}\boldsymbol{P}^T  <a class="anchor-link" href="#\boldsymbol{P}\boldsymbol{P}^T--">¶</a></h1><p>\left[
 \begin{array}{rlll}
 p_1^T p_1 & p_1^T p_2 & \cdots & p_1^T p_{\textrm{Nfeat}}\\
 p_2^T p_1 & p_2^T p_2 & \cdots & p_2^T p_{\textrm{Nfeat}}\\
 \vdots    &           &        &\vdots\\
 p_{\textrm{Nfeat}}^T p_1 & p_{\textrm{Nfeat}}^T p_2 & \cdots & p_2^T p_{\textrm{Nfeat}}\\
-\end{array}</p>
-<h1 id="\right]">\right]<a class="anchor-link" href="#\right]">¶</a></h1><p>\left[
-\begin{array}{rlll}
-1 & 0 & \cdots & 0\\
-0 & 1 & \cdots & 0\\
-\vdots    &           &        &\vdots\\
-0 & 0 & \cdots & 1\\
 \end{array}
 \right]
 =\boldsymbol{I}
-$$</p>
+\end{equation}</p>
 <ul>
 <li><strong>Observation 2</strong>: $\boldsymbol{p}_k$ is an eigenvector of $A$ with corresponding eigenvalue $\lambda_k$. This means that: </li>
 </ul>
