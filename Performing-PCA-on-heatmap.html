@@ -1076,10 +1076,10 @@ and then simply perform PCA on the estimated variance matrix.</p>
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="c1">#img = load_img("plot_PCA_from_heatmap.png")</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -1101,7 +1101,7 @@ But don't get misreaded. The origin of the imshow image is at the left top.</p>
 <div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">biv_gaussian_k</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">biv_gaussian_k</span><span class="p">(</span><span class="n">x0</span><span class="p">,</span><span class="n">y0</span><span class="p">,</span><span class="n">sigma</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">):</span>
         <span class="sd">""" </span>
 <span class="sd">        Create a heatmap of size (height, width) containing </span>
 <span class="sd">        density values of bivariate gaussian centered at (x0, y0) and </span>
@@ -1147,7 +1147,7 @@ But don't get misreaded. The origin of the imshow image is at the left top.</p>
 <span class="n">total_density</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="o">*</span><span class="n">const</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Gaussian density (with normalized constant)= {:5.4f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_density</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Gaussian density (with normalized constant)= </span><span class="si">{:5.4f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_density</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1179,7 +1179,7 @@ As the portion of density is outside of the image, the total sum of the provided
 <div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">mx</span><span class="p">,</span> <span class="n">my</span> <span class="o">=</span> <span class="mi">90</span><span class="p">,</span><span class="mi">50</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mx</span><span class="p">,</span> <span class="n">my</span> <span class="o">=</span> <span class="mi">90</span><span class="p">,</span><span class="mi">50</span> 
 <span class="n">arr</span> <span class="o">=</span> <span class="n">biv_gaussian_k</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">my</span><span class="p">,</span> 
                      <span class="n">sigma</span><span class="p">,</span> 
                      <span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">)</span>
@@ -1187,7 +1187,7 @@ As the portion of density is outside of the image, the total sum of the provided
 <span class="n">total_density</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">arr</span><span class="o">*</span><span class="n">const</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Gaussian density (with normalized constant)= {:5.4f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_density</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Gaussian density (with normalized constant)= </span><span class="si">{:5.4f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">total_density</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1223,7 +1223,7 @@ So I will present how to "estimate" the variance matrix using heatmap.</p>
 <div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">get_merginal_mean</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">meanNN_TF</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_merginal_mean</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span> <span class="n">meanNN_TF</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">'''</span>
 <span class="sd">        E(x) = int x f(x) dx</span>
 <span class="sd">        </span>
@@ -1257,7 +1257,7 @@ So I will present how to "estimate" the variance matrix using heatmap.</p>
         <span class="n">meanx</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">xcoor</span><span class="o">*</span><span class="n">mardens</span><span class="p">)[:</span><span class="n">Npixel</span><span class="p">])</span>
         <span class="k">return</span><span class="p">(</span><span class="n">meanx</span><span class="p">)</span>
     
-<span class="k">def</span> <span class="nf">get_merginal_sd</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_merginal_sd</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">dim</span><span class="o">=</span><span class="s2">"x"</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">'''</span>
 <span class="sd">         E( (x - barx)**2 ) = int (x-barx)**2 f(x) dx</span>
 <span class="sd">         </span>
@@ -1281,13 +1281,13 @@ So I will present how to "estimate" the variance matrix using heatmap.</p>
         <span class="n">meanx</span>   <span class="o">=</span> <span class="n">get_merginal_mean</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">dim</span><span class="p">,</span> <span class="n">meanNN_TF</span><span class="o">=</span><span class="n">meanNN_TF</span><span class="p">)</span>
         <span class="n">varx</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">xcoor</span> <span class="o">-</span> <span class="n">meanx</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">mardens</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="k">print</span><span class="p">(</span><span class="s2">"{} total dens = {:4.3f}, mean = {:5.2f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> total dens = </span><span class="si">{:4.3f}</span><span class="s2">, mean = </span><span class="si">{:5.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                   <span class="n">dim</span><span class="p">,</span>
                   <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mardens</span><span class="p">),</span>
                   <span class="n">meanx</span><span class="p">)</span>
                  <span class="p">)</span>
         <span class="k">return</span><span class="p">(</span><span class="n">varx</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">get_cov</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_cov</span><span class="p">(</span><span class="n">arr</span><span class="p">,</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">'''</span>
 <span class="sd">         E( (x - barx)*(y - bary) ) = int (x-barx)*(y - bary) f(x,y) dxdy</span>
 <span class="sd">          </span>
@@ -1352,7 +1352,7 @@ The estimated mean and variances are calculated as:</p>
 <div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">plot_gaussian_kernel_with_exsimates</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="n">sigmas</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">normalize_density</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_gaussian_kernel_with_exsimates</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="n">sigmas</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">normalize_density</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">my</span><span class="p">)</span> <span class="ow">in</span> <span class="n">ms</span><span class="p">:</span>
@@ -1385,9 +1385,9 @@ The estimated mean and variances are calculated as:</p>
             <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"True Gaussian parameters:</span><span class="se">\n</span><span class="s2">mean=(x:{},y:{}), sigma=(x:{},y:{},rho:{})"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span><span class="n">my</span><span class="p">,</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"True Gaussian parameters:</span><span class="se">\n</span><span class="s2">mean=(x:</span><span class="si">{}</span><span class="s2">,y:</span><span class="si">{}</span><span class="s2">), sigma=(x:</span><span class="si">{}</span><span class="s2">,y:</span><span class="si">{}</span><span class="s2">,rho:</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span><span class="n">my</span><span class="p">,</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">meanx</span><span class="p">,</span><span class="n">meany</span><span class="p">,</span><span class="s2">"X"</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">"magenta"</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="s2">"Estimates:</span><span class="se">\n</span><span class="s2">mean(x)={:5.2f}</span><span class="se">\n</span><span class="s2">mean(y)={:5.2f}</span><span class="se">\n</span><span class="s2">SD(x)={:5.2f}</span><span class="se">\n</span><span class="s2">SD(y)={:5.2f}</span><span class="se">\n</span><span class="s2">Cor  ={:5.2f}</span><span class="se">\n</span><span class="s2">Total dens={:5.2f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="s2">"Estimates:</span><span class="se">\n</span><span class="s2">mean(x)=</span><span class="si">{:5.2f}</span><span class="se">\n</span><span class="s2">mean(y)=</span><span class="si">{:5.2f}</span><span class="se">\n</span><span class="s2">SD(x)=</span><span class="si">{:5.2f}</span><span class="se">\n</span><span class="s2">SD(y)=</span><span class="si">{:5.2f}</span><span class="se">\n</span><span class="s2">Cor  =</span><span class="si">{:5.2f}</span><span class="se">\n</span><span class="s2">Total dens=</span><span class="si">{:5.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="n">meanx</span><span class="p">,</span><span class="n">meany</span><span class="p">,</span><span class="n">sdx</span><span class="p">,</span><span class="n">sdy</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">normalized_arr</span><span class="p">)),</span><span class="n">color</span><span class="o">=</span><span class="s2">"white"</span><span class="p">)</span>
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
@@ -1443,7 +1443,7 @@ The estimated mean and variances are calculated similarly as before, now using $
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">plot_gaussian_kernel_with_exsimates</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="n">sigmas</span><span class="p">,</span><span class="n">normalize_density</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_gaussian_kernel_with_exsimates</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="n">sigmas</span><span class="p">,</span><span class="n">normalize_density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1494,7 +1494,7 @@ For this reason, I will take this simple approach to obtain the variance.
 <div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">plot_gaussian_kernel_with_exsimates</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="n">sigmas</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">normalize_density</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_gaussian_kernel_with_exsimates</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="n">sigmas</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">normalize_density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1525,7 +1525,7 @@ The assert statement checks if the calculations are correct.</p>
 <div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">fit_PCA</span><span class="p">(</span><span class="n">cov</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">fit_PCA</span><span class="p">(</span><span class="n">cov</span><span class="p">):</span>
     <span class="sd">'''</span>
 <span class="sd">    fit PCA on the covariance matrix</span>
 <span class="sd">    cov : n by n square covariance matrix</span>
@@ -1558,8 +1558,8 @@ The assert statement checks if the calculations are correct.</p>
         
 <span class="n">eig_vals</span><span class="p">,</span> <span class="n">eig_vecs</span> <span class="o">=</span>  <span class="n">fit_PCA</span><span class="p">(</span><span class="n">est_sigma_mat</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s2">" eigenvalues:</span><span class="se">\n</span><span class="s2"> {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eig_vals</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s2">" eigenvector:</span><span class="se">\n</span><span class="s2"> {}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eig_vecs</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">" eigenvalues:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eig_vals</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">" eigenvector:</span><span class="se">\n</span><span class="s2"> </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">eig_vecs</span><span class="p">))</span>
 
 
 <span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">est_sigma_mat</span><span class="p">)</span>
@@ -1605,7 +1605,7 @@ The assert statement checks if the calculations are correct.</p>
 <div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">plot_gaussian_kernel_with_exsimates</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="n">sigmas</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">normalize_density</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_gaussian_kernel_with_exsimates</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="n">sigmas</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">normalize_density</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
     <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">for</span> <span class="p">(</span><span class="n">mx</span><span class="p">,</span> <span class="n">my</span><span class="p">)</span> <span class="ow">in</span> <span class="n">ms</span><span class="p">:</span>
@@ -1647,9 +1647,9 @@ The assert statement checks if the calculations are correct.</p>
             <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">arr</span><span class="p">)</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"x"</span><span class="p">)</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"y"</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"True Gaussian parameters:</span><span class="se">\n</span><span class="s2">mean=(x:{},y:{}), sigma=(x:{},y:{},rho:{})"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span><span class="n">my</span><span class="p">,</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"True Gaussian parameters:</span><span class="se">\n</span><span class="s2">mean=(x:</span><span class="si">{}</span><span class="s2">,y:</span><span class="si">{}</span><span class="s2">), sigma=(x:</span><span class="si">{}</span><span class="s2">,y:</span><span class="si">{}</span><span class="s2">,rho:</span><span class="si">{}</span><span class="s2">)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mx</span><span class="p">,</span><span class="n">my</span><span class="p">,</span><span class="o">*</span><span class="n">sigma</span><span class="p">))</span>
             <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">meanx</span><span class="p">,</span><span class="n">meany</span><span class="p">,</span><span class="s2">"X"</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">"magenta"</span><span class="p">)</span>
-            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="s2">"Estimates:</span><span class="se">\n</span><span class="s2">mean(x)={:5.2f}</span><span class="se">\n</span><span class="s2">mean(y)={:5.2f}</span><span class="se">\n</span><span class="s2">SD(x)={:5.2f}</span><span class="se">\n</span><span class="s2">SD(y)={:5.2f}</span><span class="se">\n</span><span class="s2">Cor  ={:5.2f}</span><span class="se">\n</span><span class="s2">Total dens={:5.2f}</span><span class="se">\n</span><span class="s2">SD(PC1)={:5.2f}"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="s2">"Estimates:</span><span class="se">\n</span><span class="s2">mean(x)=</span><span class="si">{:5.2f}</span><span class="se">\n</span><span class="s2">mean(y)=</span><span class="si">{:5.2f}</span><span class="se">\n</span><span class="s2">SD(x)=</span><span class="si">{:5.2f}</span><span class="se">\n</span><span class="s2">SD(y)=</span><span class="si">{:5.2f}</span><span class="se">\n</span><span class="s2">Cor  =</span><span class="si">{:5.2f}</span><span class="se">\n</span><span class="s2">Total dens=</span><span class="si">{:5.2f}</span><span class="se">\n</span><span class="s2">SD(PC1)=</span><span class="si">{:5.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
                 <span class="n">meanx</span><span class="p">,</span><span class="n">meany</span><span class="p">,</span><span class="n">sdx</span><span class="p">,</span><span class="n">sdy</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">normalized_arr</span><span class="p">),</span><span class="n">SDPC1</span><span class="p">),</span><span class="n">color</span><span class="o">=</span><span class="s2">"white"</span><span class="p">)</span>
             <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
 
@@ -1669,7 +1669,7 @@ The assert statement checks if the calculations are correct.</p>
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     
 
-<span class="n">plot_gaussian_kernel_with_exsimates</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="n">sigmas</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">normalize_density</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plot_gaussian_kernel_with_exsimates</span><span class="p">(</span><span class="n">ms</span><span class="p">,</span><span class="n">sigmas</span><span class="p">,</span><span class="n">meanNN_TF</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">normalize_density</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1766,6 +1766,12 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/implement-the-spectrogram-from-scratch-in-python.html">Implement the Spectrogram from scratch in python</a>
+      </li>
+      <li class="post">
+          <a href="https://FairyOnIce.github.io/review-on-dicrete-fourier-transform.html">Review on Discrete Fourier Transform</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Performing-PCA-on-heatmap.html">Performing PCA on heatmap</a>
       </li>
       <li class="post">
@@ -1773,12 +1779,6 @@ s.setAttribute('data-timestamp', +new Date());
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/My-first-GAN-using-CelebA-data.html">My first GAN using CelebA data</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Welcome-to-CelebA.html">Welcome to CelebA</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Evaluate-uncertainty-using-ensemble-of-deep-learning-models-with-negative-log-likelihood-loss.html">Evaluate uncertainty using ensemble models with likelihood loss and adverserial training</a>
       </li>
     </ul>
   </section>
@@ -1793,7 +1793,7 @@ s.setAttribute('data-timestamp', +new Date());
 
   <section>
   <h1>Tags</h1>
-    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>  </section>
+    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/spectrogram.html">Spectrogram</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>,    <a href="https://FairyOnIce.github.io/tag/fourier-transform.html">Fourier Transform</a>  </section>
 
 
     <section>
