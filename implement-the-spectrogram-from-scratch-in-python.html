@@ -1052,8 +1052,9 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Spectrogram is an awesome tool to analyze the properties of signals that evolve over time. 
-There are lots of Spectogram modules available in python e.g. matplotlib.pyplot.specgram. 
-However users need to specify parameters such as "window size", "the number of time points to overlap" and "sampling rates", and without correct understanding of Spectrogram, I believe that it is difficult to utilize these existing modules.</p>
+There are lots of Spect4ogram modules available in python e.g. <a href="https://matplotlib.org/api/_as_gen/matplotlib.pyplot.specgram.html">matplotlib.pyplot.specgram</a>. 
+Users need to specify parameters such as "window size", "the number of time points to overlap" and "sampling rates".
+So without correct understanding of Spectrogram, I believe that it is difficult to utilize these existing modules.</p>
 <p>In this blog post, I will implement Spectrogram from scratch so that its implementation is cristal clear. 
 This blog post assumes that the audience understand Discrete Fourier Transform (DFT).
 If you do not understand it, I kindly ask you to read my previous blog post <a href="https://fairyonice.github.io/review-on-dicrete-fourier-transformspectrogram-from-scratch-in-python.html">Review on Discrete Fourier Transform</a>.</p>
@@ -1085,7 +1086,8 @@ This means that there are 28,000 sample points in total.</p>
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">"ignore"</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">RuntimeWarning</span><span class="p">)</span> 
 
 <span class="k">def</span> <span class="nf">get_signal_Hz</span><span class="p">(</span><span class="n">Hz</span><span class="p">,</span><span class="n">sample_rate</span><span class="p">,</span><span class="n">length_ts_sec</span><span class="p">):</span>
     <span class="c1">## 1 sec length time series with sampling rate <sample_rate></span>
@@ -2272,17 +2274,6 @@ $$</p>
 </div>
 </div>
 </div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/yumikondo/anaconda3/lib/python3.6/site-packages/ipykernel_launcher.py:22: RuntimeWarning: divide by zero encountered in log10
-</pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
@@ -3093,7 +3084,7 @@ y+jWKwAAAABJRU5ErkJggg==
 <div class="output_area">
 <div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre><matplotlib.image.axesimage at 0x110609898></pre>
+<pre><matplotlib.image.axesimage at 0x109c9a828></pre>
 </div>
 </div>
 </div>
@@ -3149,13 +3140,6 @@ You can see that when Spectrogram is narrowband (i.e., higher window size) then 
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>wideband             time resoulsion=0.04sec, frequency resoulsion=26.67Hz
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/yumikondo/anaconda3/lib/python3.6/site-packages/ipykernel_launcher.py:22: RuntimeWarning: divide by zero encountered in log10
 </pre>
 </div>
 </div>
@@ -5118,6 +5102,9 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/decode-the-dial-up-sounds-using-spectrogram.html">Decode the dial-up sounds using Spectrogram</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/implement-the-spectrogram-from-scratch-in-python.html">Implement the Spectrogram from scratch in python</a>
       </li>
       <li class="post">
@@ -5128,9 +5115,6 @@ s.setAttribute('data-timestamp', +new Date());
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Review-on-PCA.html">Review on PCA</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/My-first-GAN-using-CelebA-data.html">My first GAN using CelebA data</a>
       </li>
     </ul>
   </section>
