@@ -1297,26 +1297,28 @@ BjMzK3AwmJlZgYPBzMwKHAxmZlbw/wFMoXaOE8MS8AAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Calculation-of-Fourier-coefficients-$x_0$,-$x_1$-by-hand">Calculation of Fourier coefficients $x_0$, $x_1$ by hand<a class="anchor-link" href="#Calculation-of-Fourier-coefficients-$x_0$,-$x_1$-by-hand">¶</a></h3><p>I will derive the Fourier coefficients $x_0$ and $x_1$ by hands.</p>
-<p>\begin{array}{rl}
-x_0&=\frac{1}{8}\left( 0 exp\left(\frac{2 \pi j <em>0</em> 0}{8}\right)</p>
-<pre><code>                   + 0.707 exp\left(\frac{2 \pi j *1* 0}{8}\right) 
-                   + 1 exp\left(\frac{2 \pi j *2* 0}{8}\right) 
-                   + 0.707 exp\left(\frac{2 \pi j *3* 0}{8}\right) 
-                   + 0 exp\left(\frac{2 \pi j *4* 0}{8}\right) 
-                   -0.707 exp\left(\frac{2 \pi j *5 *0}{8}\right) 
-                   -1 exp\left(\frac{2 \pi j *6* 0}{8}\right) 
-                   -0.707 exp\left(\frac{2 \pi j *7* 0}{8}\right) \right)\\
-</code></pre>
-<p>&=0\
-\end{array}</p>
-<p>\begin{array}{rl}
-x_1&= \frac{1}{8}\left( 0 exp\left(\frac{2 \pi j <em>0</em> 1}{8}\right)</p>
-<pre><code>                   + 0.707 exp\left(\frac{2 \pi j *1* 1}{8}\right) 
-                   + 1 exp\left(\frac{2 \pi j *2* 1}{8}\right) 
-                   + 0.707 exp\left(\frac{2 \pi j *3* 1}{8}\right) 
-                   + 0 exp\left(\frac{2 \pi j *4* 1}{8}\right) 
-                   -0.707 exp\left(\frac{2 \pi j *5* 1}{8}\right) 
-                   -1 exp\left(\frac{2 \pi j *6* 1}{8}\right) 
+<p>$$
+\begin{array}{rl}
+x_0&=\frac{1}{8}\left( 0 exp\left(\frac{2 \pi j *0* 0}{8}\right)+ 0.707 exp\left(\frac{2 \pi j *1* 0}{8}\right) + 1 exp\left(\frac{2 \pi j *2* 0}{8}\right)+ 0.707 exp\left(\frac{2 \pi j *3* 0}{8}\right) + 0 exp\left(\frac{2 \pi j *4* 0}{8}\right) -0.707 exp\left(\frac{2 \pi j *5 *0}{8}\right)-1 exp\left(\frac{2 \pi j *6* 0}{8}\right) -0.707 exp\left(\frac{2 \pi j *7* 0}{8}\right) \right)\\
+&=0\\
+\end{array}
+$$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>$$
+\begin{array}{rl}
+x_1&= \frac{1}{8}\left( 0 exp\left(\frac{2 \pi j <em>0</em> 1}{8}\right)\</p>
+<pre><code>                   + 0.707 exp\left(\frac{2 \pi j *1* 1}{8}\right)\ 
+                   + 1 exp\left(\frac{2 \pi j *2* 1}{8}\right)\ 
+                   + 0.707 exp\left(\frac{2 \pi j *3* 1}{8}\right)\ 
+                   + 0 exp\left(\frac{2 \pi j *4* 1}{8}\right)\ 
+                   -0.707 exp\left(\frac{2 \pi j *5* 1}{8}\right)\ 
+                   -1 exp\left(\frac{2 \pi j *6* 1}{8}\right)\ 
                    -0.707 exp\left(\frac{2 \pi j *7* 1}{8}\right) \right)\\
 </code></pre>
 <p>&= \frac{1}{8}\left( 0 + 0.707 exp\left(\frac{2 \pi j }{8}\right)</p>
@@ -1358,6 +1360,7 @@ x_1&= \frac{1}{8}\left( 0 exp\left(\frac{2 \pi j <em>0</em> 1}{8}\right)</p>
 & = \frac{1}{4}j\left(1 +  1\right)  \
 & = \frac{1}{2}j
 \end{array}
+$$
 OK. I am tired. But I hope you got the idea of calculating Fourier coefficients.</p>
 <h3 id="Numerical-Calculation-of-Fourier-coefficients-$x_k$,-$k=1,\cdots,-8$">Numerical Calculation of Fourier coefficients $x_k$, $k=1,\cdots, 8$<a class="anchor-link" href="#Numerical-Calculation-of-Fourier-coefficients-$x_k$,-$k=1,\cdots,-8$">¶</a></h3><p>I will now derive the Fourier coefficients numerically.
 I am glad to see that the numerical calculations of $X_0$ and $X_1$ agree to the hand calculation above.</p>
