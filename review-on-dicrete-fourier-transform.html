@@ -1298,7 +1298,10 @@ BjMzK3AwmJlZgYPBzMwKHAxmZlbw/wFMoXaOE8MS8AAAAABJRU5ErkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Calculation-of-Fourier-coefficients-$x_0$,-$x_1$-by-hand">Calculation of Fourier coefficients $x_0$, $x_1$ by hand<a class="anchor-link" href="#Calculation-of-Fourier-coefficients-$x_0$,-$x_1$-by-hand">¶</a></h3><p>I will derive the Fourier coefficients $x_0$ and $x_1$ by hands.</p>
 <p>$$
-x_0=\frac{1}{8}\left( 0 exp\left(\frac{2 \pi j *0* 0}{8}\right)+ 0.707 exp\left(\frac{2 \pi j *1* 0}{8}\right) + 1 exp\left(\frac{2 \pi j *2* 0}{8}\right)+ 0.707 exp\left(\frac{2 \pi j *3* 0}{8}\right) + 0 exp\left(\frac{2 \pi j *4* 0}{8}\right) -0.707 exp\left(\frac{2 \pi j *5 *0}{8}\right)-1 exp\left(\frac{2 \pi j *6* 0}{8}\right) -0.707 exp\left(\frac{2 \pi j *7* 0}{8}\right) \right)=0
+\begin{array}{rl}
+x_0&=\frac{1}{8}\left( 0 exp\left(\frac{2 \pi j *0* 0}{8}\right)+ 0.707 exp\left(\frac{2 \pi j *1* 0}{8}\right) + 1 exp\left(\frac{2 \pi j *2* 0}{8}\right)+ 0.707 exp\left(\frac{2 \pi j *3* 0}{8}\right) + 0 exp\left(\frac{2 \pi j *4* 0}{8}\right) -0.707 exp\left(\frac{2 \pi j *5 *0}{8}\right) -1 exp\left(\frac{2 \pi j *6* 0}{8}\right) -0.707 exp\left(\frac{2 \pi j *7* 0}{8}\right) \right)\\
+   &=0\\
+\end{array}
 $$</p>
 </div>
 </div>
@@ -1309,52 +1312,16 @@ $$</p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>$$
 \begin{array}{rl}
-x_1&= \frac{1}{8}\left( 0 exp\left(\frac{2 \pi j <em>0</em> 1}{8}\right)\</p>
-<pre><code>                   + 0.707 exp\left(\frac{2 \pi j *1* 1}{8}\right)\ 
-                   + 1 exp\left(\frac{2 \pi j *2* 1}{8}\right)\ 
-                   + 0.707 exp\left(\frac{2 \pi j *3* 1}{8}\right)\ 
-                   + 0 exp\left(\frac{2 \pi j *4* 1}{8}\right)\ 
-                   -0.707 exp\left(\frac{2 \pi j *5* 1}{8}\right)\ 
-                   -1 exp\left(\frac{2 \pi j *6* 1}{8}\right)\ 
-                   -0.707 exp\left(\frac{2 \pi j *7* 1}{8}\right) \right)\\
-</code></pre>
-<p>&= \frac{1}{8}\left( 0 + 0.707 exp\left(\frac{2 \pi j }{8}\right)</p>
-<pre><code>                   +  exp\left(\frac{2 \pi j *2}{8}\right) 
-                   + 0.707 exp\left(\frac{2 \pi j *3}{8}\right) 
-                   + 0
-                   -0.707 exp\left(\frac{2 \pi j *5}{8}\right) 
-                   -exp\left(\frac{2 \pi j *6}{8}\right) 
-                   -0.707 exp\left(\frac{2 \pi j *7}{8}\right) \right)\\
-</code></pre>
-<p>&= \frac{1}{8}\left(  0.707 exp\left(\frac{2 \pi j }{8}\right)</p>
-<pre><code>                   +  exp\left(\frac{4 \pi j }{8}\right) 
-                   + 0.707 exp\left(\frac{6 \pi j }{8}\right) 
-                   -0.707 exp\left(\frac{10 \pi j }{8}\right) 
-                   -exp\left(\frac{12 \pi j }{8}\right) 
-                   -0.707 exp\left(\frac{14 \pi j }{8}\right) \right)   \\
-</code></pre>
-<p>&= \frac{1}{8}\left(  0.707 exp\left(\frac{2 \pi j }{8}\right)</p>
-<pre><code>                   +  exp\left(\frac{4 \pi j }{8}\right) 
-                   + 0.707 exp\left(\frac{6 \pi j }{8}\right) 
-                   -\left(-0.707 exp\left(\frac{2 \pi j }{8}\right)\right) 
-                   -\left(-exp\left(\frac{4 \pi j }{8}\right) \right)
-                   -\left(-0.707 exp\left(\frac{6 \pi j }{8}\right) \right) \right)\\  
-</code></pre>
-<p>&\textrm{           because $exp\left(\pi j\right) = -1$}   \
-&= \frac{1}{4}\left(  0.707 exp\left(\frac{2 \pi j }{8}\right)</p>
-<pre><code>                   +  exp\left(\frac{4 \pi j }{8}\right) 
-                   + 0.707 exp\left(\frac{6 \pi j }{8}\right) \right) \\
-</code></pre>
-<p>&= \frac{1}{4}\Big(   0.707  \big( cos(45) + j sin(45) \big)</p>
-<pre><code>                  +      \big( cos(90) + j sin(90) \big)
-                  + 0.707 \big( cos(135) + j sin(135)\big)  \Big) \\
-</code></pre>
-<p>&= \frac{1}{4}\left(   0.707 \left( \frac{1}{\sqrt{2}} + j \frac{1}{\sqrt{2}} \right)</p>
-<pre><code>                  +     \left( 0 + j  \right)
-                  + 0.707 \left( -\frac{1}{\sqrt{2}} + j \frac{1}{\sqrt{2}} \right)  \right)\\
-</code></pre>
-<p>& = \frac{1}{4}j\left(1 +  0.707 \frac{2}{\sqrt{2}}\right)  \
-& = \frac{1}{4}j\left(1 +  1\right)  \
+x_1&= \frac{1}{8}\left( 0 exp\left(\frac{2 \pi j *0* 1}{8}\right) + 0.707 exp\left(\frac{2 \pi j *1* 1}{8}\right)+ 1 exp\left(\frac{2 \pi j *2* 1}{8}\right)+ 0.707 exp\left(\frac{2 \pi j *3* 1}{8}\right)+ 0 exp\left(\frac{2 \pi j *4* 1}{8}\right)-0.707 exp\left(\frac{2 \pi j *5* 1}{8}\right)-1 exp\left(\frac{2 \pi j *6* 1}{8}\right)-0.707 exp\left(\frac{2 \pi j *7* 1}{8}\right) \right)\\
+&= \frac{1}{8}\left( 0 + 0.707 exp\left(\frac{2 \pi j }{8}\right) +  exp\left(\frac{2 \pi j *2}{8}\right) + 0.707 exp\left(\frac{2 \pi j *3}{8}\right) + 0-0.707 exp\left(\frac{2 \pi j *5}{8}\right) -exp\left(\frac{2 \pi j *6}{8}\right) -0.707 exp\left(\frac{2 \pi j *7}{8}\right) \right)\\
+&= \frac{1}{8}\left(  0.707 exp\left(\frac{2 \pi j }{8}\right) +  exp\left(\frac{4 \pi j }{8}\right) + 0.707 exp\left(\frac{6 \pi j }{8}\right) -0.707 exp\left(\frac{10 \pi j }{8}\right) -exp\left(\frac{12 \pi j }{8}\right) -0.707 exp\left(\frac{14 \pi j }{8}\right) \right)\\
+&= \frac{1}{8}\left(  0.707 exp\left(\frac{2 \pi j }{8}\right) +  exp\left(\frac{4 \pi j }{8}\right) + 0.707 exp\left(\frac{6 \pi j }{8}\right) -\left(-0.707 exp\left(\frac{2 \pi j }{8}\right)\right) -\left(-exp\left(\frac{4 \pi j }{8}\right) \right)-\left(-0.707 exp\left(\frac{6 \pi j }{8}\right) \right) \right)\\  
+&\textrm{           because $exp\left(\pi j\right) = -1$}   \\
+&= \frac{1}{4}\left(  0.707 exp\left(\frac{2 \pi j }{8}\right) +  exp\left(\frac{4 \pi j }{8}\right) + 0.707 exp\left(\frac{6 \pi j }{8}\right) \right) \\
+&= \frac{1}{4}\Big(   0.707  \big( cos(45) + j sin(45) \big) +      \big( cos(90) + j sin(90) \big)+ 0.707 \big( cos(135) + j sin(135)\big)  \Big) \\
+&= \frac{1}{4}\left(   0.707 \left( \frac{1}{\sqrt{2}} + j \frac{1}{\sqrt{2}} \right) +     \left( 0 + j  \right)+ 0.707 \left( -\frac{1}{\sqrt{2}} + j \frac{1}{\sqrt{2}} \right)  \right)\\
+& = \frac{1}{4}j\left(1 +  0.707 \frac{2}{\sqrt{2}}\right)  \\
+& = \frac{1}{4}j\left(1 +  1\right)  \\
 & = \frac{1}{2}j
 \end{array}
 $$
