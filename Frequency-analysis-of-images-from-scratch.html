@@ -1057,7 +1057,7 @@ If you follow this blog, you will understand</p>
 <ul>
 <li>The two-dimensional discrete Fourier transform</li>
 <li>How to calculate wavelength of the Sinosoid</li>
-<li>What exactly <a href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.fft.fft2.html">np.fft.fft2d</a> and  <a href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.fft.fftshift.html">np.fft.fftshift</a> are doing.</li>
+<li>What exactly <a href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.fft.fft2.html">np.fft.fft2</a> and  <a href="https://docs.scipy.org/doc/numpy-1.15.0/reference/generated/numpy.fft.fftshift.html">np.fft.fftshift</a> are doing.</li>
 </ul>
 <p>This blog series on frequency analysis on images will continue <a href="https://fairyonice.github.io/Low-and-High-pass-filtering-experiments.html">Low and High pass filtering experiments</a></p>
 <h2 id="Reference">Reference<a class="anchor-link" href="#Reference">¶</a></h2><ul>
@@ -1346,12 +1346,12 @@ The following lengthy math shows what these two sets exactly are.</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>$$</p>
-<h1 id="cos\Big(---2\pi-\left(x^u-+-y^v\right)-\Big)">cos\Big( - 2\pi \left(x^<em>u + y^</em>v\right) \Big)<a class="anchor-link" href="#cos\Big(---2\pi-\left(x^u-+-y^v\right)-\Big)">¶</a></h1><p>\frac{1}{2}
+<p>\begin{array}{rl}</p>
+<h1 id="cos\Big(---2\pi-\big(x^u-+-y^v\big)-\Big)">cos\Big( - 2\pi \big(x^<em>u + y^</em>v\big) \Big)<a class="anchor-link" href="#cos\Big(---2\pi-\big(x^u-+-y^v\big)-\Big)">¶</a></h1><p>\frac{1}{2}
 \Big(
 \exp\big( - 2\pi j \left(x^<em>u + y^</em>v\right) \big) + \exp\big( 2\pi j \left(x^<em>u + y^</em>v\right) \big)
 \Big)
-$$</p>
+\end{array}</p>
 </div>
 </div>
 </div>
@@ -1386,6 +1386,13 @@ v\left[ \frac{y'}{N}+ \frac{y }{N}\right]\right)\Big)\Big) --(4)\\
 u\left[ \frac{x'}{M} -\frac{x }{M}\right] + 
 v\left[ \frac{y'}{N}-\frac{y }{N}\right]\right)\Big)\Big)--(5) \\
 \end{array}</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Consider-the-term-(4)">Consider the term (4)<a class="anchor-link" href="#Consider-the-term-(4)">¶</a></h2><p>Consider the term within the summation of (4). 
 $$
 \exp\Big( - 2\pi j \Big( 
