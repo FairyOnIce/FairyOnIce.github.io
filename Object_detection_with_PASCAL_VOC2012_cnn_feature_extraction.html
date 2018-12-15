@@ -1086,6 +1086,9 @@ We will focus on detecting a person.</p>
 <ul>
 <li><a href="https://fairyonice.github.io/Object_detection_with_PASCAL_VOC2012_inference.html">Part 5: Object Detection with Pascal VOC2012 - Inference with your own image!</a></li>
 </ul>
+<h3 id="Reference:-"Object-Detection-with-R-CNN"-series-in-my-Github">Reference: "Object Detection with R-CNN" series in my Github<a class="anchor-link" href="#Reference:-"Object-Detection-with-R-CNN"-series-in-my-Github">¶</a></h3><ul>
+<li><a href="https://github.com/FairyOnIce/ObjectDetectionRCNN">My Github repository</a></li>
+</ul>
 </div>
 </div>
 </div>
@@ -1112,13 +1115,26 @@ Cited from <a href="https://www.cs.toronto.edu/~frossard/post/vgg16/">VGG in Ten
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="kn">import</span> <span class="nn">os</span> 
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span> 
 <span class="kn">import</span> <span class="nn">scipy.misc</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">random</span>
 <span class="kn">import</span> <span class="nn">imageio</span>
 <span class="kn">import</span> <span class="nn">skimage</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">)</span>
 </pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3.6.3 |Anaconda, Inc.| (default, Oct  6 2017, 12:04:38) 
+[GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)]
+</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1329,7 +1345,7 @@ R-CNN paper suggests that we warp all pixels in the region proposal to the CNN's
 <p>Let's read in one of the image from the JPEGImages folder, run selective search region proposal, warp the image and then create CNN features.</p>
 <p>I will run the selective search on an image to extract around 2,000 region proposals as suggested by R-CNN paper. 
 I put all the modules for the selective search from <a href="https://fairyonice.github.io/Object_detection_with_PASCAL_VOC2012_data_preparation_and_understanding.html">Part 1: Object Detection with Pascal VOC2012 - data preparation and understanding</a> at
-<a href="">My Github account for selective search</a>. 
+<a href="https://github.com/FairyOnIce/ObjectDetectionRCNN/blob/master/selective_search.py">My Github account for selective search</a>. 
 Please download this file, and save it in the current directory as selective_search.py, then run the codes below. 
 ss.get_region_proposal will yield all the region proposals.
 We need to warp each candidate region.</p>
@@ -15471,8 +15487,12 @@ So I only select a single candidate region for each object.</li>
 <li>image1: a list containing all the candidate regions that <strong> does not contain a person object </strong> i.e., IOU < 0.4</li>
 <li>info 1: the infomation corresponding to this particular object that was not captured in image0</li>
 </ul>
-<p>In order to avoid having too many candidate regions that do not contain any object, I will make sure that:</p>
-<p>N of regions containing a person object : N of regions not containing a person object ~= 1 : 1</p>
+<p>In order to avoid having too many candidate regions that do not contain any object, I will downsample the regions not containing objects such that:</p>
+<p>N of regions containing a person object : N of regions not containing a person object ~= 1 : 2
+Note: N_img_without_obj (roughly) determins this ratio, 1 : N_img_without_obj.</p>
+<p>As the codes below require considerable time, we will save the results in the folder</p>
+<p><strong>dir_result</strong></p>
+<p>The following codes assume that the current folder contains "result" folder.</p>
 </div>
 </div>
 </div>
@@ -15485,6 +15505,7 @@ So I only select a single candidate region for each object.</li>
 <span class="n">IoU_cutoff_object</span>     <span class="o">=</span> <span class="mf">0.7</span>
 <span class="n">IoU_cutoff_not_object</span> <span class="o">=</span> <span class="mf">0.4</span>
 <span class="n">objnms</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"image0"</span><span class="p">,</span><span class="s2">"info0"</span><span class="p">,</span><span class="s2">"image1"</span><span class="p">,</span><span class="s2">"info1"</span><span class="p">]</span>  
+<span class="n">dir_result</span> <span class="o">=</span> <span class="s2">"result"</span>
 </pre></div>
 </div>
 </div>
@@ -15575,7 +15596,7 @@ So I only select a single candidate region for each object.</li>
 <span class="c1">### Save image0, info0, image1, info1 </span>
 <span class="n">objs</span>   <span class="o">=</span> <span class="p">[</span><span class="n">image0</span><span class="p">,</span><span class="n">info0</span><span class="p">,</span><span class="n">image1</span><span class="p">,</span><span class="n">info1</span><span class="p">]</span>        
 <span class="k">for</span> <span class="n">obj</span><span class="p">,</span> <span class="n">nm</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">objs</span><span class="p">,</span><span class="n">objnms</span><span class="p">):</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'</span><span class="si">{}</span><span class="s1">.pickle'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nm</span><span class="p">),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_result</span> <span class="p">,</span><span class="s1">'</span><span class="si">{}</span><span class="s1">.pickle'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nm</span><span class="p">)),</span> <span class="s1">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
         <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> 
                     <span class="n">handle</span><span class="p">,</span> <span class="n">protocol</span><span class="o">=</span><span class="n">pickle</span><span class="o">.</span><span class="n">HIGHEST_PROTOCOL</span><span class="p">)</span>
 </pre></div>
@@ -15596,21 +15617,6 @@ So I only select a single candidate region for each object.</li>
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>frameID = 0000/9583, BBXID = 00,  N region proposals = 1137, N regions with an object gathered till now = 0
-frameID = 0050/9583, BBXID = 01,  N region proposals = 994, N regions with an object gathered till now = 25
-frameID = 0050/9583, BBXID = 02,  N region proposals = 994, N regions with an object gathered till now = 25
-frameID = 0050/9583, BBXID = 03,  N region proposals = 994, N regions with an object gathered till now = 26
-frameID = 0050/9583, BBXID = 04,  N region proposals = 994, N regions with an object gathered till now = 26
-frameID = 0050/9583, BBXID = 05,  N region proposals = 994, N regions with an object gathered till now = 26
-frameID = 0050/9583, BBXID = 06,  N region proposals = 994, N regions with an object gathered till now = 26
-frameID = 0100/9583, BBXID = 00,  N region proposals = 1010, N regions with an object gathered till now = 44
-frameID = 0150/9583, BBXID = 01,  N region proposals = 1201, N regions with an object gathered till now = 81
-frameID = 0150/9583, BBXID = 02,  N region proposals = 1201, N regions with an object gathered till now = 81
-frameID = 0200/9583, BBXID = 00,  N region proposals = 1187, N regions with an object gathered till now = 108
-frameID = 0250/9583, BBXID = 03,  N region proposals = 1184, N regions with an object gathered till now = 140
-frameID = 0250/9583, BBXID = 04,  N region proposals = 1184, N regions with an object gathered till now = 141
-frameID = 0250/9583, BBXID = 05,  N region proposals = 1184, N regions with an object gathered till now = 142
-frameID = 0250/9583, BBXID = 06,  N region proposals = 1184, N regions with an object gathered till now = 142
-frameID = 0300/9583, BBXID = 00,  N region proposals = 1128, N regions with an object gathered till now = 171
 </pre>
 </div>
 </div>
@@ -15668,7 +15674,7 @@ frameID = 0300/9583, BBXID = 00,  N region proposals = 1128, N regions with an o
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">objnms</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"image0"</span><span class="p">,</span><span class="s2">"info0"</span><span class="p">,</span><span class="s2">"image1"</span><span class="p">,</span><span class="s2">"info1"</span><span class="p">]</span> 
 <span class="n">objs</span>  <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">nm</span> <span class="ow">in</span> <span class="n">objnms</span><span class="p">:</span>
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">'</span><span class="si">{}</span><span class="s1">.pickle'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nm</span><span class="p">),</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_result</span><span class="p">,</span><span class="s1">'</span><span class="si">{}</span><span class="s1">.pickle'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nm</span><span class="p">)),</span> <span class="s1">'rb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
         <span class="n">objs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">handle</span><span class="p">))</span>
 <span class="n">image0</span><span class="p">,</span><span class="n">info0</span><span class="p">,</span><span class="n">image1</span><span class="p">,</span><span class="n">info1</span> <span class="o">=</span> <span class="n">objs</span> 
 <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">image0</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">info0</span><span class="p">)</span>
@@ -15737,8 +15743,8 @@ frameID = 0300/9583, BBXID = 00,  N region proposals = 1128, N regions with an o
 
 <span class="c1">## Save data</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"X.shape=</span><span class="si">{}</span><span class="s2">, y.shape=</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s2">"X.npy"</span><span class="p">,</span><span class="n">arr</span> <span class="o">=</span> <span class="n">X</span><span class="p">)</span>
-<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s2">"y.npy"</span><span class="p">,</span><span class="n">arr</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_result</span><span class="p">,</span><span class="s2">"X.npy"</span><span class="p">),</span><span class="n">arr</span> <span class="o">=</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_result</span><span class="p">,</span><span class="s2">"y.npy"</span><span class="p">),</span><span class="n">arr</span> <span class="o">=</span> <span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -15757,8 +15763,8 @@ frameID = 0300/9583, BBXID = 00,  N region proposals = 1128, N regions with an o
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s2">"X.npy"</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="s2">"y.npy"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_result</span><span class="p">,</span><span class="s2">"X.npy"</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_result</span><span class="p">,</span><span class="s2">"y.npy"</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -15874,7 +15880,7 @@ I will use 80% of the data as training data.</p>
 <div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s2">"classifier.h5"</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_result</span><span class="p">,</span><span class="s2">"classifier.h5"</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"Saved model to disk"</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -15974,7 +15980,7 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_inference.html">Part 4 Object Detection with Pascal VOC2012 - inference</a>
+          <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_inference.html">Part 5 Object Detection with Pascal VOC2012 - inference</a>
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_cnn_feature_extraction.html">Part 4 Object Detection with Pascal VOC2012 - CNN feature extraction</a>
