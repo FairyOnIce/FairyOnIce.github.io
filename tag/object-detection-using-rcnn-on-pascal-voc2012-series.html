@@ -18,7 +18,7 @@
  
 
   <meta charset="utf-8">
-  <title>Yumi's Blog - Object Detection</title>
+  <title>Yumi's Blog - Object Detection using RCNN on Pascal VOC2012 series</title>
   <meta name="author" content="Yumi">
 
 
@@ -72,9 +72,9 @@ placeholder="Google Search"/>
   		<article>
 <header>
       <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2014_data_model_and_loss.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model and loss</a>
+        <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_inference.html">Part 5 Object Detection using RCNN on Pascal VOC2012 - inference</a>
       </h1>
-      <p class="meta"><time datetime="2018-12-02T20:00:00-08:00" pubdate>Sun 02 December 2018</time></p>
+      <p class="meta"><time datetime="2018-11-17T20:00:00-08:00" pubdate>Sat 17 November 2018</time></p>
 </header>
 
   <div class="entry-content">
@@ -82,20 +82,21 @@ placeholder="Google Search"/>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This blog goes over the encoding of the inputs and outputs of Yolo.</p>
-<p>This blog assumes that the readers have watched Andrew Ng's Yolo lectures on youtube.
-Specifically, the following 4 videos. Each of these videos are (of course free and) about 10 minutes so please watch through all the videos.</p>
-<h2 id="Andrew-Ng's-Yolo-lecture">Andrew Ng's Yolo lecture<a class="anchor-link" href="#Andrew-Ng's-Yolo-lecture">¶</a></div>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/31391589467/in/datetaken-public/" title="bbx_example"><img alt="bbx_example" height="719" src="https://farm5.staticflickr.com/4843/31391589467_8ee226b1cf_h.jpg" width="1600" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
+<p>This is the last article of the blog series for Object Detection with R-CNN.</p>
+<p>If you are reading this blog, congratulations for getting this far. 
+Now you are ready to experiment the performance of your RCNN classifier.
+I will use my own image to see whether the classifier can detect my face.</p></div>
   <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2014_data_model_and_loss.html">Read On &crarr;</a>
+    <a rel="full-article" href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_inference.html">Read On &crarr;</a>
   </footer>
   		</article>
   		<article>
 <header>
       <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Part 2_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a>
+        <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_cnn_feature_extraction.html">Part 4 Object Detection using RCNN on Pascal VOC2012 - CNN feature extraction</a>
       </h1>
-      <p class="meta"><time datetime="2018-11-25T20:00:00-08:00" pubdate>Sun 25 November 2018</time></p>
+      <p class="meta"><time datetime="2018-11-10T20:00:00-08:00" pubdate>Sat 10 November 2018</time></p>
 </header>
 
   <div class="entry-content">
@@ -103,27 +104,82 @@ Specifically, the following 4 videos. Each of these videos are (of course free a
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This blog goes over the encoding of the inputs and outputs of Yolo.</p>
-<p>This blog assumes that the readers have watched Andrew Ng's Yolo lectures on youtube.
-Specifically, the following 4 videos. Each of these videos are (of course free and) about 10 minutes so please watch through all the videos.</p>
-<h2 id="Andrew-Ng's-Yolo-lecture">Andrew Ng's Yolo lecture<a class="anchor-link" href="#Andrew-Ng's-Yolo-lecture">¶</a></div>
+<p>This is part of the blog series for Object Detection with R-CNN.</p>
+<p><img alt="Screen Shot 2018-11-23 at 2.43.29 PM" height="618" src="https://farm5.staticflickr.com/4900/45295225774_60a2171338_b.jpg" width="524" />
+Cited from <a href="https://www.cs.toronto.edu/~frossard/post/vgg16/">VGG in TensorFlow</a>.</p>
+<p>In this blog, we are now ready to train our classifier for object detection.
+We will use a large pre-trained CNN to extract a fixed-length feature vector from each region, and then create artificial neural networks that mapps the feature vector to the object class.
+We will focus on detecting a person.</p></div>
   <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Part 2_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Read On &crarr;</a>
+    <a rel="full-article" href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_cnn_feature_extraction.html">Read On &crarr;</a>
   </footer>
   		</article>
   		<article>
 <header>
       <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1 Object Detection using YOLOv2 on Pascal VOC2012 - anchor box clustering</a>
+        <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_selective_search.html">Part 3 Object Detection using RCNN on Pascal VOC2012 - Selective Search</a>
       </h1>
-      <p class="meta"><time datetime="2018-11-18T21:00:00-08:00" pubdate>Sun 18 November 2018</time></p>
+      <p class="meta"><time datetime="2018-11-03T20:00:00-07:00" pubdate>Sat 03 November 2018</time></p>
 </header>
 
   <div class="entry-content">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input"></div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is part of the blog series for Object Detection with R-CNN.</p>
+<p><img src="https://media.giphy.com/media/61Rem8VlsANGpByXBu/giphy.gif" width="1000" /></p>
+<p>In this blog, we will review the selective sarch algorithm.
+The selective search is one of the most successful category-independent region proposal algorithms, and R-CNN also uses selective search to find region proposal.</p>
+<p><a href="http://www.huppelen.nl/publications/selectiveSearchDraft.pdf">J.R.R. Uijlings et al</a> take a hierarchical grouping algorithm to form the basis of 
+selective search, and first apply <a href="http://people.cs.uchicago.edu/~pff/papers/seg-ijcv.pdf">fast segmentation method of Felzenszwalb and Huttenlocher</a></div>
   <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Read On &crarr;</a>
+    <a rel="full-article" href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_selective_search.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_RCNN_overview.html">Part 2 Object Detection using RCNN on Pascal VOC2012 - R-CNN overview</a>
+      </h1>
+      <p class="meta"><time datetime="2018-10-27T20:00:00-07:00" pubdate>Sat 27 October 2018</time></p>
+</header>
+
+  <div class="entry-content">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="Screen Shot 2018-11-18 at 4.58.16 PM" height="356" src="https://farm5.staticflickr.com/4870/31007672467_de354716a0_b.jpg" width="1024" />
+Cited from <a href="https://arxiv.org/abs/1311.2524">Rich feature hierarchies for accurate object detection and semantic segmentation</a> paper</p>
+<p>This is the second blog post of "Object Detection with R-CNN" series.</p>
+<p>In this blog, I will review <a href="https://arxiv.org/abs/1311.2524">Rich feature hierarchies for accurate object detection and semantic segmentation</a> paper to understand Regions with CNN features (R-CNN) method.
+R-CNN is a successful object detection algorithm that can return class label of objects and their bounding boxes for a given image. The work is published in 2013 and there have been many faster algorithms for the object detection algorithm (e.g., fast R-CNN, faster R-CNN and Yolo). But nevertheless, the implementation of the R-CNN is simple, and serves as a powerful bench mark for various object detection tasks. So for that reason, this blog  will review the R-CNN algorithm.</p></div>
+  <footer>
+    <a rel="full-article" href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_RCNN_overview.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_data_preparation_and_understanding.html">Part 1 Object Detection using RCNN on Pascal VOC2012 - Data Preparation and Understanding</a>
+      </h1>
+      <p class="meta"><time datetime="2018-10-20T20:00:00-07:00" pubdate>Sat 20 October 2018</time></p>
+</header>
+
+  <div class="entry-content">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://farm5.staticflickr.com/4814/45943796321_d72d46d464_b.jpg" width="430" /></p>
+<p>This is the first blog post of "Object Detection with R-CNN" series.</p>
+<h3 id="Object-detection">Object detection<a class="anchor-link" href="#Object-detection">¶</a></h3><p>According to the <a href="https://en.wikipedia.org/wiki/Object_detection">wikipedia</a>:</p>
+<p><blockquote>
+Object detection is a computer technology related to computer vision and image processing that deals with detecting instances of semantic objects of a certain class (such as humans, buildings, or cars) in digital images and videos.
+</blockquote></div>
+  <footer>
+    <a rel="full-article" href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_data_preparation_and_understanding.html">Read On &crarr;</a>
   </footer>
   		</article>
 <div class="pagination">
@@ -142,13 +198,19 @@ Specifically, the following 4 videos. Each of these videos are (of course free a
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="https://FairyOnIce.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2014_data_model_and_loss.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model and loss</a>
+          <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_inference.html">Part 5 Object Detection using RCNN on Pascal VOC2012 - inference</a>
       </li>
       <li class="post">
-          <a href="https://FairyOnIce.github.io/Part 2_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a>
+          <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_cnn_feature_extraction.html">Part 4 Object Detection using RCNN on Pascal VOC2012 - CNN feature extraction</a>
       </li>
       <li class="post">
-          <a href="https://FairyOnIce.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1 Object Detection using YOLOv2 on Pascal VOC2012 - anchor box clustering</a>
+          <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_selective_search.html">Part 3 Object Detection using RCNN on Pascal VOC2012 - Selective Search</a>
+      </li>
+      <li class="post">
+          <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_RCNN_overview.html">Part 2 Object Detection using RCNN on Pascal VOC2012 - R-CNN overview</a>
+      </li>
+      <li class="post">
+          <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_data_preparation_and_understanding.html">Part 1 Object Detection using RCNN on Pascal VOC2012 - Data Preparation and Understanding</a>
       </li>
     </ul>
   </section>

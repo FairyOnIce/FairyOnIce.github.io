@@ -1047,22 +1047,13 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The goal of this blog series is to understand the state-of-art object detection algorithm, called YOLO (you only look once). Allegedly, Andrew Ng mentioned that YOLO is the best object detection algorithm in his course:</p>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">IFrame</span>
-<span class="n">src</span> <span class="o">=</span> <span class="s2">"https://www.youtube.com/embed/6ykvU9WuIws?start=340"</span>
-<span class="n">IFrame</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">990</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">IFrame</span><span class="p">(</span><span class="s2">"https://www.youtube.com/embed/6ykvU9WuIws?start=340"</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">990</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">800</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1082,26 +1073,55 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I will go into Yolo's model architecture and input/output encoding procedure in later posts <a href="">BLAHBLAH</a>.</p>
-<p>The focus of this blog is to understand the distribution of the bounding box shape that we will later model with Yolo. The understanding of the bounding box shape distribution will later be very important to define important "Anchor box" hyperparameters in Yolo training.</p>
-<h3 id="Anchor-box">Anchor box<a class="anchor-link" href="#Anchor-box">¶</a></h3><p>Yolo uses an idea of "Anchor box" to wisely detect multiple objects, lying in close neighboorhood.</p>
+<p>This is the first blog post of "Object Detection with Yolo" series.
+The goal of this blog series is to understand the state-of-art object detection algorithm, called YOLO (you only look once). Allegedly, Andrew Ng mentioned that YOLO is the best object detection algorithm in his course. See the youtube video above.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>I will go into YOLO's model architecture and input/output encoding procedure in later posts <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a> and <a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2014_data_model_and_loss.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model and loss</a>.</p>
+<p>The focus of this blog is to understand the distribution of the bounding box shape. 
+The understanding of the bounding box shape distribution will later be very important to define "Anchor box" hyperparameters in Yolo training.</p>
+<h3 id="Anchor-box">Anchor box<a class="anchor-link" href="#Anchor-box">¶</a></h3><p>YOLO uses an idea of "Anchor box" to wisely detect multiple objects, lying in close neighboorhood.</p>
 <p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/46466533461/in/datetaken-public/" title="Screen Shot 2018-12-25 at 7.32.35 PM"><img alt="Screen Shot 2018-12-25 at 7.32.35 PM" height="976" src="https://farm8.staticflickr.com/7876/46466533461_d18c10387a_b.jpg" width="1024" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script>
 Example: two objects (a person and a boat) are in close neighboorhood.</p>
-<p>Yolo requires users to predefine</p>
+<p>YOLO's Anchor box requires users to predefine two hyperparameters:</p>
 <ul>
 <li>(1) the number of anchor boxs and </li>
 <li>(2) their shapes</li>
 </ul>
 <p>so that multiple objects lying in close neighboorhood can be assigned to different anchor boxes.</p>
-<p>For example, you may predefine that there are two anchor boxes, and their specializations are such that:</p>
+<p>The more anchor boxes, the more objects YOLO can detect in a close neighboorhood with the cost of more parameters in deep learning model.</p>
+<p>What about shapes? For example, you may predefine that there are four anchor boxes, and their specializations are such that:</p>
 <ul>
 <li>the 1st anchor box specializes small flat rectangle bounding box</li>
 <li>the 2nd anchor box specializes small tall rectangle bounding box</li>
 <li>the 3rd anchor box specializes large flat rectangle bounding box</li>
 <li>the 4th anchor box specializes large tall rectangle bounding box</li>
 </ul>
-<p>Then for the example above, the anchor box 2 may captuers the person object and anchor box 3 may capture the boat.</p>
-<p>In order to pre-specify the number of anchor boxes and their shapes, Yolo proposes to use K-means clustering algorithm on bounding box shape. This blog will run K-means algorithm on the VOC2012 dataset to find good hyperparameters for Yolo.</p>
+<p>Then for the example image above, the anchor box 2 may captuers the person object and anchor box 3 may capture the boat.</p>
+<p>Clearly, it would be waste of anchor boxes if make an anchor box to specialize the bounding box shapes that rarely exist in data.</p>
+<p>In order to pre-specify the number of anchor boxes and their shapes, YOLOv2 proposes to use the K-means clustering algorithm on bounding box shape. This blog will run K-means algorithm on the VOC2012 dataset to find good hyperparameters for YOLO. Let's get started!</p>
+<h2 id="Reference">Reference<a class="anchor-link" href="#Reference">¶</a></h2><ul>
+<li><p><a href="https://lars76.github.io/object-detection/k-means-anchor-boxes/#references">k-means clustering for anchor boxes</a></p>
+</li>
+<li><p><a href="https://arxiv.org/pdf/1506.02640.pdf">You Only Look Once:Unified, Real-Time Object Detection</a></p>
+</li>
+<li><p><a href="https://arxiv.org/pdf/1612.08242.pdf">YOLO9000:Better, Faster, Stronger</a></p>
+</li>
+</ul>
+<h2 id="Reference-in-my-blog">Reference in my blog<a class="anchor-link" href="#Reference-in-my-blog">¶</a></h2><ul>
+<li><p><a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1 Object Detection using YOLOv2 on Pascal VOC2012 - anchor box clustering</a></p>
+</li>
+<li><p><a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a></p>
+</li>
+<li><p><a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2014_data_model_and_loss.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model and loss</a></p>
+</li>
+</ul>
+<h1 id="Data">Data<a class="anchor-link" href="#Data">¶</a></h1><p>As in <a href=""></a></p>
 <h2 id="VOC2012">VOC2012<a class="anchor-link" href="#VOC2012">¶</a></h2><p>Data can be downloaded from <a href="http://host.robots.ox.ac.uk/pascal/VOC/voc2012/index.html#data">Visual Object Classes Challenge 2012 (VOC2012)</a></p>
 <p>This data was <a href="https://fairyonice.github.io/Object_detection_with_PASCAL_VOC2012_data_preparation_and_understanding.html">previously</a> analyzed to demonstrate RCNN, one of the common object detection techiniques.
 Please see <a href="https://fairyonice.github.io/Object_detection_with_PASCAL_VOC2012_data_preparation_and_understanding.html">this blog</a>
@@ -1142,21 +1162,6 @@ The data contains the following object classes:</p>
 <span class="n">train_annot_folder</span> <span class="o">=</span> <span class="s2">"../ObjectDetectionRCNN/VOCdevkit/VOC2012/Annotations/"</span>
 </pre></div>
 </div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Reference">Reference<a class="anchor-link" href="#Reference">¶</a></h2><ul>
-<li><p><a href="https://lars76.github.io/object-detection/k-means-anchor-boxes/#references">k-means clustering for anchor boxes</a></p>
-</li>
-<li><p><a href="https://arxiv.org/pdf/1506.02640.pdf">You Only Look Once:Unified, Real-Time Object Detection</a></p>
-</li>
-<li><p><a href="https://arxiv.org/pdf/1612.08242.pdf">YOLO9000:Better, Faster, Stronger</a></p>
-</li>
-</ul>
 </div>
 </div>
 </div>
@@ -25078,6 +25083,7 @@ lKJgEBGRUv4fNf2Y16qlxEQAAAAASUVORK5CYII=
     <a class="category" href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>
     <a class="category" href="https://FairyOnIce.github.io/tag/deep-learning.html">deep learning</a>
     <a class="category" href="https://FairyOnIce.github.io/tag/object-detection.html">Object Detection</a>
+    <a class="category" href="https://FairyOnIce.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection using YOLOv2 on Pascal VOC2012 series</a>
   </span>
 </p><div class="sharing">
   <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://FairyOnIce.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html" data-via="" data-counturl="https://FairyOnIce.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html" >Tweet</a>
@@ -25148,7 +25154,7 @@ s.setAttribute('data-timestamp', +new Date());
 
   <section>
   <h1>Tags</h1>
-    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/spectrogram.html">Spectrogram</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/pascal-voc2012.html">PASCAL VOC2012</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/deep-learning.html">deep learning</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection.html">Object Detection</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>,    <a href="https://FairyOnIce.github.io/tag/fourier-transform.html">Fourier Transform</a>  </section>
+    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/spectrogram.html">Spectrogram</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection using YOLOv2 on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/pascal-voc2012.html">PASCAL VOC2012</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-rcnn-on-pascal-voc2012-series.html">Object Detection using RCNN on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/deep-learning.html">deep learning</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection.html">Object Detection</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>,    <a href="https://FairyOnIce.github.io/tag/fourier-transform.html">Fourier Transform</a>  </section>
 
 
     <section>
