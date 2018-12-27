@@ -82,8 +82,57 @@ placeholder="Google Search"/>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is the third blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. This blog discusses the YOLO's model architecture and loss funciton. I will use PASCAL VOC2012 data. This blog assumes that the readers have read the previous two blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a>.</p>
-<h2 id="Andrew-Ng's-Yolo-lecture">Andrew Ng's Yolo lecture<a class="anchor-link" href="#Andrew-Ng's-Yolo-lecture">¶</a></div>
+<p><p color="red">
+$$
+\begin{array}{rl}
+\textrm{loss}_{i,j} &= \textrm{loss}_{i,j}^{xywh} + \textrm{loss}_{i,j}^c + \textrm{loss}_{i,j}^p\\
+\textrm{loss}_{i,j}^{xywh}&=
+\lambda_{\textrm{coord}}
+\sum_{i=0}^{S^2}
+\sum_{j=0}^B
+\textrm{L}_{i,j}^{\text{obj}}
+\left[
+\left(x_{i,j}-\hat{x}_{i,j}\right)^2 + 
+\left(y_{i,j}-\hat{y}_{i,j}\right)^2 +
+\left(\sqrt{w}_{i,j}-\sqrt{\hat{w}}_{i,j}\right)^2 +
+\left(\sqrt{h}_{i,j}-\sqrt{\hat{h}}_{i,j}\right)^2 
+\right]\\
+\textrm{loss}_{i,j}^c &=
+\sum_{i=0}^{S^2}
+\sum_{j=0}^B
+\textrm{loss}_{i,j}^{\text{obj}}
+\left(
+IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i,j}} - \widehat{C}_{i,j}
+\right)^2
++
+\lambda_{\textrm{noobj}}
+\sum_{i=0}^{S^2}
+\sum_{j=0}^B
+L_{i,j}^{\text{noobj}}
+\left(0 - \widehat{C}_{i,j}\right)\\
+\textrm{loss}_{i,j}^p&=-\sum_{i=0}^{S^2} \sum_{j=0}^B L_{i,j}^{\text{obj}}\sum_{c \in \text{class}} p_{i,j}^c \text{log}(\hat{p}_{i,j})
+\end{array}
+$$</p>
+<p>$$
+\begin{array}{rl}
+L_{i,j}^{\text{noobj}}
+& = \texttt{conf-mask} = 
+\begin{cases}
+ 1 \;\;\text{if}\;\;\text{max}_{i',j'}
+ \;\;IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i',j'}} < 0.6 \;\text{and}\; C_{i,j} = 0\\
+ 0\;\;\text{else}\\
+\end{cases}\\
+L_{i,j}^{\text{obj}}
+ &= \texttt{coord-mask} = 
+ \begin{cases}
+ 1 
+\;\;\text{if} \;\;C_{i,j}=1\\
+ 0\;\;\text{else}\\
+\end{cases}
+\end{array}
+$$</p>
+<p></p>
+This is the third blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a></div>
   <footer>
     <a rel="full-article" href="https://FairyOnIce.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2014_data_model_and_loss.html">Read On &crarr;</a>
   </footer>

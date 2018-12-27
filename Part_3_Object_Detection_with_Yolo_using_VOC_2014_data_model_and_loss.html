@@ -1051,7 +1051,57 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is the third blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. This blog discusses the YOLO's model architecture and loss funciton. I will use PASCAL VOC2012 data. This blog assumes that the readers have read the previous two blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a>.</p>
+<p><p color="red">
+$$
+\begin{array}{rl}
+\textrm{loss}_{i,j} &= \textrm{loss}_{i,j}^{xywh} + \textrm{loss}_{i,j}^c + \textrm{loss}_{i,j}^p\\
+\textrm{loss}_{i,j}^{xywh}&=
+\lambda_{\textrm{coord}}
+\sum_{i=0}^{S^2}
+\sum_{j=0}^B
+\textrm{L}_{i,j}^{\text{obj}}
+\left[
+\left(x_{i,j}-\hat{x}_{i,j}\right)^2 + 
+\left(y_{i,j}-\hat{y}_{i,j}\right)^2 +
+\left(\sqrt{w}_{i,j}-\sqrt{\hat{w}}_{i,j}\right)^2 +
+\left(\sqrt{h}_{i,j}-\sqrt{\hat{h}}_{i,j}\right)^2 
+\right]\\
+\textrm{loss}_{i,j}^c &=
+\sum_{i=0}^{S^2}
+\sum_{j=0}^B
+\textrm{loss}_{i,j}^{\text{obj}}
+\left(
+IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i,j}} - \widehat{C}_{i,j}
+\right)^2
++
+\lambda_{\textrm{noobj}}
+\sum_{i=0}^{S^2}
+\sum_{j=0}^B
+L_{i,j}^{\text{noobj}}
+\left(0 - \widehat{C}_{i,j}\right)\\
+\textrm{loss}_{i,j}^p&=-\sum_{i=0}^{S^2} \sum_{j=0}^B L_{i,j}^{\text{obj}}\sum_{c \in \text{class}} p_{i,j}^c \text{log}(\hat{p}_{i,j})
+\end{array}
+$$</p>
+<p>$$
+\begin{array}{rl}
+L_{i,j}^{\text{noobj}}
+& = \texttt{conf-mask} = 
+\begin{cases}
+ 1 \;\;\text{if}\;\;\text{max}_{i',j'}
+ \;\;IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i',j'}} < 0.6 \;\text{and}\; C_{i,j} = 0\\
+ 0\;\;\text{else}\\
+\end{cases}\\
+L_{i,j}^{\text{obj}}
+ &= \texttt{coord-mask} = 
+ \begin{cases}
+ 1 
+\;\;\text{if} \;\;C_{i,j}=1\\
+ 0\;\;\text{else}\\
+\end{cases}
+\end{array}
+$$</p>
+<p></p>
+This is the third blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. This blog discusses the YOLO's model architecture and loss funciton. I will use PASCAL VOC2012 data. This blog assumes that the readers have read the previous two blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a>.</p>
 <h2 id="Andrew-Ng's-Yolo-lecture">Andrew Ng's Yolo lecture<a class="anchor-link" href="#Andrew-Ng's-Yolo-lecture">¶</a></h2><ul>
 <li><a href="https://www.youtube.com/watch?v=gKreZOUi-O0&amp;t=0s&amp;index=7&amp;list=PL_IHmaMAvkVxdDOBRg2CbcJBq9SY7ZUvs">Neural Networks - Bounding Box Predictions</a></li>
 <li><a href="https://www.youtube.com/watch?v=ANIzQ5G-XPE&amp;t=7s">C4W3L06 Intersection Over Union</a></li>
@@ -1059,7 +1109,7 @@ h6:hover .anchor-link {
 <li><a href="https://www.youtube.com/watch?v=RTlwl2bv0Tg&amp;t=28s">C4W3L08 Anchor Boxes</a></li>
 <li><a href="https://www.youtube.com/watch?v=9s_FpMpdYW8&amp;t=34s">C4W3L09 YOLO Algorithm</a></li>
 </ul>
-</div>
+</p></div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -1070,6 +1120,8 @@ h6:hover .anchor-link {
 <li><p><a href="https://arxiv.org/pdf/1506.02640.pdf">You Only Look Once:Unified, Real-Time Object Detection</a></p>
 </li>
 <li><p><a href="https://arxiv.org/pdf/1612.08242.pdf">YOLO9000:Better, Faster, Stronger</a></p>
+</li>
+<li><p><a href="https://github.com/experiencor/keras-yolo2">experiencor/keras-yolo2</a></p>
 </li>
 </ul>
 <h2 id="Reference-in-my-blog">Reference in my blog<a class="anchor-link" href="#Reference-in-my-blog">¶</a></h2><ul>
@@ -1104,12 +1156,13 @@ h6:hover .anchor-link {
 <h2 id="Define-anchor-box">Define anchor box<a class="anchor-link" href="#Define-anchor-box">¶</a></h2><p><code>ANCHORS</code> defines the number of anchor boxes and the shape of each anchor box.
 The choice of the anchor box specialization is already discussed in <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1 Object Detection using YOLOv2 on Pascal VOC2012 - anchor box clustering</a>.</p>
 <p>Based on the K-means analysis in the previous blog post, I will select 4 anchor boxes of following width and height. The width and heights are rescaled in the grid cell scale (Assuming that the number of grid size is 13 by 13.) See <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a> to learn how I rescal the anchor box shapes into the grid cell scale.</p>
+<p>Here I choose 4 anchor boxes. With 13 by 13 grids, every frame gets 4 x 13 x 13 = 676 bouding box predictions.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ANCHORS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.07709888</span><span class="p">,</span>  <span class="mf">1.78171903</span><span class="p">,</span>  <span class="c1"># anchor box 1, width , height</span>
@@ -1125,13 +1178,38 @@ The choice of the anchor box specialization is already discussed in <a href="htt
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Model">Model<a class="anchor-link" href="#Model">¶</a></h2>
+<h3 id="Define-Label-vector-containing-20-object-classe-names.">Define Label vector containing 20 object classe names.<a class="anchor-link" href="#Define-Label-vector-containing-20-object-classe-names.">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [5]:</div>
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#LABELS = ['aeroplane',  'bicycle', 'bird',  'boat',      'bottle', </span>
+<span class="c1">#          'bus',        'car',      'cat',  'chair',     'cow',</span>
+<span class="c1">#          'diningtable','dog',    'horse',  'motorbike', 'person',</span>
+<span class="c1">#          'pottedplant','sheep',  'sofa',   'train',   'tvmonitor']</span>
+<span class="n">LABELS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'chair'</span><span class="p">,</span>    <span class="s1">'person'</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="YOLOv2-Model-Architecture">YOLOv2 Model Architecture<a class="anchor-link" href="#YOLOv2-Model-Architecture">¶</a></h2><p>While YOLO's input and output encodings are complex, and loss function of YOLO is quite complex (which will be discussed very soon), the model architecture is simple. 
+It repeatedly stacks Convolusion + Batch Normalization + Leaky Relu layers until the image shape reduces to the grid cell size. 
+Here is the model defenition, extracted from <a href="https://github.com/experiencor/keras-yolo2">experiencor/keras-yolo2</a>.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [33]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.models</span> <span class="k">import</span> <span class="n">Sequential</span><span class="p">,</span> <span class="n">Model</span>
@@ -1148,138 +1226,139 @@ The choice of the anchor box specialization is already discussed in <a href="htt
     <span class="k">return</span> <span class="n">tf</span><span class="o">.</span><span class="n">space_to_depth</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">block_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">define_YOLOv2</span><span class="p">(</span><span class="n">IMAGE_H</span><span class="p">,</span><span class="n">IMAGE_W</span><span class="p">,</span><span class="n">GRID_H</span><span class="p">,</span><span class="n">GRID_W</span><span class="p">,</span><span class="n">TRUE_BOX_BUFFER</span><span class="p">,</span><span class="n">BOX</span><span class="p">,</span><span class="n">CLASS</span><span class="p">):</span>
-    <span class="n">input_image</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">IMAGE_H</span><span class="p">,</span> <span class="n">IMAGE_W</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-    <span class="n">true_boxes</span>  <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">TRUE_BOX_BUFFER</span> <span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">define_YOLOv2</span><span class="p">(</span><span class="n">IMAGE_H</span><span class="p">,</span><span class="n">IMAGE_W</span><span class="p">,</span><span class="n">GRID_H</span><span class="p">,</span><span class="n">GRID_W</span><span class="p">,</span><span class="n">TRUE_BOX_BUFFER</span><span class="p">,</span><span class="n">BOX</span><span class="p">,</span><span class="n">CLASS</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="n">input_image</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">IMAGE_H</span><span class="p">,</span> <span class="n">IMAGE_W</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">"input_image"</span><span class="p">)</span>
+    <span class="n">true_boxes</span>  <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">TRUE_BOX_BUFFER</span> <span class="p">,</span> <span class="mi">4</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">"input_hack"</span><span class="p">)</span>
 
     <span class="c1"># Layer 1</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_1'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">input_image</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_1'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_1'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">input_image</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_1'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+    <span class="c1"># strides = None, strides = pool_size.</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">"maxpool1_416to208"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 2</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_2'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_2'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_2'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_2'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">"maxpool1_208to104"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 3</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_3'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_3'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_3'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_3'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 4</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_4'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_4'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_4'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_4'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 5</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_5'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_5'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_5'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_5'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">"maxpool1_104to52"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 6</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_6'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_6'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_6'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_6'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 7</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_7'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_7'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_7'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_7'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 8</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_8'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_8'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_8'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_8'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">"maxpool1_52to26"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span> 
 
     <span class="c1"># Layer 9</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_9'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_9'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_9'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_9'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 10</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_10'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_10'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_10'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_10'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 11</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_11'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_11'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_11'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_11'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 12</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_12'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_12'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_12'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_12'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 13</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_13'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_13'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_13'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_13'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="n">skip_connection</span> <span class="o">=</span> <span class="n">x</span>
 
-    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">MaxPooling2D</span><span class="p">(</span><span class="n">pool_size</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">"maxpool1_26to13"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 14</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_14'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_14'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_14'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_14'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 15</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_15'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_15'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_15'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_15'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 16</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_16'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_16'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_16'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_16'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 17</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_17'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_17'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">512</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_17'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_17'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 18</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_18'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_18'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_18'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_18'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 19</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_19'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_19'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_19'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_19'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 20</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_20'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_20'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_20'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_20'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 21</span>
-    <span class="n">skip_connection</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_21'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">skip_connection</span><span class="p">)</span>
-    <span class="n">skip_connection</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_21'</span><span class="p">)(</span><span class="n">skip_connection</span><span class="p">)</span>
+    <span class="n">skip_connection</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_21'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">skip_connection</span><span class="p">)</span>
+    <span class="n">skip_connection</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_21'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">skip_connection</span><span class="p">)</span>
     <span class="n">skip_connection</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">skip_connection</span><span class="p">)</span>
     <span class="n">skip_connection</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">(</span><span class="n">space_to_depth_x2</span><span class="p">)(</span><span class="n">skip_connection</span><span class="p">)</span>
 
     <span class="n">x</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">([</span><span class="n">skip_connection</span><span class="p">,</span> <span class="n">x</span><span class="p">])</span>
 
     <span class="c1"># Layer 22</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_22'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_22'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_22'</span><span class="p">,</span> <span class="n">use_bias</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'norm_22'</span><span class="p">,</span> <span class="n">trainable</span><span class="o">=</span><span class="n">trainable</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">LeakyReLU</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># Layer 23</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span><span class="n">BOX</span> <span class="o">*</span> <span class="p">(</span><span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">CLASS</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">strides</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s1">'same'</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'conv_23'</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="n">GRID_H</span><span class="p">,</span> <span class="n">GRID_W</span><span class="p">,</span> <span class="n">BOX</span><span class="p">,</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">CLASS</span><span class="p">))(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">Reshape</span><span class="p">((</span><span class="n">GRID_H</span><span class="p">,</span> <span class="n">GRID_W</span><span class="p">,</span> <span class="n">BOX</span><span class="p">,</span> <span class="mi">4</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">CLASS</span><span class="p">),</span><span class="n">name</span><span class="o">=</span><span class="s2">"final_output"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
 
     <span class="c1"># small hack to allow true_boxes to be registered when Keras build the model </span>
     <span class="c1"># for more information: https://github.com/fchollet/keras/issues/2790</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">args</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">])([</span><span class="n">output</span><span class="p">,</span> <span class="n">true_boxes</span><span class="p">])</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">Lambda</span><span class="p">(</span><span class="k">lambda</span> <span class="n">args</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">name</span><span class="o">=</span><span class="s2">"hack_layer"</span><span class="p">)([</span><span class="n">output</span><span class="p">,</span> <span class="n">true_boxes</span><span class="p">])</span>
 
     <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">([</span><span class="n">input_image</span><span class="p">,</span> <span class="n">true_boxes</span><span class="p">],</span> <span class="n">output</span><span class="p">)</span>
     <span class="k">return</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">true_boxes</span><span class="p">)</span>
@@ -1290,7 +1369,8 @@ The choice of the anchor box specialization is already discussed in <a href="htt
 <span class="n">BOX</span>               <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ANCHORS</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">CLASS</span>             <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">LABELS</span><span class="p">)</span>
 <span class="c1">## true_boxes is the tensor that takes "b_batch"</span>
-<span class="n">model</span><span class="p">,</span> <span class="n">true_boxes</span> <span class="o">=</span> <span class="n">define_YOLOv2</span><span class="p">(</span><span class="n">IMAGE_H</span><span class="p">,</span><span class="n">IMAGE_W</span><span class="p">,</span><span class="n">GRID_H</span><span class="p">,</span><span class="n">GRID_W</span><span class="p">,</span><span class="n">TRUE_BOX_BUFFER</span><span class="p">,</span><span class="n">BOX</span><span class="p">,</span><span class="n">CLASS</span><span class="p">)</span>
+<span class="n">model</span><span class="p">,</span> <span class="n">true_boxes</span> <span class="o">=</span> <span class="n">define_YOLOv2</span><span class="p">(</span><span class="n">IMAGE_H</span><span class="p">,</span><span class="n">IMAGE_W</span><span class="p">,</span><span class="n">GRID_H</span><span class="p">,</span><span class="n">GRID_W</span><span class="p">,</span><span class="n">TRUE_BOX_BUFFER</span><span class="p">,</span><span class="n">BOX</span><span class="p">,</span><span class="n">CLASS</span><span class="p">,</span> 
+                                  <span class="n">trainable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1300,183 +1380,290 @@ The choice of the anchor box specialization is already discussed in <a href="htt
 <div class="output">
 <div class="output_area">
 <div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/yumikondo/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:34: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
-  from ._conv import register_converters as _register_converters
-Using TensorFlow backend.
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>__________________________________________________________________________________________________
 Layer (type)                    Output Shape         Param #     Connected to                     
 ==================================================================================================
-input_1 (InputLayer)            (None, 416, 416, 3)  0                                            
+input_image (InputLayer)        (None, 416, 416, 3)  0                                            
 __________________________________________________________________________________________________
-conv_1 (Conv2D)                 (None, 416, 416, 32) 864         input_1[0][0]                    
+conv_1 (Conv2D)                 (None, 416, 416, 32) 864         input_image[0][0]                
 __________________________________________________________________________________________________
 norm_1 (BatchNormalization)     (None, 416, 416, 32) 128         conv_1[0][0]                     
 __________________________________________________________________________________________________
-leaky_re_lu_1 (LeakyReLU)       (None, 416, 416, 32) 0           norm_1[0][0]                     
+leaky_re_lu_173 (LeakyReLU)     (None, 416, 416, 32) 0           norm_1[0][0]                     
 __________________________________________________________________________________________________
-max_pooling2d_1 (MaxPooling2D)  (None, 208, 208, 32) 0           leaky_re_lu_1[0][0]              
+maxpool1_416to208 (MaxPooling2D (None, 208, 208, 32) 0           leaky_re_lu_173[0][0]            
 __________________________________________________________________________________________________
-conv_2 (Conv2D)                 (None, 208, 208, 64) 18432       max_pooling2d_1[0][0]            
+conv_2 (Conv2D)                 (None, 208, 208, 64) 18432       maxpool1_416to208[0][0]          
 __________________________________________________________________________________________________
 norm_2 (BatchNormalization)     (None, 208, 208, 64) 256         conv_2[0][0]                     
 __________________________________________________________________________________________________
-leaky_re_lu_2 (LeakyReLU)       (None, 208, 208, 64) 0           norm_2[0][0]                     
+leaky_re_lu_174 (LeakyReLU)     (None, 208, 208, 64) 0           norm_2[0][0]                     
 __________________________________________________________________________________________________
-max_pooling2d_2 (MaxPooling2D)  (None, 104, 104, 64) 0           leaky_re_lu_2[0][0]              
+maxpool1_208to104 (MaxPooling2D (None, 104, 104, 64) 0           leaky_re_lu_174[0][0]            
 __________________________________________________________________________________________________
-conv_3 (Conv2D)                 (None, 104, 104, 128 73728       max_pooling2d_2[0][0]            
+conv_3 (Conv2D)                 (None, 104, 104, 128 73728       maxpool1_208to104[0][0]          
 __________________________________________________________________________________________________
 norm_3 (BatchNormalization)     (None, 104, 104, 128 512         conv_3[0][0]                     
 __________________________________________________________________________________________________
-leaky_re_lu_3 (LeakyReLU)       (None, 104, 104, 128 0           norm_3[0][0]                     
+leaky_re_lu_175 (LeakyReLU)     (None, 104, 104, 128 0           norm_3[0][0]                     
 __________________________________________________________________________________________________
-conv_4 (Conv2D)                 (None, 104, 104, 64) 8192        leaky_re_lu_3[0][0]              
+conv_4 (Conv2D)                 (None, 104, 104, 64) 8192        leaky_re_lu_175[0][0]            
 __________________________________________________________________________________________________
 norm_4 (BatchNormalization)     (None, 104, 104, 64) 256         conv_4[0][0]                     
 __________________________________________________________________________________________________
-leaky_re_lu_4 (LeakyReLU)       (None, 104, 104, 64) 0           norm_4[0][0]                     
+leaky_re_lu_176 (LeakyReLU)     (None, 104, 104, 64) 0           norm_4[0][0]                     
 __________________________________________________________________________________________________
-conv_5 (Conv2D)                 (None, 104, 104, 128 73728       leaky_re_lu_4[0][0]              
+conv_5 (Conv2D)                 (None, 104, 104, 128 73728       leaky_re_lu_176[0][0]            
 __________________________________________________________________________________________________
 norm_5 (BatchNormalization)     (None, 104, 104, 128 512         conv_5[0][0]                     
 __________________________________________________________________________________________________
-leaky_re_lu_5 (LeakyReLU)       (None, 104, 104, 128 0           norm_5[0][0]                     
+leaky_re_lu_177 (LeakyReLU)     (None, 104, 104, 128 0           norm_5[0][0]                     
 __________________________________________________________________________________________________
-max_pooling2d_3 (MaxPooling2D)  (None, 52, 52, 128)  0           leaky_re_lu_5[0][0]              
+maxpool1_104to52 (MaxPooling2D) (None, 52, 52, 128)  0           leaky_re_lu_177[0][0]            
 __________________________________________________________________________________________________
-conv_6 (Conv2D)                 (None, 52, 52, 256)  294912      max_pooling2d_3[0][0]            
+conv_6 (Conv2D)                 (None, 52, 52, 256)  294912      maxpool1_104to52[0][0]           
 __________________________________________________________________________________________________
 norm_6 (BatchNormalization)     (None, 52, 52, 256)  1024        conv_6[0][0]                     
 __________________________________________________________________________________________________
-leaky_re_lu_6 (LeakyReLU)       (None, 52, 52, 256)  0           norm_6[0][0]                     
+leaky_re_lu_178 (LeakyReLU)     (None, 52, 52, 256)  0           norm_6[0][0]                     
 __________________________________________________________________________________________________
-conv_7 (Conv2D)                 (None, 52, 52, 128)  32768       leaky_re_lu_6[0][0]              
+conv_7 (Conv2D)                 (None, 52, 52, 128)  32768       leaky_re_lu_178[0][0]            
 __________________________________________________________________________________________________
 norm_7 (BatchNormalization)     (None, 52, 52, 128)  512         conv_7[0][0]                     
 __________________________________________________________________________________________________
-leaky_re_lu_7 (LeakyReLU)       (None, 52, 52, 128)  0           norm_7[0][0]                     
+leaky_re_lu_179 (LeakyReLU)     (None, 52, 52, 128)  0           norm_7[0][0]                     
 __________________________________________________________________________________________________
-conv_8 (Conv2D)                 (None, 52, 52, 256)  294912      leaky_re_lu_7[0][0]              
+conv_8 (Conv2D)                 (None, 52, 52, 256)  294912      leaky_re_lu_179[0][0]            
 __________________________________________________________________________________________________
 norm_8 (BatchNormalization)     (None, 52, 52, 256)  1024        conv_8[0][0]                     
 __________________________________________________________________________________________________
-leaky_re_lu_8 (LeakyReLU)       (None, 52, 52, 256)  0           norm_8[0][0]                     
+leaky_re_lu_180 (LeakyReLU)     (None, 52, 52, 256)  0           norm_8[0][0]                     
 __________________________________________________________________________________________________
-max_pooling2d_4 (MaxPooling2D)  (None, 26, 26, 256)  0           leaky_re_lu_8[0][0]              
+maxpool1_52to26 (MaxPooling2D)  (None, 26, 26, 256)  0           leaky_re_lu_180[0][0]            
 __________________________________________________________________________________________________
-conv_9 (Conv2D)                 (None, 26, 26, 512)  1179648     max_pooling2d_4[0][0]            
+conv_9 (Conv2D)                 (None, 26, 26, 512)  1179648     maxpool1_52to26[0][0]            
 __________________________________________________________________________________________________
 norm_9 (BatchNormalization)     (None, 26, 26, 512)  2048        conv_9[0][0]                     
 __________________________________________________________________________________________________
-leaky_re_lu_9 (LeakyReLU)       (None, 26, 26, 512)  0           norm_9[0][0]                     
+leaky_re_lu_181 (LeakyReLU)     (None, 26, 26, 512)  0           norm_9[0][0]                     
 __________________________________________________________________________________________________
-conv_10 (Conv2D)                (None, 26, 26, 256)  131072      leaky_re_lu_9[0][0]              
+conv_10 (Conv2D)                (None, 26, 26, 256)  131072      leaky_re_lu_181[0][0]            
 __________________________________________________________________________________________________
 norm_10 (BatchNormalization)    (None, 26, 26, 256)  1024        conv_10[0][0]                    
 __________________________________________________________________________________________________
-leaky_re_lu_10 (LeakyReLU)      (None, 26, 26, 256)  0           norm_10[0][0]                    
+leaky_re_lu_182 (LeakyReLU)     (None, 26, 26, 256)  0           norm_10[0][0]                    
 __________________________________________________________________________________________________
-conv_11 (Conv2D)                (None, 26, 26, 512)  1179648     leaky_re_lu_10[0][0]             
+conv_11 (Conv2D)                (None, 26, 26, 512)  1179648     leaky_re_lu_182[0][0]            
 __________________________________________________________________________________________________
 norm_11 (BatchNormalization)    (None, 26, 26, 512)  2048        conv_11[0][0]                    
 __________________________________________________________________________________________________
-leaky_re_lu_11 (LeakyReLU)      (None, 26, 26, 512)  0           norm_11[0][0]                    
+leaky_re_lu_183 (LeakyReLU)     (None, 26, 26, 512)  0           norm_11[0][0]                    
 __________________________________________________________________________________________________
-conv_12 (Conv2D)                (None, 26, 26, 256)  131072      leaky_re_lu_11[0][0]             
+conv_12 (Conv2D)                (None, 26, 26, 256)  131072      leaky_re_lu_183[0][0]            
 __________________________________________________________________________________________________
 norm_12 (BatchNormalization)    (None, 26, 26, 256)  1024        conv_12[0][0]                    
 __________________________________________________________________________________________________
-leaky_re_lu_12 (LeakyReLU)      (None, 26, 26, 256)  0           norm_12[0][0]                    
+leaky_re_lu_184 (LeakyReLU)     (None, 26, 26, 256)  0           norm_12[0][0]                    
 __________________________________________________________________________________________________
-conv_13 (Conv2D)                (None, 26, 26, 512)  1179648     leaky_re_lu_12[0][0]             
+conv_13 (Conv2D)                (None, 26, 26, 512)  1179648     leaky_re_lu_184[0][0]            
 __________________________________________________________________________________________________
 norm_13 (BatchNormalization)    (None, 26, 26, 512)  2048        conv_13[0][0]                    
 __________________________________________________________________________________________________
-leaky_re_lu_13 (LeakyReLU)      (None, 26, 26, 512)  0           norm_13[0][0]                    
+leaky_re_lu_185 (LeakyReLU)     (None, 26, 26, 512)  0           norm_13[0][0]                    
 __________________________________________________________________________________________________
-max_pooling2d_5 (MaxPooling2D)  (None, 13, 13, 512)  0           leaky_re_lu_13[0][0]             
+maxpool1_26to13 (MaxPooling2D)  (None, 13, 13, 512)  0           leaky_re_lu_185[0][0]            
 __________________________________________________________________________________________________
-conv_14 (Conv2D)                (None, 13, 13, 1024) 4718592     max_pooling2d_5[0][0]            
+conv_14 (Conv2D)                (None, 13, 13, 1024) 4718592     maxpool1_26to13[0][0]            
 __________________________________________________________________________________________________
 norm_14 (BatchNormalization)    (None, 13, 13, 1024) 4096        conv_14[0][0]                    
 __________________________________________________________________________________________________
-leaky_re_lu_14 (LeakyReLU)      (None, 13, 13, 1024) 0           norm_14[0][0]                    
+leaky_re_lu_186 (LeakyReLU)     (None, 13, 13, 1024) 0           norm_14[0][0]                    
 __________________________________________________________________________________________________
-conv_15 (Conv2D)                (None, 13, 13, 512)  524288      leaky_re_lu_14[0][0]             
+conv_15 (Conv2D)                (None, 13, 13, 512)  524288      leaky_re_lu_186[0][0]            
 __________________________________________________________________________________________________
 norm_15 (BatchNormalization)    (None, 13, 13, 512)  2048        conv_15[0][0]                    
 __________________________________________________________________________________________________
-leaky_re_lu_15 (LeakyReLU)      (None, 13, 13, 512)  0           norm_15[0][0]                    
+leaky_re_lu_187 (LeakyReLU)     (None, 13, 13, 512)  0           norm_15[0][0]                    
 __________________________________________________________________________________________________
-conv_16 (Conv2D)                (None, 13, 13, 1024) 4718592     leaky_re_lu_15[0][0]             
+conv_16 (Conv2D)                (None, 13, 13, 1024) 4718592     leaky_re_lu_187[0][0]            
 __________________________________________________________________________________________________
 norm_16 (BatchNormalization)    (None, 13, 13, 1024) 4096        conv_16[0][0]                    
 __________________________________________________________________________________________________
-leaky_re_lu_16 (LeakyReLU)      (None, 13, 13, 1024) 0           norm_16[0][0]                    
+leaky_re_lu_188 (LeakyReLU)     (None, 13, 13, 1024) 0           norm_16[0][0]                    
 __________________________________________________________________________________________________
-conv_17 (Conv2D)                (None, 13, 13, 512)  524288      leaky_re_lu_16[0][0]             
+conv_17 (Conv2D)                (None, 13, 13, 512)  524288      leaky_re_lu_188[0][0]            
 __________________________________________________________________________________________________
 norm_17 (BatchNormalization)    (None, 13, 13, 512)  2048        conv_17[0][0]                    
 __________________________________________________________________________________________________
-leaky_re_lu_17 (LeakyReLU)      (None, 13, 13, 512)  0           norm_17[0][0]                    
+leaky_re_lu_189 (LeakyReLU)     (None, 13, 13, 512)  0           norm_17[0][0]                    
 __________________________________________________________________________________________________
-conv_18 (Conv2D)                (None, 13, 13, 1024) 4718592     leaky_re_lu_17[0][0]             
+conv_18 (Conv2D)                (None, 13, 13, 1024) 4718592     leaky_re_lu_189[0][0]            
 __________________________________________________________________________________________________
 norm_18 (BatchNormalization)    (None, 13, 13, 1024) 4096        conv_18[0][0]                    
 __________________________________________________________________________________________________
-leaky_re_lu_18 (LeakyReLU)      (None, 13, 13, 1024) 0           norm_18[0][0]                    
+leaky_re_lu_190 (LeakyReLU)     (None, 13, 13, 1024) 0           norm_18[0][0]                    
 __________________________________________________________________________________________________
-conv_19 (Conv2D)                (None, 13, 13, 1024) 9437184     leaky_re_lu_18[0][0]             
+conv_19 (Conv2D)                (None, 13, 13, 1024) 9437184     leaky_re_lu_190[0][0]            
 __________________________________________________________________________________________________
 norm_19 (BatchNormalization)    (None, 13, 13, 1024) 4096        conv_19[0][0]                    
 __________________________________________________________________________________________________
-conv_21 (Conv2D)                (None, 26, 26, 64)   32768       leaky_re_lu_13[0][0]             
+conv_21 (Conv2D)                (None, 26, 26, 64)   32768       leaky_re_lu_185[0][0]            
 __________________________________________________________________________________________________
-leaky_re_lu_19 (LeakyReLU)      (None, 13, 13, 1024) 0           norm_19[0][0]                    
+leaky_re_lu_191 (LeakyReLU)     (None, 13, 13, 1024) 0           norm_19[0][0]                    
 __________________________________________________________________________________________________
 norm_21 (BatchNormalization)    (None, 26, 26, 64)   256         conv_21[0][0]                    
 __________________________________________________________________________________________________
-conv_20 (Conv2D)                (None, 13, 13, 1024) 9437184     leaky_re_lu_19[0][0]             
+conv_20 (Conv2D)                (None, 13, 13, 1024) 9437184     leaky_re_lu_191[0][0]            
 __________________________________________________________________________________________________
-leaky_re_lu_21 (LeakyReLU)      (None, 26, 26, 64)   0           norm_21[0][0]                    
+leaky_re_lu_193 (LeakyReLU)     (None, 26, 26, 64)   0           norm_21[0][0]                    
 __________________________________________________________________________________________________
 norm_20 (BatchNormalization)    (None, 13, 13, 1024) 4096        conv_20[0][0]                    
 __________________________________________________________________________________________________
-lambda_1 (Lambda)               (None, 13, 13, 256)  0           leaky_re_lu_21[0][0]             
+lambda_8 (Lambda)               (None, 13, 13, 256)  0           leaky_re_lu_193[0][0]            
 __________________________________________________________________________________________________
-leaky_re_lu_20 (LeakyReLU)      (None, 13, 13, 1024) 0           norm_20[0][0]                    
+leaky_re_lu_192 (LeakyReLU)     (None, 13, 13, 1024) 0           norm_20[0][0]                    
 __________________________________________________________________________________________________
-concatenate_1 (Concatenate)     (None, 13, 13, 1280) 0           lambda_1[0][0]                   
-                                                                 leaky_re_lu_20[0][0]             
+concatenate_7 (Concatenate)     (None, 13, 13, 1280) 0           lambda_8[0][0]                   
+                                                                 leaky_re_lu_192[0][0]            
 __________________________________________________________________________________________________
-conv_22 (Conv2D)                (None, 13, 13, 1024) 11796480    concatenate_1[0][0]              
+conv_22 (Conv2D)                (None, 13, 13, 1024) 11796480    concatenate_7[0][0]              
 __________________________________________________________________________________________________
 norm_22 (BatchNormalization)    (None, 13, 13, 1024) 4096        conv_22[0][0]                    
 __________________________________________________________________________________________________
-leaky_re_lu_22 (LeakyReLU)      (None, 13, 13, 1024) 0           norm_22[0][0]                    
+leaky_re_lu_194 (LeakyReLU)     (None, 13, 13, 1024) 0           norm_22[0][0]                    
 __________________________________________________________________________________________________
-conv_23 (Conv2D)                (None, 13, 13, 28)   28700       leaky_re_lu_22[0][0]             
+conv_23 (Conv2D)                (None, 13, 13, 28)   28700       leaky_re_lu_194[0][0]            
 __________________________________________________________________________________________________
-reshape_1 (Reshape)             (None, 13, 13, 4, 7) 0           conv_23[0][0]                    
+final_output (Reshape)          (None, 13, 13, 4, 7) 0           conv_23[0][0]                    
 __________________________________________________________________________________________________
-input_2 (InputLayer)            (None, 1, 1, 1, 50,  0                                            
+input_hack (InputLayer)         (None, 1, 1, 1, 50,  0                                            
 __________________________________________________________________________________________________
-lambda_2 (Lambda)               (None, 13, 13, 4, 7) 0           reshape_1[0][0]                  
-                                                                 input_2[0][0]                    
+hack_layer (Lambda)             (None, 13, 13, 4, 7) 0           final_output[0][0]               
+                                                                 input_hack[0][0]                 
 ==================================================================================================
 Total params: 50,576,636
-Trainable params: 50,555,964
-Non-trainable params: 20,672
+Trainable params: 28,700
+Non-trainable params: 50,547,936
 __________________________________________________________________________________________________
 </pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Load-pre-trained-YOLOv2-weights">Load pre-trained YOLOv2 weights<a class="anchor-link" href="#Load-pre-trained-YOLOv2-weights">¶</a></h2><p>Following the instruction at <a href="https://pjreddie.com/darknet/yolov2/">YOLO: Real-Time Object Detection</a>, we download the pre-trained weights using wget:</p>
+<p><code>
+wget https://pjreddie.com/media/files/yolov2.weights
+</code></p>
+<p>The weights are saved at:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [35]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path_to_weight</span> <span class="o">=</span> <span class="s2">"./yolov2.weights"</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following codes are extracted from <a href="https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb">keras-yolo2/Yolo Step-by-Step.ipynb</a></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [36]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">WeightReader</span><span class="p">:</span>
+    <span class="c1"># code from https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">weight_file</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mi">4</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">all_weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromfile</span><span class="p">(</span><span class="n">weight_file</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'float32'</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">read_bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">+</span> <span class="n">size</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">all_weights</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="o">-</span><span class="n">size</span><span class="p">:</span><span class="bp">self</span><span class="o">.</span><span class="n">offset</span><span class="p">]</span>
+    
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">offset</span> <span class="o">=</span> <span class="mi">4</span>
+                
+<span class="n">weight_reader</span> <span class="o">=</span> <span class="n">WeightReader</span><span class="p">(</span><span class="n">path_to_weight</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"all_weights.shape = </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">weight_reader</span><span class="o">.</span><span class="n">all_weights</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>all_weights.shape = (50983565,)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Assign pre-trained weights to the following layers: 
+<code> conv_i</code>, <code>norm_i</code>, <code> i = 1, 2,..., 22</code>. 
+These layers do not depend on the number of object classes or the number of anchor boxes.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [37]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">weight_reader</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+<span class="n">nb_conv</span> <span class="o">=</span> <span class="mi">22</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nb_conv</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">conv_layer</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="s1">'conv_'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="c1">## convolusional layer</span>
+    
+    <span class="k">if</span> <span class="n">i</span> <span class="o"><</span> <span class="n">nb_conv</span><span class="p">:</span>
+        <span class="n">norm_layer</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_layer</span><span class="p">(</span><span class="s1">'norm_'</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="c1">## batch normalization layer</span>
+        
+        <span class="n">size</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">norm_layer</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+        <span class="n">beta</span>  <span class="o">=</span> <span class="n">weight_reader</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">gamma</span> <span class="o">=</span> <span class="n">weight_reader</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">mean</span>  <span class="o">=</span> <span class="n">weight_reader</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+        <span class="n">var</span>   <span class="o">=</span> <span class="n">weight_reader</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>
+
+        <span class="n">weights</span> <span class="o">=</span> <span class="n">norm_layer</span><span class="o">.</span><span class="n">set_weights</span><span class="p">([</span><span class="n">gamma</span><span class="p">,</span> <span class="n">beta</span><span class="p">,</span> <span class="n">mean</span><span class="p">,</span> <span class="n">var</span><span class="p">])</span>       
+        
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">conv_layer</span><span class="o">.</span><span class="n">get_weights</span><span class="p">())</span> <span class="o">></span> <span class="mi">1</span><span class="p">:</span> <span class="c1">## with bias</span>
+        <span class="n">bias</span>   <span class="o">=</span> <span class="n">weight_reader</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">conv_layer</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="n">weight_reader</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">conv_layer</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">conv_layer</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">transpose</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">conv_layer</span><span class="o">.</span><span class="n">set_weights</span><span class="p">([</span><span class="n">kernel</span><span class="p">,</span> <span class="n">bias</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1">## without bias</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="n">weight_reader</span><span class="o">.</span><span class="n">read_bytes</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">conv_layer</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">conv_layer</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)))</span>
+        <span class="n">kernel</span> <span class="o">=</span> <span class="n">kernel</span><span class="o">.</span><span class="n">transpose</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">conv_layer</span><span class="o">.</span><span class="n">set_weights</span><span class="p">([</span><span class="n">kernel</span><span class="p">])</span>
+</pre></div>
 </div>
 </div>
 </div>
@@ -1493,13 +1680,13 @@ ________________________________________________________________________________
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Calculating-loss-function-of-Yolo-v2">Calculating loss function of Yolo v2<a class="anchor-link" href="#Calculating-loss-function-of-Yolo-v2">¶</a></h2><p>There has been a lot of discussion on understanding Yolo loss funciton on line.
+<h2 id="Calculating-loss-function-of-Yolo-v2">Calculating loss function of Yolo v2<a class="anchor-link" href="#Calculating-loss-function-of-Yolo-v2">¶</a></h2><p>I have seen a lot of online blog posts about YOLO v1 loss function.
 For example, at <a href="https://hackernoon.com/understanding-yolo-f5a74bbc7967">Understanding YOLO</a>.
-However, most of these posts discusses the loss function of Yolo v1 which is different from Yolo v2.
-The two losses are different and the lack of explicit formula for the Yolo v2 loss is discussed at <a href="https://groups.google.com/forum/#!topic/darknet/TJ4dN9R4iJk">What is YOLOv2 Loss Function - Google Groups</a></p>
-<p>The Yolo v1 is difined in 
+However, most of these posts discusses the loss function of Yolo v1 which must be different from Yolo v2.
+The two losses are different and the lack of explicit formula for the Yolo v2 loss paper arises some confusion, for example at <a href="https://groups.google.com/forum/#!topic/darknet/TJ4dN9R4iJk">What is YOLOv2 Loss Function - Google Groups</a>.</p>
+<p>The YOLO v1 is difined in 
 <a href="https://arxiv.org/pdf/1506.02640.pdf">You Only Look Once:Unified, Real-Time Object Detection</a> as:</p>
-<h3 id="Yolo-V1-loss">Yolo V1 loss<a class="anchor-link" href="#Yolo-V1-loss">¶</a></h3><p>$$\begin{multline}
+<h3 id="YOLO-V1-loss">YOLO V1 loss<a class="anchor-link" href="#YOLO-V1-loss">¶</a></h3><p>$$\begin{multline}
 \lambda<em>\textbf{coord}
 \sum</em>{i = 0}^{S^2}
     \sum<em>{j = 0}^{B}
@@ -1554,33 +1741,66 @@ L<em>i^{\text{obj}}
 </code></pre>
 \end{multline}$$</li>
 </ul>
-<p>The output of the loss functions</p>
+<p>YOLOv2 paper expalins the difference in architecture from YOLOv1 as follows:</p>
+<blockquote>
+We remove the fully connected layers from YOLO(v1) and use anchor boxes to predict bounding boxes...
+When we move to anchor boxes we also decouple the class prediction mechanism from the spatial location and instead predict class and objectness for every anchorbox. 
+</blockquote><p>This means that the confidence probability $p_i(c)$ above should depend not only on $i$ and $c$ but also $j$ i.e., anchor box index. Therefore, the loss needs to be different from above. Unfortunately, YOLOv2 paper does not explicitly state its loss function. So rather than making a guess based on the paper, I will try to understand the loss function that <a href="https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb">experiencor/keras-yolo2</a> defines for his YOLOv2.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="experiencor/keras-yolo2's-YOLO-V2-loss"><a href="https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb">experiencor/keras-yolo2</a>'s YOLO V2 loss<a class="anchor-link" href="#experiencor/keras-yolo2's-YOLO-V2-loss">¶</a></h3><p>In <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a>, I showed that YOLO's output is encoded into <code>y_batch</code>.</p>
+<p>Here I revisit YOLO's ground truth output encoding with mathematical notations.</p>
+<p><code>
+y_batch
+</code></p>
+<p>The numpy array of shape  <code>(BATCH_SIZE, GRID_H, GRID_W, BOX, 4 + 1 + N classes) </code>.</p>
+<p>BOX = The number of anchor boxes.</p>
+<p>In the following notation, the grid cell index can be defined by two index (igrid_h,igrid_w) or by a single index $i$.</p>
 <ul>
-<li>[ $x$, $y$, $w$, $h$, $C$, $P_{C_1}$,$P_{C_2}$, .. $P_{C_{20}}$]</li>
+<li><p><code>y_batch[iframe,igrid_h,igrid_w,j,:4]</code> contains <code>(center_x,center_y,center_w,center_h)</code> of <code>j</code>th anchor at <code>grid cell=(igrid_h,igrid_w)</code> = $i$, 
+  if the object exists in this (grid cell, anchor) pair, else they simply contain 0.</p>
+<p><code>y_batch[iframe,igrid_h,igrid_w,j,:4]</code>$= (x_{i,\texttt{j}},y_{i,\texttt{j}},w_{i,\texttt{j}},h_{i,\texttt{j}})$</p>
+</li>
 </ul>
-<p>The loss function of Yolo treats each of these output entries separately. 
-So it looks complicated at the first grance. 
-So let's understand each term of the loss one by one.</p>
-<p>$$
-L_{i,j} = L_{i,j}^{xywh} + L_{i,j}^c + L_{i,j}^p
-$$</p>
+<ul>
+<li><p><code>y_batch[iframe,igrid_h,igrid_w,j,4]</code> 
+  contains 1 if the object exists in this (grid cell, anchor) pair, else it contains 0.</p>
+<p><code>y_batch[iframe,igrid_h,igrid_w,j,4]</code> = $ C_{i,\texttt{j}}$</p>
+</li>
+</ul>
+<ul>
+<li><p><code>y_batch[iframe,igrid_h,igrid_w,j,5 + iclass]</code> contains 1 if the <code>iclass</code>th class object exists in this (grid cell, anchor) pair, else it contains 0.</p>
+<p><code>y_batch[iframe,igrid_h,igrid_w,j,5:]</code> $ = (p^1_{i,\texttt{j}},p^2_{i,\texttt{j}},p^3_{i,\texttt{j}},\cdots,p^{\textrm{Nclass}}_{i,\texttt{j}})$</p>
+</li>
+</ul>
+<p>The loss function of YOLO treats each set of elements 
+<code>(center_x,center_y,center_w,center_h)</code>, 
+<code>C</code>, and 
+<code>(p_1,p_2,...p_Nclass)</code> in <code>y_batch[iframe,igrid_h,igrid_w,:]</code> differently. So let's understand each term of the loss one by one.</p>
+<p>Then the loss corresponding to (grid cell, anchor box) pair = ($i,j$) is calculated as:</p>
 <p>$$
 \begin{array}{rl}
-L_{i,j}^{xywh}&=
+\textrm{loss}_{i,j} &= \textrm{loss}_{i,j}^{xywh} + \textrm{loss}_{i,j}^c + \textrm{loss}_{i,j}^p\\
+\textrm{loss}_{i,j}^{xywh}&=
 \lambda_{\textrm{coord}}
 \sum_{i=0}^{S^2}
 \sum_{j=0}^B
-L_{i,j}^{\text{obj}}
+\textrm{L}_{i,j}^{\text{obj}}
 \left[
 \left(x_{i,j}-\hat{x}_{i,j}\right)^2 + 
 \left(y_{i,j}-\hat{y}_{i,j}\right)^2 +
 \left(\sqrt{w}_{i,j}-\sqrt{\hat{w}}_{i,j}\right)^2 +
 \left(\sqrt{h}_{i,j}-\sqrt{\hat{h}}_{i,j}\right)^2 
 \right]\\
-L_{i,j}^c &=
+\textrm{loss}_{i,j}^c &=
 \sum_{i=0}^{S^2}
 \sum_{j=0}^B
-L_{i,j}^{\text{obj}}
+\textrm{loss}_{i,j}^{\text{obj}}
 \left(
 IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i,j}} - \widehat{C}_{i,j}
 \right)^2
@@ -1590,7 +1810,7 @@ IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i,j}} - \widehat{C}_{i,j}
 \sum_{j=0}^B
 L_{i,j}^{\text{noobj}}
 \left(0 - \widehat{C}_{i,j}\right)\\
-L_{i,j}^p&=-\sum_{i=0}^{S^2} \sum_{j=0}^B L_{i,j}^{\text{obj}}\sum_{c \in \text{class}} p_{i,j}^c \text{log}(\hat{p}_{i,j})
+\textrm{loss}_{i,j}^p&=-\sum_{i=0}^{S^2} \sum_{j=0}^B L_{i,j}^{\text{obj}}\sum_{c \in \text{class}} p_{i,j}^c \text{log}(\hat{p}_{i,j})
 \end{array}
 $$</p>
 <p>$$
@@ -1616,7 +1836,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [6]:</div>
+<div class="prompt input_prompt">In [38]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Assume the following parameters are defined:</span>
@@ -1905,36 +2125,13 @@ $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Define-Label-vector-containing-20-object-classe-names.">Define Label vector containing 20 object classe names.<a class="anchor-link" href="#Define-Label-vector-containing-20-object-classe-names.">¶</a></h3>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#LABELS = ['aeroplane',  'bicycle', 'bird',  'boat',      'bottle', </span>
-<span class="c1">#          'bus',        'car',      'cat',  'chair',     'cow',</span>
-<span class="c1">#          'diningtable','dog',    'horse',  'motorbike', 'person',</span>
-<span class="c1">#          'pottedplant','sheep',  'sofa',   'train',   'tvmonitor']</span>
-<span class="n">LABELS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'chair'</span><span class="p">,</span>    <span class="s1">'person'</span> <span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="The-location-where-the-VOC2012-data-is-saved.">The location where the VOC2012 data is saved.<a class="anchor-link" href="#The-location-where-the-VOC2012-data-is-saved.">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [39]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_image_folder</span> <span class="o">=</span> <span class="s2">"../ObjectDetectionRCNN/VOCdevkit/VOC2012/JPEGImages/"</span>
@@ -1956,7 +2153,7 @@ This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDe
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In [40]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -1993,7 +2190,7 @@ This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDe
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [41]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">backend</span> <span class="k">import</span> <span class="n">SimpleBatchGenerator</span>
@@ -2060,7 +2257,7 @@ This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDe
 
 <span class="n">model</span><span class="o">.</span><span class="n">fit_generator</span><span class="p">(</span><span class="n">generator</span>        <span class="o">=</span> <span class="n">train_batch_generator</span><span class="p">,</span> 
                     <span class="n">steps_per_epoch</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_batch_generator</span><span class="p">),</span> 
-                    <span class="n">epochs</span>           <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> 
+                    <span class="n">epochs</span>           <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> 
                     <span class="n">verbose</span>          <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
                     <span class="c1">#validation_data  = valid_batch,</span>
                     <span class="c1">#validation_steps = len(valid_batch),</span>
@@ -2075,11 +2272,8 @@ This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDe
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>WARNING:tensorflow:From /Users/yumikondo/anaconda3/lib/python3.6/site-packages/keras/backend/tensorflow_backend.py:1349: calling reduce_mean (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
-Instructions for updating:
-keep_dims is deprecated, use keepdims instead
-Epoch 1/100
- 20/649 [..............................] - ETA: 7:43:51 - loss: 1696.9813</pre>
+<pre>Epoch 1/100
+388/649 [================>.............] - ETA: 55:03 - loss: 21.6776</pre>
 </div>
 </div>
 </div>
