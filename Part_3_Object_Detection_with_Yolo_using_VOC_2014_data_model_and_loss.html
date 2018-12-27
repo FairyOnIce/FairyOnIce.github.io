@@ -1051,57 +1051,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><p color="red">
-$$
-\begin{array}{rl}
-\textrm{loss}_{i,j} &= \textrm{loss}_{i,j}^{xywh} + \textrm{loss}_{i,j}^c + \textrm{loss}_{i,j}^p\\
-\textrm{loss}_{i,j}^{xywh}&=
-\lambda_{\textrm{coord}}
-\sum_{i=0}^{S^2}
-\sum_{j=0}^B
-\textrm{L}_{i,j}^{\text{obj}}
-\left[
-\left(x_{i,j}-\hat{x}_{i,j}\right)^2 + 
-\left(y_{i,j}-\hat{y}_{i,j}\right)^2 +
-\left(\sqrt{w}_{i,j}-\sqrt{\hat{w}}_{i,j}\right)^2 +
-\left(\sqrt{h}_{i,j}-\sqrt{\hat{h}}_{i,j}\right)^2 
-\right]\\
-\textrm{loss}_{i,j}^c &=
-\sum_{i=0}^{S^2}
-\sum_{j=0}^B
-\textrm{loss}_{i,j}^{\text{obj}}
-\left(
-IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i,j}} - \widehat{C}_{i,j}
-\right)^2
-+
-\lambda_{\textrm{noobj}}
-\sum_{i=0}^{S^2}
-\sum_{j=0}^B
-L_{i,j}^{\text{noobj}}
-\left(0 - \widehat{C}_{i,j}\right)\\
-\textrm{loss}_{i,j}^p&=-\sum_{i=0}^{S^2} \sum_{j=0}^B L_{i,j}^{\text{obj}}\sum_{c \in \text{class}} p_{i,j}^c \text{log}(\hat{p}_{i,j})
-\end{array}
-$$</p>
-<p>$$
-\begin{array}{rl}
-L_{i,j}^{\text{noobj}}
-& = \texttt{conf-mask} = 
-\begin{cases}
- 1 \;\;\text{if}\;\;\text{max}_{i',j'}
- \;\;IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i',j'}} < 0.6 \;\text{and}\; C_{i,j} = 0\\
- 0\;\;\text{else}\\
-\end{cases}\\
-L_{i,j}^{\text{obj}}
- &= \texttt{coord-mask} = 
- \begin{cases}
- 1 
-\;\;\text{if} \;\;C_{i,j}=1\\
- 0\;\;\text{else}\\
-\end{cases}
-\end{array}
-$$</p>
-<p></p>
-This is the third blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. This blog discusses the YOLO's model architecture and loss funciton. I will use PASCAL VOC2012 data. This blog assumes that the readers have read the previous two blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a>.</p>
+<h3 id="experiencor/keras-yolo2's-YOLO-V2-loss"><a href="https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb">experiencor/keras-yolo2</a>'s YOLO V2 loss<a class="anchor-link" href="#experiencor/keras-yolo2's-YOLO-V2-loss">¶</a></h3><p>This is the third blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. This blog discusses the YOLO's model architecture and loss funciton. I will use PASCAL VOC2012 data. This blog assumes that the readers have read the previous two blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a>.</p>
 <h2 id="Andrew-Ng's-Yolo-lecture">Andrew Ng's Yolo lecture<a class="anchor-link" href="#Andrew-Ng's-Yolo-lecture">¶</a></h2><ul>
 <li><a href="https://www.youtube.com/watch?v=gKreZOUi-O0&amp;t=0s&amp;index=7&amp;list=PL_IHmaMAvkVxdDOBRg2CbcJBq9SY7ZUvs">Neural Networks - Bounding Box Predictions</a></li>
 <li><a href="https://www.youtube.com/watch?v=ANIzQ5G-XPE&amp;t=7s">C4W3L06 Intersection Over Union</a></li>
@@ -1109,7 +1059,7 @@ This is the third blog post of <a href="https://fairyonice.github.io/tag/object-
 <li><a href="https://www.youtube.com/watch?v=RTlwl2bv0Tg&amp;t=28s">C4W3L08 Anchor Boxes</a></li>
 <li><a href="https://www.youtube.com/watch?v=9s_FpMpdYW8&amp;t=34s">C4W3L09 YOLO Algorithm</a></li>
 </ul>
-</p></div>
+</div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
@@ -1680,17 +1630,17 @@ These layers do not depend on the number of object classes or the number of anch
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Calculating-loss-function-of-Yolo-v2">Calculating loss function of Yolo v2<a class="anchor-link" href="#Calculating-loss-function-of-Yolo-v2">¶</a></h2><p>I have seen a lot of online blog posts about YOLO v1 loss function.
+<h2 id="Calculating-YOLOv2's-loss-function">Calculating YOLOv2's loss function<a class="anchor-link" href="#Calculating-YOLOv2's-loss-function">¶</a></h2><p>I have seen a lot of online blog posts about YOLO v1 loss function.
 For example, at <a href="https://hackernoon.com/understanding-yolo-f5a74bbc7967">Understanding YOLO</a>.
 However, most of these posts discusses the loss function of Yolo v1 which must be different from Yolo v2.
 The two losses are different and the lack of explicit formula for the Yolo v2 loss paper arises some confusion, for example at <a href="https://groups.google.com/forum/#!topic/darknet/TJ4dN9R4iJk">What is YOLOv2 Loss Function - Google Groups</a>.</p>
 <p>The YOLO v1 is difined in 
 <a href="https://arxiv.org/pdf/1506.02640.pdf">You Only Look Once:Unified, Real-Time Object Detection</a> as:</p>
-<h3 id="YOLO-V1-loss">YOLO V1 loss<a class="anchor-link" href="#YOLO-V1-loss">¶</a></h3><p>$$\begin{multline}
-\lambda<em>\textbf{coord}
-\sum</em>{i = 0}^{S^2}
-    \sum<em>{j = 0}^{B}
-     L</em>{ij}^{\text{obj}}
+<h3 id="YOLO-V1-loss">YOLO V1 loss<a class="anchor-link" href="#YOLO-V1-loss">¶</a></h3><p>$$\begin{array}{rl}
+&\lambda_\textbf{coord}
+\sum_{i = 0}^{S^2}
+    \sum_{j = 0}^{B}
+     L_{ij}^{\text{obj}}
             \left[
             \left(
                 x_i - \hat{x}_i
@@ -1699,48 +1649,42 @@ The two losses are different and the lack of explicit formula for the Yolo v2 lo
                 y_i - \hat{y}_i
             \right)^2
             \right]
-\</p>
-<ul>
-<li>\lambda<em>\textbf{coord} 
-\sum</em>{i = 0}^{S^2}
-  \sum_{j = 0}^{B}
-<pre><code>   L_{ij}^{\text{obj}}
-   \left[
-  \left(
-      \sqrt{w_i} - \sqrt{\hat{w}_i}
-  \right)^2 +
-  \left(
-      \sqrt{h_i} - \sqrt{\hat{h}_i}
-  \right)^2
-  \right]
-</code></pre>
-\</li>
-<li>\sum<em>{i = 0}^{S^2}
-  \sum</em>{j = 0}^{B}
-<pre><code>  L_{ij}^{\text{obj}}
-  \left(
-      C_i - \hat{C}_i
-  \right)^2
-</code></pre>
-\</li>
-<li>\lambda<em>\textrm{noobj}
-\sum</em>{i = 0}^{S^2}
-  \sum<em>{j = 0}^{B}
-  L</em>{ij}^{\text{noobj}}
-<pre><code>  \left(
-      C_i - \hat{C}_i
-  \right)^2
-</code></pre>
-\</li>
-<li>\sum_{i = 0}^{S^2}
-L<em>i^{\text{obj}}
-  \sum</em>{c \in \textrm{classes}}
-<pre><code>  \left(
-      p_i(c) - \hat{p}_i(c)
-  \right)^2
-</code></pre>
-\end{multline}$$</li>
-</ul>
+\\
+&+ \lambda_\textbf{coord} 
+\sum_{i = 0}^{S^2}
+    \sum_{j = 0}^{B}
+         L_{ij}^{\text{obj}}
+         \left[
+        \left(
+            \sqrt{w_i} - \sqrt{\hat{w}_i}
+        \right)^2 +
+        \left(
+            \sqrt{h_i} - \sqrt{\hat{h}_i}
+        \right)^2
+        \right]
+\\
+&+ \sum_{i = 0}^{S^2}
+    \sum_{j = 0}^{B}
+        L_{ij}^{\text{obj}}
+        \left(
+            C_i - \hat{C}_i
+        \right)^2
+\\
+&+ \lambda_\textrm{noobj}
+\sum_{i = 0}^{S^2}
+    \sum_{j = 0}^{B}
+    L_{ij}^{\text{noobj}}
+        \left(
+            C_i - \hat{C}_i
+        \right)^2
+\\
+&+ \sum_{i = 0}^{S^2}
+L_i^{\text{obj}}
+    \sum_{c \in \textrm{classes}}
+        \left(
+            p_i(c) - \hat{p}_i(c)
+        \right)^2
+\end{array}$$</p>
 <p>YOLOv2 paper expalins the difference in architecture from YOLOv1 as follows:</p>
 <blockquote>
 We remove the fully connected layers from YOLO(v1) and use anchor boxes to predict bounding boxes...
@@ -1783,37 +1727,43 @@ y_batch
 <code>C</code>, and 
 <code>(p_1,p_2,...p_Nclass)</code> in <code>y_batch[iframe,igrid_h,igrid_w,:]</code> differently. So let's understand each term of the loss one by one.</p>
 <p>Then the loss corresponding to (grid cell, anchor box) pair = ($i,j$) is calculated as:</p>
-<p>$$
-\begin{array}{rl}
+<p>$$\small
+\begin{array}{rl}\small
 \textrm{loss}_{i,j} &= \textrm{loss}_{i,j}^{xywh} + \textrm{loss}_{i,j}^c + \textrm{loss}_{i,j}^p\\
 \textrm{loss}_{i,j}^{xywh}&=
 \lambda_{\textrm{coord}}
 \sum_{i=0}^{S^2}
 \sum_{j=0}^B
 \textrm{L}_{i,j}^{\text{obj}}
-\left[
+\big[
 \left(x_{i,j}-\hat{x}_{i,j}\right)^2 + 
-\left(y_{i,j}-\hat{y}_{i,j}\right)^2 +
-\left(\sqrt{w}_{i,j}-\sqrt{\hat{w}}_{i,j}\right)^2 +
+\left(y_{i,j}-\hat{y}_{i,j}\right)^2 +\\
+&\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\left(\sqrt{w}_{i,j}-\sqrt{\hat{w}}_{i,j}\right)^2 +
 \left(\sqrt{h}_{i,j}-\sqrt{\hat{h}}_{i,j}\right)^2 
-\right]\\
+\big]\\
 \textrm{loss}_{i,j}^c &=
 \sum_{i=0}^{S^2}
 \sum_{j=0}^B
-\textrm{loss}_{i,j}^{\text{obj}}
+\textrm{L}_{i,j}^{\text{obj}}
 \left(
 IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i,j}} - \widehat{C}_{i,j}
-\right)^2
-+
+\right)^2\\
+&\;\;\;\;\;\;+
 \lambda_{\textrm{noobj}}
 \sum_{i=0}^{S^2}
 \sum_{j=0}^B
 L_{i,j}^{\text{noobj}}
 \left(0 - \widehat{C}_{i,j}\right)\\
-\textrm{loss}_{i,j}^p&=-\sum_{i=0}^{S^2} \sum_{j=0}^B L_{i,j}^{\text{obj}}\sum_{c \in \text{class}} p_{i,j}^c \text{log}(\hat{p}_{i,j})
+\textrm{loss}_{i,j}^p&=-\sum_{i=0}^{S^2} \sum_{j=0}^B L_{i,j}^{\text{obj}}\sum_{c \in \text{class}} p_{i,j}^c \text{log}(\hat{p}_{i,j}^c)
 \end{array}
-$$</p>
-<p>$$
+$$
+where:</p>
+<ul>
+<li>$\text{preduiction}_{i,j}=(\hat{x}_{i,j},\hat{y}_{i,j},\hat{w}_{i,j},\hat{h}_{i,j})$</li>
+<li>$\text{ground truth}_{i,j}=(x_{i,j},y_{i,j},w_{i,j},h_{i,j})$</li>
+</ul>
+<p>Here, $L_{i,j}^{\text{noobj}}$ and $L_{i,j}^{\text{obj}}$ are 0/1 indicator function such that:
+$$
 \begin{array}{rl}
 L_{i,j}^{\text{noobj}}
 & = \texttt{conf-mask} = 
@@ -2106,13 +2056,13 @@ $$</p>
     <span class="n">current_recall</span> <span class="o">=</span> <span class="n">nb_pred_box</span><span class="o">/</span><span class="p">(</span><span class="n">nb_true_box</span> <span class="o">+</span> <span class="mf">1e-6</span><span class="p">)</span>
     <span class="n">total_recall</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">assign_add</span><span class="p">(</span><span class="n">total_recall</span><span class="p">,</span> <span class="n">current_recall</span><span class="p">)</span> 
 
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">))],</span> <span class="n">message</span><span class="o">=</span><span class="s1">'Dummy Line </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">loss_xy</span><span class="p">],</span> <span class="n">message</span><span class="o">=</span><span class="s1">'Loss XY </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">loss_wh</span><span class="p">],</span> <span class="n">message</span><span class="o">=</span><span class="s1">'Loss WH </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">loss_conf</span><span class="p">],</span> <span class="n">message</span><span class="o">=</span><span class="s1">'Loss Conf </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">loss_class</span><span class="p">],</span> <span class="n">message</span><span class="o">=</span><span class="s1">'Loss Class </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">loss</span><span class="p">],</span> <span class="n">message</span><span class="o">=</span><span class="s1">'Total Loss </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">current_recall</span><span class="p">],</span> <span class="n">message</span><span class="o">=</span><span class="s1">'Current Recall </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">))],</span>     <span class="n">message</span><span class="o">=</span><span class="s1">'Dummy Line </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span>     <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">loss_xy</span><span class="p">],</span>           <span class="n">message</span><span class="o">=</span><span class="s1">'Loss XY </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span>        <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">loss_wh</span><span class="p">],</span>           <span class="n">message</span><span class="o">=</span><span class="s1">'Loss WH </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span>        <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">loss_conf</span><span class="p">],</span>         <span class="n">message</span><span class="o">=</span><span class="s1">'Loss Conf </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span>      <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">loss_class</span><span class="p">],</span>        <span class="n">message</span><span class="o">=</span><span class="s1">'Loss Class </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span>     <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">loss</span><span class="p">],</span>              <span class="n">message</span><span class="o">=</span><span class="s1">'Total Loss </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span>     <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">current_recall</span><span class="p">],</span>    <span class="n">message</span><span class="o">=</span><span class="s1">'Current Recall </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
     <span class="n">loss</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Print</span><span class="p">(</span><span class="n">loss</span><span class="p">,</span> <span class="p">[</span><span class="n">total_recall</span><span class="o">/</span><span class="n">seen</span><span class="p">],</span> <span class="n">message</span><span class="o">=</span><span class="s1">'Average Recall </span><span class="se">\t</span><span class="s1">'</span><span class="p">,</span> <span class="n">summarize</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">loss</span>
@@ -2235,14 +2185,14 @@ This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDe
 <span class="k">except</span><span class="p">:</span>
     <span class="k">pass</span>
 
-<span class="n">early_stop</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">'val_loss'</span><span class="p">,</span> 
+<span class="n">early_stop</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">'loss'</span><span class="p">,</span> 
                            <span class="n">min_delta</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> 
                            <span class="n">patience</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
                            <span class="n">mode</span><span class="o">=</span><span class="s1">'min'</span><span class="p">,</span> 
                            <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="n">checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s1">'weights_coco.h5'</span><span class="p">,</span> 
-                             <span class="n">monitor</span><span class="o">=</span><span class="s1">'val_loss'</span><span class="p">,</span> 
+                             <span class="n">monitor</span><span class="o">=</span><span class="s1">'loss'</span><span class="p">,</span> 
                              <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
                              <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
                              <span class="n">mode</span><span class="o">=</span><span class="s1">'min'</span><span class="p">,</span> 
@@ -2273,7 +2223,7 @@ This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDe
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Epoch 1/100
-388/649 [================>.............] - ETA: 55:03 - loss: 21.6776</pre>
+518/649 [======================>.......] - ETA: 28:17 - loss: 19.6704</pre>
 </div>
 </div>
 </div>
