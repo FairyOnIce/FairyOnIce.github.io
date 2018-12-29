@@ -1051,21 +1051,16 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is the third blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. This blog discusses the YOLO's model architecture and loss funciton. I will use PASCAL VOC2012 data. This blog assumes that the readers have read the previous two blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a>.</p>
-<h2 id="Andrew-Ng's-Yolo-lecture">Andrew Ng's Yolo lecture<a class="anchor-link" href="#Andrew-Ng's-Yolo-lecture">¶</a></h2><ul>
+<p>This is the fifth blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. This blog finally train the model using the scripts that are developed in the <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">previous blog posts</a>. 
+I will use PASCAL VOC2012 data. 
+This blog assumes that the readers have read the previous two blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a>, <a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3</a>, <a href="https://fairyonice.github.io/Part_4_Object_Detection_with_Yolo_using_VOC_2012_data_loss.html">Part 4</a>.</p>
+<h2 id="Andrew-Ng's-YOLO-lecture">Andrew Ng's YOLO lecture<a class="anchor-link" href="#Andrew-Ng's-YOLO-lecture">¶</a></h2><ul>
 <li><a href="https://www.youtube.com/watch?v=gKreZOUi-O0&amp;t=0s&amp;index=7&amp;list=PL_IHmaMAvkVxdDOBRg2CbcJBq9SY7ZUvs">Neural Networks - Bounding Box Predictions</a></li>
 <li><a href="https://www.youtube.com/watch?v=ANIzQ5G-XPE&amp;t=7s">C4W3L06 Intersection Over Union</a></li>
 <li><a href="https://www.youtube.com/watch?v=VAo84c1hQX8&amp;t=192s">C4W3L07 Nonmax Suppression</a></li>
 <li><a href="https://www.youtube.com/watch?v=RTlwl2bv0Tg&amp;t=28s">C4W3L08 Anchor Boxes</a></li>
 <li><a href="https://www.youtube.com/watch?v=9s_FpMpdYW8&amp;t=34s">C4W3L09 YOLO Algorithm</a></li>
 </ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Reference">Reference<a class="anchor-link" href="#Reference">¶</a></h2><ul>
 <li><p><a href="https://arxiv.org/pdf/1506.02640.pdf">You Only Look Once:Unified, Real-Time Object Detection</a></p>
 </li>
@@ -1079,8 +1074,15 @@ h6:hover .anchor-link {
 </li>
 <li><p><a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a></p>
 </li>
-<li><p><a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2014_data_model_and_loss.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model and loss</a></p>
+<li><p><a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model</a></p>
 </li>
+<li><p><a href="https://fairyonice.github.io/Part_4_Object_Detection_with_Yolo_using_VOC_2012_data_loss.html">Part 4 Object Detection using YOLOv2 on Pascal VOC2012 - loss</a></p>
+</li>
+<li><p><a href="https://fairyonice.github.io/Part_5_Object_Detection_with_Yolo_using_VOC_2012_data_training.html">Part 5 Object Detection using YOLOv2 on Pascal VOC2012 - training</a></p>
+</li>
+</ul>
+<h2 id="My-Git-repository">My Git repository<a class="anchor-link" href="#My-Git-repository">¶</a></h2><ul>
+<li><a href="https://github.com/FairyOnIce/ObjectDetectionYolo">FairyOnIce/ObjectDetectionYolo</a></li>
 </ul>
 </div>
 </div>
@@ -1150,7 +1152,7 @@ The choice of the anchor box specialization is already discussed in <a href="htt
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Define-Label-vector-containing-20-object-classe-names.">Define Label vector containing 20 object classe names.<a class="anchor-link" href="#Define-Label-vector-containing-20-object-classe-names.">¶</a></h3>
+<h2 id="Define-Label-vector-containing-20-object-classe-names.">Define Label vector containing 20 object classe names.<a class="anchor-link" href="#Define-Label-vector-containing-20-object-classe-names.">¶</a></h2>
 </div>
 </div>
 </div>
@@ -1172,8 +1174,7 @@ The choice of the anchor box specialization is already discussed in <a href="htt
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="YOLOv2's-loss-function">YOLOv2's loss function<a class="anchor-link" href="#YOLOv2's-loss-function">¶</a></h1><p>Before discussing the loss function, I will read in VOC2012 data, and call the batch generator in order to use the example batch <code> [x_batch,b_batch],y_batch</code> to demonstrate the usage of the loss funciton.</p>
-<h3 id="Read-images-and-annotations-into-memory">Read images and annotations into memory<a class="anchor-link" href="#Read-images-and-annotations-into-memory">¶</a></h3><p>Use the pre-processing code for parsing annotation at <a href="https://github.com/experiencor/keras-yolo2">experiencor/keras-yolo2</a>.
+<h2 id="Read-images-and-annotations-into-memory">Read images and annotations into memory<a class="anchor-link" href="#Read-images-and-annotations-into-memory">¶</a></h2><p>Use the pre-processing code for parsing annotation at <a href="https://github.com/experiencor/keras-yolo2">experiencor/keras-yolo2</a>.
 This <code>parse_annoation</code> function is already used in <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1 Object Detection using YOLOv2 on Pascal VOC2012 - anchor box clustering</a> and saved in my python script. 
 This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDetectionYolo/blob/master/backend.py">my Github repository, FairyOnIce/ObjectDetectionYolo/backend</a>.</p>
 </div>
@@ -1221,7 +1222,7 @@ This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDe
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Instantiate-batch-generator-object">Instantiate batch generator object<a class="anchor-link" href="#Instantiate-batch-generator-object">¶</a></h3><p><code>SimpleBatchGenerator</code> is discussed and used in 
+<h2 id="Instantiate-batch-generator-object">Instantiate batch generator object<a class="anchor-link" href="#Instantiate-batch-generator-object">¶</a></h2><p><code>SimpleBatchGenerator</code> is discussed and used in 
 <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a>.
 This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDetectionYolo/blob/master/backend.py">my Github repository, FairyOnIce/ObjectDetectionYolo/backend</a>.</p>
 </div>
@@ -1256,8 +1257,6 @@ This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDe
     <span class="k">return</span> <span class="n">image</span> <span class="o">/</span> <span class="mf">255.</span>
 <span class="n">train_batch_generator</span> <span class="o">=</span> <span class="n">SimpleBatchGenerator</span><span class="p">(</span><span class="n">train_image</span><span class="p">,</span> <span class="n">generator_config</span><span class="p">,</span>
                                              <span class="n">norm</span><span class="o">=</span><span class="n">normalize</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-<span class="p">[</span><span class="n">x_batch</span><span class="p">,</span><span class="n">b_batch</span><span class="p">],</span><span class="n">y_batch</span> <span class="o">=</span> <span class="n">train_batch_generator</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">(</span><span class="n">idx</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1267,7 +1266,8 @@ This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDe
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Define-model">Define model<a class="anchor-link" href="#Define-model">¶</a></h2><h3 id="use-the-codes-defined-in-Part3">use the codes defined in Part3<a class="anchor-link" href="#use-the-codes-defined-in-Part3">¶</a></h3>
+<h2 id="Define-model">Define model<a class="anchor-link" href="#Define-model">¶</a></h2><p>We define a YOLO model.
+The model defenition function is already discussed in <a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model</a> and all the codes are available at <a href="https://github.com/FairyOnIce/ObjectDetectionYolo/blob/master/backend.py">my Github</a>.</p>
 </div>
 </div>
 </div>
@@ -1465,7 +1465,8 @@ ________________________________________________________________________________
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Initialize-the-weights">Initialize the weights<a class="anchor-link" href="#Initialize-the-weights">¶</a></h2>
+<h2 id="Initialize-the-weights">Initialize the weights<a class="anchor-link" href="#Initialize-the-weights">¶</a></h2><p>The initialization of weights are already discussed in <a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model</a>. 
+All the codes from <a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3</a> are stored at <a href="https://github.com/FairyOnIce/ObjectDetectionYolo/blob/master/backend.py">my Github</a>.</p>
 </div>
 </div>
 </div>
@@ -1481,6 +1482,15 @@ ________________________________________________________________________________
 <span class="n">initialize_weight</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span><span class="n">sd</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="n">GRID_H</span><span class="o">*</span><span class="n">GRID_W</span><span class="p">))</span>
 </pre></div>
 </div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Loss-function">Loss function<a class="anchor-link" href="#Loss-function">¶</a></h2><p>We already discussed the loss function of YOLOv2 implemented by <a href="https://github.com/experiencor/keras-yolo2">experiencor/keras-yolo2</a> in <a href="https://fairyonice.github.io/Part_4_Object_Detection_with_Yolo_using_VOC_2012_data_loss.html">Part 4 Object Detection using YOLOv2 on Pascal VOC2012 - loss</a>.
+I modified the codes and the codes are available at <a href="https://github.com/FairyOnIce/ObjectDetectionYolo/blob/master/backend.py">my Github</a>.</p>
 </div>
 </div>
 </div>
@@ -1548,6 +1558,16 @@ custom_loss_core(y_true, y_pred, true_boxes, GRID_W, GRID_H, BATCH_SIZE, ANCHORS
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notice that this custom function <code>custom_loss_core</code> depends not only on <code>y_true</code> and <code>y_pred</code> but also the various hayperparameters.
+Unfortunately, Keras's loss function API does not accept any parameters except <code>y_true</code> and <code>y_pred</code>. Therefore, these hyperparameters need to be defined globaly. 
+To do this, I will define a wrapper function <code>custom_loss</code>.</p>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In [11]:</div>
@@ -1556,10 +1576,6 @@ custom_loss_core(y_true, y_pred, true_boxes, GRID_W, GRID_H, BATCH_SIZE, ANCHORS
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">GRID_W</span>             <span class="o">=</span> <span class="mi">13</span>
 <span class="n">GRID_H</span>             <span class="o">=</span> <span class="mi">13</span>
 <span class="n">BATCH_SIZE</span>         <span class="o">=</span> <span class="mi">34</span>
-<span class="n">ANCHORS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.07709888</span><span class="p">,</span>  <span class="mf">1.78171903</span><span class="p">,</span>  <span class="c1"># anchor box 1, width , height</span>
-                    <span class="mf">2.71054693</span><span class="p">,</span>  <span class="mf">5.12469308</span><span class="p">,</span>  <span class="c1"># anchor box 2, width,  height</span>
-                    <span class="mf">10.47181473</span><span class="p">,</span> <span class="mf">10.09646365</span><span class="p">,</span>  <span class="c1"># anchor box 3, width,  height</span>
-                    <span class="mf">5.48531347</span><span class="p">,</span>  <span class="mf">8.11011331</span><span class="p">])</span> <span class="c1"># anchor box 4, width,  height</span>
 <span class="n">LAMBDA_NO_OBJECT</span> <span class="o">=</span> <span class="mf">1.0</span>
 <span class="n">LAMBDA_OBJECT</span>    <span class="o">=</span> <span class="mf">5.0</span>
 <span class="n">LAMBDA_COORD</span>     <span class="o">=</span> <span class="mf">1.0</span>
@@ -1588,13 +1604,15 @@ custom_loss_core(y_true, y_pred, true_boxes, GRID_W, GRID_H, BATCH_SIZE, ANCHORS
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Training-starts-here!">Training starts here!<a class="anchor-link" href="#Training-starts-here!">¶</a></h2>
+<h2 id="Training-starts-here!">Training starts here!<a class="anchor-link" href="#Training-starts-here!">¶</a></h2><p>Finally, we start the training here.
+We only train the final 23rd layer and freeze the other weights.
+This is because I am unfortunately using CPU environment.</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="k">import</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">ModelCheckpoint</span>
@@ -1651,7 +1669,91 @@ custom_loss_core(y_true, y_pred, true_boxes, GRID_W, GRID_H, BATCH_SIZE, ANCHORS
 Instructions for updating:
 keep_dims is deprecated, use keepdims instead
 Epoch 1/5
- 93/536 [====>.........................] - ETA: 3:00:28 - loss: 4.9520</pre>
+128/536 [======>.......................] - ETA: 2:48:46 - loss: 4.6250</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg"><ipython-input-12-1ba466c13306></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">     39</span>                     <span class="ansi-red-fg">#validation_steps = len(valid_batch),</span>
+<span class="ansi-green-intense-fg ansi-bold">     40</span>                     callbacks        <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>early_stop<span class="ansi-blue-fg">,</span> checkpoint<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">---> 41</span><span class="ansi-red-fg">                     max_queue_size   = 3)
+</span>
+<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/keras/legacy/interfaces.py</span> in <span class="ansi-cyan-fg">wrapper</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">     85</span>                 warnings.warn('Update your `' + object_name +
+<span class="ansi-green-intense-fg ansi-bold">     86</span>                               '` call to the Keras 2 API: ' + signature, stacklevel=2)
+<span class="ansi-green-fg">---> 87</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     88</span>         wrapper<span class="ansi-blue-fg">.</span>_original_function <span class="ansi-blue-fg">=</span> func
+<span class="ansi-green-intense-fg ansi-bold">     89</span>         <span class="ansi-green-fg">return</span> wrapper
+
+<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/keras/engine/training.py</span> in <span class="ansi-cyan-fg">fit_generator</span><span class="ansi-blue-fg">(self, generator, steps_per_epoch, epochs, verbose, callbacks, validation_data, validation_steps, class_weight, max_queue_size, workers, use_multiprocessing, shuffle, initial_epoch)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2145</span>                     outs = self.train_on_batch(x, y,
+<span class="ansi-green-intense-fg ansi-bold">   2146</span>                                                sample_weight<span class="ansi-blue-fg">=</span>sample_weight<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">-> 2147</span><span class="ansi-red-fg">                                                class_weight=class_weight)
+</span><span class="ansi-green-intense-fg ansi-bold">   2148</span> 
+<span class="ansi-green-intense-fg ansi-bold">   2149</span>                     <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> isinstance<span class="ansi-blue-fg">(</span>outs<span class="ansi-blue-fg">,</span> list<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/keras/engine/training.py</span> in <span class="ansi-cyan-fg">train_on_batch</span><span class="ansi-blue-fg">(self, x, y, sample_weight, class_weight)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1837</span>             ins <span class="ansi-blue-fg">=</span> x <span class="ansi-blue-fg">+</span> y <span class="ansi-blue-fg">+</span> sample_weights
+<span class="ansi-green-intense-fg ansi-bold">   1838</span>         self<span class="ansi-blue-fg">.</span>_make_train_function<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">-> 1839</span><span class="ansi-red-fg">         </span>outputs <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>train_function<span class="ansi-blue-fg">(</span>ins<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1840</span>         <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>outputs<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1841</span>             <span class="ansi-green-fg">return</span> outputs<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/keras/backend/tensorflow_backend.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, inputs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2355</span>         session <span class="ansi-blue-fg">=</span> get_session<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2356</span>         updated = session.run(fetches=fetches, feed_dict=feed_dict,
+<span class="ansi-green-fg">-> 2357</span><span class="ansi-red-fg">                               **self.session_kwargs)
+</span><span class="ansi-green-intense-fg ansi-bold">   2358</span>         <span class="ansi-green-fg">return</span> updated<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">:</span>len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>outputs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
+<span class="ansi-green-intense-fg ansi-bold">   2359</span> 
+
+<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg">(self, fetches, feed_dict, options, run_metadata)</span>
+<span class="ansi-green-intense-fg ansi-bold">    898</span>     <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    899</span>       result = self._run(None, fetches, feed_dict, options_ptr,
+<span class="ansi-green-fg">--> 900</span><span class="ansi-red-fg">                          run_metadata_ptr)
+</span><span class="ansi-green-intense-fg ansi-bold">    901</span>       <span class="ansi-green-fg">if</span> run_metadata<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">    902</span>         proto_data <span class="ansi-blue-fg">=</span> tf_session<span class="ansi-blue-fg">.</span>TF_GetBuffer<span class="ansi-blue-fg">(</span>run_metadata_ptr<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">_run</span><span class="ansi-blue-fg">(self, handle, fetches, feed_dict, options, run_metadata)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1133</span>     <span class="ansi-green-fg">if</span> final_fetches <span class="ansi-green-fg">or</span> final_targets <span class="ansi-green-fg">or</span> <span class="ansi-blue-fg">(</span>handle <span class="ansi-green-fg">and</span> feed_dict_tensor<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1134</span>       results = self._do_run(handle, final_targets, final_fetches,
+<span class="ansi-green-fg">-> 1135</span><span class="ansi-red-fg">                              feed_dict_tensor, options, run_metadata)
+</span><span class="ansi-green-intense-fg ansi-bold">   1136</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1137</span>       results <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">_do_run</span><span class="ansi-blue-fg">(self, handle, target_list, fetch_list, feed_dict, options, run_metadata)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1314</span>     <span class="ansi-green-fg">if</span> handle <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1315</span>       return self._do_call(_run_fn, feeds, fetches, targets, options,
+<span class="ansi-green-fg">-> 1316</span><span class="ansi-red-fg">                            run_metadata)
+</span><span class="ansi-green-intense-fg ansi-bold">   1317</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1318</span>       <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_do_call<span class="ansi-blue-fg">(</span>_prun_fn<span class="ansi-blue-fg">,</span> handle<span class="ansi-blue-fg">,</span> feeds<span class="ansi-blue-fg">,</span> fetches<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">_do_call</span><span class="ansi-blue-fg">(self, fn, *args)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1320</span>   <span class="ansi-green-fg">def</span> _do_call<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> fn<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1321</span>     <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-fg">-> 1322</span><span class="ansi-red-fg">       </span><span class="ansi-green-fg">return</span> fn<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1323</span>     <span class="ansi-green-fg">except</span> errors<span class="ansi-blue-fg">.</span>OpError <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1324</span>       message <span class="ansi-blue-fg">=</span> compat<span class="ansi-blue-fg">.</span>as_text<span class="ansi-blue-fg">(</span>e<span class="ansi-blue-fg">.</span>message<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">_run_fn</span><span class="ansi-blue-fg">(feed_dict, fetch_list, target_list, options, run_metadata)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1305</span>       self<span class="ansi-blue-fg">.</span>_extend_graph<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1306</span>       return self._call_tf_sessionrun(
+<span class="ansi-green-fg">-> 1307</span><span class="ansi-red-fg">           options, feed_dict, fetch_list, target_list, run_metadata)
+</span><span class="ansi-green-intense-fg ansi-bold">   1308</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1309</span>     <span class="ansi-green-fg">def</span> _prun_fn<span class="ansi-blue-fg">(</span>handle<span class="ansi-blue-fg">,</span> feed_dict<span class="ansi-blue-fg">,</span> fetch_list<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">_call_tf_sessionrun</span><span class="ansi-blue-fg">(self, options, feed_dict, fetch_list, target_list, run_metadata)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1407</span>       return tf_session.TF_SessionRun_wrapper(
+<span class="ansi-green-intense-fg ansi-bold">   1408</span>           self<span class="ansi-blue-fg">.</span>_session<span class="ansi-blue-fg">,</span> options<span class="ansi-blue-fg">,</span> feed_dict<span class="ansi-blue-fg">,</span> fetch_list<span class="ansi-blue-fg">,</span> target_list<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">-> 1409</span><span class="ansi-red-fg">           run_metadata)
+</span><span class="ansi-green-intense-fg ansi-bold">   1410</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1411</span>       <span class="ansi-green-fg">with</span> errors<span class="ansi-blue-fg">.</span>raise_exception_on_not_ok_status<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> status<span class="ansi-blue-fg">:</span>
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
 </div>
 </div>
 </div>

@@ -1052,21 +1052,17 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="experiencor/keras-yolo2's-YOLO-V2-loss"><a href="https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb">experiencor/keras-yolo2</a>'s YOLO V2 loss<a class="anchor-link" href="#experiencor/keras-yolo2's-YOLO-V2-loss">¶</a></h3><p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/45592720625/in/datetaken-public/" title="Screen Shot 2018-12-28 at 3.47.38 PM"><img alt="Screen Shot 2018-12-28 at 3.47.38 PM" height="570" src="https://farm8.staticflickr.com/7904/45592720625_821897e898_b.jpg" width="1024" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
-<p>This is the third blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. This blog discusses the YOLO's model architecture and loss funciton. I will use PASCAL VOC2012 data. This blog assumes that the readers have read the previous two blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a>.</p>
-<h2 id="Andrew-Ng's-Yolo-lecture">Andrew Ng's Yolo lecture<a class="anchor-link" href="#Andrew-Ng's-Yolo-lecture">¶</a></h2><ul>
+<p>This is the fourth blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. 
+This blog discusses the YOLO's loss funciton. This will be the most intense blog post in <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. as loss function of YOLO is quite complex. So please get excited! 
+For demonstration of the code, I will agian use PASCAL VOC2012 data. 
+This blog assumes that the readers have read the previous two blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a> and <a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3</a>.</p>
+<h2 id="Andrew-Ng's-YOLO-lecture">Andrew Ng's YOLO lecture<a class="anchor-link" href="#Andrew-Ng's-YOLO-lecture">¶</a></h2><ul>
 <li><a href="https://www.youtube.com/watch?v=gKreZOUi-O0&amp;t=0s&amp;index=7&amp;list=PL_IHmaMAvkVxdDOBRg2CbcJBq9SY7ZUvs">Neural Networks - Bounding Box Predictions</a></li>
 <li><a href="https://www.youtube.com/watch?v=ANIzQ5G-XPE&amp;t=7s">C4W3L06 Intersection Over Union</a></li>
 <li><a href="https://www.youtube.com/watch?v=VAo84c1hQX8&amp;t=192s">C4W3L07 Nonmax Suppression</a></li>
 <li><a href="https://www.youtube.com/watch?v=RTlwl2bv0Tg&amp;t=28s">C4W3L08 Anchor Boxes</a></li>
 <li><a href="https://www.youtube.com/watch?v=9s_FpMpdYW8&amp;t=34s">C4W3L09 YOLO Algorithm</a></li>
 </ul>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Reference">Reference<a class="anchor-link" href="#Reference">¶</a></h2><ul>
 <li><p><a href="https://arxiv.org/pdf/1506.02640.pdf">You Only Look Once:Unified, Real-Time Object Detection</a></p>
 </li>
@@ -1080,8 +1076,15 @@ h6:hover .anchor-link {
 </li>
 <li><p><a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a></p>
 </li>
-<li><p><a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2014_data_model_and_loss.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model and loss</a></p>
+<li><p><a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model</a></p>
 </li>
+<li><p><a href="https://fairyonice.github.io/Part_4_Object_Detection_with_Yolo_using_VOC_2012_data_loss.html">Part 4 Object Detection using YOLOv2 on Pascal VOC2012 - loss</a></p>
+</li>
+<li><p><a href="https://fairyonice.github.io/Part_5_Object_Detection_with_Yolo_using_VOC_2012_data_training.html">Part 5 Object Detection using YOLOv2 on Pascal VOC2012 - training</a></p>
+</li>
+</ul>
+<h2 id="My-GitHub-repository">My GitHub repository<a class="anchor-link" href="#My-GitHub-repository">¶</a></h2><ul>
+<li><a href="https://github.com/FairyOnIce/ObjectDetectionYolo">FairyOnIce/ObjectDetectionYolo</a></li>
 </ul>
 </div>
 </div>
