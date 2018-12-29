@@ -72,6 +72,53 @@ placeholder="Google Search"/>
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="https://FairyOnIce.github.io/Generate-adversarial-examples-using-TensorFlow.html">Generate adversarial examples using TensorFlow</a>
+      </h1>
+      <p class="meta"><time datetime="2018-06-09T20:00:00-07:00" pubdate>Sat 09 June 2018</time></p>
+</header>
+
+  <div class="entry-content">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="gif" src="https://media.giphy.com/media/9PkfxiGvosqQGKxqHu/giphy.gif" /></p>
+<p>In this blog post, we will generate adversarial images for a pre-trained Keras facial keypoint detection model.</p>
+<h2 id="What-is-adversarial-images?">What is adversarial images?<a class="anchor-link" href="#What-is-adversarial-images?">¶</a></h2><p>According to <a href="https://blog.openai.com/adversarial-example-research/">OpenAI</a>, 
+adversarial examples are:</p>
+<blockquote>
+inputs to machine learning models that an attacker has intentionally designed to cause the model to make a mistake; they’re like optical illusions for machines. 
+</blockquote></div>
+  <footer>
+    <a rel="full-article" href="https://FairyOnIce.github.io/Generate-adversarial-examples-using-TensorFlow.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://FairyOnIce.github.io/Create-a-neural-net-with-a-negative-log-likelihood-as-a-loss.html">TensorFlow newbie creates a neural net with a negative log likelihood as a loss</a>
+      </h1>
+      <p class="meta"><time datetime="2018-06-03T20:00:00-07:00" pubdate>Sun 03 June 2018</time></p>
+</header>
+
+  <div class="entry-content">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this blog, I will create a deep learning model that uses the negative log-likelihood of Gaussian distribution as a loss. For this purpose, I will use Tensorflow.</p>
+<h4 id="Why-not-Keras?">Why not Keras?<a class="anchor-link" href="#Why-not-Keras?">¶</a></h4><p>Keras has been my first-choice deep learning framework in the last 1 year. 
+However, if you want to create personal loss functions or layers, 
+Keras requires to use backend functions written in either TensorFlow or Theano. 
+As the negative log-likelihood of Gaussian distribution is not one of the available loss in Keras, I need to implement it in Tensorflow which is often my backend.
+So this motivated me to learn Tensorflow and write everything in Tensorflow rather than mixing up two frameworks.</p></div>
+  <footer>
+    <a rel="full-article" href="https://FairyOnIce.github.io/Create-a-neural-net-with-a-negative-log-likelihood-as-a-loss.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="https://FairyOnIce.github.io/Achieving-top-5-in-Kaggles-facial-keypoints-detection-using-FCN.html">Achieving top 5 in Kaggle's facial keypoints detection using FCN</a>
       </h1>
       <p class="meta"><time datetime="2018-05-29T20:00:00-07:00" pubdate>Tue 29 May 2018</time></p>
@@ -243,56 +290,6 @@ Therefore, I am writing this blog to digest his blog post.</p></div>
     <a rel="full-article" href="https://FairyOnIce.github.io/Measure-the-uncertainty-in-deep-learning-models-using-dropout.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Object-detection-using-Haar-feature-based-cascade-classifiers-on-my-face.html">Object detection using Haar feature-based cascade classifiers on my face</a>
-      </h1>
-      <p class="meta"><time datetime="2018-04-03T20:00:00-07:00" pubdate>Tue 03 April 2018</time></p>
-</header>
-
-  <div class="entry-content">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="Yumi's driving" src="https://media.giphy.com/media/fseXN4KHDVeAfcaz5p/giphy.gif" /></p>
-<p>The above gif shows the object detection results from the Haar cascades implemented in OpenCV.</p>
-<p>In ths previous blog post <a href="Driver-facial-keypoint-detection.html">Driver's facial keypoint detection</a>, I used public dataset <a href="http://adas.cvc.uab.es/elektra/enigma-portfolio/cvc11-drivface-dataset/">CVC11</a> to train a facial keypoint detection model.  The crucial step in the modeling procedure was to trim image using the face's bounding box. 
-In practice, you might not have access to nice bounding box. 
-In such cases, pre-trained facial detection classifier such as Haar cascade can be useful.</p></div>
-  <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Object-detection-using-Haar-feature-based-cascade-classifiers-on-my-face.html">Read On &crarr;</a>
-  </footer>
-  		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Driver-facial-keypoint-detection.html">Driver's facial keypoint detection</a>
-      </h1>
-      <p class="meta"><time datetime="2018-03-31T20:00:00-07:00" pubdate>Sat 31 March 2018</time></p>
-</header>
-
-  <div class="entry-content">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img alt="Test subject gif" src="https://media.giphy.com/media/2898LwGGAJHD7ZCbgW/giphy.gif" /></p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>What you see above is the gif of a driver subject from test data with the estimated facial keypoints.</p>
-<p>Evaluation of driving performance is very important to reduce road accident rate.
-There are a lot of public data related to the driver's faces, including some from the Kaggle competition by <a href="https://www.kaggle.com/c/state-farm-distracted-driver-detection">State Farm Distracted Driver Detection</a></div>
-  <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Driver-facial-keypoint-detection.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="https://FairyOnIce.github.io/index4.html">&larr; Older</a>
 
@@ -317,13 +314,13 @@ There are a lot of public data related to the driver's faces, including some fro
           <a href="https://FairyOnIce.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model</a>
       </li>
       <li class="post">
+          <a href="https://FairyOnIce.github.io/Part 2_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a>
+      </li>
+      <li class="post">
+          <a href="https://FairyOnIce.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1 Object Detection using YOLOv2 on Pascal VOC2012 - anchor box clustering</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_inference.html">Part 5 Object Detection using RCNN on Pascal VOC2012 - inference</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_cnn_feature_extraction.html">Part 4 Object Detection using RCNN on Pascal VOC2012 - CNN feature extraction</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Object_detection_with_PASCAL_VOC2012_selective_search.html">Part 3 Object Detection using RCNN on Pascal VOC2012 - Selective Search</a>
       </li>
     </ul>
   </section>
@@ -338,7 +335,7 @@ There are a lot of public data related to the driver's faces, including some fro
 
   <section>
   <h1>Tags</h1>
-    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection using YOLOv2 on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/pascal-voc2012.html">PASCAL VOC2012</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-rcnn-on-pascal-voc2012-series.html">Object Detection using RCNN on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/spectrogram.html">Spectrogram</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection.html">Object Detection</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>,    <a href="https://FairyOnIce.github.io/tag/fourier-transform.html">Fourier Transform</a>  </section>
+    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/spectrogram.html">Spectrogram</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection using YOLOv2 on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/pascal-voc2012.html">PASCAL VOC2012</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-rcnn-on-pascal-voc2012-series.html">Object Detection using RCNN on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/deep-learning.html">deep learning</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection.html">Object Detection</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>,    <a href="https://FairyOnIce.github.io/tag/fourier-transform.html">Fourier Transform</a>  </section>
 
 
     <section>
