@@ -1081,7 +1081,7 @@ This blog assumes that the readers have read the previous two blog posts - <a hr
 <li><p><a href="https://fairyonice.github.io/Part_5_Object_Detection_with_Yolo_using_VOC_2012_data_training.html">Part 5 Object Detection using YOLOv2 on Pascal VOC2012 - training</a></p>
 </li>
 </ul>
-<h2 id="My-Git-repository">My Git repository<a class="anchor-link" href="#My-Git-repository">¶</a></h2><ul>
+<h2 id="My-GitHub-repository">My GitHub repository<a class="anchor-link" href="#My-GitHub-repository">¶</a></h2><ul>
 <li><a href="https://github.com/FairyOnIce/ObjectDetectionYolo">FairyOnIce/ObjectDetectionYolo</a></li>
 </ul>
 </div>
@@ -1570,7 +1570,7 @@ To do this, I will define a wrapper function <code>custom_loss</code>.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [11]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">GRID_W</span>             <span class="o">=</span> <span class="mi">13</span>
@@ -1612,7 +1612,7 @@ This is because I am unfortunately using CPU environment.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [12]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">keras.callbacks</span> <span class="k">import</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">ModelCheckpoint</span>
@@ -1668,92 +1668,29 @@ This is because I am unfortunately using CPU environment.</p>
 <pre>WARNING:tensorflow:From /Users/yumikondo/anaconda3/lib/python3.6/site-packages/keras/backend/tensorflow_backend.py:1349: calling reduce_mean (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
 Instructions for updating:
 keep_dims is deprecated, use keepdims instead
-Epoch 1/5
-128/536 [======>.......................] - ETA: 2:48:46 - loss: 4.6250</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
-<span class="ansi-green-fg"><ipython-input-12-1ba466c13306></span> in <span class="ansi-cyan-fg"><module></span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     39</span>                     <span class="ansi-red-fg">#validation_steps = len(valid_batch),</span>
-<span class="ansi-green-intense-fg ansi-bold">     40</span>                     callbacks        <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>early_stop<span class="ansi-blue-fg">,</span> checkpoint<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span>
-<span class="ansi-green-fg">---> 41</span><span class="ansi-red-fg">                     max_queue_size   = 3)
-</span>
-<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/keras/legacy/interfaces.py</span> in <span class="ansi-cyan-fg">wrapper</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
-<span class="ansi-green-intense-fg ansi-bold">     85</span>                 warnings.warn('Update your `' + object_name +
-<span class="ansi-green-intense-fg ansi-bold">     86</span>                               '` call to the Keras 2 API: ' + signature, stacklevel=2)
-<span class="ansi-green-fg">---> 87</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">return</span> func<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">**</span>kwargs<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     88</span>         wrapper<span class="ansi-blue-fg">.</span>_original_function <span class="ansi-blue-fg">=</span> func
-<span class="ansi-green-intense-fg ansi-bold">     89</span>         <span class="ansi-green-fg">return</span> wrapper
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/keras/engine/training.py</span> in <span class="ansi-cyan-fg">fit_generator</span><span class="ansi-blue-fg">(self, generator, steps_per_epoch, epochs, verbose, callbacks, validation_data, validation_steps, class_weight, max_queue_size, workers, use_multiprocessing, shuffle, initial_epoch)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2145</span>                     outs = self.train_on_batch(x, y,
-<span class="ansi-green-intense-fg ansi-bold">   2146</span>                                                sample_weight<span class="ansi-blue-fg">=</span>sample_weight<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-fg">-> 2147</span><span class="ansi-red-fg">                                                class_weight=class_weight)
-</span><span class="ansi-green-intense-fg ansi-bold">   2148</span> 
-<span class="ansi-green-intense-fg ansi-bold">   2149</span>                     <span class="ansi-green-fg">if</span> <span class="ansi-green-fg">not</span> isinstance<span class="ansi-blue-fg">(</span>outs<span class="ansi-blue-fg">,</span> list<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/keras/engine/training.py</span> in <span class="ansi-cyan-fg">train_on_batch</span><span class="ansi-blue-fg">(self, x, y, sample_weight, class_weight)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1837</span>             ins <span class="ansi-blue-fg">=</span> x <span class="ansi-blue-fg">+</span> y <span class="ansi-blue-fg">+</span> sample_weights
-<span class="ansi-green-intense-fg ansi-bold">   1838</span>         self<span class="ansi-blue-fg">.</span>_make_train_function<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-fg">-> 1839</span><span class="ansi-red-fg">         </span>outputs <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>train_function<span class="ansi-blue-fg">(</span>ins<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1840</span>         <span class="ansi-green-fg">if</span> len<span class="ansi-blue-fg">(</span>outputs<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1841</span>             <span class="ansi-green-fg">return</span> outputs<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/keras/backend/tensorflow_backend.py</span> in <span class="ansi-cyan-fg">__call__</span><span class="ansi-blue-fg">(self, inputs)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2355</span>         session <span class="ansi-blue-fg">=</span> get_session<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2356</span>         updated = session.run(fetches=fetches, feed_dict=feed_dict,
-<span class="ansi-green-fg">-> 2357</span><span class="ansi-red-fg">                               **self.session_kwargs)
-</span><span class="ansi-green-intense-fg ansi-bold">   2358</span>         <span class="ansi-green-fg">return</span> updated<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">:</span>len<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">.</span>outputs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">]</span>
-<span class="ansi-green-intense-fg ansi-bold">   2359</span> 
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">run</span><span class="ansi-blue-fg">(self, fetches, feed_dict, options, run_metadata)</span>
-<span class="ansi-green-intense-fg ansi-bold">    898</span>     <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    899</span>       result = self._run(None, fetches, feed_dict, options_ptr,
-<span class="ansi-green-fg">--> 900</span><span class="ansi-red-fg">                          run_metadata_ptr)
-</span><span class="ansi-green-intense-fg ansi-bold">    901</span>       <span class="ansi-green-fg">if</span> run_metadata<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">    902</span>         proto_data <span class="ansi-blue-fg">=</span> tf_session<span class="ansi-blue-fg">.</span>TF_GetBuffer<span class="ansi-blue-fg">(</span>run_metadata_ptr<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">_run</span><span class="ansi-blue-fg">(self, handle, fetches, feed_dict, options, run_metadata)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1133</span>     <span class="ansi-green-fg">if</span> final_fetches <span class="ansi-green-fg">or</span> final_targets <span class="ansi-green-fg">or</span> <span class="ansi-blue-fg">(</span>handle <span class="ansi-green-fg">and</span> feed_dict_tensor<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1134</span>       results = self._do_run(handle, final_targets, final_fetches,
-<span class="ansi-green-fg">-> 1135</span><span class="ansi-red-fg">                              feed_dict_tensor, options, run_metadata)
-</span><span class="ansi-green-intense-fg ansi-bold">   1136</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1137</span>       results <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">_do_run</span><span class="ansi-blue-fg">(self, handle, target_list, fetch_list, feed_dict, options, run_metadata)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1314</span>     <span class="ansi-green-fg">if</span> handle <span class="ansi-green-fg">is</span> <span class="ansi-green-fg">None</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1315</span>       return self._do_call(_run_fn, feeds, fetches, targets, options,
-<span class="ansi-green-fg">-> 1316</span><span class="ansi-red-fg">                            run_metadata)
-</span><span class="ansi-green-intense-fg ansi-bold">   1317</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1318</span>       <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_do_call<span class="ansi-blue-fg">(</span>_prun_fn<span class="ansi-blue-fg">,</span> handle<span class="ansi-blue-fg">,</span> feeds<span class="ansi-blue-fg">,</span> fetches<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">_do_call</span><span class="ansi-blue-fg">(self, fn, *args)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1320</span>   <span class="ansi-green-fg">def</span> _do_call<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> fn<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1321</span>     <span class="ansi-green-fg">try</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-fg">-> 1322</span><span class="ansi-red-fg">       </span><span class="ansi-green-fg">return</span> fn<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">*</span>args<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1323</span>     <span class="ansi-green-fg">except</span> errors<span class="ansi-blue-fg">.</span>OpError <span class="ansi-green-fg">as</span> e<span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1324</span>       message <span class="ansi-blue-fg">=</span> compat<span class="ansi-blue-fg">.</span>as_text<span class="ansi-blue-fg">(</span>e<span class="ansi-blue-fg">.</span>message<span class="ansi-blue-fg">)</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">_run_fn</span><span class="ansi-blue-fg">(feed_dict, fetch_list, target_list, options, run_metadata)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1305</span>       self<span class="ansi-blue-fg">.</span>_extend_graph<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1306</span>       return self._call_tf_sessionrun(
-<span class="ansi-green-fg">-> 1307</span><span class="ansi-red-fg">           options, feed_dict, fetch_list, target_list, run_metadata)
-</span><span class="ansi-green-intense-fg ansi-bold">   1308</span> 
-<span class="ansi-green-intense-fg ansi-bold">   1309</span>     <span class="ansi-green-fg">def</span> _prun_fn<span class="ansi-blue-fg">(</span>handle<span class="ansi-blue-fg">,</span> feed_dict<span class="ansi-blue-fg">,</span> fetch_list<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
-
-<span class="ansi-green-fg">~/anaconda3/lib/python3.6/site-packages/tensorflow/python/client/session.py</span> in <span class="ansi-cyan-fg">_call_tf_sessionrun</span><span class="ansi-blue-fg">(self, options, feed_dict, fetch_list, target_list, run_metadata)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1407</span>       return tf_session.TF_SessionRun_wrapper(
-<span class="ansi-green-intense-fg ansi-bold">   1408</span>           self<span class="ansi-blue-fg">.</span>_session<span class="ansi-blue-fg">,</span> options<span class="ansi-blue-fg">,</span> feed_dict<span class="ansi-blue-fg">,</span> fetch_list<span class="ansi-blue-fg">,</span> target_list<span class="ansi-blue-fg">,</span>
-<span class="ansi-green-fg">-> 1409</span><span class="ansi-red-fg">           run_metadata)
-</span><span class="ansi-green-intense-fg ansi-bold">   1410</span>     <span class="ansi-green-fg">else</span><span class="ansi-blue-fg">:</span>
-<span class="ansi-green-intense-fg ansi-bold">   1411</span>       <span class="ansi-green-fg">with</span> errors<span class="ansi-blue-fg">.</span>raise_exception_on_not_ok_status<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">as</span> status<span class="ansi-blue-fg">:</span>
-
-<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
+Epoch 1/20
+535/536 [============================>.] - ETA: 19s - loss: 3.4223Epoch 00001: loss improved from inf to 3.42166, saving model to weights_yumi.h5
+536/536 [==============================] - 10411s 19s/step - loss: 3.4217
+Epoch 2/20
+535/536 [============================>.] - ETA: 20s - loss: 2.2510Epoch 00002: loss improved from 3.42166 to 2.25025, saving model to weights_yumi.h5
+536/536 [==============================] - 10813s 20s/step - loss: 2.2502
+Epoch 3/20
+535/536 [============================>.] - ETA: 20s - loss: 1.8172Epoch 00003: loss improved from 2.25025 to 1.81714, saving model to weights_yumi.h5
+536/536 [==============================] - 10728s 20s/step - loss: 1.8171
+Epoch 4/20
+535/536 [============================>.] - ETA: 20s - loss: 1.5738Epoch 00004: loss improved from 1.81714 to 1.57317, saving model to weights_yumi.h5
+536/536 [==============================] - 10759s 20s/step - loss: 1.5732
+Epoch 5/20
+535/536 [============================>.] - ETA: 22s - loss: 1.4160Epoch 00005: loss improved from 1.57317 to 1.41594, saving model to weights_yumi.h5
+536/536 [==============================] - 11803s 22s/step - loss: 1.4159
+Epoch 6/20
+535/536 [============================>.] - ETA: 20s - loss: 1.3050Epoch 00006: loss improved from 1.41594 to 1.30531, saving model to weights_yumi.h5
+536/536 [==============================] - 11138s 21s/step - loss: 1.3053
+Epoch 7/20
+535/536 [============================>.] - ETA: 22s - loss: 1.2307Epoch 00007: loss improved from 1.30531 to 1.23087, saving model to weights_yumi.h5
+536/536 [==============================] - 12191s 23s/step - loss: 1.2309
+Epoch 8/20
+137/536 [======>.......................] - ETA: 2:44:49 - loss: 1.1689</pre>
 </div>
 </div>
 </div>
@@ -1842,6 +1779,9 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/Part_6_Object_Detection_with_Yolo_using_VOC_2012_data_inference_image.html">Part 6 Object Detection with Yolo using VOC 2012 data - inference on image</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Part_5_Object_Detection_with_Yolo_using_VOC_2012_data_training.html">Part 5 Object Detection using YOLOv2 on Pascal VOC2012 - training</a>
       </li>
       <li class="post">
@@ -1852,9 +1792,6 @@ s.setAttribute('data-timestamp', +new Date());
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Part 2_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1 Object Detection using YOLOv2 on Pascal VOC2012 - anchor box clustering</a>
       </li>
     </ul>
   </section>

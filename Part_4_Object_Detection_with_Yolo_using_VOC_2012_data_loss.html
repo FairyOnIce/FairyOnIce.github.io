@@ -1051,7 +1051,7 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="experiencor/keras-yolo2's-YOLO-V2-loss"><a href="https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb">experiencor/keras-yolo2</a>'s YOLO V2 loss<a class="anchor-link" href="#experiencor/keras-yolo2's-YOLO-V2-loss">¶</a></h3><p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/45592720625/in/datetaken-public/" title="Screen Shot 2018-12-28 at 3.47.38 PM"><img alt="Screen Shot 2018-12-28 at 3.47.38 PM" height="570" src="https://farm8.staticflickr.com/7904/45592720625_821897e898_b.jpg" width="1024" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
+<h3 id="experiencor/keras-yolo2's-YOLO-V2-loss"><a href="https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb">experiencor/keras-yolo2</a>'s YOLO V2 loss<a class="anchor-link" href="#experiencor/keras-yolo2's-YOLO-V2-loss">¶</a></h3><p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/45592720625/in/datetaken-public/" title="YOLOv2 loss function"><img alt="YOLO v2 loss funciton" height="570" src="https://farm8.staticflickr.com/7904/45592720625_821897e898_b.jpg" width="1024" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
 <p>This is the fourth blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. 
 This blog discusses the YOLO's loss funciton. This will be the most intense blog post in <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. as loss function of YOLO is quite complex. So please get excited! 
 For demonstration of the code, I will agian use PASCAL VOC2012 data. 
@@ -1091,7 +1091,7 @@ This blog assumes that the readers have read the previous two blog posts - <a hr
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [9]:</div>
+<div class="prompt input_prompt">In [41]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -1130,7 +1130,7 @@ The choice of the anchor box specialization is already discussed in <a href="htt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [10]:</div>
+<div class="prompt input_prompt">In [42]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ANCHORS</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.07709888</span><span class="p">,</span>  <span class="mf">1.78171903</span><span class="p">,</span>  <span class="c1"># anchor box 1, width , height</span>
@@ -1152,7 +1152,7 @@ The choice of the anchor box specialization is already discussed in <a href="htt
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [11]:</div>
+<div class="prompt input_prompt">In [43]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">LABELS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'aeroplane'</span><span class="p">,</span>  <span class="s1">'bicycle'</span><span class="p">,</span> <span class="s1">'bird'</span><span class="p">,</span>  <span class="s1">'boat'</span><span class="p">,</span>      <span class="s1">'bottle'</span><span class="p">,</span> 
@@ -1177,7 +1177,7 @@ This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDe
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [12]:</div>
+<div class="prompt input_prompt">In [44]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### The location where the VOC2012 data is saved.</span>
@@ -1218,7 +1218,7 @@ This script can be downloaded at <a href="https://github.com/FairyOnIce/ObjectDe
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [13]:</div>
+<div class="prompt input_prompt">In [45]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">backend</span> <span class="k">import</span> <span class="n">SimpleBatchGenerator</span>
@@ -1438,22 +1438,22 @@ $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Global-hyperparameters-necessary-for-the-loss-function">Global hyperparameters necessary for the loss function<a class="anchor-link" href="#Global-hyperparameters-necessary-for-the-loss-function">¶</a></h3><ul>
-<li>BATCH_SIZE  </li>
-<li>BOX </li>
-<li>CLASS_WEIGHTS</li>
-<li>NO_OBJECT_SCALE</li>
-<li>OBJECT_SCALE</li>
-<li>LAMBDA_COORD</li>
-<li>LAMBDA_CLASS</li>
-<li>WEIGHT</li>
-</ul>
+<h3 id="Global-hyperparameters-necessary-for-the-loss-function">Global hyperparameters necessary for the loss function<a class="anchor-link" href="#Global-hyperparameters-necessary-for-the-loss-function">¶</a></h3>
+<pre><code>               -  true_boxes
+               -  GRID_W
+               -  GRID_H
+               -  BATCH_SIZE
+               -  ANCHORS
+               -  LAMBDA_COORD
+               -  LAMBDA_CLASS
+               -  LAMBDA_NO_OBJECT 
+               -  LAMBDA_OBJECT</code></pre>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [14]:</div>
+<div class="prompt input_prompt">In [46]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">LAMBDA_NO_OBJECT</span> <span class="o">=</span> <span class="mf">1.0</span>
@@ -1486,7 +1486,7 @@ Notice that the predicted y_batch output can take any real values as the conv_23
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [15]:</div>
+<div class="prompt input_prompt">In [47]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_cell_grid</span><span class="p">(</span><span class="n">GRID_W</span><span class="p">,</span><span class="n">GRID_H</span><span class="p">,</span><span class="n">BATCH_SIZE</span><span class="p">,</span><span class="n">BOX</span><span class="p">):</span> 
@@ -1576,7 +1576,7 @@ However, the class probabilities can take negative values. This is ok because th
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [16]:</div>
+<div class="prompt input_prompt">In [48]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">print_min_max</span><span class="p">(</span><span class="n">vec</span><span class="p">,</span><span class="n">title</span><span class="p">):</span>
@@ -1697,7 +1697,7 @@ pred_box_class (200, 13, 13, 4, 20)
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [17]:</div>
+<div class="prompt input_prompt">In [49]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">extract_ground_truth</span><span class="p">(</span><span class="n">y_true</span><span class="p">):</span>    
@@ -1745,7 +1745,7 @@ When $C_{i,j}=0$, then all bounding box parameters $x_{i,j}$, $y_{i,j}$, $w_{i,j
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [18]:</div>
+<div class="prompt input_prompt">In [50]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># y_batch is the output of the simpleBatchGenerator.fit()</span>
@@ -1864,7 +1864,7 @@ L_{i,j}^{\text{obj}}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [19]:</div>
+<div class="prompt input_prompt">In [51]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_loss_xywh</span><span class="p">(</span><span class="n">true_box_conf</span><span class="p">,</span>
@@ -1898,7 +1898,7 @@ L_{i,j}^{\text{obj}}
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [20]:</div>
+<div class="prompt input_prompt">In [52]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">LAMBDA_COORD</span> <span class="o">=</span> <span class="mi">1</span>
@@ -1943,7 +1943,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [21]:</div>
+<div class="prompt input_prompt">In [53]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_loss_class</span><span class="p">(</span><span class="n">true_box_conf</span><span class="p">,</span><span class="n">CLASS_SCALE</span><span class="p">,</span> <span class="n">true_box_class</span><span class="p">,</span><span class="n">pred_box_class</span><span class="p">):</span>
@@ -1999,7 +1999,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [22]:</div>
+<div class="prompt input_prompt">In [54]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">LAMBDA_CLASS</span>   <span class="o">=</span> <span class="mi">1</span>
@@ -2054,7 +2054,7 @@ $IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i,j}} $ is 0 if $C_{i,j}=0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [23]:</div>
+<div class="prompt input_prompt">In [55]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_intersect_area</span><span class="p">(</span><span class="n">true_xy</span><span class="p">,</span><span class="n">true_wh</span><span class="p">,</span>
@@ -2137,7 +2137,7 @@ $IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i,j}} $ is 0 if $C_{i,j}=0
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [24]:</div>
+<div class="prompt input_prompt">In [56]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">true_box_conf_IOU_tf</span> <span class="o">=</span> <span class="n">calc_IOU_pred_true_assigned</span><span class="p">(</span>
@@ -2174,11 +2174,11 @@ $IOU_{\text{preduiction}_{i,j}}^{\text{ground truth}_{i,j}} $ is 0 if $C_{i,j}=0
 <pre>******************************
 input
 ******************************
-true_box_conf_tf = Tensor("strided_slice_6:0", shape=(200, 13, 13, 4), dtype=float32)
-true_box_xy_tf   = Tensor("strided_slice_4:0", shape=(200, 13, 13, 4, 2), dtype=float32)
-true_box_wh_tf   = Tensor("strided_slice_5:0", shape=(200, 13, 13, 4, 2), dtype=float32)
-pred_box_xy_tf   = Tensor("add:0", shape=(200, 13, 13, 4, 2), dtype=float32)
-pred_box_wh_tf   = Tensor("mul:0", shape=(200, 13, 13, 4, 2), dtype=float32)
+true_box_conf_tf = Tensor("strided_slice_110:0", shape=(200, 13, 13, 4), dtype=float32)
+true_box_xy_tf   = Tensor("strided_slice_108:0", shape=(200, 13, 13, 4, 2), dtype=float32)
+true_box_wh_tf   = Tensor("strided_slice_109:0", shape=(200, 13, 13, 4, 2), dtype=float32)
+pred_box_xy_tf   = Tensor("add_62:0", shape=(200, 13, 13, 4, 2), dtype=float32)
+pred_box_wh_tf   = Tensor("mul_74:0", shape=(200, 13, 13, 4, 2), dtype=float32)
 ******************************
 ouput
 ******************************
@@ -2369,7 +2369,7 @@ b_batch
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [25]:</div>
+<div class="prompt input_prompt">In [57]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_IOU_pred_true_best</span><span class="p">(</span><span class="n">pred_box_xy</span><span class="p">,</span><span class="n">pred_box_wh</span><span class="p">,</span><span class="n">true_boxes</span><span class="p">):</span>   
@@ -2420,7 +2420,7 @@ b_batch
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [26]:</div>
+<div class="prompt input_prompt">In [58]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">true_boxes_tf</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">constant</span><span class="p">(</span><span class="n">b_batch</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="s2">"float32"</span><span class="p">)</span>
@@ -2456,9 +2456,9 @@ b_batch
 <pre>******************************
 input
 ******************************
-true_box_wh_tf   = Tensor("strided_slice_5:0", shape=(200, 13, 13, 4, 2), dtype=float32)
-pred_box_xy_tf   = Tensor("add:0", shape=(200, 13, 13, 4, 2), dtype=float32)
-pred_box_wh_tf   = Tensor("mul:0", shape=(200, 13, 13, 4, 2), dtype=float32)
+true_box_wh_tf   = Tensor("strided_slice_109:0", shape=(200, 13, 13, 4, 2), dtype=float32)
+pred_box_xy_tf   = Tensor("add_62:0", shape=(200, 13, 13, 4, 2), dtype=float32)
+pred_box_wh_tf   = Tensor("mul_74:0", shape=(200, 13, 13, 4, 2), dtype=float32)
 ******************************
 ouput
 ******************************
@@ -2676,7 +2676,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [27]:</div>
+<div class="prompt input_prompt">In [59]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_conf_mask</span><span class="p">(</span><span class="n">best_ious</span><span class="p">,</span> <span class="n">true_box_conf</span><span class="p">,</span> <span class="n">true_box_conf_IOU</span><span class="p">,</span><span class="n">LAMBDA_NO_OBJECT</span><span class="p">,</span> <span class="n">LAMBDA_OBJECT</span><span class="p">):</span>    
@@ -2723,7 +2723,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [28]:</div>
+<div class="prompt input_prompt">In [60]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">conf_mask_tf</span> <span class="o">=</span> <span class="n">get_conf_mask</span><span class="p">(</span><span class="n">best_ious_tf</span><span class="p">,</span> 
@@ -2753,9 +2753,9 @@ $$</p>
 <pre>******************************
 input
 ******************************
-best_ious         = Tensor("Max:0", shape=(200, 13, 13, 4), dtype=float32)
-true_box_conf     = Tensor("strided_slice_6:0", shape=(200, 13, 13, 4), dtype=float32)
-true_box_conf_IOU = Tensor("mul_9:0", shape=(200, 13, 13, 4), dtype=float32)
+best_ious         = Tensor("Max_2:0", shape=(200, 13, 13, 4), dtype=float32)
+true_box_conf     = Tensor("strided_slice_110:0", shape=(200, 13, 13, 4), dtype=float32)
+true_box_conf_IOU = Tensor("mul_83:0", shape=(200, 13, 13, 4), dtype=float32)
 LAMBDA_NO_OBJECT  = 1.0
 LAMBDA_OBJECT     = 5.0
 ******************************
@@ -2798,7 +2798,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [29]:</div>
+<div class="prompt input_prompt">In [61]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">calc_loss_conf</span><span class="p">(</span><span class="n">conf_mask</span><span class="p">,</span><span class="n">true_box_conf_IOU</span><span class="p">,</span> <span class="n">pred_box_conf</span><span class="p">):</span>  
@@ -2830,7 +2830,7 @@ $$</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [30]:</div>
+<div class="prompt input_prompt">In [62]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"*"</span><span class="o">*</span><span class="mi">30</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">input</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> <span class="s2">"*"</span><span class="o">*</span><span class="mi">30</span><span class="p">)</span>  
@@ -2856,9 +2856,9 @@ $$</p>
 <pre>******************************
 input
 ******************************
-conf_mask_tf         = Tensor("add_11:0", shape=(200, 13, 13, 4), dtype=float32)
-true_box_conf_IOU_tf = Tensor("mul_9:0", shape=(200, 13, 13, 4), dtype=float32)
-pred_box_conf_tf     = Tensor("Sigmoid_1:0", shape=(200, 13, 13, 4), dtype=float32)
+conf_mask_tf         = Tensor("add_73:0", shape=(200, 13, 13, 4), dtype=float32)
+true_box_conf_IOU_tf = Tensor("mul_83:0", shape=(200, 13, 13, 4), dtype=float32)
+pred_box_conf_tf     = Tensor("Sigmoid_13:0", shape=(200, 13, 13, 4), dtype=float32)
 ******************************
 output
 ******************************
@@ -2881,7 +2881,7 @@ However, this tensor will not be passed as explicit arguments of the loss functi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [31]:</div>
+<div class="prompt input_prompt">In [63]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">custom_loss</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">):</span>
@@ -2952,7 +2952,7 @@ However, this tensor will not be passed as explicit arguments of the loss functi
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [39]:</div>
+<div class="prompt input_prompt">In [64]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">true_boxes</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">b_batch</span><span class="p">),</span><span class="n">dtype</span><span class="o">=</span><span class="s2">"float32"</span><span class="p">)</span>
@@ -2968,7 +2968,7 @@ However, this tensor will not be passed as explicit arguments of the loss functi
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[39]:</div>
+<div class="prompt output_prompt">Out[64]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>6.1540704</pre>
 </div>
@@ -3059,6 +3059,9 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/Part_6_Object_Detection_with_Yolo_using_VOC_2012_data_inference_image.html">Part 6 Object Detection with Yolo using VOC 2012 data - inference on image</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Part_5_Object_Detection_with_Yolo_using_VOC_2012_data_training.html">Part 5 Object Detection using YOLOv2 on Pascal VOC2012 - training</a>
       </li>
       <li class="post">
@@ -3069,9 +3072,6 @@ s.setAttribute('data-timestamp', +new Date());
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Part 2_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1 Object Detection using YOLOv2 on Pascal VOC2012 - anchor box clustering</a>
       </li>
     </ul>
   </section>

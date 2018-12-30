@@ -1066,7 +1066,7 @@ The goal of this blog series is to understand the state-of-art object detection 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [2]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
@@ -1088,7 +1088,7 @@ The goal of this blog series is to understand the state-of-art object detection 
 </div>
 </div>
 <div class="output_area">
-<div class="prompt output_prompt">Out[2]:</div>
+<div class="prompt output_prompt">Out[17]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <iframe allowfullscreen="" frameborder="0" height="400.0" src="https://www.youtube.com/embed/6ykvU9WuIws?start=340" width="495.0"></iframe>
 </div>
@@ -1143,6 +1143,9 @@ Example: two objects (a person and a boat) are in close neighboorhood.</p>
 <li><p><a href="https://fairyonice.github.io/Part_5_Object_Detection_with_Yolo_using_VOC_2012_data_training.html">Part 5 Object Detection using YOLOv2 on Pascal VOC2012 - training</a></p>
 </li>
 </ul>
+<h2 id="My-Git-repository">My Git repository<a class="anchor-link" href="#My-Git-repository">¶</a></h2><ul>
+<li><a href="https://github.com/FairyOnIce/ObjectDetectionYolo">FairyOnIce/ObjectDetectionYolo</a></li>
+</ul>
 <h1 id="Data">Data<a class="anchor-link" href="#Data">¶</a></h1><p>As in <a href="https://fairyonice.github.io/tag/object-detection-using-rcnn-on-pascal-voc2012-series.html">the object detection using RCNN on PASCAL VOC2012 series</a>, I will use PASCAL VOC2012 data.</p>
 <h3 id="PASCAL-VOC2012">PASCAL VOC2012<a class="anchor-link" href="#PASCAL-VOC2012">¶</a></h3><p>Data can be downloaded from <a href="http://host.robots.ox.ac.uk/pascal/VOC/voc2012/index.html#data">Visual Object Classes Challenge 2012 (VOC2012)</a></p>
 <p>This data was <a href="https://fairyonice.github.io/Object_detection_with_PASCAL_VOC2012_data_preparation_and_understanding.html">previously</a> analyzed to demonstrate RCNN, one of the common object detection techiniques.
@@ -1154,7 +1157,7 @@ The data contains the following object classes:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [3]:</div>
+<div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">LABELS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'aeroplane'</span><span class="p">,</span>  <span class="s1">'bicycle'</span><span class="p">,</span> <span class="s1">'bird'</span><span class="p">,</span>  <span class="s1">'boat'</span><span class="p">,</span>      <span class="s1">'bottle'</span><span class="p">,</span> 
@@ -1176,7 +1179,7 @@ The data contains the following object classes:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_image_folder</span> <span class="o">=</span> <span class="s2">"../ObjectDetectionRCNN/VOCdevkit/VOC2012/JPEGImages/"</span>
@@ -1188,7 +1191,7 @@ The data contains the following object classes:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [5]:</div>
+<div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -1210,7 +1213,7 @@ The data contains the following object classes:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [6]:</div>
+<div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">xml.etree.ElementTree</span> <span class="k">as</span> <span class="nn">ET</span>
@@ -1312,7 +1315,7 @@ The data contains the following object classes:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [7]:</div>
+<div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_image</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
@@ -1323,7 +1326,7 @@ The data contains the following object classes:</p>
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[7]:</div>
+<div class="prompt output_prompt">Out[22]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>[{'filename': '../ObjectDetectionRCNN/VOCdevkit/VOC2012/JPEGImages/2007_000027.jpg',
   'height': 500,
@@ -1364,7 +1367,7 @@ The data contains the following object classes:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [8]:</div>
+<div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seen_train_labels</span><span class="p">))</span>
@@ -1639,7 +1642,7 @@ I will standardize the bounding box width and hight with its image width and hei
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [9]:</div>
+<div class="prompt input_prompt">In [24]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">wh</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1679,7 +1682,7 @@ I will standardize the bounding box width and hight with its image width and hei
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [10]:</div>
+<div class="prompt input_prompt">In [25]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
@@ -9314,7 +9317,7 @@ IoU &= \frac{\textrm{intersection} }{
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [11]:</div>
+<div class="prompt input_prompt">In [26]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">iou</span><span class="p">(</span><span class="n">box</span><span class="p">,</span> <span class="n">clusters</span><span class="p">):</span>
@@ -9360,7 +9363,7 @@ The only change I made is the line 21 as lars76's code loop through the cases ra
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [12]:</div>
+<div class="prompt input_prompt">In [27]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">kmeans</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">dist</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
@@ -9415,7 +9418,7 @@ To find answer to these hyperparameter values, I will run k-means clustering for
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [13]:</div>
+<div class="prompt input_prompt">In [28]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">kmax</span> <span class="o">=</span> <span class="mi">11</span>
@@ -9464,7 +9467,7 @@ To find answer to these hyperparameter values, I will run k-means clustering for
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [14]:</div>
+<div class="prompt input_prompt">In [29]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plot_cluster_result</span><span class="p">(</span><span class="n">plt</span><span class="p">,</span><span class="n">clusters</span><span class="p">,</span><span class="n">nearest_clusters</span><span class="p">,</span><span class="n">WithinClusterSumDist</span><span class="p">,</span><span class="n">wh</span><span class="p">):</span>
@@ -25279,7 +25282,7 @@ In this case, I would say that 4 anchor boxes may be a good size.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [15]:</div>
+<div class="prompt input_prompt">In [30]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
@@ -25593,7 +25596,7 @@ IlKOgkFERMpRMIiISDkKBhERKUfBICIi5fx/y3bza/BqzuIAAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [16]:</div>
+<div class="prompt input_prompt">In [31]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">Nanchor_box</span> <span class="o">=</span> <span class="mi">4</span>
@@ -25605,7 +25608,7 @@ IlKOgkFERMpRMIiISDkKBhERKUfBICIi5fx/y3bza/BqzuIAAAAASUVORK5CYII=
 <div class="output_wrapper">
 <div class="output">
 <div class="output_area">
-<div class="prompt output_prompt">Out[16]:</div>
+<div class="prompt output_prompt">Out[31]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>array([[0.08285376, 0.13705531],
        [0.20850361, 0.39420716],
@@ -25699,6 +25702,9 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/Part_6_Object_Detection_with_Yolo_using_VOC_2012_data_inference_image.html">Part 6 Object Detection with Yolo using VOC 2012 data - inference on image</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Part_5_Object_Detection_with_Yolo_using_VOC_2012_data_training.html">Part 5 Object Detection using YOLOv2 on Pascal VOC2012 - training</a>
       </li>
       <li class="post">
@@ -25709,9 +25715,6 @@ s.setAttribute('data-timestamp', +new Date());
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Part 2_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1 Object Detection using YOLOv2 on Pascal VOC2012 - anchor box clustering</a>
       </li>
     </ul>
   </section>
