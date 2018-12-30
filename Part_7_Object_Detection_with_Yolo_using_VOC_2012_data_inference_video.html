@@ -18,7 +18,7 @@
  
 
   <meta charset="utf-8">
-  <title>Part 7 Object Detection with Yolo using VOC 2012 data - inference on image</title>
+  <title>Part 7 Object Detection with Yolo using VOC 2012 data - inference on video</title>
   <meta name="author" content="Yumi">
 
 
@@ -71,7 +71,7 @@ placeholder="Google Search"/>
 <div>
   <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">Part 7 Object Detection with Yolo using VOC 2012 data - inference on image</h1>
+      <h1 class="entry-title">Part 7 Object Detection with Yolo using VOC 2012 data - inference on video</h1>
       <p class="meta"><time datetime="2018-12-30T20:00:00-08:00" pubdate>Sun 30 December 2018</time></p>
 </header>
 
@@ -1122,7 +1122,7 @@ This blog assumes that the readers have read the previous two blog posts - <a hr
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [2]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_image_folder</span> <span class="o">=</span> <span class="s2">"../ObjectDetectionRCNN/VOCdevkit/VOC2012/JPEGImages/"</span>
@@ -1158,7 +1158,7 @@ This blog assumes that the readers have read the previous two blog posts - <a hr
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [3]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">backend</span> <span class="k">import</span> <span class="n">define_YOLOv2</span>
@@ -1195,7 +1195,7 @@ Using TensorFlow backend.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [4]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
@@ -1247,6 +1247,8 @@ Using TensorFlow backend.
     <span class="n">X_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_image</span><span class="p">)</span>
     
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">video_reader</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>  
 </pre></div>
 </div>
 </div>
@@ -1301,39 +1303,52 @@ Using TensorFlow backend.
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">backend</span> <span class="k">import</span> <span class="n">OutputRescaler</span><span class="p">,</span> <span class="n">find_high_class_probability_bbox</span><span class="p">,</span> <span class="n">draw_boxes</span><span class="p">,</span><span class="n">nonmax_suppression</span>
-<span class="n">obj_threshold</span> <span class="o">=</span> <span class="mf">0.03</span>
-<span class="n">outputRescaler</span> <span class="o">=</span> <span class="n">OutputRescaler</span><span class="p">(</span><span class="n">ANCHORS</span><span class="o">=</span><span class="n">ANCHORS</span><span class="p">)</span>
-<span class="n">video_writer</span>   <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoWriter</span><span class="p">(</span><span class="n">video_out</span><span class="p">,</span>
-                                 <span class="n">cv2</span><span class="o">.</span><span class="n">VideoWriter_fourcc</span><span class="p">(</span><span class="o">*</span><span class="s1">'mp4v'</span><span class="p">),</span> <span class="c1"># be sure to use lower case</span>
-                                 <span class="mf">20.0</span><span class="p">,</span> 
-                                 <span class="p">(</span><span class="n">frame_w</span><span class="p">,</span> <span class="n">frame_h</span><span class="p">))</span>
+<span class="n">obj_threshold</span>   <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">dir_png</span>         <span class="o">=</span> <span class="s2">"pngfolder"</span>
+<span class="n">outputRescaler</span>  <span class="o">=</span> <span class="n">OutputRescaler</span><span class="p">(</span><span class="n">ANCHORS</span><span class="o">=</span><span class="n">ANCHORS</span><span class="p">)</span>
+<span class="c1">#video_writer   = cv2.VideoWriter(video_out,</span>
+<span class="c1">#                                 cv2.VideoWriter_fourcc(*'mp4v'), # be sure to use lower case</span>
+<span class="c1">#                                 20.0, </span>
+<span class="c1">#                                 (frame_w, frame_h))</span>
 
 <span class="k">for</span> <span class="n">iframe</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)):</span>
-        <span class="n">netout</span>         <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">iframe</span><span class="p">]</span> 
+        <span class="n">netout</span>       <span class="o">=</span> <span class="n">y_pred</span><span class="p">[</span><span class="n">iframe</span><span class="p">]</span> 
+        <span class="n">image</span>        <span class="o">=</span> <span class="n">X_test</span><span class="p">[</span><span class="n">iframe</span><span class="p">]</span>
         <span class="c1"># decoding YOLO output</span>
-        <span class="n">netout_scale</span>    <span class="o">=</span> <span class="n">outputRescaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">netout</span><span class="p">)</span>
-        <span class="n">boxes</span>           <span class="o">=</span> <span class="n">find_high_class_probability_bbox</span><span class="p">(</span><span class="n">netout_scale</span><span class="p">,</span><span class="n">obj_threshold</span><span class="p">)</span>
+        <span class="n">netout_scale</span> <span class="o">=</span> <span class="n">outputRescaler</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">netout</span><span class="p">)</span>
+        <span class="n">boxes</span>        <span class="o">=</span> <span class="n">find_high_class_probability_bbox</span><span class="p">(</span><span class="n">netout_scale</span><span class="p">,</span><span class="n">obj_threshold</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">boxes</span><span class="p">)</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">final_boxes</span> <span class="o">=</span> <span class="n">nonmax_suppression</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span><span class="n">nms_threshold</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+            <span class="n">final_boxes</span> <span class="o">=</span> <span class="n">nonmax_suppression</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span>
+                                             <span class="n">iou_threshold</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
+                                             <span class="n">obj_threshold</span><span class="o">=</span><span class="n">obj_threshold</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">final_boxes</span><span class="p">)</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span> 
-                <span class="n">image</span> <span class="o">=</span> <span class="n">draw_boxes</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">iframe</span><span class="p">],</span><span class="n">final_boxes</span><span class="p">,</span><span class="n">LABELS</span><span class="p">)</span>
-        <span class="n">video_writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-      
-<span class="n">video_reader</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>    
-<span class="n">video_writer</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
+                <span class="n">image</span> <span class="o">=</span> <span class="n">draw_boxes</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">final_boxes</span><span class="p">,</span><span class="n">LABELS</span><span class="p">)</span>
+        <span class="c1">#video_writer.write(np.uint8(image))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">right</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">bottom</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> 
+        <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">dir_png</span> <span class="o">+</span> <span class="s2">"/fig_</span><span class="si">{:04.0f}</span><span class="s2">.png"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iframe</span><span class="p">),</span><span class="n">bbox_inches</span><span class="o">=</span><span class="s1">'tight'</span><span class="p">,</span><span class="n">pad_inches</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="c1">#video_writer.release()</span>
 </pre></div>
 </div>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cv2</span><span class="o">.</span><span class="n">__version__</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Use-ffmpeg-to-convert-pngs-to-the-mp4-video">Use ffmpeg to convert pngs to the mp4 video<a class="anchor-link" href="#Use-ffmpeg-to-convert-pngs-to-the-mp4-video">¶</a></h1><p>If you do not have ffmpeg, follow this tutorial to install it <a href="https://www.youtube.com/watch?v=8nbuqYw2OCw">ffmpeg installation</a>
+From the terminal run:</p>
 </div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>ffmpeg -framerate 10 -i fig%04.png output_video.mp4</p>
 </div>
 </div>
 </div>
@@ -1379,7 +1394,7 @@ Using TensorFlow backend.
     <a class="category" href="https://FairyOnIce.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection using YOLOv2 on Pascal VOC2012 series</a>
   </span>
 </p><div class="sharing">
-  <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://FairyOnIce.github.io/Part_7_Object_Detection_with_Yolo_using_VOC_2012_data_inference_vidoe.html" data-via="" data-counturl="https://FairyOnIce.github.io/Part_7_Object_Detection_with_Yolo_using_VOC_2012_data_inference_vidoe.html" >Tweet</a>
+  <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://FairyOnIce.github.io/Part_7_Object_Detection_with_Yolo_using_VOC_2012_data_inference_video.html" data-via="" data-counturl="https://FairyOnIce.github.io/Part_7_Object_Detection_with_Yolo_using_VOC_2012_data_inference_video.html" >Tweet</a>
     <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
 </div>    </footer>
   </article>
@@ -1420,7 +1435,7 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
-          <a href="https://FairyOnIce.github.io/Part_7_Object_Detection_with_Yolo_using_VOC_2012_data_inference_vidoe.html">Part 7 Object Detection with Yolo using VOC 2012 data - inference on image</a>
+          <a href="https://FairyOnIce.github.io/Part_7_Object_Detection_with_Yolo_using_VOC_2012_data_inference_video.html">Part 7 Object Detection with Yolo using VOC 2012 data - inference on video</a>
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Part_6_Object_Detection_with_Yolo_using_VOC_2012_data_inference_image.html">Part 6 Object Detection with Yolo using VOC 2012 data - inference on image</a>
@@ -1491,9 +1506,9 @@ s.setAttribute('data-timestamp', +new Date());
 </script>
 	<script type="text/javascript">
 	  var disqus_shortname = 'yumis-blog';
-          var disqus_identifier = '/Part_7_Object_Detection_with_Yolo_using_VOC_2012_data_inference_vidoe.html';
-          var disqus_url = 'https://FairyOnIce.github.io/Part_7_Object_Detection_with_Yolo_using_VOC_2012_data_inference_vidoe.html';
-          var disqus_title = 'Part 7 Object Detection with Yolo using VOC 2012 data - inference on image';
+          var disqus_identifier = '/Part_7_Object_Detection_with_Yolo_using_VOC_2012_data_inference_video.html';
+          var disqus_url = 'https://FairyOnIce.github.io/Part_7_Object_Detection_with_Yolo_using_VOC_2012_data_inference_video.html';
+          var disqus_title = 'Part 7 Object Detection with Yolo using VOC 2012 data - inference on video';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
