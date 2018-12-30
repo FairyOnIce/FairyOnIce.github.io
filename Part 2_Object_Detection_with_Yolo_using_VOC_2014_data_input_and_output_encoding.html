@@ -3772,18 +3772,26 @@ H8L/BVlwooR+EEHOAAAAAElFTkSuQmCC
                 <span class="n">max_iou</span>     <span class="o">=</span> <span class="n">iou</span>
         <span class="k">return</span><span class="p">(</span><span class="n">best_anchor</span><span class="p">,</span><span class="n">max_iou</span><span class="p">)</span>    
     
+    
 <span class="k">class</span> <span class="nc">BoundBox</span><span class="p">:</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">,</span> <span class="n">confidence</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">classes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">xmin</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ymin</span> <span class="o">=</span> <span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">xmax</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ymax</span> <span class="o">=</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span>
-        <span class="c1"># used during inference</span>
+        <span class="c1">## the code below are used during inference</span>
+        <span class="c1"># probability</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">confidence</span>      <span class="o">=</span> <span class="n">confidence</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">classes</span>         <span class="o">=</span> <span class="n">classes</span>
-        <span class="k">if</span> <span class="n">classes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">label</span>           <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">classes</span><span class="p">)</span> 
-        <span class="k">if</span> <span class="p">(</span><span class="n">confidence</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">classes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">]</span>
+        <span class="c1"># class probaiblities [c1, c2, .. cNclass]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_class</span><span class="p">(</span><span class="n">classes</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">set_class</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">classes</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">classes</span> <span class="o">=</span> <span class="n">classes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">label</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">classes</span><span class="p">)</span> 
+        
+    <span class="k">def</span> <span class="nf">get_label</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">)</span>
     
+    <span class="k">def</span> <span class="nf">get_score</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">classes</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
