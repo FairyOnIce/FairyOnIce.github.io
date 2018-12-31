@@ -1122,7 +1122,7 @@ This blog assumes that the readers have read the previous two blog posts - <a hr
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">train_image_folder</span> <span class="o">=</span> <span class="s2">"../ObjectDetectionRCNN/VOCdevkit/VOC2012/JPEGImages/"</span>
@@ -1158,7 +1158,7 @@ This blog assumes that the readers have read the previous two blog posts - <a hr
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">backend</span> <span class="k">import</span> <span class="n">define_YOLOv2</span>
@@ -1195,7 +1195,7 @@ Using TensorFlow backend.
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [ ]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
@@ -1303,7 +1303,7 @@ Using TensorFlow backend.
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">backend</span> <span class="k">import</span> <span class="n">OutputRescaler</span><span class="p">,</span> <span class="n">find_high_class_probability_bbox</span><span class="p">,</span> <span class="n">draw_boxes</span><span class="p">,</span><span class="n">nonmax_suppression</span>
-<span class="n">obj_threshold</span>   <span class="o">=</span> <span class="mf">0.01</span>
+<span class="n">obj_threshold</span>   <span class="o">=</span> <span class="mf">0.03</span>
 <span class="n">dir_png</span>         <span class="o">=</span> <span class="s2">"pngfolder"</span>
 <span class="n">outputRescaler</span>  <span class="o">=</span> <span class="n">OutputRescaler</span><span class="p">(</span><span class="n">ANCHORS</span><span class="o">=</span><span class="n">ANCHORS</span><span class="p">)</span>
 <span class="c1">#video_writer   = cv2.VideoWriter(video_out,</span>
@@ -1339,7 +1339,8 @@ Using TensorFlow backend.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Use-ffmpeg-to-convert-pngs-to-the-mp4-video">Use ffmpeg to convert pngs to the mp4 video<a class="anchor-link" href="#Use-ffmpeg-to-convert-pngs-to-the-mp4-video">¶</a></h1><p>If you do not have ffmpeg, follow this tutorial to install it <a href="https://www.youtube.com/watch?v=8nbuqYw2OCw">ffmpeg installation</a>
+<h1 id="Use-ffmpeg-to-convert-pngs-to-the-mp4-video">Use ffmpeg to convert pngs to the mp4 video<a class="anchor-link" href="#Use-ffmpeg-to-convert-pngs-to-the-mp4-video">¶</a></h1><p>If you do not have ffmpeg, follow this tutorial to install it <a href="https://www.youtube.com/watch?v=8nbuqYw2OCw">ffmpeg installation</a>.</p>
+<p>Following the <a href="https://superuser.com/questions/820134/why-cant-quicktime-play-a-movie-file-encoded-by-ffmpeg">suggestion in stackoverflow</a>
 From the terminal run:</p>
 </div>
 </div>
@@ -1348,7 +1349,16 @@ From the terminal run:</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>ffmpeg -framerate 10 -i fig%04.png output_video.mp4</p>
+<pre><code> ffmpeg -pattern_type glob -i fig_%04d.png -vcodec libx264 -s 640x480 -pix_fmt yuv420p movie.mp4   </code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://github.com/FairyOnIce/ObjectDetectionYolo">FairyOnIce/ObjectDetectionYolo</a>
+ contains this ipython notebook and all the functions that I defined in this notebook.</p>
 </div>
 </div>
 </div>
