@@ -1271,7 +1271,7 @@ Using TensorFlow backend.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="For-each-video-frame,-object-detection-with-YOLO">For each video frame, object detection with YOLO<a class="anchor-link" href="#For-each-video-frame,-object-detection-with-YOLO">¶</a></h1>
+<h1 id="For-each-video-frame,-detect-objects-with-YOLO">For each video frame, detect objects with YOLO<a class="anchor-link" href="#For-each-video-frame,-detect-objects-with-YOLO">¶</a></h1>
 </div>
 </div>
 </div>
@@ -1349,7 +1349,7 @@ From the terminal run:</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<pre><code> ffmpeg -pattern_type glob -i fig_%04d.png -vcodec libx264 -s 640x480 -pix_fmt yuv420p movie.mp4   </code></pre>
+<pre><code> ffmpeg -pattern_type glob -i "fig_*.png" -vcodec libx264 -s 640x480 -pix_fmt yuv420p movie.mp4   </code></pre>
 </div>
 </div>
 </div>

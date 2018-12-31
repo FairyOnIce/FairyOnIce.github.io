@@ -1100,13 +1100,24 @@ The goal of this blog series is to understand the state-of-art object detection 
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I will go into YOLO's model architecture and input/output encoding procedure in later posts <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a> and <a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2014_data_model_and_loss.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model and loss</a>.</p>
-<p>The focus of this blog is to understand the distribution of the bounding box shape. 
+<p>While there are quite a few blog posts that discuss YOLO, many of them only discuss YOLOv2 and not YOLOv2, which is more powerful. I have seen many confused comments online about YOLOv2 partly because the paper does not discuss the defenition of the YOLO loss function explicitly (, and I was one of them). This blog series is <strong>heavy</strong> as I try to go over the YOLOv2 code line by line. 
+I am doing this largely to keep track on my learning progress.
+However, I hope that this series will also benefit someone who are eager to have complehensive understanding of YOLOv2 and want to implent YOLOv2 on your own.</p>
+<p>I will go into YOLO's input/output encoding procedure in <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2 Object Detection using YOLOv2 on Pascal VOC2012 - input and output encoding</a>,
+Then the model architecture will be discussed at: 
+<a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model</a>.
+I will go over the YOLOv2's loss function line by line at: 
+<a href="https://fairyonice.github.io/Part_4_Object_Detection_with_Yolo_using_VOC_2012_data_loss.html">Part 4 Object Detection using YOLOv2 on Pascal VOC2012 - loss</a>
+The model training scripts are available in - <a href="https://fairyonice.github.io/Part_5_Object_Detection_with_Yolo_using_VOC_2012_data_training.html">Part 5 Object Detection using YOLOv2 on Pascal VOC2012 - training</a>.
+I will discuss and implement the prediction with the nonmax suppression at <a href="https://fairyonice.github.io/Part_6_Object_Detection_with_Yolo_using_VOC_2012_data_inference_image.html">Part 6 Object Detection using YOLOv2 on Pascal VOC 2012 data - inference on image</a>.
+Finally, the trained modles are used for inference on video at <a href="https://fairyonice.github.io/Part_7_Object_Detection_with_Yolo_using_VOC_2012_data_inference_video.html">Part 7 Object Detection using YOLOv2 on Pascal VOC 2012 data - inference on video</a>.</p>
+<h2 id="This-blog-post">This blog post<a class="anchor-link" href="#This-blog-post">¶</a></h2><p>The focus of this blog is to understand the distribution of the bounding box shape. 
 The understanding of the bounding box shape distribution will later be very important to define "Anchor box" hyperparameters in Yolo training.</p>
-<h3 id="Anchor-box">Anchor box<a class="anchor-link" href="#Anchor-box">¶</a></h3><p>YOLO uses an idea of "Anchor box" to wisely detect multiple objects, lying in close neighboorhood.</p>
+<h3 id="Anchor-box">Anchor box<a class="anchor-link" href="#Anchor-box">¶</a></h3><p>Conventionally, one of the biggest challenges in the object detection is to find multiple objects of various shapes within the same neighboorhood. For example, the picture below shows that a person is standing on a boat and hence the two objects are in the close vacinity.</p>
 <p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/46466533461/in/datetaken-public/" title="Screen Shot 2018-12-25 at 7.32.35 PM"><img alt="Screen Shot 2018-12-25 at 7.32.35 PM" height="976" src="https://farm8.staticflickr.com/7876/46466533461_d18c10387a_b.jpg" width="1024" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script>
 Example: two objects (a person and a boat) are in close neighboorhood.</p>
-<p>YOLO's Anchor box requires users to predefine two hyperparameters:</p>
+<p>YOLO uses an idea of "Anchor box" to wisely detect multiple objects, lying in close neighboorhood.
+YOLO's Anchor box requires users to predefine two hyperparameters:</p>
 <ul>
 <li>(1) the number of anchor boxs and </li>
 <li>(2) their shapes</li>
