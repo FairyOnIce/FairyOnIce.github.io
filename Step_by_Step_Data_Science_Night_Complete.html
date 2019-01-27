@@ -1077,7 +1077,7 @@ h6:hover .anchor-link {
 <li><a href="#Setup">Setup environment</a><ul>
 <li><a href="#Anaconda 3.7">Anaconda 3.7</a></li>
 <li><a href="#Set up virtual environment">Set up virtual environment</a></li>
-<li><a href="#Install Keras and Tensorflow">Install Keras and Tensorflow</a></li>
+<li><a href="#Install python modules">Install python modules e.g. Tensorflow</a></li>
 </ul>
 </li>
 <li><a href="Download workshop specific codes"> Download workshop specific codes</a> </li>
@@ -1131,12 +1131,20 @@ Please visit <a href="https://www.anaconda.com/download/#macos">Anaconda 3.7</a>
 </li>
 </ul>
 <h4 id="Refernece:">Refernece:<a class="anchor-link" href="#Refernece:">¶</a></h4><p>If you want to know the details of each step to create a virtual environment, please visit <a href="https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/">this website: Create virtual environments for python with conda</a></p>
-<p><a id="Install Keras and Tensorflow"></a></p>
-<h3 id="Keras-and-Tensorflow">Keras and Tensorflow<a class="anchor-link" href="#Keras-and-Tensorflow">¶</a></h3><p></a>
-In the later blog <a href="https://fairyonice.github.io/Object_detection_with_PASCAL_VOC2012_selective_search.html">Part 4: Object detection with Pascal data - CNN feature extraction</a>, you will also need Keras and tensorflow installed in your environment. These are very popular deep learning frameworks. You do NOT need GPU to follow this blog series as we will only use pre-trained network. To install them, from your terminal run the following codes:</p>
+<p><a id="#Install python modules"></a></p>
+<h3 id="Install-python-modules,-e.g.-Tensorflow,-Keras,-opencv">Install python modules, e.g. Tensorflow, Keras, opencv<a class="anchor-link" href="#Install-python-modules,-e.g.-Tensorflow,-Keras,-opencv">¶</a></h3><p></a>
+To run the scripts, you need deep learning APIs such as Keras, tensorflow and also computer vision module such as opencv in your environment.
+Note: You do NOT need GPU to follow this blog series as we will only use pre-trained network. To install them, from your terminal run the following codes:</p>
 <pre><code>conda install tensorflow
 conda install keras
 conda install -c menpo opencv=2.4.11</code></pre>
+<p>Here is how my terminal look like when you run the above commands in terminal.</p>
+<p><h2><code>conda install tensorflow</code></h2>
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/33023346168/in/datetaken-public/" title="tensorflow"><img alt="tensorflow" src="https://farm8.staticflickr.com/7895/33023346168_0a0aaa6ffc_b.jpg" width="540" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
+<p><h2><code>conda install keras</code></h2><br />
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/46173864324/in/datetaken-public/" title="keras"><img alt="keras" src="https://farm8.staticflickr.com/7885/46173864324_4f5121f2c4_b.jpg" width="522" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
+<p><h2><code>conda install -c menpo opencv=2.4.11</code></h2><br />
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/33023346258/in/datetaken-public/" title="opencv"><img alt="opencv" src="https://farm8.staticflickr.com/7834/33023346258_0e14592d4a_b.jpg" width="522" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
 </div>
 </div>
 </div>
