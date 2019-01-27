@@ -1074,7 +1074,13 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Table-of-contents">Table of contents<a class="anchor-link" href="#Table-of-contents">¶</a></h1><ul>
-<li><a href="#Setup">Setup</a></li>
+<li><a href="#Setup">Setup environment</a><ul>
+<li><a href="#Anaconda 3.7">Anaconda 3.7</a></li>
+<li><a href="#Set up virtual environment">Set up virtual environment</a></li>
+<li><a href="#Install Keras and Tensorflow">Install Keras and Tensorflow</a></li>
+</ul>
+</li>
+<li><a href="Download workshop specific codes"> Download workshop specific codes</a> </li>
 <li><a href="#Read in a video and play with it">Read in a video and play with it</a></li>
 <li><a href="#Object detection">Object detection</a></li>
 </ul>
@@ -1087,14 +1093,50 @@ h6:hover .anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a id="Setup"></a></p>
 <h1 id="Setup">Setup<a class="anchor-link" href="#Setup">¶</a></h1><p></a>
-I am using Mac OS and I recommend readers to use Mac or Linux environment. (Sorry for Windows users).</p>
-<p>To follow the blog series, please install the followings:</p>
-<h3 id="Anaconda-3.7">Anaconda 3.7<a class="anchor-link" href="#Anaconda-3.7">¶</a></h3><p>Please visit <a href="https://www.anaconda.com/download/#macos">Anaconda 3.7</a> for installation. 
-<img src="https://farm5.staticflickr.com/4813/45031214485_2b1b879e3b_b.jpg" width="890" /></p>
-<h3 id="Keras-and-Tensorflow">Keras and Tensorflow<a class="anchor-link" href="#Keras-and-Tensorflow">¶</a></h3><p>In the later blog <a href="https://fairyonice.github.io/Object_detection_with_PASCAL_VOC2012_selective_search.html">Part 4: Object detection with Pascal data - CNN feature extraction</a>, you will also need Keras and tensorflow installed in your environment. These are very popular deep learning frameworks. You do NOT need GPU to follow this blog series as we will only use pre-trained network. To install them, from your terminal run the following codes:</p>
-<pre><code>pip install tensorflow
-pip install keras</code></pre>
-<p><img alt="Screen Shot 2018-11-18 at 1.57.50 PM" height="160" src="https://farm5.staticflickr.com/4833/45895479252_5b5f94c66d_b.jpg" width="1024" /></p>
+I am using Mac OS and I recommend readers to use Mac. (Sorry for Windows users).
+<a id="Anaconda 3.7"></a></p>
+<h3 id="Anaconda-3.7">Anaconda 3.7<a class="anchor-link" href="#Anaconda-3.7">¶</a></h3><p></a>
+Please visit <a href="https://www.anaconda.com/download/#macos">Anaconda 3.7</a> for installation. Note: This will take 2.26GB of space on your computer. <strong>The installation took me about 7 MIN</strong>.</p>
+<ul>
+<li>Answer to all the questions "agree"</li>
+</ul>
+<p><img src="https://farm5.staticflickr.com/4813/45031214485_2b1b879e3b_b.jpg" width="590" /></p>
+<p><img alt="Install Anaconda" src="https://farm8.staticflickr.com/7816/31956933167_00fee7c4b3_b.jpg" width="590" /><br />
+<a id="Set up virtual environment"></a></p>
+<h3 id="Set-up-virtual-environment-(Optional-but-highly-recommended)">Set up virtual environment (Optional but highly recommended)<a class="anchor-link" href="#Set-up-virtual-environment-(Optional-but-highly-recommended)">¶</a></h3><p></a></p>
+<ul>
+<li>#### Open terminal by searching "terminal" in spotlight.
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/46173346444/in/datetaken-public/" title="OpenTerminal"><img alt="OpenTerminal" height="339" src="https://farm8.staticflickr.com/7885/46173346444_e39d11a51a_b.jpg" width="524" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></li>
+</ul>
+<ul>
+<li><p>#### Let's check if conda is correctly installed. In terminal, type:</p>
+<p><code>conda -V</code></p>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/39933401383/in/datetaken-public/" title="condaV"><img alt="condaV" height="73" src="https://farm8.staticflickr.com/7823/39933401383_2f65534ac9_b.jpg" width="524" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
+<p>If conda is installed you should see the conda version. (This step should work if you correctly installed anaconda 3.7).</p>
+</li>
+<li><p>#### Make the conda up to date by typing the following command to terminal:</p>
+<p><code>conda update conda</code></p>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/46846226532/in/datetaken-public/" title="conda_update_conda"><img alt="conda_update_conda" src="https://farm5.staticflickr.com/4915/46846226532_85977cb61c_b.jpg" width="549" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
+</li>
+<li><p>#### Create a virtual environment for our DataScienceNightSJSU</p>
+<p><code>conda create -n DataScienceNightSJSU python=3.7 anaconda</code></p>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/39933401433/in/datetaken-public/" title="condacreate1"><img alt="condacreate1" src="https://farm8.staticflickr.com/7825/39933401433_8729ab34bf_b.jpg" width="542" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script>
+<a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/46846226452/in/datetaken-public/" title="condacreate2"><img alt="condacreate2" src="https://farm5.staticflickr.com/4870/46846226452_97c6d08c35_b.jpg" width="542" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
+</li>
+<li><p>#### Activate your virtual environment
+  Activating a conda environment modifies the PATH and shell variables to point to the specific isolated Python set-up you created.</p>
+<p><code>source activate DataScienceNightSJSU</code></p>
+<p>You can alos see all available conda environments by typing <code>conda info -e </code>.</p>
+<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/46846226332/in/datetaken-public/" title="condinfoe"><img alt="condinfoe" src="https://farm8.staticflickr.com/7876/46846226332_7766da8c99_b.jpg" width="532" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
+</li>
+</ul>
+<h4 id="Refernece:">Refernece:<a class="anchor-link" href="#Refernece:">¶</a></h4><p>If you want to know the details of each step to create a virtual environment, please visit <a href="https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/">this website: Create virtual environments for python with conda</a></p>
+<p><a id="Install Keras and Tensorflow"></a></p>
+<h3 id="Keras-and-Tensorflow">Keras and Tensorflow<a class="anchor-link" href="#Keras-and-Tensorflow">¶</a></h3><p></a>
+In the later blog <a href="https://fairyonice.github.io/Object_detection_with_PASCAL_VOC2012_selective_search.html">Part 4: Object detection with Pascal data - CNN feature extraction</a>, you will also need Keras and tensorflow installed in your environment. These are very popular deep learning frameworks. You do NOT need GPU to follow this blog series as we will only use pre-trained network. To install them, from your terminal run the following codes:</p>
+<pre><code>conda install tensorflow
+conda install keras
+conda install -c menpo opencv=2.4.11</code></pre>
 </div>
 </div>
 </div>
@@ -1102,18 +1144,23 @@ pip install keras</code></pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>To follow the tutorial, you need to set up your environments:</p>
+<p><a id="Download workshop specific codes"></a></p>
+<h1 id="Download-workshop-specific-codes">Download workshop specific codes<a class="anchor-link" href="#Download-workshop-specific-codes">¶</a></h1><p></a>
+To follow the tutorial, you need to set up your environments:</p>
 <ul>
-<li>Step 1: Please download the folder from <a href="https://www.dropbox.com/sh/duv9p0xq18ie9ti/AADGFnored5Bu9N_2yPMLQG6a?dl=0">this Dropbox folder</a>, and save it in your desktop as "DataScienceNightSJSU". <ul>
-<li>The folder contains: <ul>
-<li>weights_yumi.h5 : The pre-trained Yolo weights  </li>
-<li>backend.py      : code to read-in pre-trained Yolo model</li>
-<li>DataSci</li>
+<li>Step 1: Download the python scripts to use pre-trained model from <a href="https://github.com/FairyOnIce/DataScienceNightSJSU">my Github repository</a>. </li>
+</ul>
+<p><img alt="Screen Shot 2019-01-27 at 12.26.25 PM" src="https://farm5.staticflickr.com/4844/31956192837_695f7819f4_b.jpg" width="624" /></p>
+<ul>
+<li>Step 2: Please download weights_yumi.h5 (194MB) from <a href="https://www.dropbox.com/sh/duv9p0xq18ie9ti/AADGFnored5Bu9N_2yPMLQG6a?dl=0">this Dropbox folder</a>, and save it in your git repository you just downloaded in Step 1. <ul>
+<li>The folder contains the pre-trained YOLO weights named "weights_yumi.h5" (194MB). </li>
+<li>This folder is not part of the git repository because file size of "weights_yumi.h5" exceeds GitHub's file size limit of 100.00 MB.</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>Step 2: Open ipython notebook in the folder you just donwloaded.</li>
+<p><img alt="Screen Shot 2019-01-27 at 12.11.20 PM" src="https://farm8.staticflickr.com/7917/46897447071_5dcac3d3fa_b.jpg" width="624" /></p>
+<ul>
+<li>Step 3: Open ipython notebook in the folder you just donwloaded.</li>
 </ul>
 </div>
 </div>
