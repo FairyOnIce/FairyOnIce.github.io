@@ -1075,11 +1075,12 @@ Please take the following steps in Max OSX (Sorry for Windows users).</p>
 <p><a id="Anaconda 3.7"><h2>Anaconda 3.7</h2></a>
 Please visit <a href="https://www.anaconda.com/download/#macos">Anaconda 3.7</a> for installation. Note: This will take 2.26GB of space on your computer. <strong>The installation took me about 7 MIN</strong>.</p>
 <ul>
-<li>Answer to all the questions "agree"</li>
+<li>Press "Continue" at every step and agree to the terms of the software license agreement.</li>
 </ul>
 <p><img src="https://farm5.staticflickr.com/4813/45031214485_2b1b879e3b_b.jpg" width="590" /></p>
 <p><img alt="Install Anaconda" src="https://farm8.staticflickr.com/7816/31956933167_00fee7c4b3_b.jpg" width="590" /></p>
-<p><a id="Set up virtual environment"><h2>Set up virtual environment</h2></a></p>
+<p><a id="Set up virtual environment"><h2>Set up virtual environment</h2></a>
+A virtual environment is a named, isolated, working copy of Python that that maintains its own files, directories, and paths so that you can work with specific versions of libraries or Python itself without affecting other Python projects.</p>
 <ul>
 <li><h3>Open terminal by searching "terminal" in spotlight.</h3></li>
 </ul>
@@ -1092,16 +1093,20 @@ Please visit <a href="https://www.anaconda.com/download/#macos">Anaconda 3.7</a>
  If conda is installed you should see the conda version. (This step should work if you correctly installed anaconda 3.7).</p>
 <ul>
 <li><h3>Make the conda up to date by typing the following command to terminal:</h3><p><code>conda update conda</code></p>
+<p>When "Processed ([y]/n)?", answer by hitting y.</p>
 </li>
 </ul>
 <p><img alt="conda_update_conda" src="https://farm5.staticflickr.com/4915/46846226532_85977cb61c_b.jpg" width="549" /></p>
 <ul>
-<li><h3>Create a virtual environment for our DataScienceNightSJSU</h3><p><code>conda create -n DataScienceNightSJSU python=3.6.3 anaconda</code></p>
+<li><h3>Create a virtual environment with name DataScienceNightSJSU</h3><p><code>conda create -n DataScienceNightSJSU python=3.6.3 anaconda</code></p>
+<ul>
+<li>Here, we specify the python version to 3.6.3. </li>
+<li><p>When "Processed ([y]/n)?", answer by hitting y.</p>
+<p><img alt="condacreate1" src="https://farm5.staticflickr.com/4859/31959484657_642d5f1033.jpg" width="542" />
+<img alt="condacreate2" src="https://farm5.staticflickr.com/4870/46846226452_97c6d08c35_b.jpg" width="542" /></p>
 </li>
 </ul>
-<p><img alt="condacreate1" src="https://farm8.staticflickr.com/7825/39933401433_8729ab34bf_b.jpg" width="542" />
-<img alt="condacreate2" src="https://farm5.staticflickr.com/4870/46846226452_97c6d08c35_b.jpg" width="542" /></p>
-<ul>
+</li>
 <li><p><h3>Activate your virtual environment</h3>
   Activating a conda environment modifies the PATH and shell variables to point to the specific isolated Python set-up you created.</p>
 <p><code>source activate DataScienceNightSJSU</code></p>
@@ -1111,25 +1116,28 @@ Please visit <a href="https://www.anaconda.com/download/#macos">Anaconda 3.7</a>
 <p><img alt="condinfoe" src="https://farm8.staticflickr.com/7876/46846226332_7766da8c99_b.jpg" width="532" /></p>
 <h4 id="Refernece:">Refernece:<a class="anchor-link" href="#Refernece:">¶</a></h4><p>If you want to know the details of each step to create a virtual environment, please visit <a href="https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/">this website: Create virtual environments for python with conda</a></p>
 <p><a id="Install python modules"></a></p>
-<p><h1>Install python modules, e.g. Tensorflow, Keras, opencv</h1>
+<p><h1>Install three additional python packages: tensorflow, keras, opencv</h1>
 </a>
-Anaconda is a convinent package manager that comes with most of the common python packages. 
-However, to run my deep learning scripts, you need to separately install two deep learning packages (Keras and tensorflow) and a computer vision package, opencv, in your environment.</p>
+Anaconda is a convinent package manager that comes with most of the common python packages for do data analysis in python. However, to run my deep learning scripts, you need to separately install three more packages: 
+two deep learning packages (Keras and tensorflow) and a computer vision package, opencv, in your environment.</p>
 <ul>
 <li>Note 1: It is very important to install the correct versions of these modules.  </li>
 <li>Note 2: You do NOT need GPU to follow this blog series as we will only use pre-trained network. </li>
 </ul>
-<p>To install the three packages, from your terminal run the following codes:</p>
+<p>To install the three packages in your DataScienceNightSJSU environment, from your terminal run the following codes:</p>
 <pre><code>conda install tensorflow==1.9.0
 conda install keras==2.1.2
 conda install opencv==3.4.2</code></pre>
-<p>Here is how my terminal looks like when I run the above commands in my terminal.</p>
+<ul>
+<li>When "Processed ([y]/n)?", answer by hitting y.</li>
+<li>Here is how my terminal looks like when I run the above commands in my terminal. </li>
+</ul>
 <p><h2><code>conda install tensorflow==1.9.0</code></h2>
-<img alt="tensorflow" src="https://farm8.staticflickr.com/7895/33023346168_0a0aaa6ffc_b.jpg" width="540" /></p>
+<img alt="tensorflow (1)" src="https://farm5.staticflickr.com/4909/46176347554_337144812f.jpg" width="600" /></p>
 <p><h2><code>conda install keras==2.1.2</code></h2><br />
-<img alt="keras" src="https://farm8.staticflickr.com/7885/46173864324_4f5121f2c4_b.jpg" width="522" /></a></p>
-<p><h2><code>conda install -c menpo opencv3</code></h2><br />
-<img alt="opencv" src="https://farm8.staticflickr.com/7834/33023346258_0e14592d4a_b.jpg" width="522" /></p>
+<img alt="keras (1)" src="https://farm5.staticflickr.com/4825/46901173701_58a65db78d.jpg" width="600" /></p>
+<p><h2><code>conda install opencv==3.4.2</code></h2><br />
+<img alt="opencv (1)" src="https://farm8.staticflickr.com/7898/46901174291_62b14281f1.jpg" width="600" /></p>
 </div>
 </div>
 </div>
@@ -1140,13 +1148,13 @@ conda install opencv==3.4.2</code></pre>
 <p><a id="Download workshop specific codes"></a></p>
 <p><h1> Download workshop specific codes </h1>
 </a>
-To follow the tutorial, you need to set up your environments:</p>
+To follow the tutorial, you need to download some files that I created.</p>
 <ul>
-<li><h3>Step 1: Download the python scripts to use pre-trained model from [my Github repository](https://github.com/FairyOnIce/DataScienceNightSJSU). </h3></li>
+<li><h3>Step 1: Download the python scripts to use pre-trained model from <a href="https://github.com/FairyOnIce/DataScienceNightSJSU"> my GitHub repository </a></h3></li>
 </ul>
 <p><img alt="Screen Shot 2019-01-27 at 12.26.25 PM" src="https://farm5.staticflickr.com/4844/31956192837_695f7819f4_b.jpg" width="624" /></p>
 <ul>
-<li><h3>Step 2: Please download weights_yumi.h5 (194MB) from [this Dropbox folder](https://www.dropbox.com/sh/duv9p0xq18ie9ti/AADGFnored5Bu9N_2yPMLQG6a?dl=0), and save it in the GitHub repository you just downloaded in Step 1. </h3><ul>
+<li><h3>Step 2: Please download weights_yumi.h5 (194MB) from <a href="https://www.dropbox.com/sh/duv9p0xq18ie9ti/AADGFnored5Bu9N_2yPMLQG6a?dl=0">my GitHub repository</a>, and save it in the GitHub repository you just downloaded in Step 1. </h3><ul>
 <li>The folder contains the pre-trained YOLO weights named "weights_yumi.h5" (194MB). </li>
 <li>This folder is not part of the GitHub repository because the file size of "weights_yumi.h5" exceeds GitHub's file size limit of 100.00 MB.</li>
 </ul>
@@ -1154,14 +1162,15 @@ To follow the tutorial, you need to set up your environments:</p>
 </ul>
 <p><img alt="Screen Shot 2019-01-27 at 12.11.20 PM" src="https://farm8.staticflickr.com/7917/46897447071_5dcac3d3fa_b.jpg" width="624" /></p>
 <ul>
-<li><h3>Step 3: Open ipython notebook: Open your terminal, (activate the virtual environment if it has not activated) and then type:</h3>
+<li><h3>Step 3: Open ipython notebook: Open your terminal, (activate the virtual environment that <a href="#Set up virtual environment">you just created</a>) and then type:</h3>
 <pre><code>  jupyter notebook</code></pre>
 <p><img alt="Screen Shot 2019-01-27 at 3.12.19 PM" src="https://farm8.staticflickr.com/7907/46899131071_14acd63d1d_b.jpg" width="542" />
   A window will pop up in your browser.
   <img alt="jupyternotebook" height="207" src="https://farm5.staticflickr.com/4804/33023770938_b0a84773ef.jpg" width="500" /></p>
 </li>
-<li><h3>Step 4: Direct to the folder that you just downloaded from GitHub, and create a new ipython notebook.</h3></li>
+<li><h3>Step 4: Direct to the folder that you just downloaded from GitHub, and open the ipython notebook titled "Step_by_Step_DataScience_Night_Complete.ipynb"</h3></li>
 </ul>
+<p><img alt="openipythonnotebook" height="183" src="https://farm8.staticflickr.com/7893/46901176051_de71e1c7ba.jpg" width="500" /></p>
 </div>
 </div>
 </div>
