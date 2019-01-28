@@ -1054,9 +1054,9 @@ h6:hover .anchor-link {
 <p>This notebook gives step by step instruction to set up the environment to run the codes <a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Complete.html">Use pretrained YOLO network for object detection, SJSU data science night</a>.</p>
 <h1>Table of contents</h1><ul>
 <li><a href="#Setup"><h2>Setup environment</h2></a><ul>
-<li><a href="#Anaconda 3.7"><h3>Anaconda 3.7</h3></a></li>
+<li><a href="#Anaconda 3.7"><h3>Install Anaconda 3.7</h3></a></li>
 <li><a href="#Set up virtual environment"><h3>Set up virtual environment</h3></a></li>
-<li><a href="#Install python modules"><h3>Install python modules Tensorflow, Keras and opencv3</h3></a></li>
+<li><a href="#Install python modules"><h3>Install python modules Tensorflow (v1.9.0), Keras (v2.1.2) and opencv3 (v3.4.2)</h3></a></li>
 </ul>
 </li>
 </ul>
@@ -1071,7 +1071,7 @@ h6:hover .anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a id="Setup"><h1>Setup</h1></a>
-I am using Mac OS and I recommend readers to use Mac. (Sorry for Windows users).</p>
+Please take the following steps in Max OSX (Sorry for Windows users).</p>
 <p><a id="Anaconda 3.7"><h2>Anaconda 3.7</h2></a>
 Please visit <a href="https://www.anaconda.com/download/#macos">Anaconda 3.7</a> for installation. Note: This will take 2.26GB of space on your computer. <strong>The installation took me about 7 MIN</strong>.</p>
 <ul>
@@ -1079,7 +1079,7 @@ Please visit <a href="https://www.anaconda.com/download/#macos">Anaconda 3.7</a>
 </ul>
 <p><img src="https://farm5.staticflickr.com/4813/45031214485_2b1b879e3b_b.jpg" width="590" /></p>
 <p><img alt="Install Anaconda" src="https://farm8.staticflickr.com/7816/31956933167_00fee7c4b3_b.jpg" width="590" /></p>
-<p><a id="Set up virtual environment"><h2>Set up virtual environment (Optional but highly recommended)</h2></a></p>
+<p><a id="Set up virtual environment"><h2>Set up virtual environment</h2></a></p>
 <ul>
 <li><h3>Open terminal by searching "terminal" in spotlight.</h3></li>
 </ul>
@@ -1110,15 +1110,20 @@ Please visit <a href="https://www.anaconda.com/download/#macos">Anaconda 3.7</a>
 </ul>
 <p><img alt="condinfoe" src="https://farm8.staticflickr.com/7876/46846226332_7766da8c99_b.jpg" width="532" /></p>
 <h4 id="Refernece:">Refernece:<a class="anchor-link" href="#Refernece:">¶</a></h4><p>If you want to know the details of each step to create a virtual environment, please visit <a href="https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/20/conda/">this website: Create virtual environments for python with conda</a></p>
-<p><a id="#Install python modules"></a></p>
+<p><a id="Install python modules"></a></p>
 <p><h1>Install python modules, e.g. Tensorflow, Keras, opencv</h1>
 </a>
-To run the scripts, you need deep learning APIs such as Keras, tensorflow and also computer vision module such as opencv in your environment.
-Note: You do NOT need GPU to follow this blog series as we will only use pre-trained network. To install them, from your terminal run the following codes:</p>
+Anaconda is a convinent package manager that comes with most of the common python packages. 
+However, to run my deep learning scripts, you need to separately install two deep learning packages (Keras and tensorflow) and a computer vision package, opencv, in your environment.</p>
+<ul>
+<li>Note 1: It is very important to install the correct versions of these modules.  </li>
+<li>Note 2: You do NOT need GPU to follow this blog series as we will only use pre-trained network. </li>
+</ul>
+<p>To install the three packages, from your terminal run the following codes:</p>
 <pre><code>conda install tensorflow==1.9.0
 conda install keras==2.1.2
 conda install opencv==3.4.2</code></pre>
-<p>Here is how my terminal look like when you run the above commands in terminal.</p>
+<p>Here is how my terminal looks like when I run the above commands in my terminal.</p>
 <p><h2><code>conda install tensorflow==1.9.0</code></h2>
 <img alt="tensorflow" src="https://farm8.staticflickr.com/7895/33023346168_0a0aaa6ffc_b.jpg" width="540" /></p>
 <p><h2><code>conda install keras==2.1.2</code></h2><br />

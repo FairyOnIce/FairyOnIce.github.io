@@ -1047,6 +1047,29 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This YouTube video shows a object detection performance on a baby compilation video. 
+For each frame of the video, a deep learning model detects</p>
+<ul>
+<li><p>the location of objects</p>
+</li>
+<li><p>the object's class (a person, cat etc)</p>
+</li>
+</ul>
+<p>In this workshop, your final goal is to learn how to use YOLO's pretrained model and reproduce this video. 
+To achieve this goal, there are a lot of milestone that that you can achieve:</p>
+<ul>
+<li>Learn how to use ipython notebook</li>
+<li>Learn how to import video into notebook, extract frames, and edit each frame.</li>
+<li>Learn bacic concept of object detection. </li>
+<li>Learn how to create mp4 file and git in Mac OSX. </li>
+</ul>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In [1]:</div>
@@ -1073,17 +1096,22 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Table-of-contents">Table of contents<a class="anchor-link" href="#Table-of-contents">¶</a></h1><ul>
-<li><a href="#Setup">Setup environment</a><ul>
-<li><a href="#Anaconda 3.7">Anaconda 3.7</a></li>
-<li><a href="#Set up virtual environment">Set up virtual environment</a></li>
-<li><a href="#Install python modules">Install python modules e.g. Tensorflow</a></li>
+<h1>Table of contents</h1><ul>
+<li><p><a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Setup.html#Setup"><h2>Setup environment*</h2></a></p>
+<ul>
+<li><a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Setup.html#Anaconda 3.7"><h3>Install Anaconda 3.7*</h3></a> </li>
+<li><a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Setup.html#Set up virtual environment"><h3>Set up virtual environment*</h3></a></li>
+<li><a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Setup.html#Install python modules"><h3>Install python modules Tensorflow (v1.9.0), Keras (v2.1.2) and opencv3 (v3.4.2)*</h3></a></li>
 </ul>
 </li>
-<li><a href="Download workshop specific codes"> Download workshop specific codes</a> </li>
-<li><a href="#Read in a video and play with it">Read in a video and play with it</a></li>
-<li><a href="#Object detection">Object detection</a></li>
+<li><p><a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Setup.html#Download workshop specific codes"><h2>Download workshop specific codes*</h2></a></p>
+</li>
+<li><p><a href="#Read in a video and play with it"><h2>Read in a video, extrac frames and edit them</h2></a></p>
+</li>
+<li><p><a href="#Object detection with YOLO"><h2>Object detection</h2></a></p>
+</li>
 </ul>
+<p>*covered by the <a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Setup.html">previous blog post</a>.</p>
 </div>
 </div>
 </div>
@@ -1091,8 +1119,11 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Great thing about ipython notebook is that it accept linux command.
-Check where I am:</p>
+<p>This script assumes that you already installed python 3.7, Tensorflow 1.9.0, Keras 2.1.2 and Opencv 3.4.2.
+If you have not done so, please follow <a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Setup.html">previous blog post</a> to set up your virtual environment.</p>
+<p>Then, download workshop specific codes by following instruction <a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Setup.html#Download workshop specific codes">Download workshop specific codes</a>.</p>
+<p>Open your ipython notebook in the downloaded GitHub repository.
+Step_by_step_DataScience_Night_Complete.ipynb contains this script.</p>
 </div>
 </div>
 </div>
@@ -1132,13 +1163,15 @@ Check where I am:</p>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>total 429704
+<pre>total 429720
 -rw-r--r--@    1 yumikondo  staff   194M Dec 31 09:59 weights_yumi.h5
 -rw-r--r--@    1 yumikondo  staff    16M Jan 26 13:50 videoplayback.mp4
-drwxr-xr-x     3 yumikondo  staff   102B Jan 26 17:48 <span class="ansi-blue-fg">__pycache__</span>/
-drwxr-xr-x  2282 yumikondo  staff    76K Jan 26 19:51 <span class="ansi-blue-fg">png_folder</span>/
--rw-r--r--     1 yumikondo  staff    48K Jan 26 21:34 backend.py
--rw-r--r--     1 yumikondo  staff    25K Jan 26 21:55 Step_by_Step_Data_Science_Night_Complete.ipynb
+drwxr-xr-x  2283 yumikondo  staff    76K Jan 27 06:07 <span class="ansi-blue-fg">png_folder</span>/
+drwxr-xr-x    15 yumikondo  staff   510B Jan 27 15:31 <span class="ansi-blue-fg">png_blog</span>/
+-rw-r--r--     1 yumikondo  staff    48K Jan 27 16:03 backend.py
+drwxr-xr-x     3 yumikondo  staff   102B Jan 27 18:10 <span class="ansi-blue-fg">__pycache__</span>/
+-rw-r--r--     1 yumikondo  staff   7.5K Jan 27 18:10 Step_by_Step_Data_Science_Night_Setup.ipynb
+-rw-r--r--     1 yumikondo  staff    26K Jan 27 18:15 Step_by_Step_Data_Science_Night_Complete.ipynb
 </pre>
 </div>
 </div>
@@ -1157,7 +1190,7 @@ import python libraries.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [23]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
@@ -1168,7 +1201,7 @@ import python libraries.</p>
 <span class="kn">import</span> <span class="nn">keras</span> 
 <span class="kn">import</span> <span class="nn">tensorflow</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">">>My python version is </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">">>My opencv version is </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">">>My opencv version is </span><span class="si">{}</span><span class="s2"> (opencv 3.4.2 also works)"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">">>My keras version is </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">">>My tensorflow version is </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tensorflow</span><span class="o">.</span><span class="n">__version__</span><span class="p">))</span>
 <span class="o">%</span><span class="k">matplotlib</span> inline
@@ -1180,10 +1213,19 @@ import python libraries.</p>
 <div class="output">
 <div class="output_area">
 <div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/Users/yumikondo/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:34: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+Using TensorFlow backend.
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>>>My python version is 3.6.3 |Anaconda, Inc.| (default, Oct  6 2017, 12:04:38) 
 [GCC 4.2.1 Compatible Clang 4.0.1 (tags/RELEASE_401/final)]
->>My opencv version is 3.2.0
+>>My opencv version is 3.2.0 (opencv 3.4.2 also works)
 >>My keras version is 2.1.2
 >>My tensorflow version is 1.9.0
 </pre>
@@ -1224,13 +1266,15 @@ Save the downloaded video into your current working directory</p>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>total 429704
+<pre>total 429720
 -rw-r--r--@    1 yumikondo  staff   194M Dec 31 09:59 weights_yumi.h5
 -rw-r--r--@    1 yumikondo  staff    16M Jan 26 13:50 videoplayback.mp4
-drwxr-xr-x     3 yumikondo  staff   102B Jan 26 17:48 <span class="ansi-blue-fg">__pycache__</span>/
-drwxr-xr-x  2282 yumikondo  staff    76K Jan 26 19:51 <span class="ansi-blue-fg">png_folder</span>/
--rw-r--r--     1 yumikondo  staff    48K Jan 26 21:34 backend.py
--rw-r--r--     1 yumikondo  staff    25K Jan 26 21:55 Step_by_Step_Data_Science_Night_Complete.ipynb
+drwxr-xr-x  2283 yumikondo  staff    76K Jan 27 06:07 <span class="ansi-blue-fg">png_folder</span>/
+drwxr-xr-x    15 yumikondo  staff   510B Jan 27 15:31 <span class="ansi-blue-fg">png_blog</span>/
+-rw-r--r--     1 yumikondo  staff    48K Jan 27 16:03 backend.py
+drwxr-xr-x     3 yumikondo  staff   102B Jan 27 18:10 <span class="ansi-blue-fg">__pycache__</span>/
+-rw-r--r--     1 yumikondo  staff   7.5K Jan 27 18:10 Step_by_Step_Data_Science_Night_Setup.ipynb
+-rw-r--r--     1 yumikondo  staff    26K Jan 27 18:15 Step_by_Step_Data_Science_Night_Complete.ipynb
 </pre>
 </div>
 </div>
@@ -15655,15 +15699,6 @@ I trained this object detection model in Keras framework using Pascal VOC2012.</
 <div class="output">
 <div class="output_area">
 <div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/yumikondo/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:34: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
-  from ._conv import register_converters as _register_converters
-Using TensorFlow backend.
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 
@@ -15677,7 +15712,7 @@ Pretrained weights are loaded
 
 
 *********************
-Check if the model exists as a member of the object preTrainedYOLODetector = <keras.engine.training.model object at 0x11fbaef60>
+Check if the model exists as a member of the object preTrainedYOLODetector = <keras.engine.training.model object at 0x12f018668>
 
 
 *********************
@@ -15864,7 +15899,7 @@ I will first select the frame at the 2 minute time point.</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [14]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">video_reader</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">video_name</span><span class="p">)</span>
@@ -19062,7 +19097,7 @@ P3yyXBH9vo9lAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [15]:</div>
+<div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## encode a single frame, rescale the image to (416,416,3)</span>
@@ -21520,7 +21555,7 @@ GgKnEBAQcA2BUwgICLiGwCkEBARcQ+AUAgICriFwCgEBAdfw3++QdWHO7IFlAAAAAElFTkSuQmCC
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [16]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## YOLO prediction</span>
@@ -21617,7 +21652,7 @@ I will only accept the detected bounding box that has $p_{\textrm{confidence of 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [17]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">obj_threshold</span> <span class="o">=</span> <span class="mf">0.015</span>
@@ -21628,7 +21663,7 @@ I will only accept the detected bounding box that has $p_{\textrm{confidence of 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [18]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">backend</span> <span class="k">import</span> <span class="n">find_high_class_probability_bbox</span><span class="p">,</span> <span class="n">nonmax_suppression</span><span class="p">,</span> <span class="n">draw_boxes</span>
@@ -30798,7 +30833,7 @@ CCGEEEII2cNwcogQQgghhBBCCCFkD/N/OLPySMHSnM8AAAAASUVORK5CYII=
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [19]:</div>
+<div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">boxes</span>       <span class="o">=</span> <span class="n">find_high_class_probability_bbox</span><span class="p">(</span><span class="n">netout_scale</span><span class="p">,</span><span class="n">obj_threshold</span><span class="p">)</span>
@@ -40766,7 +40801,7 @@ First, create a folder that contains every frame with predicted bounding box.</p
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [20]:</div>
+<div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dir_png</span> <span class="o">=</span> <span class="s2">"./png_folder"</span>
@@ -40789,7 +40824,7 @@ First, create a folder that contains every frame with predicted bounding box.</p
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [21]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">backend</span> <span class="k">import</span> <span class="n">find_high_class_probability_bbox</span><span class="p">,</span> <span class="n">nonmax_suppression</span><span class="p">,</span> <span class="n">draw_boxes</span>
@@ -40877,7 +40912,7 @@ From the terminal run:</p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [22]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">create_gif</span><span class="p">(</span><span class="n">gifname</span><span class="p">,</span><span class="n">dir_image</span><span class="p">,</span><span class="n">duration</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
