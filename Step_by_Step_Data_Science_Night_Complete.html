@@ -1051,17 +1051,17 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This YouTube video shows a object detection performance on a baby compilation video. 
-For each frame of the video, a deep learning model detects</p>
+<p>This YouTube video shows the object detection performance on a baby compilation video. 
+For each frame of the video, a YOLO deep learning model detects</p>
 <ul>
 <li>the location of objects</li>
 <li>the object's class (a person, cat etc)</li>
 </ul>
 <p>In this workshop, your final goal is to learn how to use YOLO's pretrained model and reproduce this video. 
-To achieve this goal, there are a lot of milestone that that you can achieve:</p>
+To achieve this goal, there are a lot of milestones that you will achieve:</p>
 <ul>
 <li>Learn how to use ipython notebook</li>
-<li>Learn how to import video into notebook, extract frames, and edit each frame.</li>
+<li>Learn how to import video into ipython notebook, extract frames, and edit each frame.</li>
 <li>Learn bacic concept of object detection. </li>
 <li>Learn how to create mp4 file and git in Mac OSX. </li>
 </ul>
@@ -1104,6 +1104,8 @@ To achieve this goal, there are a lot of milestone that that you can achieve:</p
 </li>
 <li><p><a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Setup.html#Download workshop specific codes"><h2>Download workshop specific codes*</h2></a></p>
 </li>
+<li><p><a href="#import"><h2>Import python libraries</h2></a></p>
+</li>
 <li><p><a href="#Read in a video and play with it"><h2>Read in a video, extrac frames and edit them</h2></a></p>
 </li>
 <li><p><a href="#Object detection with YOLO"><h2>Object detection</h2></a></p>
@@ -1117,7 +1119,7 @@ To achieve this goal, there are a lot of milestone that that you can achieve:</p
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This script assumes that you already installed python 3.7, Tensorflow 1.9.0, Keras 2.1.2 and Opencv 3.4.2.
+<p>This script assumes that you already installed python 3.6, Tensorflow 1.9.0, Keras 2.1.2 and Opencv 3.4.2.
 If you have not done so, please follow <a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Setup.html">previous blog post</a> to set up your virtual environment.</p>
 <p>Then, download workshop specific codes by following instruction <a href="https://fairyonice.github.io/Step_by_Step_Data_Science_Night_Setup.html#Download workshop specific codes">Download workshop specific codes</a>.</p>
 <p>Open your ipython notebook in the downloaded GitHub repository.
@@ -1161,15 +1163,15 @@ Step_by_step_DataScience_Night_Complete.ipynb contains this script.</p>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>total 429720
+<pre>total 435680
 -rw-r--r--@    1 yumikondo  staff   194M Dec 31 09:59 weights_yumi.h5
 -rw-r--r--@    1 yumikondo  staff    16M Jan 26 13:50 videoplayback.mp4
 drwxr-xr-x  2283 yumikondo  staff    76K Jan 27 06:07 <span class="ansi-blue-fg">png_folder</span>/
-drwxr-xr-x    15 yumikondo  staff   510B Jan 27 15:31 <span class="ansi-blue-fg">png_blog</span>/
 -rw-r--r--     1 yumikondo  staff    48K Jan 27 16:03 backend.py
 drwxr-xr-x     3 yumikondo  staff   102B Jan 27 18:10 <span class="ansi-blue-fg">__pycache__</span>/
--rw-r--r--     1 yumikondo  staff   7.5K Jan 27 18:10 Step_by_Step_Data_Science_Night_Setup.ipynb
--rw-r--r--     1 yumikondo  staff    26K Jan 27 18:15 Step_by_Step_Data_Science_Night_Complete.ipynb
+drwxr-xr-x    21 yumikondo  staff   714B Jan 27 19:40 <span class="ansi-blue-fg">png_blog</span>/
+-rw-r--r--     1 yumikondo  staff   8.8K Jan 27 19:56 Step_by_Step_Data_Science_Night_Setup.ipynb
+-rw-r--r--     1 yumikondo  staff   2.9M Jan 27 22:28 Step_by_Step_Data_Science_Night_Complete.ipynb
 </pre>
 </div>
 </div>
@@ -1180,9 +1182,9 @@ drwxr-xr-x     3 yumikondo  staff   102B Jan 27 18:10 <span class="ansi-blue-fg"
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a id="Read in a video and play with it"></a></p>
-<h1 id="Read-in-a-video-and-play-with-it">Read in a video and play with it<a class="anchor-link" href="#Read-in-a-video-and-play-with-it">¶</a></h1><p></a>
-import python libraries.</p>
+<p><a id="import"><h1>Import python libraries</h1></a>
+First, we import python libraries. 
+The following code should work if your virtual environment is correctly set up.</p>
 </div>
 </div>
 </div>
@@ -1236,12 +1238,22 @@ Using TensorFlow backend.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><a id="Read in a video and play with it"></a></p>
+<p><h1> Read in a YouTube video </h1>
+</a></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>I choose this ~3 min baby compilation.</p>
 <ul>
 <li><a href="https://www.youtube.com/watch?v=T9fjY3SR5KE">Funny Cats Protecting Babies Compilation (2017)</a></li>
 </ul>
-<p>You can choose your own video but make sure that it is not too long. 
-Then you can convert ~3-minute video into 360 pixel mp4 using online tool YOUTUBEMP4.
+<p>You can choose your own video but make sure that it is not too long.</p>
+<p>You can convert ~3-minute video into 360 pixel mp4 using online tool YOUTUBEMP4.
 Save the downloaded video into your current working directory</p>
 <ul>
 <li><a href="https://youtubemp4.to/">YOUTUBEMP4</a> </li>
@@ -1264,15 +1276,15 @@ Save the downloaded video into your current working directory</p>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>total 429720
+<pre>total 435680
 -rw-r--r--@    1 yumikondo  staff   194M Dec 31 09:59 weights_yumi.h5
 -rw-r--r--@    1 yumikondo  staff    16M Jan 26 13:50 videoplayback.mp4
 drwxr-xr-x  2283 yumikondo  staff    76K Jan 27 06:07 <span class="ansi-blue-fg">png_folder</span>/
-drwxr-xr-x    15 yumikondo  staff   510B Jan 27 15:31 <span class="ansi-blue-fg">png_blog</span>/
 -rw-r--r--     1 yumikondo  staff    48K Jan 27 16:03 backend.py
 drwxr-xr-x     3 yumikondo  staff   102B Jan 27 18:10 <span class="ansi-blue-fg">__pycache__</span>/
--rw-r--r--     1 yumikondo  staff   7.5K Jan 27 18:10 Step_by_Step_Data_Science_Night_Setup.ipynb
--rw-r--r--     1 yumikondo  staff    26K Jan 27 18:15 Step_by_Step_Data_Science_Night_Complete.ipynb
+drwxr-xr-x    21 yumikondo  staff   714B Jan 27 19:40 <span class="ansi-blue-fg">png_blog</span>/
+-rw-r--r--     1 yumikondo  staff   8.8K Jan 27 19:56 Step_by_Step_Data_Science_Night_Setup.ipynb
+-rw-r--r--     1 yumikondo  staff   2.9M Jan 27 22:28 Step_by_Step_Data_Science_Night_Complete.ipynb
 </pre>
 </div>
 </div>
@@ -1284,8 +1296,7 @@ drwxr-xr-x     3 yumikondo  staff   102B Jan 27 18:10 <span class="ansi-blue-fg"
 <div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">cv2</span>
-<span class="n">video_name</span>   <span class="o">=</span> <span class="s2">"videoplayback.mp4"</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">video_name</span>   <span class="o">=</span> <span class="s2">"videoplayback.mp4"</span>
 <span class="c1">## instantiate the video reader object </span>
 <span class="n">video_reader</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">video_name</span><span class="p">)</span>
 </pre></div>
@@ -15710,7 +15721,7 @@ Pretrained weights are loaded
 
 
 *********************
-Check if the model exists as a member of the object preTrainedYOLODetector = <keras.engine.training.model object at 0x12f018668>
+Check if the model exists as a member of the object preTrainedYOLODetector = <keras.engine.training.model object at 0x124e45668>
 
 
 *********************
