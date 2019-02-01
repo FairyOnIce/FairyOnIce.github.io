@@ -1054,8 +1054,7 @@ h6:hover .anchor-link {
 <p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/46489714642/in/datetaken-public/" title="YOLO model training in progress"><img alt="YOLO model training in progress" height="797" src="https://farm8.staticflickr.com/7840/46489714642_d69661a409_b.jpg" width="1024" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script></p>
 <p>This is the fifth blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. This blog finally train the model using the scripts that are developed in the <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">previous blog posts</a>. 
 I will use PASCAL VOC2012 data. 
-This blog assumes that the readers have read the previous 
-blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a>, <a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3</a>, <a href="https://fairyonice.github.io/Part_4_Object_Detection_with_Yolo_using_VOC_2012_data_loss.html">Part 4</a>.</p>
+This blog assumes that the readers have read the previous blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a>, <a href="https://fairyonice.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3</a>, <a href="https://fairyonice.github.io/Part_4_Object_Detection_with_Yolo_using_VOC_2012_data_loss.html">Part 4</a>.</p>
 <h2 id="Andrew-Ng's-YOLO-lecture">Andrew Ng's YOLO lecture<a class="anchor-link" href="#Andrew-Ng's-YOLO-lecture">¶</a></h2><ul>
 <li><a href="https://www.youtube.com/watch?v=gKreZOUi-O0&amp;t=0s&amp;index=7&amp;list=PL_IHmaMAvkVxdDOBRg2CbcJBq9SY7ZUvs">Neural Networks - Bounding Box Predictions</a></li>
 <li><a href="https://www.youtube.com/watch?v=ANIzQ5G-XPE&amp;t=7s">C4W3L06 Intersection Over Union</a></li>
@@ -1634,7 +1633,7 @@ This is because I am unfortunately using CPU environment.</p>
                            <span class="n">mode</span><span class="o">=</span><span class="s1">'min'</span><span class="p">,</span> 
                            <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s1">'weights_yumi.h5'</span><span class="p">,</span> 
+<span class="n">checkpoint</span> <span class="o">=</span> <span class="n">ModelCheckpoint</span><span class="p">(</span><span class="s1">'weights_yolo_on_voc2012.h5'</span><span class="p">,</span> 
                              <span class="n">monitor</span><span class="o">=</span><span class="s1">'loss'</span><span class="p">,</span> 
                              <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
                              <span class="n">save_best_only</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
@@ -1647,10 +1646,32 @@ This is because I am unfortunately using CPU environment.</p>
 <span class="c1">#optimizer = RMSprop(lr=1e-4, rho=0.9, epsilon=1e-08, decay=0.0)</span>
 
 <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="n">custom_loss</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">)</span>
-
-<span class="n">model</span><span class="o">.</span><span class="n">fit_generator</span><span class="p">(</span><span class="n">generator</span>        <span class="o">=</span> <span class="n">train_batch_generator</span><span class="p">,</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>WARNING:tensorflow:From /Users/yumikondo/anaconda3/lib/python3.6/site-packages/keras/backend/tensorflow_backend.py:1349: calling reduce_mean (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
+Instructions for updating:
+keep_dims is deprecated, use keepdims instead
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">fit_generator</span><span class="p">(</span><span class="n">generator</span>        <span class="o">=</span> <span class="n">train_batch_generator</span><span class="p">,</span> 
                     <span class="n">steps_per_epoch</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_batch_generator</span><span class="p">),</span> 
-                    <span class="n">epochs</span>           <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> 
+                    <span class="n">epochs</span>           <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> 
                     <span class="n">verbose</span>          <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
                     <span class="c1">#validation_data  = valid_batch,</span>
                     <span class="c1">#validation_steps = len(valid_batch),</span>
@@ -1668,73 +1689,89 @@ This is because I am unfortunately using CPU environment.</p>
 <pre>WARNING:tensorflow:From /Users/yumikondo/anaconda3/lib/python3.6/site-packages/keras/backend/tensorflow_backend.py:1349: calling reduce_mean (from tensorflow.python.ops.math_ops) with keep_dims is deprecated and will be removed in a future version.
 Instructions for updating:
 keep_dims is deprecated, use keepdims instead
-Epoch 1/20
-535/536 [============================>.] - ETA: 19s - loss: 3.4223Epoch 00001: loss improved from inf to 3.42166, saving model to weights_yumi.h5
-536/536 [==============================] - 10411s 19s/step - loss: 3.4217
-Epoch 2/20
-535/536 [============================>.] - ETA: 20s - loss: 2.2510Epoch 00002: loss improved from 3.42166 to 2.25025, saving model to weights_yumi.h5
-536/536 [==============================] - 10813s 20s/step - loss: 2.2502
-Epoch 3/20
-535/536 [============================>.] - ETA: 20s - loss: 1.8172Epoch 00003: loss improved from 2.25025 to 1.81714, saving model to weights_yumi.h5
-536/536 [==============================] - 10728s 20s/step - loss: 1.8171
-Epoch 4/20
-535/536 [============================>.] - ETA: 20s - loss: 1.5738Epoch 00004: loss improved from 1.81714 to 1.57317, saving model to weights_yumi.h5
-536/536 [==============================] - 10759s 20s/step - loss: 1.5732
-Epoch 5/20
-535/536 [============================>.] - ETA: 22s - loss: 1.4160Epoch 00005: loss improved from 1.57317 to 1.41594, saving model to weights_yumi.h5
-536/536 [==============================] - 11803s 22s/step - loss: 1.4159
-Epoch 6/20
-535/536 [============================>.] - ETA: 20s - loss: 1.3050Epoch 00006: loss improved from 1.41594 to 1.30531, saving model to weights_yumi.h5
-536/536 [==============================] - 11138s 21s/step - loss: 1.3053
-Epoch 7/20
-535/536 [============================>.] - ETA: 22s - loss: 1.2307Epoch 00007: loss improved from 1.30531 to 1.23087, saving model to weights_yumi.h5
-536/536 [==============================] - 12191s 23s/step - loss: 1.2309
-Epoch 8/20
-535/536 [============================>.] - ETA: 22s - loss: 1.1695Epoch 00008: loss improved from 1.23087 to 1.16955, saving model to weights_yumi.h5
-536/536 [==============================] - 11940s 22s/step - loss: 1.1696
-Epoch 9/20
-535/536 [============================>.] - ETA: 33s - loss: 1.1205 Epoch 00009: loss improved from 1.16955 to 1.12120, saving model to weights_yumi.h5
-536/536 [==============================] - 18093s 34s/step - loss: 1.1212
-Epoch 10/20
-535/536 [============================>.] - ETA: 19s - loss: 1.0841Epoch 00010: loss improved from 1.12120 to 1.08404, saving model to weights_yumi.h5
-536/536 [==============================] - 10492s 20s/step - loss: 1.0840
-Epoch 11/20
-535/536 [============================>.] - ETA: 20s - loss: 1.0531Epoch 00011: loss improved from 1.08404 to 1.05272, saving model to weights_yumi.h5
-536/536 [==============================] - 10814s 20s/step - loss: 1.0527
-Epoch 12/20
-535/536 [============================>.] - ETA: 19s - loss: 1.0264Epoch 00012: loss improved from 1.05272 to 1.02628, saving model to weights_yumi.h5
-536/536 [==============================] - 10516s 20s/step - loss: 1.0263
-Epoch 13/20
-535/536 [============================>.] - ETA: 20s - loss: 1.0013Epoch 00013: loss improved from 1.02628 to 1.00114, saving model to weights_yumi.h5
-536/536 [==============================] - 11074s 21s/step - loss: 1.0011
-Epoch 14/20
-535/536 [============================>.] - ETA: 21s - loss: 0.9824Epoch 00014: loss improved from 1.00114 to 0.98219, saving model to weights_yumi.h5
-536/536 [==============================] - 11652s 22s/step - loss: 0.9822
-Epoch 15/20
-535/536 [============================>.] - ETA: 21s - loss: 0.9701Epoch 00015: loss improved from 0.98219 to 0.97034, saving model to weights_yumi.h5
-536/536 [==============================] - 11322s 21s/step - loss: 0.9703
-Epoch 16/20
-535/536 [============================>.] - ETA: 20s - loss: 0.9491Epoch 00016: loss improved from 0.97034 to 0.94970, saving model to weights_yumi.h5
-536/536 [==============================] - 10911s 20s/step - loss: 0.9497
-Epoch 17/20
-535/536 [============================>.] - ETA: 19s - loss: 0.9347Epoch 00017: loss improved from 0.94970 to 0.93497, saving model to weights_yumi.h5
-536/536 [==============================] - 10638s 20s/step - loss: 0.9350
-Epoch 18/20
-535/536 [============================>.] - ETA: 19s - loss: 0.9221Epoch 00018: loss improved from 0.93497 to 0.92285, saving model to weights_yumi.h5
-536/536 [==============================] - 10446s 19s/step - loss: 0.9228
-Epoch 19/20
-535/536 [============================>.] - ETA: 19s - loss: 0.9140Epoch 00019: loss improved from 0.92285 to 0.91372, saving model to weights_yumi.h5
-536/536 [==============================] - 10555s 20s/step - loss: 0.9137
-Epoch 20/20
-535/536 [============================>.] - ETA: 24s - loss: 0.9025Epoch 00020: loss improved from 0.91372 to 0.90217, saving model to weights_yumi.h5
-536/536 [==============================] - 12969s 24s/step - loss: 0.9022
-</pre>
-</div>
-</div>
-<div class="output_area">
-<div class="prompt output_prompt">Out[10]:</div>
-<div class="output_text output_subarea output_execute_result">
-<pre><keras.callbacks.history at 0x1352fdac8></pre>
+Epoch 1/50
+535/536 [============================>.] - ETA: 24s - loss: 3.4066Epoch 00001: loss improved from inf to 3.40433, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 13142s 25s/step - loss: 3.4043
+Epoch 2/50
+535/536 [============================>.] - ETA: 20s - loss: 2.2446Epoch 00002: loss improved from 3.40433 to 2.24404, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 11008s 21s/step - loss: 2.2440
+Epoch 3/50
+535/536 [============================>.] - ETA: 19s - loss: 1.8147Epoch 00003: loss improved from 2.24404 to 1.81350, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10618s 20s/step - loss: 1.8135
+Epoch 4/50
+535/536 [============================>.] - ETA: 19s - loss: 1.5694Epoch 00004: loss improved from 1.81350 to 1.56886, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10390s 19s/step - loss: 1.5689
+Epoch 5/50
+535/536 [============================>.] - ETA: 19s - loss: 1.4156Epoch 00005: loss improved from 1.56886 to 1.41503, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10414s 19s/step - loss: 1.4150
+Epoch 6/50
+535/536 [============================>.] - ETA: 19s - loss: 1.3039Epoch 00006: loss improved from 1.41503 to 1.30439, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10340s 19s/step - loss: 1.3044
+Epoch 7/50
+535/536 [============================>.] - ETA: 19s - loss: 1.2295Epoch 00007: loss improved from 1.30439 to 1.22947, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10236s 19s/step - loss: 1.2295
+Epoch 8/50
+535/536 [============================>.] - ETA: 19s - loss: 1.1702Epoch 00008: loss improved from 1.22947 to 1.16959, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10268s 19s/step - loss: 1.1696
+Epoch 9/50
+535/536 [============================>.] - ETA: 19s - loss: 1.1217Epoch 00009: loss improved from 1.16959 to 1.12201, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10243s 19s/step - loss: 1.1220
+Epoch 10/50
+535/536 [============================>.] - ETA: 18s - loss: 1.0834Epoch 00010: loss improved from 1.12201 to 1.08334, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10162s 19s/step - loss: 1.0833
+Epoch 11/50
+535/536 [============================>.] - ETA: 19s - loss: 1.0535Epoch 00011: loss improved from 1.08334 to 1.05358, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10433s 19s/step - loss: 1.0536
+Epoch 12/50
+535/536 [============================>.] - ETA: 18s - loss: 1.0263Epoch 00012: loss improved from 1.05358 to 1.02609, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10143s 19s/step - loss: 1.0261
+Epoch 13/50
+535/536 [============================>.] - ETA: 19s - loss: 1.0024Epoch 00013: loss improved from 1.02609 to 1.00246, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10600s 20s/step - loss: 1.0025
+Epoch 14/50
+535/536 [============================>.] - ETA: 18s - loss: 0.9837Epoch 00014: loss improved from 1.00246 to 0.98375, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10167s 19s/step - loss: 0.9837
+Epoch 15/50
+535/536 [============================>.] - ETA: 19s - loss: 0.9699Epoch 00015: loss improved from 0.98375 to 0.97007, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10219s 19s/step - loss: 0.9701
+Epoch 16/50
+535/536 [============================>.] - ETA: 19s - loss: 0.9485Epoch 00016: loss improved from 0.97007 to 0.94880, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10260s 19s/step - loss: 0.9488
+Epoch 17/50
+535/536 [============================>.] - ETA: 19s - loss: 0.9345Epoch 00017: loss improved from 0.94880 to 0.93443, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10259s 19s/step - loss: 0.9344
+Epoch 18/50
+535/536 [============================>.] - ETA: 19s - loss: 0.9226Epoch 00018: loss improved from 0.93443 to 0.92268, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10229s 19s/step - loss: 0.9227
+Epoch 19/50
+535/536 [============================>.] - ETA: 19s - loss: 0.9147Epoch 00019: loss improved from 0.92268 to 0.91463, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10367s 19s/step - loss: 0.9146
+Epoch 20/50
+535/536 [============================>.] - ETA: 18s - loss: 0.9043Epoch 00020: loss improved from 0.91463 to 0.90443, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10166s 19s/step - loss: 0.9044
+Epoch 21/50
+535/536 [============================>.] - ETA: 18s - loss: 0.8929Epoch 00021: loss improved from 0.90443 to 0.89287, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10132s 19s/step - loss: 0.8929
+Epoch 22/50
+535/536 [============================>.] - ETA: 20s - loss: 0.8905Epoch 00022: loss improved from 0.89287 to 0.89053, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 11085s 21s/step - loss: 0.8905
+Epoch 23/50
+535/536 [============================>.] - ETA: 18s - loss: 0.8810Epoch 00023: loss improved from 0.89053 to 0.88130, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10108s 19s/step - loss: 0.8813
+Epoch 24/50
+535/536 [============================>.] - ETA: 18s - loss: 0.8735Epoch 00024: loss improved from 0.88130 to 0.87398, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10076s 19s/step - loss: 0.8740
+Epoch 25/50
+535/536 [============================>.] - ETA: 18s - loss: 0.8667Epoch 00025: loss improved from 0.87398 to 0.86716, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10111s 19s/step - loss: 0.8672
+Epoch 26/50
+535/536 [============================>.] - ETA: 18s - loss: 0.8581Epoch 00026: loss improved from 0.86716 to 0.85846, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10102s 19s/step - loss: 0.8585
+Epoch 27/50
+535/536 [============================>.] - ETA: 21s - loss: 0.8519Epoch 00027: loss improved from 0.85846 to 0.85145, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 11597s 22s/step - loss: 0.8515
+Epoch 28/50
+ 70/536 [==>...........................] - ETA: 2:45:17 - loss: 0.8663</pre>
 </div>
 </div>
 </div>
@@ -1746,6 +1783,74 @@ Epoch 20/20
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="https://github.com/FairyOnIce/ObjectDetectionYolo">FairyOnIce/ObjectDetectionYolo</a>
  contains this ipython notebook and all the functions that I defined in this notebook.</p>
+<p>By accident, I stopped a notebook.
+Here, let's resume the training..</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [ ]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s1">'weights_yolo_on_voc2012.h5'</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit_generator</span><span class="p">(</span><span class="n">generator</span>        <span class="o">=</span> <span class="n">train_batch_generator</span><span class="p">,</span> 
+                    <span class="n">steps_per_epoch</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">train_batch_generator</span><span class="p">),</span> 
+                    <span class="n">epochs</span>           <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> 
+                    <span class="n">verbose</span>          <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+                    <span class="c1">#validation_data  = valid_batch,</span>
+                    <span class="c1">#validation_steps = len(valid_batch),</span>
+                    <span class="n">callbacks</span>        <span class="o">=</span> <span class="p">[</span><span class="n">early_stop</span><span class="p">,</span> <span class="n">checkpoint</span><span class="p">],</span> 
+                    <span class="n">max_queue_size</span>   <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch 1/50
+535/536 [============================>.] - ETA: 18s - loss: 0.8487Epoch 00001: loss improved from inf to 0.84864, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10093s 19s/step - loss: 0.8486
+Epoch 2/50
+535/536 [============================>.] - ETA: 18s - loss: 0.8407Epoch 00002: loss improved from 0.84864 to 0.84071, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 9974s 19s/step - loss: 0.8407
+Epoch 3/50
+535/536 [============================>.] - ETA: 19s - loss: 0.8348Epoch 00003: loss improved from 0.84071 to 0.83478, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10325s 19s/step - loss: 0.8348
+Epoch 4/50
+535/536 [============================>.] - ETA: 19s - loss: 0.8326Epoch 00004: loss improved from 0.83478 to 0.83307, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10211s 19s/step - loss: 0.8331
+Epoch 5/50
+535/536 [============================>.] - ETA: 19s - loss: 0.8289Epoch 00005: loss improved from 0.83307 to 0.82875, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10407s 19s/step - loss: 0.8287
+Epoch 6/50
+535/536 [============================>.] - ETA: 18s - loss: 0.8233Epoch 00006: loss improved from 0.82875 to 0.82336, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10118s 19s/step - loss: 0.8234
+Epoch 7/50
+535/536 [============================>.] - ETA: 18s - loss: 0.8226Epoch 00007: loss improved from 0.82336 to 0.82245, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10116s 19s/step - loss: 0.8225
+Epoch 8/50
+535/536 [============================>.] - ETA: 18s - loss: 0.8165Epoch 00008: loss improved from 0.82245 to 0.81658, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10114s 19s/step - loss: 0.8166
+Epoch 9/50
+535/536 [============================>.] - ETA: 19s - loss: 0.8120Epoch 00009: loss improved from 0.81658 to 0.81197, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10435s 19s/step - loss: 0.8120
+Epoch 10/50
+535/536 [============================>.] - ETA: 18s - loss: 0.8085Epoch 00010: loss improved from 0.81197 to 0.80853, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10108s 19s/step - loss: 0.8085
+Epoch 11/50
+535/536 [============================>.] - ETA: 29s - loss: 0.8038 Epoch 00011: loss improved from 0.80853 to 0.80450, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 16065s 30s/step - loss: 0.8045
+Epoch 12/50
+535/536 [============================>.] - ETA: 19s - loss: 0.8010Epoch 00012: loss improved from 0.80450 to 0.80065, saving model to weights_yolo_on_voc2012.h5
+536/536 [==============================] - 10262s 19s/step - loss: 0.8006
+Epoch 13/50
+106/536 [====>.........................] - ETA: 2:27:29 - loss: 0.7866</pre>
+</div>
+</div>
 </div>
 </div>
 </div>

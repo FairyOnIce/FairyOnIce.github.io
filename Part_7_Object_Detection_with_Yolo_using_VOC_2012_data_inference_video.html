@@ -1166,7 +1166,7 @@ This blog assumes that the readers have read the previous blog posts - <a href="
 <span class="n">CLASS</span>             <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">LABELS</span><span class="p">)</span>
 <span class="n">model</span><span class="p">,</span> <span class="n">_</span>          <span class="o">=</span> <span class="n">define_YOLOv2</span><span class="p">(</span><span class="n">IMAGE_H</span><span class="p">,</span><span class="n">IMAGE_W</span><span class="p">,</span><span class="n">GRID_H</span><span class="p">,</span><span class="n">GRID_W</span><span class="p">,</span><span class="n">TRUE_BOX_BUFFER</span><span class="p">,</span><span class="n">BOX</span><span class="p">,</span><span class="n">CLASS</span><span class="p">,</span> 
                                   <span class="n">trainable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s2">"weights_yumi.h5"</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">load_weights</span><span class="p">(</span><span class="s2">"weights_yolo_on_voc2012.h5"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1231,8 +1231,8 @@ Using TensorFlow backend.
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">backend</span> <span class="k">import</span> <span class="n">ImageReader</span> <span class="c1"># from part 2 blog</span>
 <span class="n">count</span>    <span class="o">=</span> <span class="mi">0</span>
-<span class="n">min_count</span> <span class="o">=</span> <span class="mi">1000</span>
-<span class="n">max_count</span> <span class="o">=</span> <span class="mi">1200</span>
+<span class="n">min_count</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">#1000</span>
+<span class="n">max_count</span> <span class="o">=</span> <span class="n">draw2200</span>
 <span class="n">X_test</span>   <span class="o">=</span> <span class="p">[]</span>
 <span class="k">while</span> <span class="n">count</span> <span class="o"><</span> <span class="n">max_count</span><span class="p">:</span>
     <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -1242,7 +1242,9 @@ Using TensorFlow backend.
         
     <span class="k">if</span> <span class="n">count</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">" </span><span class="si">{}</span><span class="s2">/</span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">count</span><span class="p">,</span><span class="n">nb_frames</span><span class="p">))</span>        
-    <span class="n">imageReader</span> <span class="o">=</span> <span class="n">ImageReader</span><span class="p">(</span><span class="n">IMAGE_H</span><span class="p">,</span><span class="n">IMAGE_W</span><span class="o">=</span><span class="n">IMAGE_W</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="k">lambda</span> <span class="n">image</span> <span class="p">:</span> <span class="n">image</span> <span class="o">/</span> <span class="mf">255.</span><span class="p">)</span>
+    <span class="n">imageReader</span> <span class="o">=</span> <span class="n">ImageReader</span><span class="p">(</span><span class="n">IMAGE_H</span><span class="p">,</span>
+                              <span class="n">IMAGE_W</span> <span class="o">=</span> <span class="n">IMAGE_W</span><span class="p">,</span> 
+                              <span class="n">norm</span>    <span class="o">=</span> <span class="k">lambda</span> <span class="n">image</span> <span class="p">:</span> <span class="n">image</span> <span class="o">/</span> <span class="mf">255.</span><span class="p">)</span>
     <span class="n">_image</span>      <span class="o">=</span> <span class="n">imageReader</span><span class="o">.</span><span class="n">encode_core</span><span class="p">(</span><span class="n">_image</span><span class="p">)</span>
     <span class="n">X_test</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_image</span><span class="p">)</span>
     
@@ -1261,6 +1263,16 @@ Using TensorFlow backend.
 <pre> 1000/8024
  1100/8024
  1200/8024
+ 1300/8024
+ 1400/8024
+ 1500/8024
+ 1600/8024
+ 1700/8024
+ 1800/8024
+ 1900/8024
+ 2000/8024
+ 2100/8024
+ 2200/8024
 </pre>
 </div>
 </div>
@@ -1319,8 +1331,8 @@ Using TensorFlow backend.
         <span class="n">boxes</span>        <span class="o">=</span> <span class="n">find_high_class_probability_bbox</span><span class="p">(</span><span class="n">netout_scale</span><span class="p">,</span><span class="n">obj_threshold</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">boxes</span><span class="p">)</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">final_boxes</span> <span class="o">=</span> <span class="n">nonmax_suppression</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span>
-                                             <span class="n">iou_threshold</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-                                             <span class="n">obj_threshold</span><span class="o">=</span><span class="n">obj_threshold</span><span class="p">)</span>
+                                             <span class="n">iou_threshold</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span>
+                                             <span class="n">obj_threshold</span> <span class="o">=</span> <span class="n">obj_threshold</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">final_boxes</span><span class="p">)</span> <span class="o">></span> <span class="mi">0</span><span class="p">:</span> 
                 <span class="n">image</span> <span class="o">=</span> <span class="n">draw_boxes</span><span class="p">(</span><span class="n">image</span><span class="p">,</span><span class="n">final_boxes</span><span class="p">,</span><span class="n">LABELS</span><span class="p">)</span>
         <span class="c1">#video_writer.write(np.uint8(image))</span>
