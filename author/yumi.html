@@ -72,6 +72,57 @@ placeholder="Google Search"/>
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="https://FairyOnIce.github.io/2D-DCT.html">Two-dimensional Discrete Cosine Transform as a Linear Transformation</a>
+      </h1>
+      <p class="meta"><time datetime="2019-08-01T21:00:00-07:00" pubdate>Thu 01 August 2019</time></p>
+</header>
+
+  <div class="entry-content">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In previous blog post 
+I reviewed <a href="Review on Discrete Fourier Transform">one-dimensional Discrete Fourier Transform (DFT)</a> as well as <a href="https://fairyonice.github.io/Frequency-analysis-of-images-from-scratch.html">two-dimensional DFT</a>. 
+This short post is along the same line, and specifically study the following topics:</p>
+<ul>
+<li>Discrete Cosine Transform</li>
+<li>Represent DCT as a linear transformation of measurements in time/spatial domain to the frequency domain.</li>
+<li>What would happen if you use 1D DFT on the image, which has two dimensions?</li></div>
+  <footer>
+    <a rel="full-article" href="https://FairyOnIce.github.io/2D-DCT.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://FairyOnIce.github.io/1D-DCT-vs-2D-DCT.html">What would happen if image is analyzed with 1D-DCT vs 2D-DCT?</a>
+      </h1>
+      <p class="meta"><time datetime="2019-07-19T21:00:00-07:00" pubdate>Fri 19 July 2019</time></p>
+</header>
+
+  <div class="entry-content">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the previous blog, I reviewed 1D-DCT and 2D-DCT. In this blog, I will check what would happen if you denoise the image via 1D-DCT on flattened image.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Denoising">Denoising<a class="anchor-link" href="#Denoising">¶</a></h2><p>I will denoise the image by first transforming an image to frequency domain and pick the top $k$ largest DCT coefficients in absolute values.
+The remaining DCT coefficients are sparcified to zero. The new DCT coefficients are then inverse DCTed to spacial domain. The recovered image is visualized.</p></div>
+  <footer>
+    <a rel="full-article" href="https://FairyOnIce.github.io/1D-DCT-vs-2D-DCT.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="https://FairyOnIce.github.io/Grad-CAM-with-keras-vis.html">Grad-CAM with keras-vis</a>
       </h1>
       <p class="meta"><time datetime="2019-04-13T20:00:00-07:00" pubdate>Sat 13 April 2019</time></p>
@@ -301,48 +352,6 @@ This blog assumes that the readers have read the previous blog posts - <a href="
     <a rel="full-article" href="https://FairyOnIce.github.io/Part_5_Object_Detection_with_Yolo_using_VOC_2012_data_training.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Part_4_Object_Detection_with_Yolo_using_VOC_2012_data_loss.html">Part 4 Object Detection using YOLOv2 on Pascal VOC2012 - loss</a>
-      </h1>
-      <p class="meta"><time datetime="2018-12-09T20:00:00-08:00" pubdate>Sun 09 December 2018</time></p>
-</header>
-
-  <div class="entry-content">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="experiencor/keras-yolo2's-YOLO-V2-loss"><a href="https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb">experiencor/keras-yolo2</a>'s YOLO V2 loss<a class="anchor-link" href="#experiencor/keras-yolo2's-YOLO-V2-loss">¶</a></h3><p><img alt="YOLO v2 loss funciton" height="570" src="https://farm8.staticflickr.com/7904/45592720625_821897e898_b.jpg" width="1024" /></a></p>
-<p>This is the fourth blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. 
-This blog discusses the YOLO's loss funciton. This will be the most intense blog post in <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. as loss function of YOLO is quite complex. So please get excited! 
-For demonstration of the code, I will agian use PASCAL VOC2012 data. 
-This blog assumes that the readers have read the previous blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a></div>
-  <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Part_4_Object_Detection_with_Yolo_using_VOC_2012_data_loss.html">Read On &crarr;</a>
-  </footer>
-  		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Part 3 Object Detection using YOLOv2 on Pascal VOC2012 - model</a>
-      </h1>
-      <p class="meta"><time datetime="2018-12-02T20:00:00-08:00" pubdate>Sun 02 December 2018</time></p>
-</header>
-
-  <div class="entry-content">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This is the third blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. This blog discusses the YOLO's model architecture. I will use PASCAL VOC2012 data. This blog assumes that the readers have read the previous two blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a>, <a href="https://fairyonice.github.io/Part%202_Object_Detection_with_Yolo_using_VOC_2014_data_input_and_output_encoding.html">Part 2</a>.</p>
-<h2 id="Andrew-Ng's-YOLO-lecture">Andrew Ng's YOLO lecture<a class="anchor-link" href="#Andrew-Ng's-YOLO-lecture">¶</a></h2><ul>
-<li><a href="https://www.youtube.com/watch?v=gKreZOUi-O0&amp;t=0s&amp;index=7&amp;list=PL_IHmaMAvkVxdDOBRg2CbcJBq9SY7ZUvs">Neural Networks - Bounding Box Predictions</a></div>
-  <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Part_3_Object_Detection_with_Yolo_using_VOC_2012_data_model.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="https://FairyOnIce.github.io/author/yumi2.html">&larr; Older</a>
 
@@ -360,6 +369,12 @@ This blog assumes that the readers have read the previous blog posts - <a href="
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/2D-DCT.html">Two-dimensional Discrete Cosine Transform as a Linear Transformation</a>
+      </li>
+      <li class="post">
+          <a href="https://FairyOnIce.github.io/1D-DCT-vs-2D-DCT.html">What would happen if image is analyzed with 1D-DCT vs 2D-DCT?</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Grad-CAM-with-keras-vis.html">Grad-CAM with keras-vis</a>
       </li>
       <li class="post">
@@ -367,12 +382,6 @@ This blog assumes that the readers have read the previous blog posts - <a href="
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Visualization-of-deep-learning-classification-model-using-keras-vis.html">Visualization of deep learning classification model using keras-vis</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Step_by_Step_Data_Science_Night_Complete.html">Use pretrained YOLO network for object detection, SJSU data science night</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Step_by_Step_Data_Science_Night_Setup.html">Use pretrained YOLO network for object detection, SJSU data science night (Setup)</a>
       </li>
     </ul>
   </section>
@@ -387,7 +396,7 @@ This blog assumes that the readers have read the previous blog posts - <a href="
 
   <section>
   <h1>Tags</h1>
-    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/spectrogram.html">Spectrogram</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection using YOLOv2 on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/pascal-voc2012.html">PASCAL VOC2012</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-rcnn-on-pascal-voc2012-series.html">Object Detection using RCNN on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/deep-learning.html">deep learning</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection.html">Object Detection</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>,    <a href="https://FairyOnIce.github.io/tag/fourier-transform.html">Fourier Transform</a>  </section>
+    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/deep-learning.html">deep learning</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection using YOLOv2 on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/pascal-voc2012.html">PASCAL VOC2012</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-rcnn-on-pascal-voc2012-series.html">Object Detection using RCNN on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/spectrogram.html">Spectrogram</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection.html">Object Detection</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>,    <a href="https://FairyOnIce.github.io/tag/fourier-transform.html">Fourier Transform</a>  </section>
 
 
     <section>

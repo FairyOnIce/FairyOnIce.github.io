@@ -72,6 +72,56 @@ placeholder="Google Search"/>
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="https://FairyOnIce.github.io/Object-detection-using-Haar-feature-based-cascade-classifiers-on-my-face.html">Object detection using Haar feature-based cascade classifiers on my face</a>
+      </h1>
+      <p class="meta"><time datetime="2018-04-03T20:00:00-07:00" pubdate>Tue 03 April 2018</time></p>
+</header>
+
+  <div class="entry-content">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="Yumi's driving" src="https://media.giphy.com/media/fseXN4KHDVeAfcaz5p/giphy.gif" /></p>
+<p>The above gif shows the object detection results from the Haar cascades implemented in OpenCV.</p>
+<p>In ths previous blog post <a href="Driver-facial-keypoint-detection.html">Driver's facial keypoint detection</a>, I used public dataset <a href="http://adas.cvc.uab.es/elektra/enigma-portfolio/cvc11-drivface-dataset/">CVC11</a> to train a facial keypoint detection model.  The crucial step in the modeling procedure was to trim image using the face's bounding box. 
+In practice, you might not have access to nice bounding box. 
+In such cases, pre-trained facial detection classifier such as Haar cascade can be useful.</p></div>
+  <footer>
+    <a rel="full-article" href="https://FairyOnIce.github.io/Object-detection-using-Haar-feature-based-cascade-classifiers-on-my-face.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://FairyOnIce.github.io/Driver-facial-keypoint-detection.html">Driver's facial keypoint detection</a>
+      </h1>
+      <p class="meta"><time datetime="2018-03-31T20:00:00-07:00" pubdate>Sat 31 March 2018</time></p>
+</header>
+
+  <div class="entry-content">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img alt="Test subject gif" src="https://media.giphy.com/media/2898LwGGAJHD7ZCbgW/giphy.gif" /></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What you see above is the gif of a driver subject from test data with the estimated facial keypoints.</p>
+<p>Evaluation of driving performance is very important to reduce road accident rate.
+There are a lot of public data related to the driver's faces, including some from the Kaggle competition by <a href="https://www.kaggle.com/c/state-farm-distracted-driver-detection">State Farm Distracted Driver Detection</a></div>
+  <footer>
+    <a rel="full-article" href="https://FairyOnIce.github.io/Driver-facial-keypoint-detection.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="https://FairyOnIce.github.io/create-jpgs-from-iphone-video.html">Extract series of JPEG files from iPhone 6S video</a>
       </h1>
       <p class="meta"><time datetime="2018-03-28T20:00:00-07:00" pubdate>Wed 28 March 2018</time></p>
@@ -257,44 +307,6 @@ such as
     <a rel="full-article" href="https://FairyOnIce.github.io/Stateful-LSTM-model-training-in-Keras.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Extract-weights-from-Keras's-LSTM-and-calcualte-hidden-and-cell-states.html">Extract weights from Keras's LSTM and calcualte hidden and cell states</a>
-      </h1>
-      <p class="meta"><time datetime="2018-02-19T20:00:00-08:00" pubdate>Mon 19 February 2018</time></p>
-</header>
-
-  <div class="entry-content">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>In this blog post, I will review the famous long short-term memory (LSTM) model and try to understand how it is implemented in Keras. If you know nothing about recurrent deep learning model, please read my <a href="https://fairyonice.github.io/Understand-Keras's-RNN-behind-the-scenes-with-a-sin-wave-example.html">previous post about recurrent neural network</a>. If you know reccurent neural network (RNN) but not LSTM, you should first read <a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/">Colah's great blog post</a></div>
-  <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Extract-weights-from-Keras's-LSTM-and-calcualte-hidden-and-cell-states.html">Read On &crarr;</a>
-  </footer>
-  		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Understand-Keras's-RNN-behind-the-scenes-with-a-sin-wave-example.html">Understand Keras's RNN behind the scenes with a sin wave example - Stateful and Stateless prediction -</a>
-      </h1>
-      <p class="meta"><time datetime="2018-02-17T20:00:00-08:00" pubdate>Sat 17 February 2018</time></p>
-</header>
-
-  <div class="entry-content">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Recurrent Neural Network (RNN) has been successful in modeling time series data.</p>
-<p>People say that RNN is great for modeling sequential data because it is designed to potentially remember the entire history of the time series to predict values. "In theory" this may be true.</p>
-<p>But when it comes to implementation of the RNN model in Keras, practitioners need to specify a "length of time series" in batch_shape:</p></div>
-  <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Understand-Keras's-RNN-behind-the-scenes-with-a-sin-wave-example.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="https://FairyOnIce.github.io/author/yumi6.html">&larr; Older</a>
 
@@ -313,6 +325,12 @@ such as
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/2D-DCT.html">Two-dimensional Discrete Cosine Transform as a Linear Transformation</a>
+      </li>
+      <li class="post">
+          <a href="https://FairyOnIce.github.io/1D-DCT-vs-2D-DCT.html">What would happen if image is analyzed with 1D-DCT vs 2D-DCT?</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/Grad-CAM-with-keras-vis.html">Grad-CAM with keras-vis</a>
       </li>
       <li class="post">
@@ -320,12 +338,6 @@ such as
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Visualization-of-deep-learning-classification-model-using-keras-vis.html">Visualization of deep learning classification model using keras-vis</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Step_by_Step_Data_Science_Night_Complete.html">Use pretrained YOLO network for object detection, SJSU data science night</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Step_by_Step_Data_Science_Night_Setup.html">Use pretrained YOLO network for object detection, SJSU data science night (Setup)</a>
       </li>
     </ul>
   </section>
@@ -340,7 +352,7 @@ such as
 
   <section>
   <h1>Tags</h1>
-    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/spectrogram.html">Spectrogram</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection using YOLOv2 on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/pascal-voc2012.html">PASCAL VOC2012</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-rcnn-on-pascal-voc2012-series.html">Object Detection using RCNN on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/deep-learning.html">deep learning</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection.html">Object Detection</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>,    <a href="https://FairyOnIce.github.io/tag/fourier-transform.html">Fourier Transform</a>  </section>
+    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/deep-learning.html">deep learning</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection using YOLOv2 on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/pascal-voc2012.html">PASCAL VOC2012</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-rcnn-on-pascal-voc2012-series.html">Object Detection using RCNN on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/spectrogram.html">Spectrogram</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection.html">Object Detection</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>,    <a href="https://FairyOnIce.github.io/tag/fourier-transform.html">Fourier Transform</a>  </section>
 
 
     <section>
