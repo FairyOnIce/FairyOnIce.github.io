@@ -1077,8 +1077,8 @@ x_n = \left(\frac{1}{2} x_0 + \sum_{k=1}^{N-1} x_k cos\left( \frac{\pi}{N} k \bi
 $$
 The inverse of DCT-II is DCT-III multiplied by 2/N and vice versa.
 Roughly speaking, this is the real part of Discrete Fourier Transform. 
-See <a href="https://fairyonice.github.io/Frequency-analysis-of-images-from-scratch.html">Frequency analysis of images from scratch</a> for the defenition of DFT.</p>
-<p>The formula above is not "orthogonal". The orthogonality property is explained later in this blog and it is very nice property to have. Therefore, people often used orthogonal version of the DCTII. orthogonal DCTII can be readily obtained by multilying x_0 by $\sqrt{1/(4N)}$ and multipling all the rest $k > 0$ by $\sqrt{1/(2N)}$. Then the orthogonal DCTII can be represented as:</p>
+See <a href="https://fairyonice.github.io/Frequency-analysis-of-images-from-scratch.html">Frequency analysis of images from scratch</a> for the definition of DFT.</p>
+<p>The formula above is not "orthogonal". The orthogonality property is explained later in this blog and it is very nice property to have. Therefore, people often used orthogonal version of the DCTII. orthogonal DCTII can be readily obtained by multiplying x_0 by $\sqrt{1/(4N)}$ and multiplying all the rest $k > 0$ by $\sqrt{1/(2N)}$. Then the orthogonal DCTII can be represented as:</p>
 </div>
 </div>
 </div>
@@ -1096,7 +1096,7 @@ $$</p>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As in the previous DFT blog, let's convince ourselves that the relationship holds with small time serise og length 7.</p>
+<p>As in the previous DFT blog, let's convince ourselves that the relationship holds with small time series of length 7.</p>
 </div>
 </div>
 </div>
@@ -1417,10 +1417,10 @@ where</p>
 </li>
 <li><p>$\boldsymbol{x} \in R^N$ and its $n$th element is $x_n$
 The $\boldsymbol{C}$ is called DCT matrix.
-Notice that the inverse DCT can be simply obtained by multiplying frequency domain signal $\boldsymbol{X}$ with $\boldsymbol{C}^T$, because $\boldsymbol{C}^T=\boldsymbol{C}^{-1}$. This is the orthgonarity property of $\boldsymbol{C}$ and reason why the original DCT is scaled.</p>
+Notice that the inverse DCT can be simply obtained by multiplying frequency domain signal $\boldsymbol{X}$ with $\boldsymbol{C}^T$, because $\boldsymbol{C}^T=\boldsymbol{C}^{-1}$. This is the orthogonality property of $\boldsymbol{C}$ and reason why the original DCT is scaled.</p>
 </li>
 </ul>
-<p>Let's validate this orthgonarity.</p>
+<p>Let's validate this orthogonality.</p>
 </div>
 </div>
 </div>
@@ -3583,7 +3583,7 @@ CCF6kCRfQgghhBA96P8BTWQUbMOQJzoAAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, let's reproduce the DCT Coefficients using the matrix $\boldsymbol{C}$</p>
+<p>Now, let's reproduce the DCT Coefficients using the matrix $\boldsymbol{C}$:</p>
 </div>
 </div>
 </div>
@@ -4420,6 +4420,9 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/Learn-the-Carlini-and-Wagners-adversarial-attack-MNIST.html">Learn the Carlini and Wagner's adversarial attack - MNIST</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/1D-DCT-vs-2D-DCT.html">What would happen if image is analyzed with 1D-DCT vs 2D-DCT?</a>
       </li>
       <li class="post">
@@ -4430,9 +4433,6 @@ s.setAttribute('data-timestamp', +new Date());
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Saliency-Map-with-keras-vis.html">Saliency Map with keras-vis</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Visualization-of-deep-learning-classification-model-using-keras-vis.html">Visualization of deep learning classification model using keras-vis</a>
       </li>
     </ul>
   </section>
@@ -4447,7 +4447,7 @@ s.setAttribute('data-timestamp', +new Date());
 
   <section>
   <h1>Tags</h1>
-    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/deep-learning.html">deep learning</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection using YOLOv2 on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/pascal-voc2012.html">PASCAL VOC2012</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-rcnn-on-pascal-voc2012-series.html">Object Detection using RCNN on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/spectrogram.html">Spectrogram</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection.html">Object Detection</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>,    <a href="https://FairyOnIce.github.io/tag/fourier-transform.html">Fourier Transform</a>  </section>
+    <a href="https://FairyOnIce.github.io/tag/bleu.html">BLEU</a>,    <a href="https://FairyOnIce.github.io/tag/deep-learning.html">deep learning</a>,    <a href="https://FairyOnIce.github.io/tag/computer-vision.html">computer vision</a>,    <a href="https://FairyOnIce.github.io/tag/nlp.html">NLP</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection using YOLOv2 on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/api.html">API</a>,    <a href="https://FairyOnIce.github.io/tag/pascal-voc2012.html">PASCAL VOC2012</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection-using-rcnn-on-pascal-voc2012-series.html">Object Detection using RCNN on Pascal VOC2012 series</a>,    <a href="https://FairyOnIce.github.io/tag/gps-watch.html">GPS watch</a>,    <a href="https://FairyOnIce.github.io/tag/spectrogram.html">Spectrogram</a>,    <a href="https://FairyOnIce.github.io/tag/heroku.html">Heroku</a>,    <a href="https://FairyOnIce.github.io/tag/object-detection.html">Object Detection</a>,    <a href="https://FairyOnIce.github.io/tag/game.html">Game</a>,    <a href="https://FairyOnIce.github.io/tag/tensorflow.html">TensorFlow</a>,    <a href="https://FairyOnIce.github.io/tag/celeba.html">CelebA</a>,    <a href="https://FairyOnIce.github.io/tag/statistics.html">Statistics</a>,    <a href="https://FairyOnIce.github.io/tag/model.html">Model</a>,    <a href="https://FairyOnIce.github.io/tag/natural-language-processing.html">Natural Language Processing</a>,    <a href="https://FairyOnIce.github.io/tag/fourier-transform.html">Fourier Transform</a>  </section>
 
 
     <section>
