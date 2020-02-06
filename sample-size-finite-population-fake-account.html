@@ -1161,7 +1161,7 @@ $q_{0.0005} = -3.2905$</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To solve the above equality with respect to $n$, we now need to know the form of $SD(\hat{p}_n)$. 
-We first shows the simple approach where the population size is infinite (<-- False Assumption), and show its shortcoming.</p>
+We first shows the simple approach with the infinite population size assumption (<-- False!), and show its shortcoming.</p>
 <h3 id="The-form-of-$SD(\hat{p}_n)$">The form of $SD(\hat{p}_n)$<a class="anchor-link" href="#The-form-of-$SD(\hat{p}_n)$">¶</a></h3><p>Let's consider its squared form, variance:
 \begin{array}{rl}
 Var\Big(\hat{p}_n\Big) 
@@ -1208,7 +1208,7 @@ q_{0.0005} \frac{0.5}{0.0001}&= \sqrt{n} \\
 \end{array}</p>
 <p>WOOO, to get an acceptable prediction accuracy, we need THIS MANY sample.</p>
 <p>Wait a second, what would happen if we want the confidence level to be 99.99%?
-This will simply change the denominator in the formula above from 0.0001 to 0.00001 which gives me the sample size of 27 billions!! This is larger than the Facebook sample size. So where did my calculation get wrong?</p>
+This will simply change the denominator in the formula above from 0.0001 to 0.00001 which gives me the sample size of 27 billions!! This is larger than the Facebook population size. (Larger than population on earth.) So where did my calculation get wrong?</p>
 </div>
 </div>
 </div>
@@ -1376,7 +1376,8 @@ In case of finite population case, this equality becomes:</p>
 n_{finite} = \frac{N}{\frac{N-1}{n_{infinite}}+1} = \frac{n_{infinite} N}{N-1 + n_{infinite}}
 $$</p>
 <p>Notice that when $N$ goes to infinity, $n_{finite} \rightarrow n_{infinite}$.</p>
-<p>Once again, assuming conservative population variance of $\sigma^2 = p(1-p) = 0.5*0.5 = 0.25$, and $N=2,000,000,000$, the required sample size becomes:</p>
+<p>Once again, assuming conservative population variance of $\sigma^2 = p(1-p) = 0.5*0.5 = 0.25$, and $N=2,000,000,000$, the required sample size becomes.</p>
+<p>The difference in sample size become considerable especially when the acceptable error rate is small.</p>
 </div>
 </div>
 </div>
