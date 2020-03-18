@@ -1175,8 +1175,8 @@ $$</li>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The first derivative is:
-$$
+<p>The first derivative is:</p>
+<p>$$
 \frac{\partial L(\boldsymbol{w})}{\partial \boldsymbol{w}}
 =\boldsymbol{w} - \sum_{i=1}^N \alpha_i y_i \boldsymbol{x}_i = 0
 $$</p>
@@ -1211,13 +1211,10 @@ $$</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>\begin{array}{rl}
-L(\alpha<em>i,i=1,\cdots, N)& = \frac{1}{2} \sum</em>{i=1}^N \alpha_i y_i \boldsymbol{x}<em>i^T \sum</em>{i=1}^N \alpha_i y_i \boldsymbol{x}_i</p>
-<ul>
-<li>\sum_{i=1}^N \alpha_i y<em>i \left( \sum</em>{k=1}^N \alpha_k y_k \boldsymbol{x}_k\right)\boldsymbol{x}<em>i+ b \sum</em>{i=1}^N \alpha_i y<em>i - \sum</em>{i=1}^N \alpha<em>i \
-& =  \sum</em>{i=1}^N \alpha<em>i  -\frac{1}{2} \sum</em>{i=1}^N \sum_{j=1}^N<br />
-\alpha_i\alpha_j  y_i y_j \boldsymbol{x}_i^T  \boldsymbol{x}_j<br />
-\end{array}</li>
-</ul>
+L(\alpha_i,i=1,\cdots, N)& = \frac{1}{2} \sum_{i=1}^N \alpha_i y_i \boldsymbol{x}_i^T \sum_{i=1}^N \alpha_i y_i \boldsymbol{x}_i  - \sum_{i=1}^N \alpha_i y_i \left( \sum_{k=1}^N \alpha_k y_k \boldsymbol{x}_k\right)\boldsymbol{x}_i+ b \sum_{i=1}^N \alpha_i y_i - \sum_{i=1}^N \alpha_i \\
+& =  \sum_{i=1}^N \alpha_i  -\frac{1}{2} \sum_{i=1}^N \sum_{j=1}^N  
+\alpha_i\alpha_j  y_i y_j \boldsymbol{x}_i^T  \boldsymbol{x}_j  
+\end{array}</p>
 </div>
 </div>
 </div>
