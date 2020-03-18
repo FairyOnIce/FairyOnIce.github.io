@@ -1157,13 +1157,10 @@ $$</p>
 <p>\begin{array}{rl}
 y_i (\boldsymbol{w}\boldsymbol{x}_{gutter} + b) = 1 \\
 \end{array}</p>
-<p>This is done by lagrange multiplier $\alpha_i$. The optimization problem becomes:</p>
+<p>This is done by Lagrange multiplier $\alpha_i$. The optimization problem becomes:</p>
 <p>$$
-L(\boldsymbol{w}) =  \frac{1}{2}|| \boldsymbol{w}||^2</p>
-<ul>
-<li>\sum_{i=1}^N \alpha_i\left( y_i (\boldsymbol{w}\boldsymbol{x}_i+ b) - 1\right)
-$$</li>
-</ul>
+L(\boldsymbol{w}) =  \frac{1}{2}|| \boldsymbol{w}||^2 - \sum_{i=1}^N \alpha_i\left( y_i (\boldsymbol{w}\boldsymbol{x}_i+ b) - 1\right)
+$$</p>
 <p>Fact:</p>
 <ul>
 <li>Only some of the $\alpha_i$ on gutters receive nonzero values in this optimization problem!!! </li>
