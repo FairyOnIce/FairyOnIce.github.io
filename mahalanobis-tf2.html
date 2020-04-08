@@ -18,7 +18,7 @@
  
 
   <meta charset="utf-8">
-  <title>Extract series of JPEG files from iPhone 6S video</title>
+  <title>Calculate Mahalanobis distance with tensorflow 2.0</title>
   <meta name="author" content="Yumi">
 
 
@@ -71,8 +71,8 @@ placeholder="Google Search"/>
 <div>
   <article class="hentry" role="article">
 <header>
-      <h1 class="entry-title">Extract series of JPEG files from iPhone 6S video</h1>
-      <p class="meta"><time datetime="2018-03-28T20:00:00-07:00" pubdate>Wed 28 March 2018</time></p>
+      <h1 class="entry-title">Calculate Mahalanobis distance with tensorflow 2.0</h1>
+      <p class="meta"><time datetime="2019-12-29T21:00:00-08:00" pubdate>Sun 29 December 2019</time></p>
 </header>
 
   <div class="entry-content"><style type="text/css">/*!
@@ -1051,96 +1051,24 @@ h6:hover .anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In this blog, I will show how to extract image (.png) from video recorded using iphone.</p>
-<h3 id="Preparation">Preparation<a class="anchor-link" href="#Preparation">¶</a></h3><p>I recorded a 10 minutes and 21 second video using my iphone 6s.
-In my current directory, I have IMG7367.MOV file with:</p>
+<p>I noticed that tensorflow does not have functions to compute Mahalanobis distance between two groups of samples.
+So here I go and provide the code with explanation. The blog is organized and explain the following topics</p>
 <ul>
-<li>Size: 639.3 MB  </li>
-<li>Dimensions: 1280 × 720</li>
-</ul>
-<h3 id="You-need-cv2">You need cv2<a class="anchor-link" href="#You-need-cv2">¶</a></h3><p>If you do not have cv2, please make sure to pip install it as:</p>
-<pre><code>pip3 install opencv-python==3.2.0.6</code></pre>
-<h2 id="Reference">Reference<a class="anchor-link" href="#Reference">¶</a></h2><ul>
-<li><a href="https://docs.opencv.org/3.1.0/dd/d43/tutorial_py_video_display.html">in opencv official document</a> </li>
-<li><a href="https://stackoverflow.com/questions/33311153/python-extracting-and-saving-video-frames">Python - Extracting and Saving Video Frames</a></li>
-<li><a href="https://stackoverflow.com/questions/22704936/reading-every-nth-frame-from-videocapture-in-opencv/24684555">Reading every nth frame from VideoCapture in OpenCV</a></li>
+<li>Euclidean distance with Scipy</li>
+<li>Euclidean distance with Tensorflow v2</li>
+<li>Mahalanobis distance with Scipy</li>
+<li>Mahalanobis distance with Tensorflow v2</li>
 </ul>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The location of the MOV file from iphone.</p>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [60]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
 <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">path_to_MOV</span> <span class="o">=</span> <span class="s2">"IMG_7367.MOV"</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The location of the directory to save the file. If the folder does NOT exist, then create one.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [61]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">os</span> 
-<span class="n">dir_jpgs</span> <span class="o">=</span> <span class="n">path_to_MOV</span><span class="p">[:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">dir_jpgs</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">"folder created"</span><span class="p">)</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="k">pass</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>As I recorded a 10 minutes and 21 second video using my iphone 6s, and the iphone 6s has 30fps, getting every frame will create about 18650 images, which is a bit too many.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [62]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">VIDEO_MIN</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">+</span> <span class="mf">21.0</span><span class="o">/</span><span class="mi">60</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [63]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cap</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">VideoCapture</span><span class="p">(</span><span class="n">path_to_MOV</span><span class="p">)</span>
-<span class="n">FPS</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">CAP_PROP_FPS</span><span class="p">)</span> <span class="c1"># Gets the frames per second</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"FPS:</span><span class="si">{:4.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">FPS</span><span class="p">))</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="s2">"The maximum number of frames that can be extracted: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">VIDEO_MIN</span> <span class="o">*</span><span class="mi">60</span><span class="o">*</span> <span class="n">FPS</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"tensorflow:"</span><span class="p">,</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1150,8 +1078,7 @@ In my current directory, I have IMG7367.MOV file with:</p>
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>FPS:30.02
-The maximum number of frames that can be extracted: 18645
+<pre>tensorflow: 2.1.0
 </pre>
 </div>
 </div>
@@ -1162,73 +1089,45 @@ The maximum number of frames that can be extracted: 18645
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I will downsample and sample every 10 frame.</p>
+<h1 id="Euclidean-distance-with-Spicy">Euclidean distance with Spicy<a class="anchor-link" href="#Euclidean-distance-with-Spicy">¶</a></h1><p>Here is Scipy version of calculating the Euclidean distance between two group of samples:</p>
+<p>$$
+\boldsymbol{a}, R^{\textrm{M1 x n_feat}} \boldsymbol{b} \in R^{\textrm{M2 x n_feat}}
+$$</p>
+<p>At the end we want a distance matrix of size</p>
+<p>$$
+npeuc \in R^{M1 x M2}
+$$</p>
+<p>In the following code, there is a double loop and distance is calculated for each sample pair one by one. This is not very efficient!</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In [64]:</div>
-<div class="inner_cell">
-<div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">downsamplefactor</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Downsampling makes FPS: </span><span class="si">{:4.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">FPS</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">downsamplefactor</span><span class="p">)))</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="output_wrapper">
-<div class="output">
-<div class="output_area">
-<div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Downsampling makes FPS: 3.00
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>This will create roughly 1800 images of size 1280 x 720.</p>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In [65]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
 <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">cv2</span>
-<span class="kn">import</span> <span class="nn">time</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cv2</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="k">import</span> <span class="n">cdist</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">distance</span>
 
-<span class="n">count</span><span class="p">,</span> <span class="n">iframe</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">,</span> <span class="mi">0</span>
-<span class="n">success</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">start</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="k">while</span><span class="p">(</span><span class="n">success</span><span class="p">):</span>
-    <span class="c1"># Capture frame-by-frame</span>
-    <span class="n">success</span><span class="p">,</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">cap</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    <span class="c1"># my original image was upside down. use flip to fix this.</span>
-    <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-    <span class="c1"># fix the mirror</span>
-    <span class="n">frame</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">flip</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-    
-    <span class="k">if</span> <span class="n">count</span> <span class="o">%</span> <span class="n">downsamplefactor</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="c1"># Our operations on the frame come here</span>
-        <span class="n">cv2</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">dir_jpgs</span> <span class="o">+</span> <span class="s1">'/frame</span><span class="si">{:05.0f}</span><span class="s1">.jpg'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iframe</span><span class="p">),</span><span class="n">frame</span><span class="p">)</span>
-        <span class="n">iframe</span> <span class="o">+=</span> <span class="mi">1</span>
-   
-    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="n">count</span> <span class="o">%</span> <span class="mi">2000</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
-<span class="n">cap</span><span class="o">.</span><span class="n">release</span><span class="p">()</span>
-<span class="n">end</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"TIME TOOK </span><span class="si">{:4.2f}</span><span class="s2"> MIN"</span><span class="o">.</span><span class="n">format</span><span class="p">((</span><span class="n">end</span><span class="o">-</span><span class="n">start</span><span class="p">)</span><span class="o">/</span><span class="mi">60</span><span class="p">))</span>
+<span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">n_feat</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span>
+
+<span class="c1"># Scipy calculation</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">n_feat</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span> <span class="n">n_feat</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"b"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">npeuc</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+          <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+<span class="k">for</span> <span class="n">ib</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">ia</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">npeuc</span><span class="p">[</span><span class="n">ia</span><span class="p">][</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">euclidean</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">ia</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">ib</span><span class="p">])</span>
+<span class="n">npeuc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">npeuc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Euclidean distances with scipy"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">npeuc</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1238,17 +1137,320 @@ The maximum number of frames that can be extracted: 18645
 <div class="output_area">
 <div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>3.2.0
-2000
-4000
-6000
-8000
-10000
-12000
-14000
-16000
-18000
-TIME TOOK 3.27 MIN
+<pre>a
+[[0.3898384  0.78091735]
+ [0.18484533 0.16991404]
+ [0.04142497 0.0612804 ]
+ [0.76031846 0.3387485 ]
+ [0.86538064 0.8510765 ]]
+b
+[[0.9657545  0.78346694]
+ [0.167351   0.7013792 ]
+ [0.5052127  0.01969893]
+ [0.7475627  0.29226208]]
+Euclidean distances with scipy
+(5, 4)
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Euclidean-distance-with-Tenworflow-v2">Euclidean distance with Tenworflow v2<a class="anchor-link" href="#Euclidean-distance-with-Tenworflow-v2">¶</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [3]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">Euclidean</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">):</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">p1</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">B</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">p2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">reduce_sum</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="n">p2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">transpose_b</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="k">return</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+
+<span class="n">A</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">Euclidean</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
+<span class="n">tfeuc</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Euclidean distances with tensorflow"</span><span class="p">)</span>
+<span class="n">tfeuc</span>
+<span class="c1">#with tf.Session() as sess: tensorflow v2!!</span>
+<span class="c1">#    print(sess.run(res))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>A
+<tf.variable 'variable:0' shape="(5," 2) dtype="float32," numpy="array([[0.3898384" , 0.78091735], [0.18484533, 0.16991404], [0.04142497, 0.0612804 ], [0.76031846, 0.3387485 ], [0.86538064, 0.8510765 ]], dtype="float32)">
+B
+<tf.variable 'variable:0' shape="(4," 2) dtype="float32," numpy="array([[0.9657545" , 0.78346694], [0.167351 , 0.7013792 ], [0.5052127 , 0.01969893], [0.7475627 , 0.29226208]], dtype="float32)">
+Euclidean distances with tensorflow
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.5759218 , 0.23627718, 0.7699122 , 0.60559934],
+       [0.9931094 , 0.531753  , 0.35383588, 0.57586443],
+       [1.173004  , 0.65236783, 0.46564806, 0.74295557],
+       [0.48987594, 0.69506216, 0.4084993 , 0.04820526],
+       [0.12102088, 0.7139011 , 0.9060406 , 0.57109946]], dtype=float32)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's compare the aggreement between the two Euclidean distances:</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [4]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"average difference in the np calculation and tf calculations are:"</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tfeuc</span> <span class="o">-</span> <span class="n">npeuc</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>average difference in the np calculation and tf calculations are: 7.003545761108399e-08
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Maharanobis-distance-with-Scipy">Maharanobis distance with Scipy<a class="anchor-link" href="#Maharanobis-distance-with-Scipy">¶</a></h1><p>Now we are ready to calculate Mahalanobis distance. As before, let's start with Scipy version.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [5]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial.distance</span> <span class="k">import</span> <span class="n">cdist</span>
+<span class="kn">from</span> <span class="nn">scipy.spatial</span> <span class="k">import</span> <span class="n">distance</span>
+
+<span class="n">M1</span><span class="p">,</span> <span class="n">M2</span><span class="p">,</span> <span class="n">n_feat</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span>
+
+<span class="c1"># Scipy calculation</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">M1</span><span class="p">,</span> <span class="n">n_feat</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">M2</span><span class="p">,</span> <span class="n">n_feat</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="c1"># inverse of the  covariance matrix</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n_feat</span><span class="p">,</span><span class="n">n_feat</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">S</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"a"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"b"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="n">npmah</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+          <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+<span class="k">for</span> <span class="n">ib</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="k">for</span> <span class="n">ia</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="n">npmah</span><span class="p">[</span><span class="n">ia</span><span class="p">][</span><span class="n">ib</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">mahalanobis</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">ia</span><span class="p">],</span><span class="n">b</span><span class="p">[</span><span class="n">ib</span><span class="p">],</span><span class="n">S</span><span class="p">)</span>
+<span class="n">npmah</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">npmah</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Maharanobis distances with scipy"</span><span class="p">)</span>
+<span class="n">npmah</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>a
+[[0.9467549  0.22613871]
+ [0.8387713  0.80988747]
+ [0.82303214 0.51048654]
+ [0.24918175 0.1219909 ]
+ [0.70037013 0.82121724]]
+b
+[[0.37487715 0.6706169 ]
+ [0.13873063 0.11496447]
+ [0.7132854  0.5411484 ]
+ [0.4853384  0.67873824]]
+Maharanobis distances with scipy
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.3778871 , 0.43882653, 0.2763056 , 0.38677463],
+       [0.3112256 , 0.9181496 , 0.3075011 , 0.25844806],
+       [0.17797098, 0.6275558 , 0.04191556, 0.15506305],
+       [0.5897171 , 0.05437765, 0.5684887 , 0.62985957],
+       [0.2643244 , 0.8821087 , 0.28097183, 0.2141314 ]], dtype=float32)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Mahalanobis-distance-with-tensorflow">Mahalanobis distance with tensorflow<a class="anchor-link" href="#Mahalanobis-distance-with-tensorflow">¶</a></h2><p>The mahalanobis distances of two samples $\boldsymbol{x}$ and $\boldsymbol{y}$ $\in R^{Nfeat}$ with covariance matrix $\Sigma \in R^{\textrm{N_feat x N_feat}}$ are defined as:</p>
+<p>\begin{array}{rl}
+(\boldsymbol{x}-\boldsymbol{y})^T \Sigma(\boldsymbol{x}-\boldsymbol{y}) \in R^1
+\end{array}</p>
+<p>My calcualtion of Mahalanobis distance utilizes the calculation of Euclidean distance described above. How? Let me show you!</p>
+<p>The key is to use <a href="https://en.wikipedia.org/wiki/Cholesky_decomposition">Cholesky decomposition</a>. Cholesky decomposition allows decomposing real symetric matrix $A$ into two matrix $A=LL^T$. Fortunately covariance matrix $\Sigma$ is symetric matrix so we can use this decompositin and get a matrix $\boldsymbol{C}$</p>
+<p>\begin{array}{rl}
+\Sigma = \boldsymbol{C}^T\boldsymbol{C}, 
+\end{array}
+where $\boldsymbol{C}\in R^{\textrm{N_feat x N_feat}}$</p>
+<p>Then consdier standardized vectors:</p>
+<ul>
+<li>$\boldsymbol{x}^*=\boldsymbol{C} \boldsymbol{x}\;\;\in R^{Nfeat}$ </li>
+<li>$\boldsymbol{y}^*=\boldsymbol{C} \boldsymbol{y}$</li>
+</ul>
+<p>Their Euclidean distances are:</p>
+<p>\begin{array}{rl}
+||\boldsymbol{y}^* - \boldsymbol{x}^* || 
+&= (\boldsymbol{y}^* - \boldsymbol{x}^* )^T(\boldsymbol{y}^* - \boldsymbol{x}^* )\\
+&= (\boldsymbol{C}\boldsymbol{y} - \boldsymbol{C}\boldsymbol{x})^T(\boldsymbol{C}\boldsymbol{y}- \boldsymbol{C}\boldsymbol{x} )\\
+&= (\boldsymbol{y} - \boldsymbol{x})^T\boldsymbol{C}^T\boldsymbol{C}(\boldsymbol{y}- \boldsymbol{x} )
+&= (\boldsymbol{y} - \boldsymbol{x})^T\Sigma(\boldsymbol{y}- \boldsymbol{x} )
+\end{array}</p>
+<p>Notice that the Euclidean distance between $\boldsymbol{x}^*$ and $\boldsymbol{y}^*$ is Mahalanobis distance between $\boldsymbol{x}$ and $\boldsymbol{y}$.</p>
+<p>Using this idea, we calculate the Mahalanobis distances.</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [6]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">EfficientMaharanobis</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">invS</span><span class="p">):</span>
+    <span class="sd">'''</span>
+<span class="sd">    </span>
+<span class="sd">    A : tensor, N sample1 by N feat</span>
+<span class="sd">    B : tensor, N sample2 by N feat</span>
+<span class="sd">    S : tensor, N feat by N feat </span>
+<span class="sd">    </span>
+<span class="sd">    Output:</span>
+<span class="sd">    </span>
+<span class="sd">    marahanobis distance of each pair (A[i],B[j]) with inv variance S</span>
+<span class="sd">    </span>
+<span class="sd">    </span>
+<span class="sd">    '''</span>
+    <span class="n">S_half</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">cholesky</span><span class="p">(</span><span class="n">invS</span><span class="p">)</span>
+    <span class="n">A_star</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">S_half</span><span class="p">)</span>
+    <span class="n">B_star</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">B</span><span class="p">,</span><span class="n">S_half</span><span class="p">)</span>
+
+    <span class="n">res</span> <span class="o">=</span> <span class="n">Euclidean</span><span class="p">(</span><span class="n">A_star</span><span class="p">,</span><span class="n">B_star</span><span class="p">)</span>
+    <span class="k">return</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+
+<span class="c1"># TF calculation</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">S</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"B"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"S"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+
+<span class="n">tfmah</span> <span class="o">=</span> <span class="n">EfficientMaharanobis</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">S</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Maharanobis distances with tensorflow v2"</span><span class="p">)</span>
+<span class="n">tfmah</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>A
+<tf.variable 'variable:0' shape="(5," 2) dtype="float32," numpy="array([[0.9467549" , 0.22613871], [0.8387713 , 0.80988747], [0.82303214, 0.51048654], [0.24918175, 0.1219909 ], [0.70037013, 0.82121724]], dtype="float32)">
+B
+<tf.variable 'variable:0' shape="(4," 2) dtype="float32," numpy="array([[0.37487715," 0.6706169 ], [0.13873063, 0.11496447], [0.7132854 , 0.5411484 ], [0.4853384 , 0.67873824]], dtype="float32)">
+S
+<tf.variable 'variable:0' shape="(2," 2) dtype="float32," numpy="array([[0.20618938," 0.2517266 ], [0.2517266 , 1.029237 ]], dtype="float32)">
+Maharanobis distances with tensorflow v2
+</pre>
+</div>
+</div>
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
+<div class="output_text output_subarea output_execute_result">
+<pre>array([[0.37788695, 0.43882656, 0.27630562, 0.38677463],
+       [0.31122538, 0.9181496 , 0.3075013 , 0.25844818],
+       [0.17797098, 0.6275558 , 0.04191547, 0.15506293],
+       [0.58971703, 0.05437763, 0.5684887 , 0.6298596 ],
+       [0.26432416, 0.8821087 , 0.28097183, 0.2141315 ]], dtype=float32)</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In [7]:</div>
+<div class="inner_cell">
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"average difference in the np calculation and tf calculations are:"</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">tfmah</span> <span class="o">-</span> <span class="n">npmah</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="output_wrapper">
+<div class="output">
+<div class="output_area">
+<div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>average difference in the np calculation and tf calculations are: 7.0594254e-08
 </pre>
 </div>
 </div>
@@ -1290,11 +1492,11 @@ TIME TOOK 3.27 MIN
   <span class="byline author vcard">
     Posted by <span class="fn">Yumi</span>
   </span>
-<time datetime="2018-03-28T20:00:00-07:00" pubdate>Wed 28 March 2018</time>  <span class="categories">
+<time datetime="2019-12-29T21:00:00-08:00" pubdate>Sun 29 December 2019</time>  <span class="categories">
     <a class="category" href="https://FairyOnIce.github.io/tag/computer-vision.html">Computer Vision</a>
   </span>
 </p><div class="sharing">
-  <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://FairyOnIce.github.io/create-jpgs-from-iphone-video.html" data-via="" data-counturl="https://FairyOnIce.github.io/create-jpgs-from-iphone-video.html" >Tweet</a>
+  <a href="https://twitter.com/share" class="twitter-share-button" data-url="https://FairyOnIce.github.io/mahalanobis-tf2.html" data-via="" data-counturl="https://FairyOnIce.github.io/mahalanobis-tf2.html" >Tweet</a>
     <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
 </div>    </footer>
   </article>
@@ -1406,9 +1608,9 @@ s.setAttribute('data-timestamp', +new Date());
 </script>
 	<script type="text/javascript">
 	  var disqus_shortname = 'yumis-blog';
-          var disqus_identifier = '/create-jpgs-from-iphone-video.html';
-          var disqus_url = 'https://FairyOnIce.github.io/create-jpgs-from-iphone-video.html';
-          var disqus_title = 'Extract series of JPEG files from iPhone 6S video';
+          var disqus_identifier = '/mahalanobis-tf2.html';
+          var disqus_url = 'https://FairyOnIce.github.io/mahalanobis-tf2.html';
+          var disqus_title = 'Calculate Mahalanobis distance with tensorflow 2.0';
 	  (function() {
 	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
 	    dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
