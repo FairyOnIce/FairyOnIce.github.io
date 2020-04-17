@@ -1334,15 +1334,15 @@ Maharanobis distances with scipy
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Mahalanobis-distance-with-tensorflow">Mahalanobis distance with tensorflow<a class="anchor-link" href="#Mahalanobis-distance-with-tensorflow">¶</a></h2><p>The mahalanobis distances of two samples $\boldsymbol{x}$ and $\boldsymbol{y}$ $\in R^{Nfeat}$ with covariance matrix $\Sigma \in R^{\textrm{N_feat x N_feat}}$ are defined as:</p>
 <p>\begin{array}{rl}
-(\boldsymbol{x}-\boldsymbol{y})^T \Sigma(\boldsymbol{x}-\boldsymbol{y}) \in R^1
+(\boldsymbol{x}-\boldsymbol{y})^T \Sigma^{-1}(\boldsymbol{x}-\boldsymbol{y}) \in R^1
 \end{array}</p>
 <p>My calcualtion of Mahalanobis distance utilizes the calculation of Euclidean distance described above. How? Let me show you!</p>
-<p>The key is to use <a href="https://en.wikipedia.org/wiki/Cholesky_decomposition">Cholesky decomposition</a>. Cholesky decomposition allows decomposing real symetric matrix $A$ into two matrix $A=LL^T$. Fortunately covariance matrix $\Sigma$ is symetric matrix so we can use this decompositin and get a matrix $\boldsymbol{C}$</p>
+<p>The key is to use <a href="https://en.wikipedia.org/wiki/Cholesky_decomposition">Cholesky decomposition</a>. Cholesky decomposition allows decomposing real symmetric matrix $A$ into two matrix $A=LL^T$. Fortunately covariance matrix $\Sigma$ is symmetric matrix so we can use this decomposition and get a matrix $\boldsymbol{C}$</p>
 <p>\begin{array}{rl}
-\Sigma = \boldsymbol{C}^T\boldsymbol{C}, 
+\Sigma^{-1} = \boldsymbol{C}^T\boldsymbol{C}, 
 \end{array}
 where $\boldsymbol{C}\in R^{\textrm{N_feat x N_feat}}$</p>
-<p>Then consdier standardized vectors:</p>
+<p>Then consider standardized vectors:</p>
 <ul>
 <li>$\boldsymbol{x}^*=\boldsymbol{C} \boldsymbol{x}\;\;\in R^{Nfeat}$ </li>
 <li>$\boldsymbol{y}^*=\boldsymbol{C} \boldsymbol{y}$</li>
@@ -1353,7 +1353,7 @@ where $\boldsymbol{C}\in R^{\textrm{N_feat x N_feat}}$</p>
 &= (\boldsymbol{y}^* - \boldsymbol{x}^* )^T(\boldsymbol{y}^* - \boldsymbol{x}^* )\\
 &= (\boldsymbol{C}\boldsymbol{y} - \boldsymbol{C}\boldsymbol{x})^T(\boldsymbol{C}\boldsymbol{y}- \boldsymbol{C}\boldsymbol{x} )\\
 &= (\boldsymbol{y} - \boldsymbol{x})^T\boldsymbol{C}^T\boldsymbol{C}(\boldsymbol{y}- \boldsymbol{x} )
-&= (\boldsymbol{y} - \boldsymbol{x})^T\Sigma(\boldsymbol{y}- \boldsymbol{x} )
+&= (\boldsymbol{y} - \boldsymbol{x})^T\Sigma^{-1}(\boldsymbol{y}- \boldsymbol{x} )
 \end{array}</p>
 <p>Notice that the Euclidean distance between $\boldsymbol{x}^*$ and $\boldsymbol{y}^*$ is Mahalanobis distance between $\boldsymbol{x}$ and $\boldsymbol{y}$.</p>
 <p>Using this idea, we calculate the Mahalanobis distances.</p>
@@ -1537,6 +1537,9 @@ s.setAttribute('data-timestamp', +new Date());
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/mahalanobis-tf2-full.html">Classification with Mahalanobis distance + full covariance using tensorflow</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/mahalanobis-tf2.html">Calculate Mahalanobis distance with tensorflow 2.0</a>
       </li>
       <li class="post">
@@ -1547,9 +1550,6 @@ s.setAttribute('data-timestamp', +new Date());
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Inverse-transform-sampling-and-other-sampling-techniques.html">Inverse transform sampling and other sampling techniques</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Learn-the-Carlini-and-Wagners-adversarial-attack-MNIST.html">Learn the Carlini and Wagner's adversarial attack - MNIST</a>
       </li>
     </ul>
   </section>
