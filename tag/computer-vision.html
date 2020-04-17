@@ -72,6 +72,36 @@ placeholder="Google Search"/>
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="https://FairyOnIce.github.io/multidimensional-indexling-with-tensorflow.ipynb.html">Multidimensional indexling with tensorflow</a>
+      </h1>
+      <p class="meta"><time datetime="2020-02-07T20:00:00-08:00" pubdate>Fri 07 February 2020</time></p>
+</header>
+
+  <div class="entry-content">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this blog post, I present how to use multi-dimensional index arrays for indexing tensors.</p>
+<p>First, I will show multi-dimensional array indexing with numpy. Then I will show two approaches in tensorflow:</p>
+<ul>
+<li>tf.while_loop</li>
+<li>tf.gather_nd</li>
+</ul>
+<p>I will conclude that tf.gather_nd is much more effective than tf.while_loop.</p>
+<h1 id="Reference">Reference<a class="anchor-link" href="#Reference">¶</a></h1><p><a href="https://docs.scipy.org/doc/numpy-1.13.0/user/basics.indexing.html">numpy indexing</a></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="https://FairyOnIce.github.io/multidimensional-indexling-with-tensorflow.ipynb.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="https://FairyOnIce.github.io/mahalanobis-tf2-full.html">Classification with Mahalanobis distance + full covariance using tensorflow</a>
       </h1>
       <p class="meta"><time datetime="2020-01-29T21:00:00-08:00" pubdate>Wed 29 January 2020</time></p>
@@ -315,28 +345,6 @@ This blog assumes that the readers have read the previous blog posts - <a href="
     <a rel="full-article" href="https://FairyOnIce.github.io/Part_5_Object_Detection_with_Yolo_using_VOC_2012_data_training.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Part_4_Object_Detection_with_Yolo_using_VOC_2012_data_loss.html">Part 4 Object Detection using YOLOv2 on Pascal VOC2012 - loss</a>
-      </h1>
-      <p class="meta"><time datetime="2018-12-09T20:00:00-08:00" pubdate>Sun 09 December 2018</time></p>
-</header>
-
-  <div class="entry-content">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="experiencor/keras-yolo2's-YOLO-V2-loss"><a href="https://github.com/experiencor/keras-yolo2/blob/master/Yolo%20Step-by-Step.ipynb">experiencor/keras-yolo2</a>'s YOLO V2 loss<a class="anchor-link" href="#experiencor/keras-yolo2's-YOLO-V2-loss">¶</a></h3><p><img alt="YOLO v2 loss funciton" height="570" src="https://farm8.staticflickr.com/7904/45592720625_821897e898_b.jpg" width="1024" /></a></p>
-<p>This is the fourth blog post of <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. 
-This blog discusses the YOLO's loss funciton. This will be the most intense blog post in <a href="https://fairyonice.github.io/tag/object-detection-using-yolov2-on-pascal-voc2012-series.html">Object Detection with YOLO blog series</a>. as loss function of YOLO is quite complex. So please get excited! 
-For demonstration of the code, I will agian use PASCAL VOC2012 data. 
-This blog assumes that the readers have read the previous blog posts - <a href="https://fairyonice.github.io/Part_1_Object_Detection_with_Yolo_for_VOC_2014_data_anchor_box_clustering.html">Part 1</a></div>
-  <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Part_4_Object_Detection_with_Yolo_using_VOC_2012_data_loss.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="https://FairyOnIce.github.io/tag/computer-vision2.html">&larr; Older</a>
 
@@ -354,6 +362,9 @@ This blog assumes that the readers have read the previous blog posts - <a href="
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/multidimensional-indexling-with-tensorflow.ipynb.html">Multidimensional indexling with tensorflow</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/mahalanobis-tf2-full.html">Classification with Mahalanobis distance + full covariance using tensorflow</a>
       </li>
       <li class="post">
@@ -364,9 +375,6 @@ This blog assumes that the readers have read the previous blog posts - <a href="
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Grad-CAM-with-keras-vis.html">Grad-CAM with keras-vis</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Saliency-Map-with-keras-vis.html">Saliency Map with keras-vis</a>
       </li>
     </ul>
   </section>

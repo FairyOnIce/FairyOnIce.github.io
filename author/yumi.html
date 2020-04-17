@@ -72,6 +72,36 @@ placeholder="Google Search"/>
   		<article>
 <header>
       <h1 class="entry-title">
+        <a href="https://FairyOnIce.github.io/multidimensional-indexling-with-tensorflow.ipynb.html">Multidimensional indexling with tensorflow</a>
+      </h1>
+      <p class="meta"><time datetime="2020-02-07T20:00:00-08:00" pubdate>Fri 07 February 2020</time></p>
+</header>
+
+  <div class="entry-content">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this blog post, I present how to use multi-dimensional index arrays for indexing tensors.</p>
+<p>First, I will show multi-dimensional array indexing with numpy. Then I will show two approaches in tensorflow:</p>
+<ul>
+<li>tf.while_loop</li>
+<li>tf.gather_nd</li>
+</ul>
+<p>I will conclude that tf.gather_nd is much more effective than tf.while_loop.</p>
+<h1 id="Reference">Reference<a class="anchor-link" href="#Reference">¶</a></h1><p><a href="https://docs.scipy.org/doc/numpy-1.13.0/user/basics.indexing.html">numpy indexing</a></p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="https://FairyOnIce.github.io/multidimensional-indexling-with-tensorflow.ipynb.html">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
         <a href="https://FairyOnIce.github.io/mahalanobis-tf2-full.html">Classification with Mahalanobis distance + full covariance using tensorflow</a>
       </h1>
       <p class="meta"><time datetime="2020-01-29T21:00:00-08:00" pubdate>Wed 29 January 2020</time></p>
@@ -283,31 +313,6 @@ This short post is along the same line, and specifically study the following top
     <a rel="full-article" href="https://FairyOnIce.github.io/Grad-CAM-with-keras-vis.html">Read On &crarr;</a>
   </footer>
   		</article>
-  		<article>
-<header>
-      <h1 class="entry-title">
-        <a href="https://FairyOnIce.github.io/Saliency-Map-with-keras-vis.html">Saliency Map with keras-vis</a>
-      </h1>
-      <p class="meta"><time datetime="2019-04-06T21:00:00-07:00" pubdate>Sat 06 April 2019</time></p>
-</header>
-
-  <div class="entry-content">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><a data-flickr-embed="true" href="https://www.flickr.com/photos/157237655@N08/40688584023/in/datetaken-public/" title="saliency_map_golden_retriver"><img alt="saliency_map_golden_retriver" height="363" src="https://live.staticflickr.com/65535/40688584023_58640639cc_b.jpg" width="794" /></a><script async="" charset="utf-8" src="//embedr.flickr.com/assets/client-code.js"></script>
-Image Specific Class Saliency Visualization allows better understanding of why a model makes a classification decision. The goal of this blog is to understand its concept and how to interpret the Saliency Map.</p>
-<h1 id="Reference">Reference<a class="anchor-link" href="#Reference">¶</a></h1><ul>
-<li><a href="https://arxiv.org/abs/1312.6034">Deep Inside Convolutional Networks: Visualising Image Classification Models and Saliency Maps</a></li>
-<li><a href="https://github.com/raghakot/keras-vis">keras-vis</a></li>
-</ul>
-<h2 id="Reference-in-this-blog">Reference in this blog<a class="anchor-link" href="#Reference-in-this-blog">¶</a></h2><ul>
-<li><a href="https://fairyonice.github.io/Visualization-of-deep-learning-classification-model-using-keras-vis.html">Visualization of deep learning classification model using keras-vis</a></div>
-  <footer>
-    <a rel="full-article" href="https://FairyOnIce.github.io/Saliency-Map-with-keras-vis.html">Read On &crarr;</a>
-  </footer>
-  		</article>
 <div class="pagination">
     <a class="prev" href="https://FairyOnIce.github.io/author/yumi2.html">&larr; Older</a>
 
@@ -325,6 +330,9 @@ Image Specific Class Saliency Visualization allows better understanding of why a
     <h1>Recent Posts</h1>
     <ul id="recent_posts">
       <li class="post">
+          <a href="https://FairyOnIce.github.io/multidimensional-indexling-with-tensorflow.ipynb.html">Multidimensional indexling with tensorflow</a>
+      </li>
+      <li class="post">
           <a href="https://FairyOnIce.github.io/mahalanobis-tf2-full.html">Classification with Mahalanobis distance + full covariance using tensorflow</a>
       </li>
       <li class="post">
@@ -335,9 +343,6 @@ Image Specific Class Saliency Visualization allows better understanding of why a
       </li>
       <li class="post">
           <a href="https://FairyOnIce.github.io/Gentle-Hands-on-Introduction-to-Observational-Study.html">Gentle Hands-on Introduction to Propensity Score Matching</a>
-      </li>
-      <li class="post">
-          <a href="https://FairyOnIce.github.io/Inverse-transform-sampling-and-other-sampling-techniques.html">Inverse transform sampling and other sampling techniques</a>
       </li>
     </ul>
   </section>
